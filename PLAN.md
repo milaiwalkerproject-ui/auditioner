@@ -172,6 +172,16 @@ approved.
 | **M4** | Auditions | Open-auditions feed, My upcoming audition, recommendations, admin review page | |
 | **M5** | Launch prep | Sign in with Apple + deletion, community trends, 11 languages, privacy policy, Tutti links → external TestFlight | public TestFlight |
 
+**Status (2026-10-10):** M0 done. M1 built and green on the cloud Mac (Xcode 26.3,
+101 unit tests passing): scan/import → crop → recognise → reference audio with
+notation highlighting; excerpt pages with YouTube/Apple Music; My parts with Apple
+Pencil + AirTurn; onboarding and settings. Apple Pencil markup and AirTurn (planned
+for M2) shipped early in M1. Server (note reading, identify, catalogue, limits,
+Cloud Run deploy) built with 167 tests; not yet deployed. Catalogue: 19 cello
+excerpts reviewed and published by Milai; 806 BrassXcerpts excerpts published with
+the "Imported — bars not yet checked" label (Milai's decision). Draft privacy policy
+in `docs/PRIVACY.md` (contact email to add).
+
 Milai wants testers (orchestra/tour colleagues) as early as possible, so M1 aims at an
 **internal TestFlight** build: the app works offline for catalogue, excerpt pages,
 recordings and reader; scanning needs the server to be deployed (see `docs/SETUP.md`).
