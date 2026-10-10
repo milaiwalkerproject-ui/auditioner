@@ -47,12 +47,21 @@ enum ExcerptFormat {
         return formatter
     }()
 
+    /// Formats the parsed day in UTC too, so the calendar day never shifts with the user's time zone.
+    private static let displayDayFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        formatter.timeZone = TimeZone(identifier: "UTC")
+        return formatter
+    }()
+
     /// Shows a catalogue date ("2026-10-10") the way the user's locale writes dates.
     /// Falls back to the raw text when it cannot be parsed.
     static func displayDate(_ iso: String) -> String {
         let day = String(iso.prefix(10))
         if let date = isoDayFormatter.date(from: day) {
-            return date.formatted(date: .abbreviated, time: .omitted)
+            return displayDayFormatter.string(from: date)
         }
         return iso
     }
