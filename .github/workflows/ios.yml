@@ -1,0 +1,77 @@
+name: iOS build & tests
+
+on:
+  push:
+    paths:
+      - "ios/**"
+      - "content/**"
+      - ".github/workflows/ios.yml"
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ios-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    runs-on: macos-15
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select newest Xcode
+        run: |
+          ls -d /Applications/Xcode*.app
+          XCODE="$(ls -d /Applications/Xcode_*.app | sort -V | tail -1)"
+          sudo xcode-select -s "$XCODE"
+          xcodebuild -version
+
+      - name: Catalogue in app matches content/
+        run: python3 content/sync_to_app.py --check
+
+      - name: Pick a simulator
+        id: sim
+        run: |
+          UDID=$(xcrun simctl list devices available -j | python3 -c '
+          import json, sys
+          data = json.load(sys.stdin)["devices"]
+          runtimes = sorted([r for r in data if "iOS" in r], key=lambda r: [int(x) for x in r.split("iOS-")[-1].split("-") if x.isdigit()])
+          for rt in reversed(runtimes):
+              for d in data[rt]:
+                  if d["name"].startswith("iPhone"):
+                      print(d["udid"]); sys.exit(0)
+          ')
+          echo "udid=$UDID" >> "$GITHUB_OUTPUT"
+          echo "Simulator: $UDID"
+
+      - name: Build and test
+        run: |
+          mkdir -p build
+          set +e
+          xcodebuild \
+            -project ios/Auditioner.xcodeproj \
+            -scheme Auditioner \
+            -destination "id=${{ steps.sim.outputs.udid }}" \
+            -derivedDataPath build/DerivedData \
+            CODE_SIGNING_ALLOWED=NO \
+            test > build/xcodebuild.log 2>&1
+          STATUS=$?
+          grep -E "error:|\*\* (BUILD|TEST)|Test Case .* (passed|failed)|Executed" build/xcodebuild.log | tail -300
+          exit $STATUS
+
+      - name: Error summary
+        if: failure()
+        run: |
+          echo "==== compiler errors ===="
+          grep -E "^/.*: error:" build/xcodebuild.log | sed -E 's#^.*/ios/#ios/#' | sort -u | head -150 || true
+          echo "==== other failures ===="
+          grep -E "error:|failed|FAILED" build/xcodebuild.log | grep -v "^/.*: error:" | sort -u | head -60 || true
+
+      - name: Upload log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: xcodebuild-log
+          path: build/xcodebuild.log
+          if-no-files-found: ignore

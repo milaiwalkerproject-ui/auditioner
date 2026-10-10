@@ -1,0 +1,22 @@
+name: Catalogue check
+
+on:
+  push:
+    paths:
+      - "content/**"
+      - "ios/Auditioner/Resources/Catalog/**"
+      - ".github/workflows/content.yml"
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install jsonschema
+      - run: python3 content/validate.py
+      - run: python3 content/sync_to_app.py --check
