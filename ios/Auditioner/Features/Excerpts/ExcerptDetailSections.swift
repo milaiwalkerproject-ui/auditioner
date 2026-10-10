@@ -62,7 +62,7 @@ struct ExcerptHeaderSection: View {
                 TagPill(text: ExcerptFormat.difficultyLabel(difficulty.value), color: Theme.slate)
             }
             if excerpt.provenanceType == "imported" {
-                TagPill(text: String(localized: "Imported"), color: Theme.teal)
+                TagPill(text: String(localized: "Imported — bars not yet checked"), color: Theme.teal)
             }
             if reviewerMode && excerpt.listingStatus != .published {
                 TagPill(text: String(localized: "Draft"), color: Theme.garnet)
@@ -255,7 +255,14 @@ struct ExcerptCopyrightSection: View {
     }
 
     private var regions: [(fact: Verifiable<CopyrightValue>?, region: ExcerptFormat.CopyrightRegion)] {
-        [(excerpt.copyright?.US, .us), (excerpt.copyright?.EU, .eu), (excerpt.copyright?.CA, .ca)]
+        let us: Verifiable<CopyrightValue>? = excerpt.copyright?.US
+        let eu: Verifiable<CopyrightValue>? = excerpt.copyright?.EU
+        let ca: Verifiable<CopyrightValue>? = excerpt.copyright?.CA
+        return [
+            (fact: us, region: ExcerptFormat.CopyrightRegion.us),
+            (fact: eu, region: ExcerptFormat.CopyrightRegion.eu),
+            (fact: ca, region: ExcerptFormat.CopyrightRegion.ca)
+        ]
     }
 
     private var lines: [Line] {

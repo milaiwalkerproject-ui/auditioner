@@ -354,8 +354,8 @@ final class PracticeTests: XCTestCase {
     // MARK: Player helpers
 
     func testAudioFileName() {
-        XCTAssertEqual(PracticePlayerView.audioFileName(for: "Strauss · Don Juan"), "Strauss-Don-Juan.m4a")
-        XCTAssertEqual(PracticePlayerView.audioFileName(for: "   "), "Auditioner-reference.m4a")
-        XCTAssertEqual(PracticePlayerView.audioFileName(for: "Demo: D major scale"), "Demo-D-major-scale.m4a")
+        XCTAssertEqual(PracticeExport.audioFileName(for: "Strauss · Don Juan"), "Strauss-Don-Juan.m4a")
+        XCTAssertEqual(PracticeExport.audioFileName(for: "   "), "Auditioner-reference.m4a")
+        XCTAssertEqual(PracticeExport.audioFileName(for: "Demo: D major scale"), "Demo-D-major-scale.m4a")
     }
 }

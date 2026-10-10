@@ -11,6 +11,8 @@ struct FactRow: View, Identifiable {
     let sourceURL: URL?
     let asOf: String?
     var italic: Bool = false
+    /// Caveat recorded with the fact (e.g. "As listed in BrassXcerpts; not yet re-checked against the part").
+    var note: String? = nil
 
     var id: String { label }
 
@@ -20,7 +22,7 @@ struct FactRow: View, Identifiable {
         guard let fact = fact, !fact.isHidden else { return nil }
         let value: String? = fact.verifiedValue.map(text)
         return FactRow(label: label, status: fact.status, valueText: value,
-                       sourceURL: fact.sourceURL, asOf: fact.asOf, italic: italic)
+                       sourceURL: fact.sourceURL, asOf: fact.asOf, italic: italic, note: fact.note)
     }
 
     var body: some View {
@@ -31,6 +33,11 @@ struct FactRow: View, Identifiable {
                     valueView(valueText)
                     Spacer(minLength: 0)
                     SourceLink(url: sourceURL)
+                }
+                if let note = note, !note.isEmpty {
+                    Text(note)
+                        .font(.caption)
+                        .foregroundStyle(Theme.inkSoft)
                 }
             } else {
                 CheckOfficialListLink(url: sourceURL)

@@ -232,7 +232,7 @@ struct ExcerptRow: View {
                     TagPill(text: ExcerptFormat.difficultyLabel(difficulty.value), color: Theme.slate)
                 }
                 if excerpt.provenanceType == "imported" {
-                    TagPill(text: String(localized: "Imported"), color: Theme.teal)
+                    TagPill(text: String(localized: "Bars not yet checked"), color: Theme.teal)
                 }
                 if reviewerMode && excerpt.listingStatus != .published {
                     TagPill(text: String(localized: "Draft"), color: Theme.garnet)

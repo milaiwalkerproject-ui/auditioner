@@ -82,7 +82,7 @@ struct PracticePlayerView: View {
     }
 
     private func saveAudio() {
-        let fileName = PracticePlayerView.audioFileName(for: document.title)
+        let fileName = PracticeExport.audioFileName(for: document.title)
         let url = FileManager.default.temporaryDirectory.appendingPathComponent(fileName)
         Task {
             do {
@@ -94,6 +94,14 @@ struct PracticePlayerView: View {
         }
     }
 
+    /// Kept for callers that used the old name; the logic lives in `PracticeExport` (plain, testable).
+    static func audioFileName(for title: String) -> String {
+        PracticeExport.audioFileName(for: title)
+    }
+}
+
+/// Pure helpers for the "Save audio" feature (no SwiftUI, so tests can call them directly).
+enum PracticeExport {
     /// "Strauss · Don Juan" → "Strauss-Don-Juan.m4a"
     static func audioFileName(for title: String) -> String {
         let allowed = CharacterSet.alphanumerics
