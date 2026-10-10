@@ -1808,8 +1808,10 @@
         "technique": {
           "text": "The passage asks for a light, clean off-the-string stroke at a fast tempo, with the bow working from a small, controlled area near the balance point. Every note of the scale and arpeggio figures has to be clearly placed by the left hand so the articulation reads at speed. Keep the dynamics transparent: Mozart's piano must stay genuinely soft while remaining rhythmically exact.",
           "origin": "ai",
-          "reviewStatus": "draft",
-          "generatedAt": "2026-10-10"
+          "reviewStatus": "approved",
+          "generatedAt": "2026-10-10",
+          "reviewedBy": "Milai Walker",
+          "reviewedAt": "2026-10-10"
         },
         "pitfalls": {
           "text": "The usual problems are a spiccato that is too high and therefore uneven, rushing through the repeated-note figures, and losing the tempo on the string crossings. Candidates often choose a tempo that is impressive for the first bars and then falls apart in the awkward passages. Intonation in the quick leaps is exposed because the texture is so thin.",
