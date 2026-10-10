@@ -238,7 +238,7 @@ struct LibraryView: View {
                     return .failure(error)
                 }
             }.value
-            await finishImport(outcome, context: context)
+            finishImport(outcome, context: context)
         }
     }
 
@@ -255,7 +255,7 @@ struct LibraryView: View {
                     return .failure(error)
                 }
             }.value
-            await finishImport(outcome, context: context)
+            finishImport(outcome, context: context)
         }
     }
 
