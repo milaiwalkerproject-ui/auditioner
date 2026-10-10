@@ -69,6 +69,8 @@ final class ScoreRecord {
     var sourceItemId: UUID?
     var preferredBPM: Double?
     var warnings: [String] = []
+    /// JPEG of the marked excerpt the notes were read from (Documents/Scans/), for the correction editor.
+    var scanImageFileName: String?
 
     init(title: String, musicXML: String, origin: ScoreOrigin, instrument: Instrument, excerptId: String? = nil, sourceItemId: UUID? = nil, warnings: [String] = []) {
         self.id = UUID()
@@ -112,6 +114,80 @@ final class TimestampMark {
     }
 }
 
+/// One recording the player made of themselves (practice tools / record & compare).
+@Model
+final class PracticeTake {
+    var id: UUID = UUID()
+    var createdAt: Date = Date()
+    var title: String = ""
+    /// Audio file name inside Documents/Takes/.
+    var fileName: String = ""
+    var durationSeconds: Double = 0
+    /// What was practised: a ScoreRecord id and/or a catalogue excerpt id.
+    var scoreId: UUID?
+    var excerptId: String?
+    /// Tempo of the reference when the take was recorded (quarter = BPM), if recorded against it.
+    var referenceBPM: Double?
+    /// The take started this many beats into the reference (for A/B alignment).
+    var referenceStartBeat: Double?
+    var selfRating: Int?
+    var notes: String = ""
+
+    init(title: String, fileName: String, durationSeconds: Double) {
+        self.id = UUID()
+        self.createdAt = Date()
+        self.title = title
+        self.fileName = fileName
+        self.durationSeconds = durationSeconds
+    }
+}
+
+/// A mock audition run: an ordered list of excerpts played in one continuous recording.
+@Model
+final class MockAuditionRun {
+    var id: UUID = UUID()
+    var createdAt: Date = Date()
+    var title: String = ""
+    /// Items as JSON-encoded [MockAuditionItem] (kept as Data so the model stays CloudKit-friendly).
+    var itemsData: Data = Data()
+    /// Continuous recording of the whole run (Documents/Takes/), if recorded.
+    var recordingFileName: String?
+    var totalSeconds: Double = 0
+    var overallRating: Int?
+    var notes: String = ""
+
+    init(title: String, itemsData: Data) {
+        self.id = UUID()
+        self.createdAt = Date()
+        self.title = title
+        self.itemsData = itemsData
+    }
+}
+
+/// A "Report an error" / "Send feedback" message waiting to be sent to the server (or already sent).
+@Model
+final class FeedbackReport {
+    var id: UUID = UUID()
+    var createdAt: Date = Date()
+    /// Where it was sent from, e.g. "excerpt-note:pitfalls", "excerpt-fact", "settings", "scan".
+    var context: String = ""
+    var excerptId: String?
+    var message: String = ""
+    var sentAt: Date?
+    var lastError: String?
+
+    init(context: String, excerptId: String?, message: String) {
+        self.id = UUID()
+        self.createdAt = Date()
+        self.context = context
+        self.excerptId = excerptId
+        self.message = message
+    }
+}
+
 enum PersistenceSchema {
-    static let models: [any PersistentModel.Type] = [LibraryItem.self, PageAnnotation.self, ScoreRecord.self, TimestampMark.self]
+    static let models: [any PersistentModel.Type] = [
+        LibraryItem.self, PageAnnotation.self, ScoreRecord.self, TimestampMark.self,
+        PracticeTake.self, MockAuditionRun.self, FeedbackReport.self,
+    ]
 }

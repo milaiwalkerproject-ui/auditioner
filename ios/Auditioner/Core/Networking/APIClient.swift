@@ -4,6 +4,8 @@ import Foundation
 //   POST /v1/omr       multipart: image (JPEG), instrument, transposition, meter?, hints (JSON array of OCR lines)
 //                      → OMRResponse
 //   POST /v1/identify  JSON {ocrText, instrument} → {candidates: [{excerptId, score}]}
+//   POST /v1/feedback  JSON {context, excerptId?, message, appVersion} → 201 {"status":"received"}
+//                      (503 when feedback storage isn't set up on the server; the app keeps the report queued)
 //   GET  /healthz      → {"status":"ok"}
 // Every request carries X-Device-Id (random per install) and X-App-Version.
 
@@ -109,6 +111,16 @@ final class APIClient {
         } catch {
             throw APIError.invalidResponse
         }
+    }
+
+    /// Sends one "Report an error" / feedback message. Throws `APIError` on failure so the caller can keep it queued.
+    func sendFeedback(context: String, excerptId: String?, message: String) async throws {
+        var req = try request(path: "v1/feedback", method: "POST")
+        req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        var body: [String: String] = ["context": context, "message": message, "appVersion": appVersion]
+        if let excerptId { body["excerptId"] = excerptId }
+        req.httpBody = try JSONEncoder().encode(body)
+        _ = try await send(req)
     }
 
     func identify(ocrText: String, instrument: Instrument) async throws -> [IdentifyCandidate] {
