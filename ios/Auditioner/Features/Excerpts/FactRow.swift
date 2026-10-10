@@ -15,8 +15,8 @@ struct FactRow: View, Identifiable {
     var id: String { label }
 
     /// Builds a row from a `Verifiable`, or `nil` when the fact is missing or not applicable.
-    static func make<T>(_ label: String, _ fact: Verifiable<T>?, italic: Bool = false,
-                        text: (T) -> String) -> FactRow? {
+    static func make<T: Codable & Hashable>(_ label: String, _ fact: Verifiable<T>?, italic: Bool = false,
+                                            text: (T) -> String) -> FactRow? {
         guard let fact = fact, !fact.isHidden else { return nil }
         let value: String? = fact.verifiedValue.map(text)
         return FactRow(label: label, status: fact.status, valueText: value,

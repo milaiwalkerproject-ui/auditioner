@@ -190,6 +190,7 @@ struct AppleMusicRecordingPlayer: View {
         }
     }
 
+    @MainActor
     private func load() async {
         guard let isrc = recording.isrc, !isrc.isEmpty else {
             model.phase = .failed(String(localized: "This recording has no Apple Music identifier yet."))

@@ -85,9 +85,15 @@ struct ExcerptProseBlockView: View {
         .padding(.vertical, 4)
     }
 
+    private var draftBannerText: String {
+        if block.reviewStatus == .rejected {
+            return String(localized: "Rejected — not shown to users")
+        }
+        return String(localized: "Draft — not reviewed")
+    }
+
     private var draftBanner: some View {
-        Label(block.reviewStatus == .rejected ? "Rejected — not shown to users" : "Draft — not reviewed",
-              systemImage: "eye.slash")
+        Label(draftBannerText, systemImage: "eye.slash")
             .font(.caption.weight(.semibold))
             .foregroundStyle(Color.black)
             .padding(.horizontal, 10)
