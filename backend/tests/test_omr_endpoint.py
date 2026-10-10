@@ -238,7 +238,7 @@ def test_temp_dir_deleted_after_success(client, settings, tmp_path, monkeypatch)
     assert work_dir.parent == settings.work_dir
     assert seen["files"] == ["page.png"]  # only the normalised image, nothing else
     assert seen["cwd"] == seen["dir"]
-    assert seen["argv"][0] == "--no-title"
+    assert seen["argv"] == [seen["image"]]  # homr 0.7.0 takes the image and nothing else
     assert not work_dir.exists()
     assert list(settings.work_dir.iterdir()) == []
 

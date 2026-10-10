@@ -47,7 +47,7 @@ def settings_factory(tmp_path: Path) -> Callable[..., Settings]:
     def factory(**overrides: Any) -> Settings:
         values: dict[str, Any] = {
             "homr_cmd": f"{sys.executable} {FAKE_HOMR}",
-            "homr_extra_args": "--no-title",
+            "homr_extra_args": "",
             "omr_timeout_seconds": 10.0,
             "daily_scan_limit": 30,
             "omr_queue_limit": 4,
