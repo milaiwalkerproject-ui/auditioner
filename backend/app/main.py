@@ -65,8 +65,13 @@ class IdentifyRequest(BaseModel):
     instrument: str = Field(min_length=1, max_length=40)
 
 
-class BodyTooLarge(Exception):
-    """Raised from the request stream when an upload exceeds the limit."""
+class BodyTooLarge(HTTPException):
+    """Raised from the request stream when an upload exceeds the limit. An
+    HTTPException so FastAPI's form parsing re-raises it untouched (anything else
+    it turns into a generic 400) and the usual handler answers 413 JSON."""
+
+    def __init__(self) -> None:
+        super().__init__(status_code=413, detail=MSG_TOO_BIG)
 
 
 class UploadSizeLimit:
@@ -157,10 +162,6 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     async def http_error(_: Request, exc: HTTPException) -> JSONResponse:
         detail = exc.detail if isinstance(exc.detail, str) else "Something went wrong."
         return JSONResponse(status_code=exc.status_code, content={"detail": detail}, headers=exc.headers)
-
-    @app.exception_handler(BodyTooLarge)
-    async def body_too_large(_: Request, __: BodyTooLarge) -> JSONResponse:
-        return JSONResponse(status_code=413, content={"detail": MSG_TOO_BIG})
 
     @app.exception_handler(Exception)
     async def unexpected_error(_: Request, __: Exception) -> JSONResponse:

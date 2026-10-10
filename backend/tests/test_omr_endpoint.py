@@ -292,3 +292,142 @@ def test_upload_is_normalised_before_homr(client, settings, tmp_path, monkeypatc
         assert im.mode == "RGB"
         assert max(im.size) == 3000
         assert im.size == (3000, 750)
+
+
+# ---------------------------------------------------- chunked uploads & bombs
+
+
+def _multipart(fields: dict[str, str], image: bytes, boundary: str = "auditioner-test") -> bytes:
+    """A body shaped exactly like APIClient.swift builds it."""
+    body = b""
+    for name, value in fields.items():
+        body += f'--{boundary}\r\nContent-Disposition: form-data; name="{name}"\r\n\r\n{value}\r\n'.encode()
+    body += (
+        f'--{boundary}\r\nContent-Disposition: form-data; name="image"; filename="page.jpg"\r\n'
+        f"Content-Type: image/jpeg\r\n\r\n"
+    ).encode()
+    body += image + f"\r\n--{boundary}--\r\n".encode()
+    return body
+
+
+def test_too_large_without_content_length(settings_factory):
+    """A chunked upload (no Content-Length) is cut off while it streams in."""
+    from app.main import MSG_TOO_BIG
+
+    app = create_app(settings_factory(max_upload_bytes=100_000))
+    client = TestClient(app)
+    body = _multipart({"instrument": "cello", "transposition": "0"}, b"\xff" * 600_000)
+
+    def chunks():
+        for i in range(0, len(body), 8192):
+            yield body[i : i + 8192]
+
+    headers = {**DEVICE, "Content-Type": "multipart/form-data; boundary=auditioner-test"}
+    response = client.post("/v1/omr", content=chunks(), headers=headers)
+    assert "content-length" not in {k.lower() for k in response.request.headers}
+    assert response.status_code == 413
+    assert response.json() == {"detail": MSG_TOO_BIG}
+
+
+def test_upload_size_limit_middleware_counts_the_stream():
+    """Pure-ASGI check: the limit trips on the chunk that crosses it, not at the end."""
+    import asyncio
+
+    from app.main import BodyTooLarge, UploadSizeLimit
+
+    seen: list[int] = []
+
+    async def inner(scope, receive, send):
+        while True:
+            message = await receive()
+            seen.append(len(message.get("body", b"")))
+            if not message.get("more_body"):
+                break
+
+    chunks = [b"a" * 400, b"b" * 400, b"c" * 400, b"d" * 400]
+
+    async def receive():
+        body = chunks.pop(0)
+        return {"type": "http.request", "body": body, "more_body": bool(chunks)}
+
+    async def send(message):
+        pass
+
+    middleware = UploadSizeLimit(inner, limit=1000)
+    scope = {"type": "http", "path": "/v1/omr", "method": "POST", "headers": []}
+    with pytest.raises(BodyTooLarge):
+        asyncio.run(middleware(scope, receive, send))
+    assert seen == [400, 400]  # the third chunk crossed the limit and was never handed on
+
+    # other paths are untouched
+    seen.clear()
+    chunks[:] = [b"x" * 5000]
+    asyncio.run(middleware({**scope, "path": "/v1/identify"}, receive, send))
+    assert seen == [5000]
+
+
+def test_decompression_bomb_is_refused_before_decoding(settings_factory):
+    from conftest import fake_png
+    from app.main import MSG_TOO_MANY_PIXELS
+
+    app = create_app(settings_factory(daily_scan_limit=3))
+    client = TestClient(app)
+    for size in ((8000, 8000), (30000, 30000)):
+        response = post_omr(client, fake_png(*size), filename="page.png", content_type="image/png")
+        assert response.status_code == 400, response.text
+        assert response.json() == {"detail": MSG_TOO_MANY_PIXELS}
+    # refused before the daily limit was touched
+    assert app.state.limiter.remaining(DEVICE["X-Device-Id"]) == 3
+
+
+# --------------------------------------------------------- unexpected errors
+
+
+def test_unexpected_errors_are_json(settings_factory, monkeypatch):
+    """Whatever blows up, the app must get {"detail": "<string>"} (APIClient.swift
+    decodes the error body as [String: String])."""
+    from app.main import MSG_SERVER
+
+    def boom(*_args, **_kwargs):
+        raise RuntimeError("unexpected")
+
+    monkeypatch.setattr("app.main.postprocess", boom)
+    client = TestClient(create_app(settings_factory()), raise_server_exceptions=False)
+    response = post_omr(client)
+    assert response.status_code == 500
+    assert response.json() == {"detail": MSG_SERVER}
+
+
+def test_unknown_route_is_json(client):
+    response = client.get("/nope")
+    assert response.status_code == 404
+    assert isinstance(response.json()["detail"], str)
+
+
+# -------------------------------------------------------------- queue budget
+
+
+def test_queue_wait_is_capped(settings_factory):
+    """If the line does not move within OMR_QUEUE_WAIT_SECONDS: 503, not charged."""
+    import time
+
+    app = create_app(settings_factory(omr_queue_wait_seconds=0.2))
+    app.state.guard = ConcurrencyGuard(max_running=0, max_waiting=5)  # the slot never frees
+    client = TestClient(app)
+    started = time.monotonic()
+    response = post_omr(client)
+    assert response.status_code == 503
+    assert time.monotonic() - started < 5
+    assert response.json()["detail"] == "Busy — try again in a minute"
+    assert app.state.limiter.remaining(DEVICE["X-Device-Id"]) == app.state.settings.daily_scan_limit
+
+
+def test_no_run_without_time_left(settings_factory, monkeypatch):
+    """The app stops waiting after 120 s; with nothing left of that budget the scan
+    is refused up front rather than started."""
+    monkeypatch.setattr("app.main.REQUEST_BUDGET_SECONDS", 0.0)
+    app = create_app(settings_factory())
+    client = TestClient(app)
+    response = post_omr(client)
+    assert response.status_code == 503
+    assert app.state.limiter.remaining(DEVICE["X-Device-Id"]) == app.state.settings.daily_scan_limit

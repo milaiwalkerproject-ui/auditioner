@@ -18,8 +18,11 @@ WORKDIR /srv
 COPY backend/requirements.txt /srv/requirements.txt
 RUN pip install -r /srv/requirements.txt
 
-# Download homr's recognition models (and the OCR weights it would use for title
-# detection) into the image so a fresh Cloud Run instance never has to fetch them.
+# Download homr's recognition models into the image so a fresh Cloud Run instance
+# never has to fetch them. In homr 0.7.0 `--init` fetches the segmentation and
+# transformer models (CPU variants, since the build machine has no GPU — the same
+# ones Cloud Run uses) into site-packages and initialises RapidOCR, whose models ship
+# inside the rapidocr wheel. At run time the non-root user only reads them.
 RUN homr --init
 
 COPY backend/app /srv/app
@@ -30,12 +33,16 @@ RUN groupadd --system app \
     && chown -R app:app /srv
 USER app
 
+# HOMR_EXTRA_ARGS stays empty: homr 0.7.0 takes only the image path (an unknown flag
+# such as --no-title makes it exit 2). OMR_TIMEOUT_SECONDS stays under the app's
+# 120 s request timeout (APIClient.swift).
 ENV PORT=8080 \
     HOME=/home/app \
     CATALOG_DIR=/srv/content/catalog \
     HOMR_CMD=homr \
-    HOMR_EXTRA_ARGS=--no-title \
-    OMR_TIMEOUT_SECONDS=150 \
+    HOMR_EXTRA_ARGS= \
+    OMR_TIMEOUT_SECONDS=110 \
+    OMR_QUEUE_WAIT_SECONDS=30 \
     DAILY_SCAN_LIMIT=30
 
 EXPOSE 8080

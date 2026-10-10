@@ -60,3 +60,55 @@ def test_normalise_rejects_decompression_bombs(tmp_path, monkeypatch):
     monkeypatch.setattr(Image, "MAX_IMAGE_PIXELS", 10_000)
     with pytest.raises(ImageTooLarge):
         normalise_image(make_png(400, 400), tmp_path / "bomb.png")
+
+
+# ------------------------------------------------------------ bombs & probing
+
+
+def test_probe_reads_format_and_size():
+    from conftest import fake_png
+    from app.imaging import probe
+
+    assert probe(make_jpeg(600, 400)) == ("JPEG", (600, 400))
+    assert probe(fake_png(10, 10))[0] == "PNG"
+    with pytest.raises(NotAnImage):
+        probe(b"%PDF-1.4")
+    with pytest.raises(NotAnImage):
+        probe(b"")
+
+
+def test_probe_refuses_too_many_pixels_without_decoding(tmp_path):
+    """8000 x 8000 = 64 MP: over our limit, under Pillow's hard refusal (2x)."""
+    from conftest import fake_png
+    from app.imaging import MAX_PIXELS, probe
+
+    assert Image.MAX_IMAGE_PIXELS == MAX_PIXELS
+    bomb = fake_png(8000, 8000)
+    assert len(bomb) < 200
+    with pytest.raises(ImageTooLarge):
+        probe(bomb)
+    with pytest.raises(ImageTooLarge):
+        normalise_image(bomb, tmp_path / "bomb.png")
+
+
+def test_pillow_bomb_refusal_is_mapped(tmp_path):
+    """30000 x 30000 px (900 MP): Pillow itself refuses at open; we map that too,
+    also on the sniff path, so the endpoint never sees a bare DecompressionBombError."""
+    from conftest import fake_png
+    from app.imaging import probe
+
+    bomb = fake_png(30000, 30000)
+    with pytest.raises(ImageTooLarge):
+        probe(bomb)
+    with pytest.raises(ImageTooLarge):
+        sniff_format(bomb)
+    with pytest.raises(ImageTooLarge):
+        normalise_image(bomb, tmp_path / "bomb.png")
+
+
+def test_photo_sized_images_pass():
+    """A 48 MP phone photo (8064 x 6048) is under the limit."""
+    from conftest import fake_png
+    from app.imaging import probe
+
+    assert probe(fake_png(8064, 6048)) == ("PNG", (8064, 6048))

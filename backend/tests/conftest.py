@@ -97,3 +97,17 @@ def post_omr(
         data["hints"] = hints if isinstance(hints, str) else json.dumps(hints)
     files = {"image": (filename, image if image is not None else make_jpeg(), content_type)}
     return client.post("/v1/omr", data=data, files=files, headers=DEVICE if headers is None else headers)
+
+
+def fake_png(width: int, height: int) -> bytes:
+    """A syntactically valid PNG whose header claims `width` × `height` pixels but
+    carries almost no data — what a decompression bomb looks like to Image.open."""
+    import struct
+    import zlib
+
+    def chunk(kind: bytes, payload: bytes) -> bytes:
+        return struct.pack(">I", len(payload)) + kind + payload + struct.pack(">I", zlib.crc32(kind + payload))
+
+    ihdr = struct.pack(">IIBBBBB", width, height, 8, 0, 0, 0, 0)  # 8-bit greyscale
+    idat = zlib.compress(b"\x00" * 16)
+    return b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", ihdr) + chunk(b"IDAT", idat) + chunk(b"IEND", b"")

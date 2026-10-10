@@ -64,6 +64,12 @@ gcloud builds submit . \
   --project "$PROJECT"
 
 # 5. Put it live (creates the service the first time, updates it afterwards).
+#    --update-env-vars (not --set-env-vars) so anything set by hand in the console,
+#    e.g. INCLUDE_DRAFTS=1 for an internal TestFlight, survives a re-run.
+#    --concurrency 4: one instance keeps answering /healthz and /v1/identify while a
+#    scan runs; extra scans wait in the server's own short queue (503 "Busy" when it
+#    is full) instead of hitting Cloud Run's 429, which the app would show as
+#    "Daily scan limit reached".
 say "Deploying to Cloud Run service '$SERVICE'"
 gcloud run deploy "$SERVICE" \
   --image "$IMAGE" \
@@ -73,12 +79,13 @@ gcloud run deploy "$SERVICE" \
   --allow-unauthenticated \
   --memory 4Gi \
   --cpu 2 \
-  --concurrency 1 \
+  --cpu-boost \
+  --concurrency 4 \
   --timeout 300 \
   --min-instances 0 \
   --max-instances 3 \
   --port 8080 \
-  --set-env-vars "DAILY_SCAN_LIMIT=$DAILY_SCAN_LIMIT" \
+  --update-env-vars "DAILY_SCAN_LIMIT=$DAILY_SCAN_LIMIT" \
   --quiet
 
 # 6. Check it answers and print the address for the app.

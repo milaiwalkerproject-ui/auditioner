@@ -6,11 +6,16 @@
 #       --ignore-file backend/.gcloudignore
 steps:
   - name: gcr.io/cloud-builders/docker
+    # BuildKit reads backend/Dockerfile.dockerignore (the classic builder ignores it).
+    env: ["DOCKER_BUILDKIT=1"]
     args: ["build", "-f", "backend/Dockerfile", "-t", "${_IMAGE}", "."]
 images:
   - "${_IMAGE}"
 substitutions:
+  # Only a fallback; deploy.sh always passes its own _IMAGE. Referencing ${PROJECT_ID}
+  # inside a substitution value needs dynamicSubstitutions (below).
   _IMAGE: "us-central1-docker.pkg.dev/${PROJECT_ID}/auditioner/auditioner-api:latest"
 options:
   logging: CLOUD_LOGGING_ONLY
+  dynamicSubstitutions: true
 timeout: 1800s

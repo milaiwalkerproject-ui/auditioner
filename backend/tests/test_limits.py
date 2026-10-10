@@ -117,3 +117,27 @@ def test_guard_releases_slot_on_error():
 )
 def test_clean_device_id(raw, expected):
     assert clean_device_id(raw) == expected
+
+
+def test_slot_max_wait_gives_up_with_busy():
+    async def scenario() -> None:
+        guard = ConcurrencyGuard(max_running=1, max_waiting=3)
+        release = asyncio.Event()
+
+        async def hog() -> None:
+            async with guard.slot():
+                await release.wait()
+
+        task = asyncio.create_task(hog())
+        await asyncio.sleep(0.01)
+        with pytest.raises(Busy):
+            async with guard.slot(max_wait=0.05):
+                pass
+        assert guard.waiting == 0 and guard.running == 1
+        release.set()
+        await task
+        # with the slot free again, max_wait is not even noticed
+        async with guard.slot(max_wait=0.05):
+            assert guard.running == 1
+
+    asyncio.run(scenario())

@@ -18,27 +18,36 @@ the two in step.
 | `GET /v1/catalog/{instrument}` | optional `If-None-Match` | the `content/catalog/<instrument>.json` file with an `ETag` (304 when unchanged); 404 if there is no file |
 | `GET /v1/instruments` | — | `{"instruments": ["violin", …]}` (handy for checks) |
 
-Errors are always JSON `{"detail": "plain words for a musician"}`:
+Errors are always JSON `{"detail": "plain words for a musician"}` and nothing else
+in the body — the app decodes it as a flat `[String: String]` dictionary:
 
 | Status | When |
 |---|---|
-| 400 | missing `X-Device-Id`, unknown instrument, bad meter / transposition / hints |
-| 413 | image over 15 MB |
+| 400 | missing `X-Device-Id`, unknown instrument, bad meter / transposition / hints, or a picture claiming over 50 megapixels |
+| 413 | upload over 15 MB (refused by Content-Length before reading, or cut off while a chunked body streams in) |
 | 415 | the file isn't a JPEG/PNG (or another picture Pillow can read) |
 | 422 | a field is missing or has the wrong type |
 | 429 | daily scan limit reached for this device |
-| 500 | homr failed or produced nothing readable |
-| 503 | the instance is busy (one scan at a time, four waiting) — `Retry-After: 60` |
+| 500 | homr failed or produced nothing readable (or any unexpected server error) |
+| 503 | the instance is busy: the short queue is full, or the scan could not start within `OMR_QUEUE_WAIT_SECONDS` — `Retry-After: 60`, not charged |
 | 504 | homr ran past `OMR_TIMEOUT_SECONDS` |
 
 ### What `/v1/omr` does with the picture
 
-1. Reads the upload (chunked, capped at 15 MB) and checks it really is a picture.
+1. Reads the upload (chunked, capped at 15 MB) and reads the picture's header only:
+   format and declared size. Anything over 50 megapixels (`app/imaging.py`,
+   `MAX_PIXELS`, also set as Pillow's `MAX_IMAGE_PIXELS`) is refused before a pixel
+   is decoded — a decompression bomb is a few hundred bytes claiming 900 MP.
 2. Checks the per-device daily limit and takes the single OMR slot (`app/limits.py`).
+   The app stops waiting 120 s after its request (APIClient.swift), so the wait in
+   the queue is capped (`OMR_QUEUE_WAIT_SECONDS`) and homr only gets what is left of
+   that budget, at most `OMR_TIMEOUT_SECONDS`.
 3. `app/omr.py`: in a fresh temporary directory, normalises the picture with Pillow
    (EXIF rotation, flatten onto white, RGB, longest side ≤ 3000 px, saved as PNG) and
-   runs **the unmodified homr command line** as a separate process — `homr --no-title
-   page.png` — with a timeout. homr writes `page.musicxml` next to the input.
+   runs **the unmodified homr command line** as a separate process — `homr page.png`,
+   in its own process group, with a minimal environment — with a timeout. homr
+   writes `page.musicxml` next to the input. On timeout, or if the client goes away,
+   the whole process group is killed.
 4. `app/postprocess.py` (plain `xml.etree`): names the part after the instrument,
    writes `<transpose>` for transposing instruments (double bass −12 → chromatic 0 +
    octave-change −1), replaces every `<time>` with the catalogue meter when one is
@@ -50,17 +59,43 @@ Errors are always JSON `{"detail": "plain words for a musician"}`:
    and counts the measures. homr's `<!-- imgpos -->` comments are preserved.
 5. The temporary directory — upload, normalised image, homr's output and preview —
    is deleted in a `finally` block before the response is sent. Request bodies and
-   images are never logged.
+   images are never logged; on failure only the tail of homr's stderr is logged, with
+   its "Found title:" line (homr's OCR of the text above the first staff) removed.
+
+### homr 0.7.0 facts the adapter relies on
+
+Checked against the wheel on PyPI (`homr==0.7.0`, `homr/main.py`), not the GitHub
+main branch, which has moved on:
+
+- Command line: `homr <image>` plus `--init`, `--debug`, `--cache`,
+  `--output-large-page`, `--output-metronome N`, `--output-tempo N`,
+  `--write-staff-positions`, `--read-staff-positions`, `--coreml-encoder`. **There is
+  no `--no-title`** in 0.7.0 — an unknown flag makes homr exit 2 without reading the
+  picture, so `HOMR_EXTRA_ARGS` is empty by default.
+- Output: `<image stem>.musicxml` next to the input, plus `<stem>_teaser.png` and
+  `<stem>_tesseract_input.png` (the crop its title OCR reads). Everything lands in
+  our per-request directory.
+- Title detection (RapidOCR) always runs; its models ship inside the `rapidocr`
+  wheel, so no download happens at request time. The title only lands in
+  `<work-title>`.
+- A recognition error raises → non-zero exit and homr deletes any half-written
+  output. The adapter treats non-zero exit, a missing file and an empty file alike.
+- `homr --init` downloads the segmentation + transformer models (CPU variants on a
+  machine without CUDA) into site-packages and exits — done once in the Dockerfile.
+- `onnxruntime` is a plain dependency of 0.7.0 on PyPI; the `homr[cpu]` extra the
+  README on main mentions does not exist in this release (`provides_extra` is empty).
 
 ### Rate limits
 
 In-memory, per instance, per `X-Device-Id`: a sliding 24-hour window of
 `DAILY_SCAN_LIMIT` scans (default 30), plus one OMR job at a time with a queue of
-`OMR_QUEUE_LIMIT` (default 4) — beyond that the server answers 503 at once. A 503
-does not count against the device's daily limit. This stops a runaway client; it is
-not a security boundary. **M5 (PLAN.md B3): App Attest replaces/augments it** — the
-app proves it is the genuine build on a real device and signed-in users get a higher,
-server-stored limit. The header-based limiter stays as the fallback.
+`OMR_QUEUE_LIMIT` (default 4) — beyond that, or when the queue does not move within
+`OMR_QUEUE_WAIT_SECONDS`, the server answers 503. A 503 does not count against the
+device's daily limit. This stops a runaway client; it is not a security boundary
+(anyone can mint device ids, and the counters reset with the instance). **M5
+(PLAN.md B3): App Attest replaces/augments it** — the app proves it is the genuine
+build on a real device and signed-in users get a higher, server-stored limit. The
+header-based limiter stays as the fallback.
 
 ## Environment variables
 
@@ -68,8 +103,9 @@ server-stored limit. The header-based limiter stays as the fallback.
 |---|---|---|
 | `PORT` | `8080` | port uvicorn listens on (Cloud Run sets it) |
 | `HOMR_CMD` | `homr` | command to run, split like a shell line (tests use `python3 tests/fixtures/fake_homr.py`) |
-| `HOMR_EXTRA_ARGS` | `--no-title` | arguments placed before the image path (`--no-title` skips homr's own OCR; the app sends the printed text as hints) |
-| `OMR_TIMEOUT_SECONDS` | `150` | kill homr after this long → 504 |
+| `HOMR_EXTRA_ARGS` | *(empty)* | arguments placed before the image path — only flags `homr --help` lists for the pinned version (0.7.0 has no `--no-title`) |
+| `OMR_TIMEOUT_SECONDS` | `110` | kill homr after this long → 504 (keep under the app's 120 s request timeout) |
+| `OMR_QUEUE_WAIT_SECONDS` | `30` | a scan that cannot start within this → 503, not charged |
 | `DAILY_SCAN_LIMIT` | `30` | scans per device per sliding 24 h |
 | `OMR_QUEUE_LIMIT` | `4` | scans allowed to wait behind the running one |
 | `MAX_UPLOAD_BYTES` | `15728640` | 15 MB |
@@ -106,9 +142,11 @@ pip install -r backend/requirements-dev.txt
 pytest -q backend/tests           # from the repo root (backend/pytest.ini sets the path)
 ```
 
-`tests/fixtures/fake_homr.py` stands in for the homr command line; `FAKE_HOMR_MODE`
-makes it crash, hang, stay silent or write garbage so the error paths and the
-temp-file clean-up are covered. The fixture catalogue in `tests/fixtures/catalog/`
+`tests/fixtures/fake_homr.py` stands in for the homr command line (same options as
+homr 0.7.0, strict about unknown flags); `FAKE_HOMR_MODE` makes it crash, hang, hang
+with a child process, stay silent, print a title or write garbage so the error
+paths, the process-group kill and the temp-file clean-up are covered. The real
+engine is never run in CI. The fixture catalogue in `tests/fixtures/catalog/`
 keeps the tests independent of `content/catalog`, which is also exercised when files
 exist there. `.github/workflows/backend.yml` runs the suite on every push that
 touches `backend/**` or `content/**`.
@@ -125,8 +163,15 @@ docker run --rm -p 8080:8080 auditioner-api
 
 `backend/deploy.sh` does the whole Cloud Run deployment (Cloud Build with
 `backend/cloudbuild.yaml`, service `auditioner-api`, us-central1, 2 CPU / 4 GiB,
-concurrency 1, 300 s timeout, 0–3 instances) and prints the URL to paste into the
-app. The non-programmer walkthrough is in `docs/SETUP.md`.
+concurrency 4 so health checks and `/v1/identify` keep answering while a scan runs,
+300 s timeout, 0–3 instances, env vars merged with `--update-env-vars` so a re-run
+keeps what was set by hand) and prints the URL to paste into the app. The
+non-programmer walkthrough is in `docs/SETUP.md`.
+
+The image has not been built in the cloud coding environment (no Docker daemon,
+GitHub release downloads blocked), so the first `deploy.sh` run is the first real
+build. The engine's OS library needs (`libglib2.0-0`, `libgomp1`) and the ~1–2 GB
+image size are expectations, not measurements.
 
 ## Licensing note (AGPL)
 

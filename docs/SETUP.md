@@ -129,8 +129,10 @@ wakes the server up; the next ones are quicker.
 
 ## Pausing or removing the server
 
-- **Pause** (keeps everything, costs nothing while idle anyway): nothing to do — it
-  already sleeps between scans.
+- **Pause** (keeps everything, costs next to nothing while idle): nothing to do — it
+  already sleeps between scans. The only thing kept around is the server image in
+  **Artifact Registry**; every deploy adds a version, and old ones can be deleted
+  there whenever you like.
 - **Delete the service** (the app's scan button stops working until you deploy
   again): in Terminal
 
@@ -152,10 +154,16 @@ wakes the server up; the next ones are quicker.
   find the row ending in `compute@developer.gserviceaccount.com`, click the pencil
   and add the roles **Cloud Build Service Account**, **Artifact Registry Writer**
   and **Logs Writer**; then run the script again.
-- Scans fail with "**Busy — try again in a minute**" → two people are scanning at
-  once; it really does clear in a minute.
+- Scans fail with "**Busy — try again in a minute**" → several people are scanning at
+  once and the queue is full; it really does clear in a minute.
+- "**Reading this page took too long**" → the page had more than the server could
+  read in the time the app waits (about two minutes). A straighter, closer photo of
+  fewer staves works better.
 - "**Daily scan limit reached**" → each phone gets 30 scans a day for now (set in
   `backend/deploy.sh`, `DAILY_SCAN_LIMIT`).
+- **Every scan fails right away** after a server update → look at the Logs tab (see
+  above) for a line starting `homr exited with status 2`: the note-reading program
+  was given an option it doesn't know. Ask for help; nothing on the phone is wrong.
 - Anything else: copy the last 20 lines from Terminal into a message and ask.
 
 ## Not needed yet

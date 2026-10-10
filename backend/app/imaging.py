@@ -25,8 +25,6 @@ ALLOWED_FORMATS = frozenset({"JPEG", "PNG", "WEBP", "TIFF", "BMP"})
 # a decompression bomb does not. A 50 MP RGB image is ~150 MB decoded.
 MAX_PIXELS = 50_000_000
 Image.MAX_IMAGE_PIXELS = MAX_PIXELS
-# We check the size ourselves (below); Pillow's warning for the 1–2× band is noise.
-warnings.filterwarnings("ignore", category=Image.DecompressionBombWarning)
 
 
 class NotAnImage(Exception):
@@ -40,7 +38,11 @@ class ImageTooLarge(Exception):
 def _open(data: bytes) -> Image.Image:
     """Image.open with its failure modes mapped to ours. Reads the header only."""
     try:
-        return Image.open(io.BytesIO(data))
+        with warnings.catch_warnings():
+            # `probe` rejects everything over MAX_PIXELS itself; Pillow's warning
+            # for the 1–2× band would only add noise to the log.
+            warnings.simplefilter("ignore", Image.DecompressionBombWarning)
+            return Image.open(io.BytesIO(data))
     except Image.DecompressionBombError as exc:
         raise ImageTooLarge(str(exc)) from exc
     except (UnidentifiedImageError, OSError, ValueError) as exc:
