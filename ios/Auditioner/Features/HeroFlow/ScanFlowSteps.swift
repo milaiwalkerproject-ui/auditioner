@@ -196,77 +196,95 @@ struct ScanConfirmView: View {
     var body: some View {
         List {
             if let cropped = model.croppedImage {
-                Section {
-                    Image(uiImage: cropped)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxHeight: 160)
-                        .frame(maxWidth: .infinity)
-                        .background(Color.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 6))
-                        .listRowBackground(Color.clear)
-                        .listRowInsets(EdgeInsets())
-                }
+                previewSection(cropped)
             }
-
-            Section {
-                if model.candidates.isEmpty {
-                    Text("The text on this page didn't match an excerpt in the catalogue. Search below, or carry on without one.")
-                        .font(.subheadline)
-                        .foregroundStyle(Theme.inkSoft)
-                } else {
-                    ForEach(model.candidates) { excerpt in
-                        ScanExcerptChoiceRow(excerpt: excerpt) {
-                            model.confirmExcerpt(excerpt)
-                        }
-                    }
-                }
-            } header: {
-                Text("Best matches")
-            }
-
-            Section {
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                        .foregroundStyle(Theme.inkFaint)
-                    TextField("Composer, work or excerpt", text: $query)
-                        .textInputAutocapitalization(.words)
-                        .autocorrectionDisabled()
-                }
-                if !trimmedQuery.isEmpty {
-                    if searchResults.isEmpty {
-                        Text("No excerpts match.")
-                            .font(.subheadline)
-                            .foregroundStyle(Theme.inkSoft)
-                    } else {
-                        ForEach(searchResults) { excerpt in
-                            ScanExcerptChoiceRow(excerpt: excerpt) {
-                                model.confirmExcerpt(excerpt)
-                            }
-                        }
-                    }
-                }
-            } header: {
-                Text("Search the catalogue")
-            }
-
-            Section {
-                Button {
-                    model.confirmExcerpt(nil)
-                } label: {
-                    Label("It's not in the list", systemImage: "arrow.right.circle")
-                }
-                Button {
-                    model.cropAgain()
-                } label: {
-                    Label("Mark the excerpt again", systemImage: "crop")
-                }
-            } footer: {
-                Text("Without an excerpt you still get reference audio; the excerpt page (tempo, techniques, recordings) needs a catalogue match.")
-            }
+            matchesSection
+            searchSection
+            otherwiseSection
         }
         .listStyle(.insetGrouped)
         .scrollContentBackground(.hidden)
+    }
+
+    private func previewSection(_ cropped: UIImage) -> some View {
+        Section {
+            Image(uiImage: cropped)
+                .resizable()
+                .scaledToFit()
+                .frame(maxHeight: 160)
+                .frame(maxWidth: .infinity)
+                .background(Color.white)
+                .clipShape(RoundedRectangle(cornerRadius: 6))
+                .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets())
+        }
+    }
+
+    private var matchesSection: some View {
+        Section {
+            if model.candidates.isEmpty {
+                Text("The text on this page didn't match an excerpt in the catalogue. Search below, or carry on without one.")
+                    .font(.subheadline)
+                    .foregroundStyle(Theme.inkSoft)
+            } else {
+                ForEach(model.candidates) { excerpt in
+                    ScanExcerptChoiceRow(excerpt: excerpt) {
+                        model.confirmExcerpt(excerpt)
+                    }
+                }
+            }
+        } header: {
+            Text("Best matches")
+        }
+    }
+
+    private var searchSection: some View {
+        Section {
+            HStack {
+                Image(systemName: "magnifyingglass")
+                    .foregroundStyle(Theme.inkFaint)
+                TextField("Composer, work or excerpt", text: $query)
+                    .textInputAutocapitalization(.words)
+                    .autocorrectionDisabled()
+            }
+            if !trimmedQuery.isEmpty {
+                searchResultRows
+            }
+        } header: {
+            Text("Search the catalogue")
+        }
+    }
+
+    @ViewBuilder
+    private var searchResultRows: some View {
+        if searchResults.isEmpty {
+            Text("No excerpts match.")
+                .font(.subheadline)
+                .foregroundStyle(Theme.inkSoft)
+        } else {
+            ForEach(searchResults) { excerpt in
+                ScanExcerptChoiceRow(excerpt: excerpt) {
+                    model.confirmExcerpt(excerpt)
+                }
+            }
+        }
+    }
+
+    private var otherwiseSection: some View {
+        Section {
+            Button {
+                model.confirmExcerpt(nil)
+            } label: {
+                Label("It's not in the list", systemImage: "arrow.right.circle")
+            }
+            Button {
+                model.cropAgain()
+            } label: {
+                Label("Mark the excerpt again", systemImage: "crop")
+            }
+        } footer: {
+            Text("Without an excerpt you still get reference audio; the excerpt page (tempo, techniques, recordings) needs a catalogue match.")
+        }
     }
 }
 

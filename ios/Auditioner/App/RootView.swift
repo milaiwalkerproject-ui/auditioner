@@ -6,7 +6,36 @@ struct RootView: View {
     @EnvironmentObject private var settings: AppSettings
     @Environment(\.modelContext) private var modelContext
 
+    /// The player is presented from this copy of `router.practiceDocument` so it can wait until the scan
+    /// cover has finished closing: `AppRouter.openPractice` clears the scan context and sets the document in
+    /// one go, and SwiftUI can drop a cover that is presented while another one is still animating away.
+    @State private var presentedPractice: ScoreDocument? = nil
+    @State private var isScanCoverShowing: Bool = false
+
     var body: some View {
+        tabs
+            .fullScreenCover(item: $router.scanContext, onDismiss: scanCoverDidClose) { context in
+                ScanFlowView(context: context)
+                    .environmentObject(router)
+                    .onAppear { isScanCoverShowing = true }
+            }
+            .fullScreenCover(item: $presentedPractice, onDismiss: practiceCoverDidClose) { document in
+                PracticePlayerView(document: document)
+                    .environmentObject(router)
+            }
+            .sheet(isPresented: onboardingBinding) {
+                OnboardingView()
+                    .interactiveDismissDisabled()
+            }
+            .onChange(of: router.practiceDocument) { _, newValue in
+                practiceDocumentChanged(newValue)
+            }
+            .onOpenURL { url in
+                importSharedFile(url)
+            }
+    }
+
+    private var tabs: some View {
         TabView(selection: $router.selectedTab) {
             ExcerptBrowserView()
                 .tabItem { Label("Excerpts", systemImage: "music.note.list") }
@@ -21,23 +50,43 @@ struct RootView: View {
                 .tabItem { Label("Settings", systemImage: "gearshape") }
                 .tag(AppTab.settings)
         }
-        .fullScreenCover(item: $router.scanContext) { context in
-            ScanFlowView(context: context)
-                .environmentObject(router)
-        }
-        .fullScreenCover(item: $router.practiceDocument) { document in
-            PracticePlayerView(document: document)
-                .environmentObject(router)
-        }
-        .sheet(isPresented: Binding(
+    }
+
+    private var onboardingBinding: Binding<Bool> {
+        Binding(
             get: { !settings.hasCompletedOnboarding },
-            set: { newValue in if !newValue { settings.hasCompletedOnboarding = true } }
-        )) {
-            OnboardingView()
-                .interactiveDismissDisabled()
+            set: { newValue in
+                if !newValue {
+                    settings.hasCompletedOnboarding = true
+                }
+            }
+        )
+    }
+
+    // MARK: Presentation sequencing
+
+    private func practiceDocumentChanged(_ newValue: ScoreDocument?) {
+        guard let document = newValue else {
+            presentedPractice = nil
+            return
         }
-        .onOpenURL { url in
-            importSharedFile(url)
+        if isScanCoverShowing {
+            // The scan cover is still on screen (closing); `scanCoverDidClose` presents the player.
+            return
+        }
+        presentedPractice = document
+    }
+
+    private func scanCoverDidClose() {
+        isScanCoverShowing = false
+        if let pending = router.practiceDocument, presentedPractice == nil {
+            presentedPractice = pending
+        }
+    }
+
+    private func practiceCoverDidClose() {
+        if router.practiceDocument != nil {
+            router.practiceDocument = nil
         }
     }
 

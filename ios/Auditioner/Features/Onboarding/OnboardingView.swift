@@ -221,7 +221,7 @@ private struct OnboardingChoiceChip: View {
                 .overlay(RoundedRectangle(cornerRadius: 10).stroke(isSelected ? Theme.garnet : Theme.inkFaint.opacity(0.4), lineWidth: 1))
         }
         .buttonStyle(.plain)
-        .accessibilityAddTraits(isSelected ? .isSelected : [])
+        .accessibilityAddTraits(isSelected ? AccessibilityTraits.isSelected : AccessibilityTraits())
     }
 }
 
@@ -246,7 +246,7 @@ private struct OnboardingChoiceRow: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .accessibilityAddTraits(isSelected ? .isSelected : [])
+        .accessibilityAddTraits(isSelected ? AccessibilityTraits.isSelected : AccessibilityTraits())
     }
 }
 

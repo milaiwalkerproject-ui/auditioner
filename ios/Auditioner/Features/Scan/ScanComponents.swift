@@ -166,9 +166,7 @@ enum TextRecognizer {
         } catch {
             return []
         }
-        let observations: [VNRecognizedTextObservation] = (request.results ?? []).compactMap { result in
-            result as? VNRecognizedTextObservation
-        }
+        let observations: [VNRecognizedTextObservation] = request.results ?? []
         var lines: [RecognizedLine] = []
         for observation in observations {
             guard let candidate = observation.topCandidates(1).first else { continue }
