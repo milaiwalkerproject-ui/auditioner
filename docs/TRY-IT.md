@@ -154,10 +154,12 @@ of the error list and send it to me.
 
 ## 8. Reviewer mode (to see draft excerpts)
 
-Most of the cello catalogue is still "in review", so it is hidden from normal
-users. To see it: **Settings → About → tap the Version row seven times** → a new
-**Catalogue review** section appears → turn on **Reviewer mode (show drafts)**.
-Draft entries show a "Draft" tag. Turn it off again to see what a tester sees.
+You reviewed and published all 19 cello excerpts and the brass import, so
+testers already see them. New excerpts will arrive as drafts. To see drafts
+before they are published: **Settings → About → tap the Version row seven
+times** → a new **Catalogue review** section appears → turn on **Reviewer mode
+(show drafts)**. Draft entries show a "Draft" tag, and unreviewed notes show a
+"Draft — not reviewed" banner. Turn it off again to see what a tester sees.
 
 ## 9. How to report problems
 
