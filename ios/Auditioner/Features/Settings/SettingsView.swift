@@ -3,7 +3,6 @@ import SwiftUI
 /// Settings tab: profile, tuning, server, about. Reviewer mode is hidden behind seven taps on the version row.
 struct SettingsView: View {
     @EnvironmentObject private var settings: AppSettings
-    @EnvironmentObject private var catalog: CatalogStore
 
     @AppStorage(SettingsKey.instrument) private var instrumentRaw: String = Instrument.cello.rawValue
     @AppStorage(SettingsKey.position) private var positionRaw: String = Position.section.rawValue
@@ -145,7 +144,7 @@ struct SettingsView: View {
         } header: {
             Text("Server")
         } footer: {
-            Text("Reading notes from a scan needs the Auditioner server. Everything else works without it. The address comes from whoever set the server up (see docs/SETUP.md).")
+            Text("Reading notes from a scan needs the Auditioner server. Everything else works without it. Paste the address you were given, starting with https://")
         }
     }
 

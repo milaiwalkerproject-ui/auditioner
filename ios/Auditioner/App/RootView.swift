@@ -1,8 +1,10 @@
 import SwiftUI
+import SwiftData
 
 struct RootView: View {
     @EnvironmentObject private var router: AppRouter
     @EnvironmentObject private var settings: AppSettings
+    @Environment(\.modelContext) private var modelContext
 
     var body: some View {
         TabView(selection: $router.selectedTab) {
@@ -33,6 +35,20 @@ struct RootView: View {
         )) {
             OnboardingView()
                 .interactiveDismissDisabled()
+        }
+        .onOpenURL { url in
+            importSharedFile(url)
+        }
+    }
+
+    /// A PDF or image handed over by the Share sheet / "Open in Auditioner" goes straight into My parts.
+    private func importSharedFile(_ url: URL) {
+        guard url.isFileURL else { return }
+        do {
+            try LibraryStore.importFile(at: url, context: modelContext)
+            router.selectedTab = .library
+        } catch {
+            NSLog("Auditioner: couldn't import shared file: %@", error.localizedDescription)
         }
     }
 }

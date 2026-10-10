@@ -201,14 +201,20 @@ struct ScanFlowView: View {
         router.scanContext = nil
     }
 
+    /// Opens the system picker for Files / Photos once, a moment after the cover has finished appearing
+    /// (presenting during the cover's own transition is unreliable). The placeholder's button is the fallback.
     private func presentPickerIfNeeded() {
         guard !pickerShownOnce else { return }
         pickerShownOnce = true
         switch context.source {
         case .files:
-            showingFileImporter = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                showingFileImporter = true
+            }
         case .photos:
-            showingPhotoPicker = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                showingPhotoPicker = true
+            }
         case .camera, .libraryItem:
             break
         }
