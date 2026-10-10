@@ -57,7 +57,12 @@ jobs:
             CODE_SIGNING_ALLOWED=NO \
             test > build/xcodebuild.log 2>&1
           STATUS=$?
-          grep -E "error:|\*\* (BUILD|TEST)|Test Case .* (passed|failed)|Executed" build/xcodebuild.log | tail -300
+          grep -iE "error:|\*\* (BUILD|TEST)|test case .* failed|Executed [0-9]+ test" build/xcodebuild.log | tail -300
+          echo "==== summary ===="
+          echo "tests passed: $(grep -ciE "test case .* passed" build/xcodebuild.log)"
+          echo "tests failed: $(grep -ciE "test case .* failed" build/xcodebuild.log)"
+          echo "compiler warnings (unique): $(grep -E ": warning: " build/xcodebuild.log | sort -u | wc -l | tr -d ' ')"
+          grep -E "^/.*: warning: " build/xcodebuild.log | sed -E 's#^.*/ios/#ios/#' | sort -u | head -60
           exit $STATUS
 
       - name: Error summary
