@@ -1,0 +1,71 @@
+import SwiftUI
+
+/// Settings → About → Privacy: a short, plain-words summary. The full policy comes with M5.
+struct PrivacyView: View {
+    private static let youtubeTerms: URL? = URL(string: "https://www.youtube.com/t/terms")
+    private static let googlePrivacy: URL? = URL(string: "https://policies.google.com/privacy")
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 20) {
+                PrivacyBlock(symbol: "person.crop.circle.badge.xmark",
+                             title: String(localized: "No account needed"),
+                             text: String(localized: "You don't sign in. Your instrument, position, region, parts, markings and reference audio stay on this device."))
+                PrivacyBlock(symbol: "doc.viewfinder",
+                             title: String(localized: "Scans"),
+                             text: String(localized: "When you ask the app to read the notes on a page, the part you marked is sent to the Auditioner server, used only to read the notes, and deleted right after — within 24 hours at the latest. You're asked before the first time. The app also sends a random number for this install so the server can limit scans per device; it doesn't identify you."))
+                PrivacyBlock(symbol: "nosign",
+                             title: String(localized: "Nothing sent to AI"),
+                             text: String(localized: "Your scans, parts and recordings are never sent to any AI service."))
+                PrivacyBlock(symbol: "play.rectangle",
+                             title: String(localized: "YouTube videos"),
+                             text: String(localized: "Recordings on excerpt pages are played by YouTube's own player, under YouTube's terms of service and Google's privacy policy. The app doesn't download or change the videos."))
+                VStack(alignment: .leading, spacing: 8) {
+                    if let url = PrivacyView.youtubeTerms {
+                        Link(destination: url) {
+                            Label("YouTube terms of service", systemImage: "arrow.up.right.square")
+                        }
+                    }
+                    if let url = PrivacyView.googlePrivacy {
+                        Link(destination: url) {
+                            Label("Google privacy policy", systemImage: "arrow.up.right.square")
+                        }
+                    }
+                }
+                .font(.subheadline)
+                .padding(.leading, 42)
+                Text("A full privacy policy comes before the App Store release.")
+                    .font(.footnote)
+                    .foregroundStyle(Theme.inkSoft)
+            }
+            .padding(24)
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .background(Theme.paper.ignoresSafeArea())
+        .navigationTitle("Privacy")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+private struct PrivacyBlock: View {
+    let symbol: String
+    let title: String
+    let text: String
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 14) {
+            Image(systemName: symbol)
+                .font(.title3)
+                .frame(width: 28)
+                .foregroundStyle(Theme.teal)
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title)
+                    .font(.headline)
+                    .foregroundStyle(Theme.ink)
+                Text(text)
+                    .font(.subheadline)
+                    .foregroundStyle(Theme.inkSoft)
+            }
+        }
+    }
+}

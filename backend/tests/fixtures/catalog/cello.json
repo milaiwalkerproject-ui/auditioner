@@ -1,0 +1,76 @@
+{
+  "version": "test-fixture",
+  "generatedAt": "2026-10-10",
+  "instrument": "cello",
+  "excerpts": [
+    {
+      "id": "beethoven-symphony-5-ii",
+      "instrument": "cello",
+      "part": "Cello",
+      "positions": ["section"],
+      "composer": "Ludwig van Beethoven",
+      "work": "Symphony No. 5 in C minor",
+      "catalogueNumber": "Op. 67",
+      "movement": { "number": 2, "title": "Andante con moto" },
+      "title": "Movement II, opening",
+      "location": { "status": "unverified" },
+      "listingStatus": "published",
+      "sources": []
+    },
+    {
+      "id": "beethoven-symphony-5-iii",
+      "instrument": "cello",
+      "part": "Cello",
+      "positions": ["section"],
+      "composer": "Ludwig van Beethoven",
+      "work": "Symphony No. 5 in C minor",
+      "catalogueNumber": "Op. 67",
+      "movement": { "number": 3, "title": "Allegro" },
+      "title": "Movement III, trio",
+      "location": { "status": "unverified" },
+      "listingStatus": "published",
+      "sources": []
+    },
+    {
+      "id": "brahms-symphony-2-ii",
+      "instrument": "cello",
+      "part": "Cello",
+      "positions": ["section", "principal"],
+      "composer": "Johannes Brahms",
+      "work": "Symphony No. 2 in D major",
+      "catalogueNumber": "Op. 73",
+      "movement": { "number": 2, "title": "Adagio non troppo" },
+      "title": "Movement II, opening",
+      "location": { "status": "unverified" },
+      "listingStatus": "published",
+      "sources": []
+    },
+    {
+      "id": "dvorak-symphony-9-ii",
+      "instrument": "cello",
+      "part": "Cello",
+      "positions": ["section"],
+      "composer": "Antonín Dvořák",
+      "work": "Symphony No. 9 in E minor \"From the New World\"",
+      "catalogueNumber": "Op. 95",
+      "movement": { "number": 2, "title": "Largo" },
+      "title": "Movement II",
+      "location": { "status": "unverified" },
+      "listingStatus": "published",
+      "sources": []
+    },
+    {
+      "id": "strauss-don-juan-draft",
+      "instrument": "cello",
+      "part": "Cello",
+      "positions": ["section"],
+      "composer": "Richard Strauss",
+      "work": "Don Juan",
+      "catalogueNumber": "Op. 20",
+      "title": "Opening",
+      "location": { "status": "unverified" },
+      "listingStatus": "draft",
+      "sources": []
+    }
+  ]
+}

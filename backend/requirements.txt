@@ -1,0 +1,12 @@
+# Runtime dependencies of the Auditioner API (Python 3.12, see Dockerfile).
+fastapi>=0.115,<1
+uvicorn[standard]>=0.30,<1
+python-multipart>=0.0.9,<1
+pillow>=12.1.1,<13
+
+# homr — the note-reading engine. AGPL-3.0: it is installed for its command line
+# only and run as a separate process (app/omr.py); nothing in app/ imports it.
+# Pinned to the current PyPI release (checked 2026-10-10 via
+# https://pypi.org/pypi/homr/json). Newer versions may move onnxruntime behind a
+# `homr[cpu]` extra — check the release notes before bumping.
+homr==0.7.0
