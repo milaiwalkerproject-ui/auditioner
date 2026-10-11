@@ -5,10 +5,12 @@ import SwiftData
 enum AuditionsRoute: Hashable {
     case audition(UUID)
     case vacancy(FeedVacancy)
+    /// The archived auditions (PLAN F5): restore, or delete for good.
+    case archived
 }
 
-/// The Auditions tab: "My auditions" (readiness, countdown) and the open-auditions feed for
-/// the player's instrument (PLAN F1–F4).
+/// The Auditions tab: "My auditions" (readiness, countdown), the archive row, and the open-auditions
+/// feed for the player's instrument in their region or every region (PLAN F1–F5).
 struct AuditionsHomeView: View {
     @EnvironmentObject private var settings: AppSettings
     @EnvironmentObject private var catalog: CatalogStore
@@ -90,13 +92,18 @@ struct AuditionsHomeView: View {
 
     // MARK: My auditions
 
+    /// Archived auditions stay out of this list; they live behind the "Archived (N)" row.
     private var sortedAuditions: [Audition] {
-        auditions.sorted { a, b in
+        auditions.filter { !$0.isArchived }.sorted { a, b in
             let da: Date = AuditionOrdering.sortDate(auditionDate: a.auditionDate, deadline: a.applicationDeadline)
             let db: Date = AuditionOrdering.sortDate(auditionDate: b.auditionDate, deadline: b.applicationDeadline)
             if da != db { return da < db }
             return a.createdAt > b.createdAt
         }
+    }
+
+    private var archivedCount: Int {
+        auditions.filter { $0.isArchived }.count
     }
 
     private func ratings(for audition: Audition) -> [Int?] {
@@ -115,6 +122,12 @@ struct AuditionsHomeView: View {
                     AuditionSummaryRow(audition: audition, ratings: ratings(for: audition))
                 }
             }
+            if AuditionArchive.showsArchivedRow(count: archivedCount) {
+                NavigationLink(value: AuditionsRoute.archived) {
+                    Label(AuditionArchive.archivedRowTitle(count: archivedCount), systemImage: "archivebox")
+                        .foregroundStyle(Theme.inkSoft)
+                }
+            }
         } header: {
             Text("My auditions")
         }
@@ -122,11 +135,38 @@ struct AuditionsHomeView: View {
 
     // MARK: Open auditions
 
+    private var regionName: String {
+        ProfileOptions.regionName(id: settings.region)
+    }
+
+    /// The picker writes through the model so the choice is remembered and the feed reloads.
+    private var allRegionsBinding: Binding<Bool> {
+        Binding(
+            get: { feed.allRegions },
+            set: { newValue in
+                Task { await feed.setAllRegions(newValue, settings: settings) }
+            }
+        )
+    }
+
     private var openAuditionsSection: some View {
         Section {
+            if feed.state != .notConfigured {
+                Picker(selection: allRegionsBinding) {
+                    Text(OpenAuditionsLogic.scopeTitle(allRegions: false, regionName: regionName)).tag(false)
+                    Text(OpenAuditionsLogic.scopeTitle(allRegions: true, regionName: regionName)).tag(true)
+                } label: {
+                    Label("Show", systemImage: "globe")
+                }
+                .pickerStyle(.menu)
+            }
             feedContent
         } header: {
-            Text("Open auditions · \(settings.instrument.displayName)")
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Open auditions · \(settings.instrument.displayName)")
+                Text(OpenAuditionsLogic.scopeTitle(allRegions: feed.allRegions, regionName: regionName))
+                    .textCase(nil)
+            }
         } footer: {
             if case .loaded(let list) = feed.state, !list.isEmpty {
                 Text("Facts come from each orchestra's own website and were checked by a person. Always confirm on the official page before applying.")
@@ -192,6 +232,8 @@ struct AuditionsHomeView: View {
                                   onOpenLink: { url in
                                       safariItem = SafariLinkItem.make(url)
                                   })
+        case .archived:
+            ArchivedAuditionsView()
         }
     }
 }

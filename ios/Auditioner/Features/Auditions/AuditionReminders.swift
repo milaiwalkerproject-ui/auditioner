@@ -119,11 +119,12 @@ final class AuditionReminderCenter {
         }
     }
 
-    /// Replaces the audition's reminders with the current plan (none when reminders are off).
+    /// Replaces the audition's reminders with the current plan (none when reminders are off or the
+    /// audition is archived).
     func reschedule(for audition: Audition, now: Date = Date(), calendar: Calendar = .current) async {
         let auditionId: UUID = audition.id
         center.removePendingNotificationRequests(withIdentifiers: AuditionReminderSchedule.identifiers(auditionId: auditionId))
-        guard audition.remindersEnabled else { return }
+        guard audition.remindersEnabled, !audition.isArchived else { return }
         let planned: [AuditionReminder] = AuditionReminderSchedule.reminders(auditionId: auditionId,
                                                                              orchestra: audition.orchestra,
                                                                              position: audition.position,

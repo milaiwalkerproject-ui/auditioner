@@ -12,8 +12,9 @@ struct AddToAuditionSheet: View {
     @State private var isCreating: Bool = false
     @State private var message: String? = nil
 
+    /// Archived auditions are left out: restore one from the Auditions tab first.
     private var sorted: [Audition] {
-        auditions.sorted { a, b in
+        auditions.filter { !$0.isArchived }.sorted { a, b in
             let da: Date = AuditionOrdering.sortDate(auditionDate: a.auditionDate, deadline: a.applicationDeadline)
             let db: Date = AuditionOrdering.sortDate(auditionDate: b.auditionDate, deadline: b.applicationDeadline)
             if da != db { return da < db }

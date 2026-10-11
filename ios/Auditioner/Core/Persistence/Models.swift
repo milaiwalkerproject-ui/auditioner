@@ -203,6 +203,9 @@ final class Audition {
     var listCompleteness: String = "unknown"
     var notes: String = ""
     var remindersEnabled: Bool = false
+    /// Set when the player archives the audition (PLAN F5): it leaves "My auditions" but can be restored.
+    /// `nil` = active. Added as an optional so existing stores migrate on their own.
+    var archivedAt: Date?
 
     init(orchestra: String, position: String, instrument: Instrument) {
         self.id = UUID()
@@ -213,6 +216,8 @@ final class Audition {
     }
 
     var instrument: Instrument { Instrument(rawValue: instrumentRaw) ?? .cello }
+
+    var isArchived: Bool { archivedAt != nil }
 }
 
 /// One line of an audition's repertoire list, with the player's readiness.

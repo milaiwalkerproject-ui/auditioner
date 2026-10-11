@@ -11,10 +11,11 @@ struct ExcerptBrowserView: View {
     @AppStorage(SettingsKey.position) private var positionRaw: String = Position.section.rawValue
     @AppStorage(SettingsKey.region) private var region: String = ProfileOptions.defaultRegionId
     @AppStorage(SettingsKey.reviewerMode) private var reviewerMode: Bool = false
-    @AppStorage(RecommendationSettings.includeAllChairsKey) private var includeAllChairs: Bool = false
 
     /// "Most asked for your chair" (PLAN D5); shared with the excerpt pages.
     @ObservedObject private var recommendations: RecommendationService = RecommendationService.shared
+    /// "Include all chairs", per instrument (brass defaults to on, PLAN F5); shared with the excerpt pages.
+    @ObservedObject private var chairScope: IncludeAllChairsStore = IncludeAllChairsStore.shared
 
     @State private var path = NavigationPath()
     @State private var query: String = ""
@@ -25,6 +26,10 @@ struct ExcerptBrowserView: View {
 
     private var instrument: Instrument {
         Instrument(rawValue: instrumentRaw) ?? .cello
+    }
+
+    private var includeAllChairs: Bool {
+        chairScope.includeAllChairs(for: instrument)
     }
 
     var body: some View {

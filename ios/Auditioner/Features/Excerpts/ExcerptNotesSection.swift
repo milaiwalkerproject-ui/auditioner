@@ -6,32 +6,50 @@ struct ExcerptProseItem: Identifiable {
     let id: String
     let title: String
     let block: ProseBlock
+    /// Machine translation of `block.text` in the app's language, when one may be shown
+    /// (PLAN A7b: only from 12 Nov 2026, only for approved notes). nil → the English is shown.
+    var translation: String? = nil
 }
 
 /// History / technique / pitfalls / practice tips. Honesty contract: a block is shown only when
 /// approved, or in reviewer mode (then with a "Draft — not reviewed" banner). AI text always
 /// carries the AI label with thumbs up/down and "Report an error". Below the notes (or on its
 /// own when there are none) sits a quiet page-level "Report an error" link for the facts.
+/// In another app language an approved note may show its machine translation instead of the
+/// English (`NoteTranslations`), with a "Machine-translated" pill and a "Show original" toggle.
 struct ExcerptNotesSection: View {
     let excerpt: Excerpt
     let reviewerMode: Bool
 
+    @ObservedObject private var translations: NoteTranslations = NoteTranslations.shared
+
     private var items: [ExcerptProseItem] {
-        guard let prose = excerpt.prose else { return [] }
+        ExcerptNotesSection.proseItems(for: excerpt, reviewerMode: reviewerMode, translations: translations)
+    }
+
+    /// The notes to show, in page order. The approved-only rule comes first: a block is listed only
+    /// when approved (or in reviewer mode), and a translation is attached only to an approved
+    /// block — a draft is never shown translated, whatever the mode. Pure, so it can be unit-tested.
+    static func proseItems(for excerpt: Excerpt,
+                           reviewerMode: Bool,
+                           translations: NoteTranslations) -> [ExcerptProseItem] {
+        guard let prose: ExcerptProse = excerpt.prose else { return [] }
+        let fields: [(id: String, title: String, block: ProseBlock?)] = [
+            (id: "history", title: String(localized: "History"), block: prose.history),
+            (id: "technique", title: String(localized: "Technique"), block: prose.technique),
+            (id: "pitfalls", title: String(localized: "Common pitfalls"), block: prose.pitfalls),
+            (id: "practiceTips", title: String(localized: "Practice tips"), block: prose.practiceTips),
+        ]
         var result: [ExcerptProseItem] = []
-        if let block = prose.history {
-            result.append(ExcerptProseItem(id: "history", title: String(localized: "History"), block: block))
+        for field in fields {
+            guard let block: ProseBlock = field.block else { continue }
+            guard block.isApproved || reviewerMode else { continue }
+            let translation: String? = block.isApproved
+                ? translations.translation(excerptId: excerpt.id, field: field.id)
+                : nil
+            result.append(ExcerptProseItem(id: field.id, title: field.title, block: block, translation: translation))
         }
-        if let block = prose.technique {
-            result.append(ExcerptProseItem(id: "technique", title: String(localized: "Technique"), block: block))
-        }
-        if let block = prose.pitfalls {
-            result.append(ExcerptProseItem(id: "pitfalls", title: String(localized: "Common pitfalls"), block: block))
-        }
-        if let block = prose.practiceTips {
-            result.append(ExcerptProseItem(id: "practiceTips", title: String(localized: "Practice tips"), block: block))
-        }
-        return result.filter { $0.block.isApproved || reviewerMode }
+        return result
     }
 
     var body: some View {
@@ -56,6 +74,8 @@ struct ExcerptProseBlockView: View {
     /// "" (no vote), "up" or "down". Stored only on this device.
     @AppStorage private var vote: String
     @State private var isReporting: Bool = false
+    /// "Show original" tapped: the English instead of the translation. Per note, translation first.
+    @State private var showsOriginal: Bool = false
 
     init(excerptId: String, item: ExcerptProseItem, reviewerMode: Bool) {
         self.excerptId = excerptId
@@ -66,6 +86,14 @@ struct ExcerptProseBlockView: View {
 
     private var block: ProseBlock { item.block }
 
+    private var displayedText: String {
+        NoteTranslationDisplay.text(original: block.text, translation: item.translation, showsOriginal: showsOriginal)
+    }
+
+    private var showsMachineTranslatedTag: Bool {
+        NoteTranslationDisplay.showsMachineTranslatedTag(translation: item.translation, showsOriginal: showsOriginal)
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 8) {
@@ -75,13 +103,19 @@ struct ExcerptProseBlockView: View {
                 if block.origin == .curated && block.isApproved {
                     TagPill(text: String(localized: "Curated"), color: Theme.teal)
                 }
+                if showsMachineTranslatedTag {
+                    TagPill(text: String(localized: "Machine-translated"), color: Theme.brass)
+                }
             }
             if !block.isApproved {
                 draftBanner
             }
-            Text(block.text)
+            Text(displayedText)
                 .font(.body)
                 .foregroundStyle(Theme.ink)
+            if item.translation != nil {
+                translationToggle
+            }
             if block.origin == .ai {
                 aiFooter
             }
@@ -90,6 +124,19 @@ struct ExcerptProseBlockView: View {
         .sheet(isPresented: $isReporting) {
             ReportProblemSheet(context: "excerpt-note:\(item.id)", excerptId: excerptId)
         }
+    }
+
+    /// Swaps the translation and the English for this note only.
+    private var translationToggle: some View {
+        let title: String = showsOriginal
+            ? String(localized: "Show translation")
+            : String(localized: "Show original")
+        return Button(title) {
+            showsOriginal.toggle()
+        }
+        .font(.caption)
+        .buttonStyle(.borderless)
+        .foregroundStyle(Theme.slate)
     }
 
     private var draftBannerText: String {

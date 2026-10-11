@@ -43,8 +43,9 @@ struct FeedVacancyDetailView: View {
         ListCompleteness(raw: vacancy.listCompleteness)
     }
 
+    /// An archived audition for this vacancy doesn't count: the button reads "Prepare" and restores it.
     private var alreadyPrepared: Audition? {
-        AuditionsStore.audition(vacancyId: vacancy.id, context: modelContext)
+        AuditionsStore.activeAudition(vacancyId: vacancy.id, context: modelContext)
     }
 
     var body: some View {
@@ -162,8 +163,15 @@ struct FeedVacancyDetailView: View {
     }
 
     private func prepare() {
+        // An archived audition for this vacancy is restored, not duplicated (PLAN F5).
+        let restoring: Bool = AuditionsStore.audition(vacancyId: vacancy.id, context: modelContext)?.isArchived ?? false
         do {
             let audition: Audition = try AuditionsStore.prepare(from: vacancy, fallbackInstrument: settings.instrument, context: modelContext)
+            if restoring && audition.remindersEnabled {
+                Task {
+                    await AuditionReminderCenter.shared.reschedule(for: audition)
+                }
+            }
             onPrepared(audition)
         } catch {
             errorMessage = error.localizedDescription

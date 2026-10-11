@@ -11,11 +11,34 @@ enum AuditionsStore {
         return (try? context.fetch(descriptor))?.first
     }
 
-    /// The audition already made from this feed vacancy, if any (so "Prepare" never duplicates).
+    /// Every audition on the device, newest first. Few per player, so callers filter in memory
+    /// (that also avoids optional-field predicates).
+    static func allAuditions(context: ModelContext) -> [Audition] {
+        var descriptor = FetchDescriptor<Audition>()
+        descriptor.sortBy = [SortDescriptor(\Audition.createdAt, order: .reverse)]
+        return (try? context.fetch(descriptor)) ?? []
+    }
+
+    /// The auditions shown in "My auditions" (not archived).
+    static func activeAuditions(context: ModelContext) -> [Audition] {
+        allAuditions(context: context).filter { !$0.isArchived }
+    }
+
+    /// The archived auditions, most recently archived first.
+    static func archivedAuditions(context: ModelContext) -> [Audition] {
+        AuditionArchive.archivedFirst(allAuditions(context: context).filter { $0.isArchived })
+    }
+
+    /// The audition already made from this feed vacancy, archived or not (so "Prepare" never duplicates).
+    /// An active one wins over an archived one.
     static func audition(vacancyId: String, context: ModelContext) -> Audition? {
-        // Few auditions per player: filtering in memory avoids optional-field predicates.
-        let all: [Audition] = (try? context.fetch(FetchDescriptor<Audition>())) ?? []
-        return all.first { $0.vacancyId == vacancyId }
+        let matching: [Audition] = allAuditions(context: context).filter { $0.vacancyId == vacancyId }
+        return matching.first { !$0.isArchived } ?? matching.first
+    }
+
+    /// The active (not archived) audition made from this feed vacancy, if any.
+    static func activeAudition(vacancyId: String, context: ModelContext) -> Audition? {
+        allAuditions(context: context).first { $0.vacancyId == vacancyId && !$0.isArchived }
     }
 
     /// Items of one audition in list order.
@@ -32,10 +55,15 @@ enum AuditionsStore {
     // MARK: Creating
 
     /// Creates the audition and its checklist from a feed vacancy, or returns the one made earlier.
+    /// An archived one is restored rather than duplicated (PLAN F5); the caller reschedules its reminders
+    /// if they were on (check `audition(vacancyId:context:)?.isArchived` before calling to know).
     @discardableResult
     static func prepare(from vacancy: FeedVacancy, fallbackInstrument: Instrument, context: ModelContext,
                         calendar: Calendar = .current) throws -> Audition {
         if let existing = audition(vacancyId: vacancy.id, context: context) {
+            if existing.isArchived {
+                try restore(existing, context: context)
+            }
             return existing
         }
         let audition: Audition = AuditionBuilder.audition(from: vacancy, fallbackInstrument: fallbackInstrument, calendar: calendar)
@@ -104,7 +132,22 @@ enum AuditionsStore {
         try? context.save()
     }
 
-    /// Deletes the audition and its items; the caller cancels the reminders.
+    // MARK: Archiving (PLAN F5: "Delete" archives; "Delete for good" lives in the archive)
+
+    /// Moves the audition out of "My auditions"; its list stays. The caller cancels the reminders.
+    static func archive(_ audition: Audition, context: ModelContext, now: Date = Date()) throws {
+        audition.archivedAt = now
+        try context.save()
+    }
+
+    /// Puts an archived audition back into "My auditions". `remindersEnabled` is untouched, so the
+    /// caller reschedules the reminders when it is on.
+    static func restore(_ audition: Audition, context: ModelContext) throws {
+        audition.archivedAt = nil
+        try context.save()
+    }
+
+    /// Deletes the audition and its items for good; the caller cancels the reminders.
     static func delete(_ audition: Audition, context: ModelContext) {
         for item in items(for: audition.id, context: context) {
             context.delete(item)

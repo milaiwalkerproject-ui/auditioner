@@ -385,8 +385,30 @@ enum LocalRecommendationEngine {
 // MARK: - Settings
 
 enum RecommendationSettings {
-    /// UserDefaults key (Bool, default false): count lists for every chair, not only the player's.
-    static let includeAllChairsKey: String = "recommendations.includeAllChairs"
+    /// UserDefaults key (Bool) per instrument: count lists for every chair, not only the player's.
+    /// "recommendations.includeAllChairs.<instrument raw value>", e.g. "...includeAllChairs.bass-trombone".
+    static func includeAllChairsKey(for instrument: Instrument) -> String {
+        "recommendations.includeAllChairs." + instrument.rawValue
+    }
+
+    /// Until the player chooses: on for brass (PLAN F5 — the BrassXcerpts lists carry no chair, so
+    /// counting only one chair would show nothing), off for everyone else.
+    static func defaultIncludeAllChairs(for instrument: Instrument) -> Bool {
+        instrument.family == .brass
+    }
+
+    /// The player's choice for this instrument, or the default when they never set one.
+    static func includeAllChairs(for instrument: Instrument, defaults: UserDefaults = .standard) -> Bool {
+        let key: String = includeAllChairsKey(for: instrument)
+        if defaults.object(forKey: key) != nil {
+            return defaults.bool(forKey: key)
+        }
+        return defaultIncludeAllChairs(for: instrument)
+    }
+
+    static func setIncludeAllChairs(_ on: Bool, for instrument: Instrument, defaults: UserDefaults = .standard) {
+        defaults.set(on, forKey: includeAllChairsKey(for: instrument))
+    }
 
     /// The query for the player's profile as stored in Settings.
     static func query(instrument: Instrument, positionRaw: String, region: String, includeAllChairs: Bool,

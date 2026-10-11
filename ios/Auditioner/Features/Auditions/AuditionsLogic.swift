@@ -394,9 +394,59 @@ enum AuditionOrdering {
     }
 }
 
+// MARK: - Archive (PLAN F5)
+
+/// "Delete audition" archives; the archive offers Restore and Delete for good.
+enum AuditionArchive {
+    /// The "Archived (N)" row is shown only when there is something in it.
+    static func showsArchivedRow(count: Int) -> Bool {
+        count > 0
+    }
+
+    /// "Archived (3)" — the navigation row under "My auditions".
+    static func archivedRowTitle(count: Int) -> String {
+        String(localized: "Archived (\(count))")
+    }
+
+    /// Most recently archived first; two archived at the same moment keep the newer audition first.
+    static func archivedFirst(_ auditions: [Audition]) -> [Audition] {
+        auditions.sorted { a, b in
+            let da: Date = a.archivedAt ?? a.createdAt
+            let db: Date = b.archivedAt ?? b.createdAt
+            if da != db { return da > db }
+            return a.createdAt > b.createdAt
+        }
+    }
+}
+
 // MARK: - Open auditions feed
 
 enum OpenAuditionsLogic {
+    /// UserDefaults key (Bool, default false): the feed shows every region, not only the player's (PLAN F5).
+    static let allRegionsKey: String = "auditions.feedAllRegions"
+
+    static func showsAllRegions(_ defaults: UserDefaults = .standard) -> Bool {
+        defaults.bool(forKey: allRegionsKey)
+    }
+
+    static func setShowsAllRegions(_ on: Bool, _ defaults: UserDefaults = .standard) {
+        defaults.set(on, forKey: allRegionsKey)
+    }
+
+    /// The `region` sent to `/v1/auditions`: `nil` (every region) when "All regions" is on or the
+    /// player's region is blank, else the region id.
+    static func feedRegion(allRegions: Bool, region: String) -> String? {
+        if allRegions { return nil }
+        let trimmed: String = region.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.isEmpty ? nil : trimmed
+    }
+
+    /// Picker choice and section subtitle: "Your region (North America)" / "All regions".
+    static func scopeTitle(allRegions: Bool, regionName: String) -> String {
+        if allRegions { return String(localized: "All regions") }
+        return String(localized: "Your region (\(regionName))")
+    }
+
     /// Open = no deadline we could parse, or a deadline today or later.
     static func isOpen(_ vacancy: FeedVacancy, today: Date, calendar: Calendar) -> Bool {
         guard let deadline = AuditionDates.parseDay(vacancy.applicationDeadline, calendar: calendar) else { return true }

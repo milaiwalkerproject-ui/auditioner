@@ -36,7 +36,6 @@ struct AuditionDetailView: View {
 
     @State private var sheet: AuditionDetailSheet? = nil
     @State private var pushedExcerpt: Excerpt? = nil
-    @State private var confirmDelete: Bool = false
     @State private var reminderNotice: String? = nil
 
     init(audition: Audition) {
@@ -105,12 +104,6 @@ struct AuditionDetailView: View {
         .sheet(item: $sheet) { which in
             sheetContent(which)
         }
-        .alert("Delete this audition?", isPresented: $confirmDelete) {
-            Button("Delete", role: .destructive) { deleteAudition() }
-            Button("Cancel", role: .cancel) {}
-        } message: {
-            Text("The list and your readiness notes go with it. Nothing on the orchestra's website changes.")
-        }
     }
 
     // MARK: Pieces
@@ -156,10 +149,11 @@ struct AuditionDetailView: View {
                 } label: {
                     Label("Edit details", systemImage: "pencil")
                 }
-                Button(role: .destructive) {
-                    confirmDelete = true
+                // PLAN F5: archiving is the undo-able "delete"; the archive offers Delete for good.
+                Button {
+                    archiveAudition()
                 } label: {
-                    Label("Delete audition", systemImage: "trash")
+                    Label("Archive audition", systemImage: "archivebox")
                 }
             } label: {
                 Label("More", systemImage: "ellipsis.circle")
@@ -238,9 +232,16 @@ struct AuditionDetailView: View {
         }
     }
 
-    private func deleteAudition() {
+    /// Moves the audition to the archive (Auditions tab → "Archived (N)") and goes back. No confirmation:
+    /// it can be restored from there. The reminders are cancelled until it is restored.
+    private func archiveAudition() {
+        do {
+            try AuditionsStore.archive(audition, context: modelContext)
+        } catch {
+            NSLog("Auditioner: archiving the audition failed: %@", error.localizedDescription)
+            return
+        }
         AuditionReminderCenter.shared.cancel(auditionId: audition.id)
-        AuditionsStore.delete(audition, context: modelContext)
         dismiss()
     }
 
