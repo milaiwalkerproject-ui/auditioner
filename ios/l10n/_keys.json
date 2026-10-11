@@ -1,0 +1,5287 @@
+{
+ " (%@)": {
+  "comment": "",
+  "files": [
+   "LocalRecommendationEngine.swift"
+  ]
+ },
+ " (%@–%@)": {
+  "comment": "",
+  "files": [
+   "LocalRecommendationEngine.swift"
+  ]
+ },
+ " (corrected)": {
+  "comment": "",
+  "files": [
+   "EditorLogic.swift"
+  ]
+ },
+ "%@ %@ · %@": {
+  "comment": "",
+  "files": [
+   "AuditionsComponents.swift"
+  ]
+ },
+ "%@ (%@)": {
+  "comment": "",
+  "files": [
+   "AuditionReminders.swift"
+  ]
+ },
+ "%@ = %lld": {
+  "comment": "",
+  "files": [
+   "MetronomeView.swift"
+  ]
+ },
+ "%@ Hz": {
+  "comment": "",
+  "files": [
+   "DroneMath.swift"
+  ]
+ },
+ "%@ · %@": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "%@ · %@–%@": {
+  "comment": "",
+  "files": [
+   "MetronomeMath.swift"
+  ]
+ },
+ "%@ · A = %@ Hz": {
+  "comment": "",
+  "files": [
+   "DroneView.swift"
+  ]
+ },
+ "%@ — %@": {
+  "comment": "",
+  "files": [
+   "AppleMusicRecordingPlayer.swift"
+  ]
+ },
+ "%@: %@": {
+  "comment": "",
+  "files": [
+   "ExcerptFormat.swift"
+  ]
+ },
+ "%@: applications close %@.": {
+  "comment": "",
+  "files": [
+   "AuditionReminders.swift"
+  ]
+ },
+ "%@: audition on %@.": {
+  "comment": "",
+  "files": [
+   "AuditionReminders.swift"
+  ]
+ },
+ "%lld": {
+  "comment": "",
+  "files": [
+   "MetronomeView.swift",
+   "MockAuditionRunView.swift"
+  ]
+ },
+ "%lld Hz": {
+  "comment": "",
+  "files": [
+   "SettingsView.swift"
+  ]
+ },
+ "%lld beats per minute": {
+  "comment": "",
+  "files": [
+   "MetronomeView.swift"
+  ]
+ },
+ "%lld days ago": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "%lld excerpts": {
+  "comment": "",
+  "files": [
+   "TakesListView.swift"
+  ]
+ },
+ "%lld more lists don't say which chair they were for. Turn on Include all chairs to count them.": {
+  "comment": "",
+  "files": [
+   "LocalRecommendationEngine.swift"
+  ]
+ },
+ "%lld of %lld ready": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "%lld of 5": {
+  "comment": "",
+  "files": [
+   "ToolsComponents.swift"
+  ]
+ },
+ "%lld of these lists have no date and count as the oldest year we have (%@).": {
+  "comment": "",
+  "files": [
+   "LocalRecommendationEngine.swift"
+  ]
+ },
+ "%lld pages": {
+  "comment": "",
+  "files": [
+   "LibraryView.swift"
+  ]
+ },
+ "%lld percent": {
+  "comment": "",
+  "files": [
+   "ToolsComponents.swift"
+  ]
+ },
+ "%lld s": {
+  "comment": "",
+  "files": [
+   "AuditionMockSetupSheet.swift",
+   "MockAuditionSetupView.swift"
+  ]
+ },
+ "%lld.": {
+  "comment": "",
+  "files": [
+   "MockAuditionReviewView.swift"
+  ]
+ },
+ "+%lld": {
+  "comment": "",
+  "files": [
+   "MetronomeView.swift"
+  ]
+ },
+ "+5": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift"
+  ]
+ },
+ ", all chairs": {
+  "comment": "",
+  "files": [
+   "LocalRecommendationEngine.swift"
+  ]
+ },
+ "1 more list doesn't say which chair it was for. Turn on Include all chairs to count it.": {
+  "comment": "",
+  "files": [
+   "LocalRecommendationEngine.swift"
+  ]
+ },
+ "1 not started · 3 under tempo · 5 audition-ready. Tap the same star again to clear.": {
+  "comment": "",
+  "files": [
+   "AuditionItemEditView.swift"
+  ]
+ },
+ "1 of these lists has no date and counts as the oldest year we have (%@).": {
+  "comment": "",
+  "files": [
+   "LocalRecommendationEngine.swift"
+  ]
+ },
+ "1 page": {
+  "comment": "",
+  "files": [
+   "LibraryView.swift"
+  ]
+ },
+ "16th": {
+  "comment": "",
+  "files": [
+   "ScoreEditing.swift"
+  ]
+ },
+ "32nd": {
+  "comment": "",
+  "files": [
+   "ScoreEditing.swift"
+  ]
+ },
+ "7 days and 1 day before the deadline and the audition, at 9:00.": {
+  "comment": "",
+  "files": [
+   "AuditionDetailSections.swift"
+  ]
+ },
+ "8th": {
+  "comment": "",
+  "files": [
+   "ScoreEditing.swift"
+  ]
+ },
+ "A = %lld Hz": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift"
+  ]
+ },
+ "A list from this year counts as 1, one from three years ago as a half, six years ago as a quarter, and so on. A list without a date counts like the oldest one we have.": {
+  "comment": "",
+  "files": [
+   "RecommendationInfoSheet.swift"
+  ]
+ },
+ "A recording is already running.": {
+  "comment": "",
+  "files": [
+   "TakeRecorder.swift"
+  ]
+ },
+ "A separate badge: how many auditions open right now list the excerpt. It appears only when the server can be reached, and never changes the share.": {
+  "comment": "",
+  "files": [
+   "RecommendationInfoSheet.swift"
+  ]
+ },
+ "A short scale to try the tempo slider, loop, count-in, tuning and record & compare.": {
+  "comment": "",
+  "files": [
+   "PracticeHomeView.swift"
+  ]
+ },
+ "A sustained note to tune and play against.": {
+  "comment": "",
+  "files": [
+   "PracticeHomeView.swift"
+  ]
+ },
+ "AI-generated — may contain errors, check against your part": {
+  "comment": "",
+  "files": [
+   "ExcerptNotesSection.swift"
+  ]
+ },
+ "About": {
+  "comment": "",
+  "files": [
+   "SettingsView.swift"
+  ]
+ },
+ "About this take": {
+  "comment": "",
+  "files": [
+   "TakesListView.swift"
+  ]
+ },
+ "Accent beat 1": {
+  "comment": "",
+  "files": [
+   "MetronomeView.swift"
+  ]
+ },
+ "Account": {
+  "comment": "",
+  "files": [
+   "AccountSettingsSection.swift"
+  ]
+ },
+ "Accounts need the server, which isn't set up yet.": {
+  "comment": "",
+  "files": [
+   "AccountSettingsSection.swift"
+  ]
+ },
+ "Achieved": {
+  "comment": "",
+  "files": [
+   "AuditionItemEditView.swift"
+  ]
+ },
+ "Add": {
+  "comment": "",
+  "files": [
+   "AuditionDetailView.swift",
+   "AuditionFormView.swift",
+   "AuditionAddItemViews.swift"
+  ]
+ },
+ "Add %lld": {
+  "comment": "",
+  "files": [
+   "AuditionAddItemViews.swift"
+  ]
+ },
+ "Add %lld items": {
+  "comment": "",
+  "files": [
+   "AuditionListReviewView.swift"
+  ]
+ },
+ "Add 1 item": {
+  "comment": "",
+  "files": [
+   "AuditionListReviewView.swift"
+  ]
+ },
+ "Add a PDF from Files (including iCloud Drive, Google Drive and Dropbox), a photo from Photos, or scan a page with the camera. Your parts stay on this device.": {
+  "comment": "",
+  "files": [
+   "LibraryView.swift"
+  ]
+ },
+ "Add from a list": {
+  "comment": "",
+  "files": [
+   "AuditionListImportView.swift"
+  ]
+ },
+ "Add from a list (photo, PDF or text)": {
+  "comment": "",
+  "files": [
+   "AuditionDetailView.swift"
+  ]
+ },
+ "Add from my reference audio": {
+  "comment": "",
+  "files": [
+   "MockAuditionSetupView.swift"
+  ]
+ },
+ "Add from the catalogue": {
+  "comment": "",
+  "files": [
+   "MockAuditionSetupView.swift"
+  ]
+ },
+ "Add part": {
+  "comment": "",
+  "files": [
+   "LibraryView.swift"
+  ]
+ },
+ "Add the deadline and audition day": {
+  "comment": "",
+  "files": [
+   "AuditionDetailSections.swift"
+  ]
+ },
+ "Add the fifth above": {
+  "comment": "",
+  "files": [
+   "DroneView.swift"
+  ]
+ },
+ "Add the repertoire with the + button: type a line, pick from the catalogue, or read it from a photo or PDF of the list — on this device only.": {
+  "comment": "",
+  "files": [
+   "AuditionDetailView.swift"
+  ]
+ },
+ "Add to my audition": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailView.swift",
+   "AddToAuditionSheet.swift"
+  ]
+ },
+ "Adding your part…": {
+  "comment": "",
+  "files": [
+   "LibraryView.swift"
+  ]
+ },
+ "Agree and continue": {
+  "comment": "",
+  "files": [
+   "ScanFlowSteps.swift"
+  ]
+ },
+ "Aiming for %@": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "All bars add up": {
+  "comment": "",
+  "files": [
+   "EditorPalette.swift"
+  ]
+ },
+ "All positions": {
+  "comment": "",
+  "files": [
+   "ExcerptBrowserView.swift"
+  ]
+ },
+ "All regions": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "All rounds": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "Allow the microphone": {
+  "comment": "",
+  "files": [
+   "AudioSessionCoordinator.swift"
+  ]
+ },
+ "Among %@ players who share what they practise": {
+  "comment": "",
+  "files": [
+   "TrendsCopy.swift"
+  ]
+ },
+ "Any": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Any frequency": {
+  "comment": "",
+  "files": [
+   "ExcerptBrowserView.swift"
+  ]
+ },
+ "App language": {
+  "comment": "",
+  "files": [
+   "LanguageSettingsSection.swift"
+  ]
+ },
+ "Apple Music couldn't load this recording. %@": {
+  "comment": "",
+  "files": [
+   "AppleMusicRecordingPlayer.swift"
+  ]
+ },
+ "Apple Music couldn't start playing. %@": {
+  "comment": "",
+  "files": [
+   "AppleMusicRecordingPlayer.swift"
+  ]
+ },
+ "Apple couldn't finish the sign-in. Try again.": {
+  "comment": "",
+  "files": [
+   "AccountStore.swift"
+  ]
+ },
+ "Apple didn't send what the app needs to sign you in. Try again.": {
+  "comment": "",
+  "files": [
+   "AccountStore.swift"
+  ]
+ },
+ "Application deadline": {
+  "comment": "",
+  "files": [
+   "AuditionFormView.swift"
+  ]
+ },
+ "Application deadline %@": {
+  "comment": "",
+  "files": [
+   "AuditionReminders.swift"
+  ]
+ },
+ "Archive audition": {
+  "comment": "",
+  "files": [
+   "AuditionDetailView.swift"
+  ]
+ },
+ "Archive audition on an audition's page moves it here. You can restore it any time.": {
+  "comment": "",
+  "files": [
+   "ArchivedAuditionsView.swift"
+  ]
+ },
+ "Archived (%lld)": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "Archived auditions": {
+  "comment": "",
+  "files": [
+   "ArchivedAuditionsView.swift"
+  ]
+ },
+ "Are you 18 or older?": {
+  "comment": "",
+  "files": [
+   "TrendsCopy.swift"
+  ]
+ },
+ "As listed": {
+  "comment": "",
+  "files": [
+   "MockAuditionModels.swift"
+  ]
+ },
+ "Asia-Pacific": {
+  "comment": "",
+  "files": [
+   "ProfileOptions.swift"
+  ]
+ },
+ "Assistant principal": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "At %@": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "At %@, aiming for %@": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "Audition": {
+  "comment": "",
+  "files": [
+   "AuditionsComponents.swift",
+   "AuditionDetailSections.swift",
+   "AuditionFormView.swift"
+  ]
+ },
+ "Audition %@": {
+  "comment": "",
+  "files": [
+   "AuditionReminders.swift",
+   "AuditionsLogic.swift"
+  ]
+ },
+ "Audition day": {
+  "comment": "",
+  "files": [
+   "AuditionFormView.swift"
+  ]
+ },
+ "Audition not found": {
+  "comment": "",
+  "files": [
+   "AuditionsHomeView.swift"
+  ]
+ },
+ "Audition-ready": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "Auditioner": {
+  "comment": "",
+  "files": [
+   "OnboardingView.swift"
+  ]
+ },
+ "Auditioner needs permission to use Apple Music. You can allow it in the Settings app.": {
+  "comment": "",
+  "files": [
+   "AppleMusicRecordingPlayer.swift"
+  ]
+ },
+ "Auditions": {
+  "comment": "",
+  "files": [
+   "RootView.swift",
+   "AuditionsHomeView.swift"
+  ]
+ },
+ "Auditions %@": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "Average %@ of 5": {
+  "comment": "",
+  "files": [
+   "MockAuditionReviewView.swift"
+  ]
+ },
+ "BPM": {
+  "comment": "",
+  "files": [
+   "AuditionItemEditView.swift"
+  ]
+ },
+ "Back": {
+  "comment": "",
+  "files": [
+   "AuditionListImportView.swift"
+  ]
+ },
+ "Back to start": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift"
+  ]
+ },
+ "Bar %@ has no notes in the top voice. Tap a note in a bar next to it and use Insert.": {
+  "comment": "",
+  "files": [
+   "ScoreEditorModel.swift"
+  ]
+ },
+ "Bar %@, note %lld": {
+  "comment": "",
+  "files": [
+   "EditorPalette.swift"
+  ]
+ },
+ "Bar %@: %@ of %@ beats": {
+  "comment": "",
+  "files": [
+   "EditorLogic.swift"
+  ]
+ },
+ "Bars": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailSections.swift"
+  ]
+ },
+ "Bars not yet checked": {
+  "comment": "",
+  "files": [
+   "ExcerptBrowserView.swift"
+  ]
+ },
+ "Bars to check": {
+  "comment": "",
+  "files": [
+   "EditorPalette.swift"
+  ]
+ },
+ "Bass clarinet": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Bass trombone": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Bassoon": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Beat": {
+  "comment": "",
+  "files": [
+   "MetronomeView.swift"
+  ]
+ },
+ "Beat %lld of %lld": {
+  "comment": "",
+  "files": [
+   "MetronomeView.swift"
+  ]
+ },
+ "Beat unit": {
+  "comment": "",
+  "files": [
+   "MetronomeView.swift"
+  ]
+ },
+ "Beats per bar: %lld": {
+  "comment": "",
+  "files": [
+   "MetronomeView.swift"
+  ]
+ },
+ "Beep": {
+  "comment": "",
+  "files": [
+   "ClickSynth.swift"
+  ]
+ },
+ "Before your first scan": {
+  "comment": "",
+  "files": [
+   "ScanFlowView.swift"
+  ]
+ },
+ "Behind the screen": {
+  "comment": "",
+  "files": [
+   "AuditionMockSetupSheet.swift",
+   "MockAuditionSetupView.swift"
+  ]
+ },
+ "Best matches": {
+  "comment": "",
+  "files": [
+   "ScanFlowSteps.swift"
+  ]
+ },
+ "Beta translation": {
+  "comment": "",
+  "files": [
+   "LanguageSettingsSection.swift"
+  ]
+ },
+ "Both": {
+  "comment": "",
+  "files": [
+   "TakePlayer.swift"
+  ]
+ },
+ "Both dates have passed or aren't set — nothing to remind you of yet.": {
+  "comment": "",
+  "files": [
+   "AuditionReminders.swift"
+  ]
+ },
+ "Brass": {
+  "comment": "",
+  "files": [
+   "ProfileOptions.swift"
+  ]
+ },
+ "Cancel": {
+  "comment": "",
+  "files": [
+   "AuditionListImportView.swift",
+   "AccountSettingsSection.swift",
+   "AuditionMockSetupSheet.swift",
+   "AuditionFormView.swift",
+   "ArchivedAuditionsView.swift",
+   "AuditionAddItemViews.swift",
+   "LibraryView.swift",
+   "AuditionItemEditView.swift",
+   "ScoreEditorView.swift",
+   "ScanFlowView.swift",
+   "AddToAuditionSheet.swift",
+   "ReportProblemSheet.swift",
+   "ExcerptCropView.swift",
+   "AuditionMatchPickerView.swift"
+  ]
+ },
+ "Catalogue": {
+  "comment": "",
+  "files": [
+   "MockAuditionSetupView.swift"
+  ]
+ },
+ "Catalogue data": {
+  "comment": "",
+  "files": [
+   "LicencesView.swift"
+  ]
+ },
+ "Catalogue excerpt": {
+  "comment": "",
+  "files": [
+   "AuditionItemEditView.swift"
+  ]
+ },
+ "Catalogue match": {
+  "comment": "",
+  "files": [
+   "AuditionAddItemViews.swift"
+  ]
+ },
+ "Catalogue review": {
+  "comment": "",
+  "files": [
+   "SettingsView.swift"
+  ]
+ },
+ "Cello": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Chamber music": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "Change the match": {
+  "comment": "",
+  "files": [
+   "AuditionItemEditView.swift"
+  ]
+ },
+ "Check IMSLP's copyright label for your country before downloading.": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailSections.swift"
+  ]
+ },
+ "Check it yourself": {
+  "comment": "",
+  "files": [
+   "RecommendationInfoSheet.swift"
+  ]
+ },
+ "Check the list": {
+  "comment": "",
+  "files": [
+   "AuditionListImportView.swift"
+  ]
+ },
+ "Check the official list": {
+  "comment": "",
+  "files": [
+   "FactRow.swift"
+  ]
+ },
+ "Check the official page for the repertoire. You can add the list yourself once you have it.": {
+  "comment": "",
+  "files": [
+   "FeedVacancyDetailView.swift"
+  ]
+ },
+ "Checked": {
+  "comment": "",
+  "files": [
+   "PracticeHomeView.swift"
+  ]
+ },
+ "Checked transcription": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift"
+  ]
+ },
+ "Checking what other players practise…": {
+  "comment": "",
+  "files": [
+   "TrendsCopy.swift"
+  ]
+ },
+ "Choose a PDF or a picture of your part": {
+  "comment": "",
+  "files": [
+   "ScanFlowView.swift"
+  ]
+ },
+ "Choose a PDF or picture": {
+  "comment": "",
+  "files": [
+   "AuditionListImportView.swift"
+  ]
+ },
+ "Choose a file": {
+  "comment": "",
+  "files": [
+   "ScanFlowView.swift"
+  ]
+ },
+ "Choose a page": {
+  "comment": "",
+  "files": [
+   "ScanFlowView.swift"
+  ]
+ },
+ "Choose a photo": {
+  "comment": "",
+  "files": [
+   "ScanFlowView.swift"
+  ]
+ },
+ "Choose a photo of your part": {
+  "comment": "",
+  "files": [
+   "ScanFlowView.swift"
+  ]
+ },
+ "Choose from Photos": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailSections.swift",
+   "AuditionListImportView.swift",
+   "LibraryView.swift"
+  ]
+ },
+ "Clarinet": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Clear filters": {
+  "comment": "",
+  "files": [
+   "ExcerptBrowserView.swift"
+  ]
+ },
+ "Clefs": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailSections.swift"
+  ]
+ },
+ "Close": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift",
+   "ScanFlowSteps.swift"
+  ]
+ },
+ "Close player": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailView.swift"
+  ]
+ },
+ "Close the player": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift"
+  ]
+ },
+ "Common": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Common pitfalls": {
+  "comment": "",
+  "files": [
+   "FeedbackLogic.swift",
+   "ExcerptNotesSection.swift"
+  ]
+ },
+ "Compare": {
+  "comment": "",
+  "files": [
+   "RecordCompareViews.swift"
+  ]
+ },
+ "Composer's metronome": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailSections.swift"
+  ]
+ },
+ "Composer, work or excerpt": {
+  "comment": "",
+  "files": [
+   "AuditionAddItemViews.swift",
+   "ScanFlowSteps.swift",
+   "AuditionMatchPickerView.swift",
+   "MockAuditionSetupView.swift",
+   "ExcerptBrowserView.swift"
+  ]
+ },
+ "Concertmaster": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Connected. Scans will be read by this server.": {
+  "comment": "",
+  "files": [
+   "SettingsView.swift"
+  ]
+ },
+ "Contrabassoon": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Copyright": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailSections.swift"
+  ]
+ },
+ "Core": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Correct the notes read from your scan": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift"
+  ]
+ },
+ "Corrected by you": {
+  "comment": "",
+  "files": [
+   "PracticeHomeView.swift"
+  ]
+ },
+ "Couldn't add this part": {
+  "comment": "",
+  "files": [
+   "LibraryView.swift"
+  ]
+ },
+ "Couldn't check what other players practise. Try again later.": {
+  "comment": "",
+  "files": [
+   "TrendsService.swift"
+  ]
+ },
+ "Couldn't keep your sign-in on this device. Try again.": {
+  "comment": "",
+  "files": [
+   "AccountStore.swift"
+  ]
+ },
+ "Couldn't load the feed": {
+  "comment": "",
+  "files": [
+   "AuditionsHomeView.swift"
+  ]
+ },
+ "Couldn't prepare this audition": {
+  "comment": "",
+  "files": [
+   "FeedVacancyDetailView.swift"
+  ]
+ },
+ "Couldn't reach our server to check what other players practise.": {
+  "comment": "",
+  "files": [
+   "TrendsService.swift"
+  ]
+ },
+ "Couldn't reach our server, so this uses the lists in the app's catalogue.": {
+  "comment": "",
+  "files": [
+   "RecommendationService.swift"
+  ]
+ },
+ "Couldn't reach the server. Check the address and your connection.": {
+  "comment": "",
+  "files": [
+   "SettingsView.swift"
+  ]
+ },
+ "Couldn't reach the server. Check your connection and try again.": {
+  "comment": "",
+  "files": [
+   "AccountStore.swift"
+  ]
+ },
+ "Couldn't save": {
+  "comment": "",
+  "files": [
+   "ScoreEditorView.swift"
+  ]
+ },
+ "Couldn't save the audio": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift"
+  ]
+ },
+ "Couldn't save your mark on this device.": {
+  "comment": "",
+  "files": [
+   "TimestampMarkStore.swift"
+  ]
+ },
+ "Count-in": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift"
+  ]
+ },
+ "Count-in…": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift",
+   "RecordCompareViews.swift"
+  ]
+ },
+ "Counting lists from %@.": {
+  "comment": "",
+  "files": [
+   "LocalRecommendationEngine.swift"
+  ]
+ },
+ "Counting lists from every region.": {
+  "comment": "",
+  "files": [
+   "LocalRecommendationEngine.swift"
+  ]
+ },
+ "Counting lists…": {
+  "comment": "",
+  "files": [
+   "MostAskedSection.swift"
+  ]
+ },
+ "Curated": {
+  "comment": "",
+  "files": [
+   "ExcerptNotesSection.swift"
+  ]
+ },
+ "Daily scan limit reached. Try again tomorrow.": {
+  "comment": "",
+  "files": [
+   "APIClient.swift"
+  ]
+ },
+ "Date": {
+  "comment": "",
+  "files": [
+   "MockAuditionReviewView.swift"
+  ]
+ },
+ "Dates": {
+  "comment": "",
+  "files": [
+   "AuditionFormView.swift"
+  ]
+ },
+ "Deadline": {
+  "comment": "",
+  "files": [
+   "FeedVacancyDetailView.swift",
+   "AuditionsComponents.swift",
+   "AuditionDetailSections.swift",
+   "AuditionFormView.swift"
+  ]
+ },
+ "Deadline %@ · %@": {
+  "comment": "",
+  "files": [
+   "AuditionsComponents.swift"
+  ]
+ },
+ "Deadline: check the official list": {
+  "comment": "",
+  "files": [
+   "AuditionsComponents.swift"
+  ]
+ },
+ "Delete": {
+  "comment": "",
+  "files": [
+   "EditorPalette.swift",
+   "LibraryView.swift",
+   "TakesListView.swift"
+  ]
+ },
+ "Delete account": {
+  "comment": "",
+  "files": [
+   "AccountSettingsSection.swift"
+  ]
+ },
+ "Delete for good": {
+  "comment": "",
+  "files": [
+   "ArchivedAuditionsView.swift"
+  ]
+ },
+ "Delete recording": {
+  "comment": "",
+  "files": [
+   "TakesListView.swift"
+  ]
+ },
+ "Delete this audition for good?": {
+  "comment": "",
+  "files": [
+   "ArchivedAuditionsView.swift"
+  ]
+ },
+ "Delete this recording?": {
+  "comment": "",
+  "files": [
+   "TakesListView.swift"
+  ]
+ },
+ "Delete your account?": {
+  "comment": "",
+  "files": [
+   "AccountSettingsSection.swift"
+  ]
+ },
+ "Deletes this audition and its list for good. This can't be undone.": {
+  "comment": "",
+  "files": [
+   "ArchivedAuditionsView.swift"
+  ]
+ },
+ "Demo": {
+  "comment": "",
+  "files": [
+   "PracticeHomeView.swift",
+   "PracticePlayerView.swift"
+  ]
+ },
+ "Demo: D major scale": {
+  "comment": "",
+  "files": [
+   "ScoreDocument.swift"
+  ]
+ },
+ "Discard changes": {
+  "comment": "",
+  "files": [
+   "ScoreEditorView.swift"
+  ]
+ },
+ "Discard the run": {
+  "comment": "",
+  "files": [
+   "MockAuditionRunView.swift"
+  ]
+ },
+ "Discard your changes?": {
+  "comment": "",
+  "files": [
+   "ScoreEditorView.swift"
+  ]
+ },
+ "Don't include personal details. We see your message, where in the app you sent it from, the excerpt, the app version and a scrambled install code — never your name, email or device.": {
+  "comment": "",
+  "files": [
+   "ReportProblemSheet.swift"
+  ]
+ },
+ "Done": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailSections.swift",
+   "ExcerptDetailView.swift",
+   "PracticePlayerView.swift",
+   "PDFReaderView.swift",
+   "AuditionItemEditView.swift",
+   "MockAuditionReviewView.swift",
+   "RecordCompareViews.swift",
+   "RecommendationInfoSheet.swift"
+  ]
+ },
+ "Dot": {
+  "comment": "",
+  "files": [
+   "EditorPalette.swift"
+  ]
+ },
+ "Dotted quarter": {
+  "comment": "",
+  "files": [
+   "MetronomeMath.swift"
+  ]
+ },
+ "Double bass": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Down": {
+  "comment": "",
+  "files": [
+   "EditorPalette.swift"
+  ]
+ },
+ "Draft": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailSections.swift",
+   "ScanFlowSteps.swift",
+   "ExcerptBrowserView.swift"
+  ]
+ },
+ "Draft — not reviewed": {
+  "comment": "",
+  "files": [
+   "ExcerptNotesSection.swift"
+  ]
+ },
+ "Drag the box around the bars you want. Drag a corner to resize it.": {
+  "comment": "",
+  "files": [
+   "ExcerptCropView.swift"
+  ]
+ },
+ "Drawing the music…": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift",
+   "ScoreEditorView.swift"
+  ]
+ },
+ "Drone": {
+  "comment": "",
+  "files": [
+   "DroneView.swift",
+   "PracticeHomeView.swift"
+  ]
+ },
+ "Each excerpt page lists every source we counted for it, with a link to the orchestra's own page.": {
+  "comment": "",
+  "files": [
+   "RecommendationInfoSheet.swift"
+  ]
+ },
+ "Edit audition": {
+  "comment": "",
+  "files": [
+   "AuditionFormView.swift"
+  ]
+ },
+ "Edit details": {
+  "comment": "",
+  "files": [
+   "AuditionDetailView.swift"
+  ]
+ },
+ "Eighth note": {
+  "comment": "",
+  "files": [
+   "MetronomeMath.swift"
+  ]
+ },
+ "English horn": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Europe (German-speaking)": {
+  "comment": "",
+  "files": [
+   "ProfileOptions.swift"
+  ]
+ },
+ "Europe (other)": {
+  "comment": "",
+  "files": [
+   "ProfileOptions.swift"
+  ]
+ },
+ "Excerpt": {
+  "comment": "",
+  "files": [
+   "ReportProblemSheet.swift"
+  ]
+ },
+ "Excerpt %lld of %lld": {
+  "comment": "",
+  "files": [
+   "MockAuditionRunView.swift",
+   "MockAuditionModels.swift"
+  ]
+ },
+ "Excerpt facts": {
+  "comment": "",
+  "files": [
+   "FeedbackLogic.swift"
+  ]
+ },
+ "Excerpt lists differ by position. You can change this any time in Settings.": {
+  "comment": "",
+  "files": [
+   "OnboardingView.swift"
+  ]
+ },
+ "Excerpt notes — %@": {
+  "comment": "",
+  "files": [
+   "FeedbackLogic.swift"
+  ]
+ },
+ "Excerpt page": {
+  "comment": "",
+  "files": [
+   "AuditionDetailSections.swift"
+  ]
+ },
+ "Excerpt recordings": {
+  "comment": "",
+  "files": [
+   "FeedbackLogic.swift"
+  ]
+ },
+ "Excerpts": {
+  "comment": "",
+  "files": [
+   "RootView.swift",
+   "MockAuditionReviewView.swift",
+   "ExcerptBrowserView.swift"
+  ]
+ },
+ "Excerpts (%lld)": {
+  "comment": "",
+  "files": [
+   "AuditionMockSetupSheet.swift",
+   "MockAuditionSetupView.swift"
+  ]
+ },
+ "External link": {
+  "comment": "",
+  "files": [
+   "ExcerptRecordingsSection.swift"
+  ]
+ },
+ "E♭ clarinet": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Facts": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailSections.swift"
+  ]
+ },
+ "Facts come from each orchestra's own website and were checked by a person. Always confirm on the official page before applying.": {
+  "comment": "",
+  "files": [
+   "AuditionsHomeView.swift"
+  ]
+ },
+ "Faster by %lld": {
+  "comment": "",
+  "files": [
+   "MetronomeView.swift"
+  ]
+ },
+ "Feedback you send": {
+  "comment": "",
+  "files": [
+   "PrivacyView.swift"
+  ]
+ },
+ "Fewer than %lld %@ from %@ so far, so this counts lists from every region.": {
+  "comment": "",
+  "files": [
+   "LocalRecommendationEngine.swift"
+  ]
+ },
+ "Filter": {
+  "comment": "",
+  "files": [
+   "ExcerptBrowserView.swift"
+  ]
+ },
+ "Final round": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "Find an orchestra near you": {
+  "comment": "",
+  "files": [
+   "TuttiLinkRow.swift"
+  ]
+ },
+ "Find…": {
+  "comment": "",
+  "files": [
+   "AuditionListReviewView.swift"
+  ]
+ },
+ "Finish": {
+  "comment": "",
+  "files": [
+   "MockAuditionRunView.swift"
+  ]
+ },
+ "Finish and review": {
+  "comment": "",
+  "files": [
+   "MockAuditionRunView.swift"
+  ]
+ },
+ "Fix notes": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift"
+  ]
+ },
+ "Fix the notes": {
+  "comment": "",
+  "files": [
+   "ScoreEditorView.swift"
+  ]
+ },
+ "Flat": {
+  "comment": "",
+  "files": [
+   "EditorPalette.swift"
+  ]
+ },
+ "Flute": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "For the catalogue reviewer only: shows excerpts that haven't been published yet and notes still waiting for review, marked as drafts. Leave this off unless you're checking the catalogue.": {
+  "comment": "",
+  "files": [
+   "SettingsView.swift"
+  ]
+ },
+ "Free-licence recording": {
+  "comment": "",
+  "files": [
+   "ExcerptRecordingsSection.swift"
+  ]
+ },
+ "From %@'s website": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "From %@'s website, checked %@": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "From bar %@": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift"
+  ]
+ },
+ "From orchestra lists on our server": {
+  "comment": "",
+  "files": [
+   "RecommendationService.swift"
+  ]
+ },
+ "From players who share what they practise — not what orchestras ask.": {
+  "comment": "",
+  "files": [
+   "TrendsCopy.swift"
+  ]
+ },
+ "From the catalogue": {
+  "comment": "",
+  "files": [
+   "AuditionDetailView.swift",
+   "AuditionAddItemViews.swift"
+  ]
+ },
+ "From the lists in the app's catalogue": {
+  "comment": "",
+  "files": [
+   "RecommendationService.swift"
+  ]
+ },
+ "Full list": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "General feedback": {
+  "comment": "",
+  "files": [
+   "FeedbackLogic.swift"
+  ]
+ },
+ "GeneralUser GS (instrument sounds)": {
+  "comment": "",
+  "files": [
+   "LicencesView.swift"
+  ]
+ },
+ "Get ready": {
+  "comment": "",
+  "files": [
+   "MockAuditionRunView.swift"
+  ]
+ },
+ "Get the part on IMSLP": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailSections.swift"
+  ]
+ },
+ "Give this note a length first (whole, half, quarter…).": {
+  "comment": "",
+  "files": [
+   "ScoreEditing.swift"
+  ]
+ },
+ "Google privacy policy": {
+  "comment": "",
+  "files": [
+   "PrivacyView.swift"
+  ]
+ },
+ "Half": {
+  "comment": "",
+  "files": [
+   "ScoreEditing.swift",
+   "MetronomeMath.swift"
+  ]
+ },
+ "Half note": {
+  "comment": "",
+  "files": [
+   "MetronomeMath.swift"
+  ]
+ },
+ "Harp": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Help and support": {
+  "comment": "",
+  "files": [
+   "TuttiLinkRow.swift"
+  ]
+ },
+ "Helpful": {
+  "comment": "",
+  "files": [
+   "ExcerptNotesSection.swift"
+  ]
+ },
+ "Hide this note": {
+  "comment": "",
+  "files": [
+   "ScoreEditorView.swift"
+  ]
+ },
+ "High": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "History": {
+  "comment": "",
+  "files": [
+   "FeedbackLogic.swift",
+   "ExcerptNotesSection.swift"
+  ]
+ },
+ "Horn": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "How did it go?": {
+  "comment": "",
+  "files": [
+   "RecordCompareViews.swift"
+  ]
+ },
+ "How is this worked out?": {
+  "comment": "",
+  "files": [
+   "MostAskedSection.swift",
+   "RecommendationInfoSheet.swift"
+  ]
+ },
+ "How often it's asked": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailSections.swift",
+   "ExcerptBrowserView.swift"
+  ]
+ },
+ "IMSLP page for this work": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailSections.swift"
+  ]
+ },
+ "If you sign in with Apple": {
+  "comment": "",
+  "files": [
+   "PrivacyView.swift"
+  ]
+ },
+ "Import from Files": {
+  "comment": "",
+  "files": [
+   "LibraryView.swift"
+  ]
+ },
+ "Import my part": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailSections.swift"
+  ]
+ },
+ "Imported — bars not yet checked": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailSections.swift"
+  ]
+ },
+ "Include all chairs": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailSections.swift",
+   "MostAskedSection.swift"
+  ]
+ },
+ "Input level": {
+  "comment": "",
+  "files": [
+   "ToolsComponents.swift"
+  ]
+ },
+ "Insert": {
+  "comment": "",
+  "files": [
+   "EditorPalette.swift"
+  ]
+ },
+ "Instrument": {
+  "comment": "",
+  "files": [
+   "SettingsView.swift",
+   "AuditionFormView.swift",
+   "ExcerptBrowserView.swift"
+  ]
+ },
+ "Instrument sound": {
+  "comment": "",
+  "files": [
+   "DroneMath.swift"
+  ]
+ },
+ "Instrument sounds come from the GeneralUser GS SoundFont. Notation is drawn by Verovio, used under the LGPL 3.0; the app links it as a separate component and you can replace it.": {
+  "comment": "",
+  "files": [
+   "LicencesView.swift"
+  ]
+ },
+ "Is this your excerpt?": {
+  "comment": "",
+  "files": [
+   "ScanFlowView.swift"
+  ]
+ },
+ "It's deleted right after that — within 24 hours at the latest.": {
+  "comment": "",
+  "files": [
+   "ScanFlowSteps.swift"
+  ]
+ },
+ "It's never sent to any AI service.": {
+  "comment": "",
+  "files": [
+   "ScanFlowSteps.swift"
+  ]
+ },
+ "It's not in the list": {
+  "comment": "",
+  "files": [
+   "ScanFlowSteps.swift"
+  ]
+ },
+ "It's used only to read the notes on it.": {
+  "comment": "",
+  "files": [
+   "ScanFlowSteps.swift"
+  ]
+ },
+ "Item": {
+  "comment": "",
+  "files": [
+   "AuditionItemEditView.swift"
+  ]
+ },
+ "Jump to my start": {
+  "comment": "",
+  "files": [
+   "RecordingControls.swift"
+  ]
+ },
+ "Jump to start": {
+  "comment": "",
+  "files": [
+   "HostedRecordingPlayer.swift",
+   "AppleMusicRecordingPlayer.swift"
+  ]
+ },
+ "Jump to start (checked)": {
+  "comment": "",
+  "files": [
+   "YouTubeRecordingPlayer.swift"
+  ]
+ },
+ "Keep editing": {
+  "comment": "",
+  "files": [
+   "ScoreEditorView.swift"
+  ]
+ },
+ "Keep this line": {
+  "comment": "",
+  "files": [
+   "AuditionListReviewView.swift"
+  ]
+ },
+ "Keep your parts in one place, with Apple Pencil markup and page-turn pedals.": {
+  "comment": "",
+  "files": [
+   "OnboardingView.swift"
+  ]
+ },
+ "Key": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailSections.swift"
+  ]
+ },
+ "Keyboard": {
+  "comment": "",
+  "files": [
+   "ProfileOptions.swift"
+  ]
+ },
+ "Kind": {
+  "comment": "",
+  "files": [
+   "AuditionAddItemViews.swift",
+   "AuditionItemEditView.swift"
+  ]
+ },
+ "Language": {
+  "comment": "",
+  "files": [
+   "LanguageSettingsSection.swift"
+  ]
+ },
+ "Last checked %@": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailSections.swift"
+  ]
+ },
+ "Last practised": {
+  "comment": "",
+  "files": [
+   "AuditionItemEditView.swift"
+  ]
+ },
+ "Learning the notes": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "Leave a date off if the orchestra hasn't announced it. Reminders use these dates.": {
+  "comment": "",
+  "files": [
+   "AuditionFormView.swift"
+  ]
+ },
+ "Length": {
+  "comment": "",
+  "files": [
+   "TakesListView.swift"
+  ]
+ },
+ "Level %lld of 5": {
+  "comment": "",
+  "files": [
+   "ExcerptFormat.swift"
+  ]
+ },
+ "Licence: %@": {
+  "comment": "",
+  "files": [
+   "HostedRecordingPlayer.swift"
+  ]
+ },
+ "Licences": {
+  "comment": "",
+  "files": [
+   "SettingsView.swift",
+   "LicencesView.swift"
+  ]
+ },
+ "Line": {
+  "comment": "",
+  "files": [
+   "AuditionListReviewView.swift"
+  ]
+ },
+ "Line as printed on the list": {
+  "comment": "",
+  "files": [
+   "AuditionItemEditView.swift"
+  ]
+ },
+ "Line as printed, e.g. Composer – Work, movement, bars": {
+  "comment": "",
+  "files": [
+   "AuditionAddItemViews.swift"
+  ]
+ },
+ "Line left out": {
+  "comment": "",
+  "files": [
+   "AuditionListReviewView.swift"
+  ]
+ },
+ "Link": {
+  "comment": "",
+  "files": [
+   "AuditionMatchPickerView.swift"
+  ]
+ },
+ "Link this line?": {
+  "comment": "",
+  "files": [
+   "AuditionMatchPickerView.swift"
+  ]
+ },
+ "Link to the official list (https://…)": {
+  "comment": "",
+  "files": [
+   "AuditionFormView.swift"
+  ]
+ },
+ "Linking a line to the catalogue gives you its excerpt page, reference audio and recordings. You choose the match.": {
+  "comment": "",
+  "files": [
+   "AuditionItemEditView.swift"
+  ]
+ },
+ "List sent with invitation": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "Listen to": {
+  "comment": "",
+  "files": [
+   "RecordCompareViews.swift"
+  ]
+ },
+ "Lists from your region come first. When we have fewer than %lld from there, we say so and count every region.": {
+  "comment": "",
+  "files": [
+   "RecommendationInfoSheet.swift"
+  ]
+ },
+ "Loading the sound…": {
+  "comment": "",
+  "files": [
+   "DroneView.swift"
+  ]
+ },
+ "Loading…": {
+  "comment": "",
+  "files": [
+   "EditorPalette.swift"
+  ]
+ },
+ "Looking at the page…": {
+  "comment": "",
+  "files": [
+   "ScanFlowModel.swift"
+  ]
+ },
+ "Looking for open auditions…": {
+  "comment": "",
+  "files": [
+   "AuditionsHomeView.swift"
+  ]
+ },
+ "Looking up this recording in Apple Music…": {
+  "comment": "",
+  "files": [
+   "AppleMusicRecordingPlayer.swift"
+  ]
+ },
+ "Loop": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift"
+  ]
+ },
+ "Loop my marks": {
+  "comment": "",
+  "files": [
+   "HostedRecordingPlayer.swift",
+   "YouTubeRecordingPlayer.swift"
+  ]
+ },
+ "Low": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Lowest readiness first, then the earliest round, then the harder excerpt.": {
+  "comment": "",
+  "files": [
+   "AuditionDetailSections.swift"
+  ]
+ },
+ "Machine-translated": {
+  "comment": "",
+  "files": [
+   "ExcerptNotesSection.swift"
+  ]
+ },
+ "Make reference audio": {
+  "comment": "",
+  "files": [
+   "LibraryView.swift"
+  ]
+ },
+ "Makes a private checklist on this device with the list above: readiness, tempo, countdown and reminders. Nothing is sent anywhere.": {
+  "comment": "",
+  "files": [
+   "FeedVacancyDetailView.swift"
+  ]
+ },
+ "Mark end": {
+  "comment": "",
+  "files": [
+   "RecordingControls.swift"
+  ]
+ },
+ "Mark start": {
+  "comment": "",
+  "files": [
+   "RecordingControls.swift"
+  ]
+ },
+ "Mark the excerpt": {
+  "comment": "",
+  "files": [
+   "ScanFlowView.swift",
+   "ExcerptCropView.swift"
+  ]
+ },
+ "Mark the excerpt again": {
+  "comment": "",
+  "files": [
+   "ScanFlowSteps.swift"
+  ]
+ },
+ "Markup": {
+  "comment": "",
+  "files": [
+   "PDFReaderView.swift"
+  ]
+ },
+ "Match to catalogue": {
+  "comment": "",
+  "files": [
+   "AuditionDetailSections.swift",
+   "AuditionItemEditView.swift",
+   "AuditionMatchPickerView.swift"
+  ]
+ },
+ "Meter": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailSections.swift"
+  ]
+ },
+ "Metronome": {
+  "comment": "",
+  "files": [
+   "MetronomeView.swift",
+   "PracticeHomeView.swift"
+  ]
+ },
+ "Metronome for this excerpt": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailSections.swift"
+  ]
+ },
+ "Microphone is off": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift",
+   "AudioSessionCoordinator.swift"
+  ]
+ },
+ "Microphone needed": {
+  "comment": "",
+  "files": [
+   "AudioSessionCoordinator.swift"
+  ]
+ },
+ "Mock audition": {
+  "comment": "",
+  "files": [
+   "AuditionMockSetupSheet.swift",
+   "PracticeHomeView.swift",
+   "MockAuditionRunView.swift",
+   "MockAuditionSetupView.swift"
+  ]
+ },
+ "Mock audition · %@": {
+  "comment": "",
+  "files": [
+   "MockAuditionModels.swift"
+  ]
+ },
+ "Mock auditions": {
+  "comment": "",
+  "files": [
+   "TakesListView.swift"
+  ]
+ },
+ "More": {
+  "comment": "",
+  "files": [
+   "AuditionDetailView.swift"
+  ]
+ },
+ "More instruments": {
+  "comment": "",
+  "files": [
+   "ExcerptBrowserView.swift"
+  ]
+ },
+ "Most asked for your chair": {
+  "comment": "",
+  "files": [
+   "MostAskedSection.swift"
+  ]
+ },
+ "Mvt. %@": {
+  "comment": "",
+  "files": [
+   "ExcerptFormat.swift"
+  ]
+ },
+ "Mvt. %@ · %@": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "My auditions": {
+  "comment": "",
+  "files": [
+   "AuditionsHomeView.swift",
+   "AddToAuditionSheet.swift"
+  ]
+ },
+ "My marks: %@ – %@": {
+  "comment": "",
+  "files": [
+   "RecordingControls.swift"
+  ]
+ },
+ "My parts": {
+  "comment": "",
+  "files": [
+   "RootView.swift",
+   "LibraryView.swift"
+  ]
+ },
+ "My recordings": {
+  "comment": "",
+  "files": [
+   "PracticeHomeView.swift",
+   "TakesListView.swift"
+  ]
+ },
+ "My reference audio": {
+  "comment": "",
+  "files": [
+   "MockAuditionSetupView.swift"
+  ]
+ },
+ "My upcoming audition": {
+  "comment": "",
+  "files": [
+   "AuditionDetailView.swift"
+  ]
+ },
+ "Natural": {
+  "comment": "",
+  "files": [
+   "EditorPalette.swift"
+  ]
+ },
+ "Nearly there": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "Needs the Auditioner server. Add its address in Settings → Server.": {
+  "comment": "",
+  "files": [
+   "TrendsService.swift"
+  ]
+ },
+ "New audition": {
+  "comment": "",
+  "files": [
+   "AuditionFormView.swift",
+   "AuditionsHomeView.swift",
+   "AddToAuditionSheet.swift"
+  ]
+ },
+ "Next": {
+  "comment": "",
+  "files": [
+   "OnboardingView.swift"
+  ]
+ },
+ "Next excerpt": {
+  "comment": "",
+  "files": [
+   "MockAuditionRunView.swift"
+  ]
+ },
+ "No": {
+  "comment": "",
+  "files": [
+   "TrendsCopy.swift"
+  ]
+ },
+ "No account needed": {
+  "comment": "",
+  "files": [
+   "PrivacyView.swift"
+  ]
+ },
+ "No account needed. Everything works without signing in.": {
+  "comment": "",
+  "files": [
+   "OnboardingView.swift"
+  ]
+ },
+ "No account needed. The app only sends a random number for this install, so the server can limit scans per device; it doesn't identify you.": {
+  "comment": "",
+  "files": [
+   "ScanFlowSteps.swift"
+  ]
+ },
+ "No address yet. Paste the server address above first.": {
+  "comment": "",
+  "files": [
+   "SettingsView.swift"
+  ]
+ },
+ "No audition yet": {
+  "comment": "",
+  "files": [
+   "AuditionsHomeView.swift"
+  ]
+ },
+ "No catalogue match": {
+  "comment": "",
+  "files": [
+   "AuditionListReviewView.swift"
+  ]
+ },
+ "No catalogue match for this line yet. You can link it later.": {
+  "comment": "",
+  "files": [
+   "AuditionAddItemViews.swift"
+  ]
+ },
+ "No date yet": {
+  "comment": "",
+  "files": [
+   "AuditionsComponents.swift"
+  ]
+ },
+ "No excerpt stands out yet.": {
+  "comment": "",
+  "files": [
+   "TrendsCopy.swift"
+  ]
+ },
+ "No excerpts match": {
+  "comment": "",
+  "files": [
+   "ExcerptBrowserView.swift"
+  ]
+ },
+ "No excerpts match.": {
+  "comment": "",
+  "files": [
+   "ScanFlowSteps.swift"
+  ]
+ },
+ "No items yet": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "No list lines were found. Try a sharper picture, or paste the text of the list.": {
+  "comment": "",
+  "files": [
+   "AuditionListImportModel.swift"
+  ]
+ },
+ "No list published here": {
+  "comment": "",
+  "files": [
+   "FeedVacancyDetailView.swift"
+  ]
+ },
+ "No list yet": {
+  "comment": "",
+  "files": [
+   "AuditionDetailView.swift"
+  ]
+ },
+ "No microphone was found. Check that the microphone is allowed for Auditioner.": {
+  "comment": "",
+  "files": [
+   "RecordCompareSession.swift"
+  ]
+ },
+ "No mock auditions yet.": {
+  "comment": "",
+  "files": [
+   "TakesListView.swift"
+  ]
+ },
+ "No open %@ auditions right now": {
+  "comment": "",
+  "files": [
+   "AuditionsHomeView.swift"
+  ]
+ },
+ "No orchestra recordings listed yet.": {
+  "comment": "",
+  "files": [
+   "ExcerptRecordingsSection.swift"
+  ]
+ },
+ "No pages were scanned.": {
+  "comment": "",
+  "files": [
+   "ScanFlowModel.swift",
+   "AuditionListImportModel.swift",
+   "LibraryStore.swift"
+  ]
+ },
+ "No parts yet": {
+  "comment": "",
+  "files": [
+   "LibraryView.swift"
+  ]
+ },
+ "No picture of the scan was kept for this part.": {
+  "comment": "",
+  "files": [
+   "ScoreEditorView.swift"
+  ]
+ },
+ "No sign": {
+  "comment": "",
+  "files": [
+   "EditorPalette.swift"
+  ]
+ },
+ "No solo recordings listed yet.": {
+  "comment": "",
+  "files": [
+   "ExcerptRecordingsSection.swift"
+  ]
+ },
+ "None": {
+  "comment": "",
+  "files": [
+   "AuditionMockSetupSheet.swift",
+   "MockAuditionSetupView.swift",
+   "MetronomeMath.swift"
+  ]
+ },
+ "None of these lists has a date, so they all count the same.": {
+  "comment": "",
+  "files": [
+   "LocalRecommendationEngine.swift"
+  ]
+ },
+ "North America": {
+  "comment": "",
+  "files": [
+   "ProfileOptions.swift"
+  ]
+ },
+ "Not added": {
+  "comment": "",
+  "files": [
+   "AddToAuditionSheet.swift"
+  ]
+ },
+ "Not enough lists yet to name a tier — we have %lld, we need %lld.": {
+  "comment": "",
+  "files": [
+   "LocalRecommendationEngine.swift"
+  ]
+ },
+ "Not enough players share yet to show this.": {
+  "comment": "",
+  "files": [
+   "TrendsCopy.swift"
+  ]
+ },
+ "Not helpful": {
+  "comment": "",
+  "files": [
+   "ExcerptNotesSection.swift"
+  ]
+ },
+ "Not in the catalogue": {
+  "comment": "",
+  "files": [
+   "ExcerptBrowserView.swift"
+  ]
+ },
+ "Not now": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift",
+   "ScanFlowSteps.swift"
+  ]
+ },
+ "Not on any of the %lld %@ we've collected%@%@": {
+  "comment": "",
+  "files": [
+   "LocalRecommendationEngine.swift"
+  ]
+ },
+ "Not on the only %@ we've collected%@%@": {
+  "comment": "",
+  "files": [
+   "LocalRecommendationEngine.swift"
+  ]
+ },
+ "Not rated yet": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "Not started": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "Not sure": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "Not yet rated": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Note": {
+  "comment": "",
+  "files": [
+   "DroneView.swift"
+  ]
+ },
+ "Notes": {
+  "comment": "",
+  "files": [
+   "AuditionFormView.swift",
+   "ExcerptNotesSection.swift",
+   "TakesListView.swift"
+  ]
+ },
+ "Nothing archived": {
+  "comment": "",
+  "files": [
+   "ArchivedAuditionsView.swift"
+  ]
+ },
+ "Nothing here yet": {
+  "comment": "",
+  "files": [
+   "ExcerptBrowserView.swift"
+  ]
+ },
+ "Nothing in the %@ catalogue matches.": {
+  "comment": "",
+  "files": [
+   "AuditionAddItemViews.swift"
+  ]
+ },
+ "Nothing in the %@ catalogue matches. Try just the composer's surname, or leave the line unlinked.": {
+  "comment": "",
+  "files": [
+   "AuditionMatchPickerView.swift"
+  ]
+ },
+ "Nothing recorded yet. Use Record in the practice player, or record a mock audition.": {
+  "comment": "",
+  "files": [
+   "TakesListView.swift"
+  ]
+ },
+ "Nothing saved yet. Scan a part from an excerpt page or from My parts to make reference audio.": {
+  "comment": "",
+  "files": [
+   "PracticeHomeView.swift"
+  ]
+ },
+ "Nothing sent to AI": {
+  "comment": "",
+  "files": [
+   "PrivacyView.swift"
+  ]
+ },
+ "Notifications are turned off for Auditioner. Allow them in the iPhone Settings app, then try again.": {
+  "comment": "",
+  "files": [
+   "AuditionDetailView.swift"
+  ]
+ },
+ "Now at %@": {
+  "comment": "",
+  "files": [
+   "YouTubeRecordingPlayer.swift"
+  ]
+ },
+ "OK": {
+  "comment": "",
+  "files": [
+   "FeedVacancyDetailView.swift",
+   "RootView.swift",
+   "ExcerptDetailView.swift",
+   "PracticePlayerView.swift",
+   "ScanComponents.swift",
+   "LibraryView.swift",
+   "ScoreEditorView.swift",
+   "AddToAuditionSheet.swift",
+   "ReportProblemSheet.swift"
+  ]
+ },
+ "Oboe": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Occasional": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Octave: %lld": {
+  "comment": "",
+  "files": [
+   "DroneView.swift"
+  ]
+ },
+ "Off unless you turn it on, and for players 18 and older. Then, when you open the app (at most twice a day), it sends your instrument, the week and which catalogue excerpts you practised that week — no name, recordings, notes, scans or times — under a scrambled install code that can't be turned back into the number. Kept 26 weeks. Shown only when at least 20 players share, as tiers, never numbers. Turning it off deletes what you shared from our server.": {
+  "comment": "",
+  "files": [
+   "PrivacyView.swift"
+  ]
+ },
+ "On %lld of the %lld %@ we've collected%@%@": {
+  "comment": "",
+  "files": [
+   "LocalRecommendationEngine.swift"
+  ]
+ },
+ "On %lld open auditions now": {
+  "comment": "",
+  "files": [
+   "RecommendationService.swift"
+  ]
+ },
+ "On 1 open audition now": {
+  "comment": "",
+  "files": [
+   "RecommendationService.swift"
+  ]
+ },
+ "On N open auditions now": {
+  "comment": "",
+  "files": [
+   "RecommendationInfoSheet.swift"
+  ]
+ },
+ "On the list": {
+  "comment": "",
+  "files": [
+   "AuditionAddItemViews.swift",
+   "AuditionItemEditView.swift"
+  ]
+ },
+ "On the only %@ we've collected%@%@": {
+  "comment": "",
+  "files": [
+   "LocalRecommendationEngine.swift"
+  ]
+ },
+ "Once it is, add its address under Settings → Server. Your page stays on this device until then.": {
+  "comment": "",
+  "files": [
+   "ScanFlowSteps.swift"
+  ]
+ },
+ "One continuous recording, with the start of each excerpt marked.": {
+  "comment": "",
+  "files": [
+   "AuditionMockSetupSheet.swift",
+   "MockAuditionSetupView.swift"
+  ]
+ },
+ "Only PDF files and images can be added to My parts.": {
+  "comment": "",
+  "files": [
+   "LibraryStore.swift"
+  ]
+ },
+ "Only a web address is kept. The orchestra's file itself is never stored by the app.": {
+  "comment": "",
+  "files": [
+   "AuditionFormView.swift"
+  ]
+ },
+ "Only the top voice can be edited here.": {
+  "comment": "",
+  "files": [
+   "ScoreEditorModel.swift"
+  ]
+ },
+ "Open Settings": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift",
+   "AudioSessionCoordinator.swift"
+  ]
+ },
+ "Open auditions arrive from the Auditioner server. Add its address in Settings → Server. You can still add your own audition with +.": {
+  "comment": "",
+  "files": [
+   "AuditionsHomeView.swift"
+  ]
+ },
+ "Open auditions · %@": {
+  "comment": "",
+  "files": [
+   "AuditionsHomeView.swift"
+  ]
+ },
+ "Open excerpt page": {
+  "comment": "",
+  "files": [
+   "AuditionItemEditView.swift"
+  ]
+ },
+ "Open in Apple Music": {
+  "comment": "",
+  "files": [
+   "AppleMusicRecordingPlayer.swift"
+  ]
+ },
+ "Open in YouTube": {
+  "comment": "",
+  "files": [
+   "YouTubeRecordingPlayer.swift"
+  ]
+ },
+ "Open my audition": {
+  "comment": "",
+  "files": [
+   "FeedVacancyDetailView.swift"
+  ]
+ },
+ "Open official list": {
+  "comment": "",
+  "files": [
+   "AuditionsComponents.swift",
+   "AuditionDetailSections.swift"
+  ]
+ },
+ "Open recording": {
+  "comment": "",
+  "files": [
+   "RecordingControls.swift"
+  ]
+ },
+ "Open the excerpt page": {
+  "comment": "",
+  "files": [
+   "ScanFlowSteps.swift"
+  ]
+ },
+ "Open the excerpt page: tempo, techniques to watch, history, pitfalls and recordings.": {
+  "comment": "",
+  "files": [
+   "OnboardingView.swift"
+  ]
+ },
+ "Opening the file…": {
+  "comment": "",
+  "files": [
+   "ScanFlowModel.swift",
+   "AuditionListImportModel.swift"
+  ]
+ },
+ "Opening the pages…": {
+  "comment": "",
+  "files": [
+   "ScanFlowModel.swift"
+  ]
+ },
+ "Opening the photos…": {
+  "comment": "",
+  "files": [
+   "AuditionListImportView.swift",
+   "AuditionListImportModel.swift"
+  ]
+ },
+ "Opening the photo…": {
+  "comment": "",
+  "files": [
+   "ScanFlowModel.swift",
+   "ScanFlowView.swift"
+  ]
+ },
+ "Opening your part…": {
+  "comment": "",
+  "files": [
+   "ScanFlowModel.swift",
+   "ScanFlowView.swift"
+  ]
+ },
+ "Optional. Gives you more scans a day.": {
+  "comment": "",
+  "files": [
+   "AccountSettingsSection.swift"
+  ]
+ },
+ "Optional. Signing in gives you more scans a day. Everything else works without an account. Accounts need the server, which isn't set up yet.": {
+  "comment": "",
+  "files": [
+   "AccountSettingsSection.swift"
+  ]
+ },
+ "Optional. Signing in gives you more scans a day. Everything else works without an account. We don't ask Apple for your name or email.": {
+  "comment": "",
+  "files": [
+   "AccountSettingsSection.swift"
+  ]
+ },
+ "Orchestra": {
+  "comment": "",
+  "files": [
+   "AuditionFormView.swift",
+   "ExcerptRecordingsSection.swift"
+  ]
+ },
+ "Orchestral excerpts": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "Order": {
+  "comment": "",
+  "files": [
+   "AuditionMockSetupSheet.swift",
+   "MockAuditionSetupView.swift"
+  ]
+ },
+ "Other": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift",
+   "ProfileOptions.swift"
+  ]
+ },
+ "Other excerpt…": {
+  "comment": "",
+  "files": [
+   "AuditionListReviewView.swift"
+  ]
+ },
+ "Other versions": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailSections.swift"
+  ]
+ },
+ "Our server has no reviewed lists for this chair yet, so this uses the lists in the app's catalogue.": {
+  "comment": "",
+  "files": [
+   "RecommendationService.swift"
+  ]
+ },
+ "Overall": {
+  "comment": "",
+  "files": [
+   "MockAuditionReviewView.swift"
+  ]
+ },
+ "Page %lld": {
+  "comment": "",
+  "files": [
+   "ScanFlowSteps.swift"
+  ]
+ },
+ "Page %lld of %lld": {
+  "comment": "",
+  "files": [
+   "PDFReaderView.swift"
+  ]
+ },
+ "Part %@": {
+  "comment": "",
+  "files": [
+   "ScanFlowLogic.swift"
+  ]
+ },
+ "Partial list": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "Partial list — more sent to invited candidates": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "Paste the list": {
+  "comment": "",
+  "files": [
+   "AuditionListImportView.swift"
+  ]
+ },
+ "Paste the list, one line per work. Headings like “Preliminary round” or “Solo” are understood.": {
+  "comment": "",
+  "files": [
+   "AuditionListImportView.swift"
+  ]
+ },
+ "Paste the text": {
+  "comment": "",
+  "files": [
+   "AuditionListImportView.swift"
+  ]
+ },
+ "Pause": {
+  "comment": "",
+  "files": [
+   "HostedRecordingPlayer.swift",
+   "AppleMusicRecordingPlayer.swift",
+   "ToolsComponents.swift",
+   "PracticePlayerView.swift"
+  ]
+ },
+ "Percussion": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Photo %@": {
+  "comment": "",
+  "files": [
+   "ScanFlowLogic.swift"
+  ]
+ },
+ "Photos %@": {
+  "comment": "",
+  "files": [
+   "LibraryView.swift"
+  ]
+ },
+ "Piano / celesta": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Piccolo": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Pick at least one excerpt.": {
+  "comment": "",
+  "files": [
+   "MockAuditionSetupView.swift"
+  ]
+ },
+ "Pick one from the open auditions below, or tap + to add your own with its list.": {
+  "comment": "",
+  "files": [
+   "AuditionsHomeView.swift"
+  ]
+ },
+ "Play": {
+  "comment": "",
+  "files": [
+   "HostedRecordingPlayer.swift",
+   "AppleMusicRecordingPlayer.swift",
+   "MockAuditionRunView.swift",
+   "ToolsComponents.swift",
+   "PracticePlayerView.swift"
+  ]
+ },
+ "Play from here": {
+  "comment": "",
+  "files": [
+   "EditorPalette.swift"
+  ]
+ },
+ "Play from the selected bar": {
+  "comment": "",
+  "files": [
+   "EditorPalette.swift"
+  ]
+ },
+ "Play from this excerpt": {
+  "comment": "",
+  "files": [
+   "MockAuditionReviewView.swift"
+  ]
+ },
+ "Play reference": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailSections.swift"
+  ]
+ },
+ "Playback couldn't start (%@).": {
+  "comment": "",
+  "files": [
+   "PlaybackEngine.swift",
+   "TakePlayer.swift"
+  ]
+ },
+ "Playback speed": {
+  "comment": "",
+  "files": [
+   "ToolsComponents.swift"
+  ]
+ },
+ "Playing inside the app needs an Apple Music subscription.": {
+  "comment": "",
+  "files": [
+   "AppleMusicRecordingPlayer.swift"
+  ]
+ },
+ "Popular": {
+  "comment": "",
+  "files": [
+   "TrendsService.swift"
+  ]
+ },
+ "Popular with %@ players": {
+  "comment": "",
+  "files": [
+   "TrendsCopy.swift"
+  ]
+ },
+ "Popular with other players": {
+  "comment": "",
+  "files": [
+   "TrendsCopy.swift",
+   "PrivacyView.swift"
+  ]
+ },
+ "Popularity lists are shown only to players who share and have confirmed they're 18 or older.": {
+  "comment": "",
+  "files": [
+   "TrendsCopy.swift"
+  ]
+ },
+ "Position": {
+  "comment": "",
+  "files": [
+   "SettingsView.swift",
+   "ToolsComponents.swift",
+   "ExcerptBrowserView.swift"
+  ]
+ },
+ "Position, e.g. Section cello": {
+  "comment": "",
+  "files": [
+   "AuditionFormView.swift"
+  ]
+ },
+ "Practice": {
+  "comment": "",
+  "files": [
+   "RootView.swift",
+   "PracticeHomeView.swift"
+  ]
+ },
+ "Practice tips": {
+  "comment": "",
+  "files": [
+   "FeedbackLogic.swift",
+   "ExcerptNotesSection.swift"
+  ]
+ },
+ "Practice tools": {
+  "comment": "",
+  "files": [
+   "FeedbackLogic.swift"
+  ]
+ },
+ "Practise next": {
+  "comment": "",
+  "files": [
+   "AuditionDetailSections.swift"
+  ]
+ },
+ "Practised %@": {
+  "comment": "",
+  "files": [
+   "AuditionDetailSections.swift"
+  ]
+ },
+ "Practised at least once": {
+  "comment": "",
+  "files": [
+   "AuditionItemEditView.swift"
+  ]
+ },
+ "Practised today": {
+  "comment": "",
+  "files": [
+   "AuditionItemEditView.swift"
+  ]
+ },
+ "Preliminary round": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "Prepare for orchestra auditions.": {
+  "comment": "",
+  "files": [
+   "OnboardingView.swift"
+  ]
+ },
+ "Prepare for this audition": {
+  "comment": "",
+  "files": [
+   "FeedVacancyDetailView.swift"
+  ]
+ },
+ "Preparing the page…": {
+  "comment": "",
+  "files": [
+   "ScanFlowModel.swift"
+  ]
+ },
+ "Preparing the reference…": {
+  "comment": "",
+  "files": [
+   "RecordCompareViews.swift"
+  ]
+ },
+ "Principal": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Privacy": {
+  "comment": "",
+  "files": [
+   "SettingsView.swift",
+   "PrivacyView.swift"
+  ]
+ },
+ "Privacy policy": {
+  "comment": "",
+  "files": [
+   "TuttiLinkRow.swift"
+  ]
+ },
+ "Protected in Canada": {
+  "comment": "",
+  "files": [
+   "ExcerptFormat.swift"
+  ]
+ },
+ "Protected in the EU": {
+  "comment": "",
+  "files": [
+   "ExcerptFormat.swift"
+  ]
+ },
+ "Protected in the US": {
+  "comment": "",
+  "files": [
+   "ExcerptFormat.swift"
+  ]
+ },
+ "Public domain in Canada": {
+  "comment": "",
+  "files": [
+   "ExcerptFormat.swift"
+  ]
+ },
+ "Public domain in the EU": {
+  "comment": "",
+  "files": [
+   "ExcerptFormat.swift"
+  ]
+ },
+ "Public domain in the US": {
+  "comment": "",
+  "files": [
+   "ExcerptFormat.swift"
+  ]
+ },
+ "Pure tone": {
+  "comment": "",
+  "files": [
+   "DroneMath.swift"
+  ]
+ },
+ "Quarter": {
+  "comment": "",
+  "files": [
+   "ScoreEditing.swift"
+  ]
+ },
+ "Quarter note": {
+  "comment": "",
+  "files": [
+   "MetronomeMath.swift"
+  ]
+ },
+ "Questions, ideas or something wrong? Use Send feedback — it reaches us directly; there's no public email. Messages go through the Auditioner server and wait on this device until it can be reached.": {
+  "comment": "",
+  "files": [
+   "SettingsView.swift"
+  ]
+ },
+ "Random": {
+  "comment": "",
+  "files": [
+   "MockAuditionModels.swift"
+  ]
+ },
+ "Random order, hidden titles, one recording, self-rating.": {
+  "comment": "",
+  "files": [
+   "PracticeHomeView.swift"
+  ]
+ },
+ "Rating": {
+  "comment": "",
+  "files": [
+   "ToolsComponents.swift"
+  ]
+ },
+ "Read from your scan": {
+  "comment": "",
+  "files": [
+   "PracticeHomeView.swift"
+  ]
+ },
+ "Read from your scan — check the notes": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift"
+  ]
+ },
+ "Read the full privacy policy": {
+  "comment": "",
+  "files": [
+   "PrivacyView.swift"
+  ]
+ },
+ "Read the lines": {
+  "comment": "",
+  "files": [
+   "AuditionListImportView.swift"
+  ]
+ },
+ "Readiness": {
+  "comment": "",
+  "files": [
+   "AuditionsComponents.swift",
+   "AuditionItemEditView.swift"
+  ]
+ },
+ "Reading notes from a scan needs the Auditioner server. Everything else works without it. Paste the address you were given, starting with https://": {
+  "comment": "",
+  "files": [
+   "SettingsView.swift"
+  ]
+ },
+ "Reading notes needs the Auditioner server, which isn't set up yet.": {
+  "comment": "",
+  "files": [
+   "ScanFlowSteps.swift"
+  ]
+ },
+ "Reading the list on this device…": {
+  "comment": "",
+  "files": [
+   "AuditionListImportModel.swift"
+  ]
+ },
+ "Reading the notes": {
+  "comment": "",
+  "files": [
+   "ScanFlowView.swift"
+  ]
+ },
+ "Reading the notes… this can take up to a minute.": {
+  "comment": "",
+  "files": [
+   "ScanFlowSteps.swift"
+  ]
+ },
+ "Recent lists count more": {
+  "comment": "",
+  "files": [
+   "RecommendationInfoSheet.swift"
+  ]
+ },
+ "Record": {
+  "comment": "",
+  "files": [
+   "RecordCompareViews.swift"
+  ]
+ },
+ "Record the whole run": {
+  "comment": "",
+  "files": [
+   "AuditionMockSetupSheet.swift",
+   "MockAuditionSetupView.swift"
+  ]
+ },
+ "Record yourself with the reference, then compare.": {
+  "comment": "",
+  "files": [
+   "RecordCompareViews.swift"
+  ]
+ },
+ "Recorded": {
+  "comment": "",
+  "files": [
+   "TakesListView.swift"
+  ]
+ },
+ "Recording": {
+  "comment": "",
+  "files": [
+   "MockAuditionRunView.swift",
+   "MockAuditionReviewView.swift",
+   "RecordCompareViews.swift",
+   "TakesListView.swift"
+  ]
+ },
+ "Recording couldn't start (%@). The run continues without it.": {
+  "comment": "",
+  "files": [
+   "MockAuditionRunView.swift"
+  ]
+ },
+ "Recording couldn't start. Check that the microphone is allowed for Auditioner.": {
+  "comment": "",
+  "files": [
+   "TakeRecorder.swift"
+  ]
+ },
+ "Recording is off because the microphone isn't allowed for Auditioner.": {
+  "comment": "",
+  "files": [
+   "MockAuditionRunView.swift"
+  ]
+ },
+ "Recording needs the microphone. Turn it on for Auditioner in Settings, then come back here.": {
+  "comment": "",
+  "files": [
+   "AudioSessionCoordinator.swift"
+  ]
+ },
+ "Recording needs the microphone. Turn it on for Auditioner in Settings, then try again.": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift"
+  ]
+ },
+ "Recording stopped because of an error (%@).": {
+  "comment": "",
+  "files": [
+   "TakeRecorder.swift"
+  ]
+ },
+ "Recording type": {
+  "comment": "",
+  "files": [
+   "ExcerptRecordingsSection.swift"
+  ]
+ },
+ "Recordings": {
+  "comment": "",
+  "files": [
+   "ExcerptRecordingsSection.swift",
+   "TakesListView.swift"
+  ]
+ },
+ "Recordings on excerpt pages are played by YouTube's own player, under YouTube's terms of service and Google's privacy policy. The app doesn't download or change the videos.": {
+  "comment": "",
+  "files": [
+   "PrivacyView.swift"
+  ]
+ },
+ "Records you while the reference plays, after a count-in when Count-in is on": {
+  "comment": "",
+  "files": [
+   "RecordCompareViews.swift"
+  ]
+ },
+ "Redo": {
+  "comment": "",
+  "files": [
+   "EditorPalette.swift"
+  ]
+ },
+ "Reference": {
+  "comment": "",
+  "files": [
+   "TakePlayer.swift"
+  ]
+ },
+ "Reference audio": {
+  "comment": "",
+  "files": [
+   "ScanFlowView.swift"
+  ]
+ },
+ "Reference audio is played at this pitch.": {
+  "comment": "",
+  "files": [
+   "SettingsView.swift"
+  ]
+ },
+ "Reference not available": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailView.swift"
+  ]
+ },
+ "Reference tempo": {
+  "comment": "",
+  "files": [
+   "TakesListView.swift"
+  ]
+ },
+ "Region": {
+  "comment": "",
+  "files": [
+   "OnboardingView.swift",
+   "SettingsView.swift"
+  ]
+ },
+ "Rejected — not shown to users": {
+  "comment": "",
+  "files": [
+   "ExcerptNotesSection.swift"
+  ]
+ },
+ "Remind me": {
+  "comment": "",
+  "files": [
+   "AuditionDetailSections.swift"
+  ]
+ },
+ "Reminders at 9:00 on %@.": {
+  "comment": "",
+  "files": [
+   "AuditionReminders.swift"
+  ]
+ },
+ "Remove": {
+  "comment": "",
+  "files": [
+   "AuditionItemEditView.swift"
+  ]
+ },
+ "Remove from the list": {
+  "comment": "",
+  "files": [
+   "AuditionItemEditView.swift"
+  ]
+ },
+ "Remove the accidental": {
+  "comment": "",
+  "files": [
+   "EditorPalette.swift"
+  ]
+ },
+ "Remove this line?": {
+  "comment": "",
+  "files": [
+   "AuditionItemEditView.swift"
+  ]
+ },
+ "Rename": {
+  "comment": "",
+  "files": [
+   "LibraryView.swift"
+  ]
+ },
+ "Rename part": {
+  "comment": "",
+  "files": [
+   "LibraryView.swift"
+  ]
+ },
+ "Repertoire": {
+  "comment": "",
+  "files": [
+   "FeedVacancyDetailView.swift",
+   "AuditionDetailView.swift"
+  ]
+ },
+ "Report an error": {
+  "comment": "",
+  "files": [
+   "FeedbackLogic.swift",
+   "ExcerptNotesSection.swift"
+  ]
+ },
+ "Rest": {
+  "comment": "",
+  "files": [
+   "EditorPalette.swift"
+  ]
+ },
+ "Restore": {
+  "comment": "",
+  "files": [
+   "ArchivedAuditionsView.swift"
+  ]
+ },
+ "Restore puts an audition back into My auditions with its list and readiness; reminders that were on are set again. Delete for good removes it from this device.": {
+  "comment": "",
+  "files": [
+   "ArchivedAuditionsView.swift"
+  ]
+ },
+ "Retry": {
+  "comment": "",
+  "files": [
+   "ScanFlowSteps.swift"
+  ]
+ },
+ "Review": {
+  "comment": "",
+  "files": [
+   "MockAuditionReviewView.swift"
+  ]
+ },
+ "Reviewer mode (show drafts)": {
+  "comment": "",
+  "files": [
+   "SettingsView.swift"
+  ]
+ },
+ "Round": {
+  "comment": "",
+  "files": [
+   "AuditionAddItemViews.swift",
+   "AuditionItemEditView.swift"
+  ]
+ },
+ "Rules": {
+  "comment": "",
+  "files": [
+   "AuditionMockSetupSheet.swift",
+   "MockAuditionSetupView.swift"
+  ]
+ },
+ "Save": {
+  "comment": "",
+  "files": [
+   "AuditionFormView.swift",
+   "LibraryView.swift",
+   "ScoreEditorView.swift"
+  ]
+ },
+ "Save audio": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift"
+  ]
+ },
+ "Saved": {
+  "comment": "",
+  "files": [
+   "FeedbackQueue.swift"
+  ]
+ },
+ "Saved — it will be sent when the app can reach our server.": {
+  "comment": "",
+  "files": [
+   "FeedbackQueue.swift"
+  ]
+ },
+ "Saving…": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift"
+  ]
+ },
+ "Scan %@": {
+  "comment": "",
+  "files": [
+   "ScanFlowLogic.swift",
+   "LibraryView.swift"
+  ]
+ },
+ "Scan my part": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailSections.swift",
+   "ScanFlowView.swift"
+  ]
+ },
+ "Scan or import your part and get reference audio you can slow down and loop.": {
+  "comment": "",
+  "files": [
+   "OnboardingView.swift"
+  ]
+ },
+ "Scan with camera": {
+  "comment": "",
+  "files": [
+   "LibraryView.swift"
+  ]
+ },
+ "Scan with the camera": {
+  "comment": "",
+  "files": [
+   "AuditionListImportView.swift"
+  ]
+ },
+ "Scanned part %@": {
+  "comment": "",
+  "files": [
+   "ScanFlowLogic.swift"
+  ]
+ },
+ "Scanning a part": {
+  "comment": "",
+  "files": [
+   "FeedbackLogic.swift"
+  ]
+ },
+ "Scanning with the camera isn't available on this device.": {
+  "comment": "",
+  "files": [
+   "ScanComponents.swift"
+  ]
+ },
+ "Scans": {
+  "comment": "",
+  "files": [
+   "PrivacyView.swift"
+  ]
+ },
+ "Scans a day": {
+  "comment": "",
+  "files": [
+   "AccountSettingsSection.swift"
+  ]
+ },
+ "Search Apple Music": {
+  "comment": "",
+  "files": [
+   "ExcerptRecordingsSection.swift"
+  ]
+ },
+ "Search on YouTube": {
+  "comment": "",
+  "files": [
+   "ExcerptRecordingsSection.swift"
+  ]
+ },
+ "Search the catalogue": {
+  "comment": "",
+  "files": [
+   "ScanFlowSteps.swift"
+  ]
+ },
+ "Second": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Section": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Semi-final": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "Send": {
+  "comment": "",
+  "files": [
+   "ReportProblemSheet.swift"
+  ]
+ },
+ "Send feedback": {
+  "comment": "",
+  "files": [
+   "SettingsView.swift",
+   "FeedbackLogic.swift"
+  ]
+ },
+ "Sent with invitation": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "Server": {
+  "comment": "",
+  "files": [
+   "SettingsView.swift"
+  ]
+ },
+ "Server or catalogue": {
+  "comment": "",
+  "files": [
+   "RecommendationInfoSheet.swift"
+  ]
+ },
+ "Settings": {
+  "comment": "",
+  "files": [
+   "SettingsView.swift",
+   "RootView.swift"
+  ]
+ },
+ "Share": {
+  "comment": "",
+  "files": [
+   "TakesListView.swift"
+  ]
+ },
+ "Share or save": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift"
+  ]
+ },
+ "Share what I practise": {
+  "comment": "",
+  "files": [
+   "TrendsCopy.swift"
+  ]
+ },
+ "Sharing and popularity lists are for players 18 and older.": {
+  "comment": "",
+  "files": [
+   "TrendsCopy.swift"
+  ]
+ },
+ "Sharp": {
+  "comment": "",
+  "files": [
+   "EditorPalette.swift"
+  ]
+ },
+ "Show": {
+  "comment": "",
+  "files": [
+   "AuditionsHomeView.swift"
+  ]
+ },
+ "Show original": {
+  "comment": "",
+  "files": [
+   "ExcerptNotesSection.swift"
+  ]
+ },
+ "Show translation": {
+  "comment": "",
+  "files": [
+   "ExcerptNotesSection.swift"
+  ]
+ },
+ "Sight-reading": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "Sight-reading lines are left out. Edit the list on the audition screen.": {
+  "comment": "",
+  "files": [
+   "AuditionMockSetupSheet.swift"
+  ]
+ },
+ "Sign out": {
+  "comment": "",
+  "files": [
+   "AccountSettingsSection.swift"
+  ]
+ },
+ "Signed in with Apple": {
+  "comment": "",
+  "files": [
+   "AccountSettingsSection.swift"
+  ]
+ },
+ "Signing in is optional and only raises your daily scan limit. We don't ask Apple for your name or email. Our server keeps a scrambled code for your Apple ID (never the ID itself), an encrypted key whose only use is to disconnect Apple when you delete the account, the dates you joined and were last seen, and a scrambled code for your sign-in session, which stops working after a year unused. While you're signed in, only the app's scan uploads — and its requests about the account itself (checking it, signing out, deleting it) — carry the session, so the server can count your scans against your account instead of your device; feedback and Popular with other players are stored without it. Delete account in Settings removes all of it from our server straight away and disconnects Apple; your parts, recordings, notes and auditions on this device aren't touched.": {
+  "comment": "",
+  "files": [
+   "PrivacyView.swift"
+  ]
+ },
+ "Signing out keeps everything on this device. Deleting removes your account from our server and disconnects Apple; your parts, recordings, notes and auditions stay here.": {
+  "comment": "",
+  "files": [
+   "AccountSettingsSection.swift"
+  ]
+ },
+ "Slow down by 5": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift"
+  ]
+ },
+ "Slower by %lld": {
+  "comment": "",
+  "files": [
+   "MetronomeView.swift"
+  ]
+ },
+ "Solo": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift",
+   "ExcerptRecordingsSection.swift"
+  ]
+ },
+ "Something went wrong": {
+  "comment": "",
+  "files": [
+   "ScanFlowView.swift"
+  ]
+ },
+ "Something went wrong. Try again.": {
+  "comment": "",
+  "files": [
+   "AccountStore.swift"
+  ]
+ },
+ "Sound": {
+  "comment": "",
+  "files": [
+   "MetronomeView.swift",
+   "DroneView.swift"
+  ]
+ },
+ "Sounds and notation": {
+  "comment": "",
+  "files": [
+   "LicencesView.swift"
+  ]
+ },
+ "Source": {
+  "comment": "",
+  "files": [
+   "FactRow.swift"
+  ]
+ },
+ "Sources": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailSections.swift"
+  ]
+ },
+ "Speed": {
+  "comment": "",
+  "files": [
+   "ToolsComponents.swift"
+  ]
+ },
+ "Speed %@": {
+  "comment": "",
+  "files": [
+   "RecordingControls.swift"
+  ]
+ },
+ "Speed up by 5": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift"
+  ]
+ },
+ "Spotted a mistake? Report an error": {
+  "comment": "",
+  "files": [
+   "ExcerptReportErrorLink.swift"
+  ]
+ },
+ "Start": {
+  "comment": "",
+  "files": [
+   "MetronomeView.swift",
+   "OnboardingView.swift"
+  ]
+ },
+ "Start drone": {
+  "comment": "",
+  "files": [
+   "DroneView.swift"
+  ]
+ },
+ "Start mock audition": {
+  "comment": "",
+  "files": [
+   "AuditionMockSetupSheet.swift",
+   "MockAuditionSetupView.swift"
+  ]
+ },
+ "Start mock audition with this list": {
+  "comment": "",
+  "files": [
+   "AuditionDetailSections.swift"
+  ]
+ },
+ "Start now": {
+  "comment": "",
+  "files": [
+   "MockAuditionRunView.swift"
+  ]
+ },
+ "Start time not confirmed yet — play and tap Mark start": {
+  "comment": "",
+  "files": [
+   "RecordingControls.swift"
+  ]
+ },
+ "Starts at %@": {
+  "comment": "",
+  "files": [
+   "MockAuditionReviewView.swift"
+  ]
+ },
+ "Starts at %@ (checked)": {
+  "comment": "",
+  "files": [
+   "RecordingControls.swift"
+  ]
+ },
+ "Stop": {
+  "comment": "",
+  "files": [
+   "MetronomeView.swift",
+   "DroneView.swift",
+   "EditorPalette.swift",
+   "MockAuditionRunView.swift",
+   "RecordCompareViews.swift"
+  ]
+ },
+ "Stop the mock audition?": {
+  "comment": "",
+  "files": [
+   "MockAuditionRunView.swift"
+  ]
+ },
+ "Stop the preview": {
+  "comment": "",
+  "files": [
+   "EditorPalette.swift"
+  ]
+ },
+ "Stopped": {
+  "comment": "",
+  "files": [
+   "MetronomeView.swift"
+  ]
+ },
+ "Strings": {
+  "comment": "",
+  "files": [
+   "ProfileOptions.swift"
+  ]
+ },
+ "Subdivide each beat": {
+  "comment": "",
+  "files": [
+   "MetronomeView.swift"
+  ]
+ },
+ "Subdivision": {
+  "comment": "",
+  "files": [
+   "MetronomeView.swift"
+  ]
+ },
+ "Subdivisions, accents, tap tempo.": {
+  "comment": "",
+  "files": [
+   "PracticeHomeView.swift"
+  ]
+ },
+ "Takes and mock auditions: listen, rate, share.": {
+  "comment": "",
+  "files": [
+   "PracticeHomeView.swift"
+  ]
+ },
+ "Tap a note first.": {
+  "comment": "",
+  "files": [
+   "ScoreEditorModel.swift"
+  ]
+ },
+ "Tap a note to edit it": {
+  "comment": "",
+  "files": [
+   "EditorPalette.swift"
+  ]
+ },
+ "Tap a suggestion to link the line to that excerpt. The percentage is how well the words agree.": {
+  "comment": "",
+  "files": [
+   "AuditionAddItemViews.swift"
+  ]
+ },
+ "Tap four times in time to set the tempo": {
+  "comment": "",
+  "files": [
+   "MetronomeView.swift"
+  ]
+ },
+ "Tap tempo": {
+  "comment": "",
+  "files": [
+   "MetronomeView.swift"
+  ]
+ },
+ "Target": {
+  "comment": "",
+  "files": [
+   "AuditionItemEditView.swift"
+  ]
+ },
+ "Technique": {
+  "comment": "",
+  "files": [
+   "FeedbackLogic.swift",
+   "ExcerptNotesSection.swift"
+  ]
+ },
+ "Techniques": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailSections.swift"
+  ]
+ },
+ "Tempo": {
+  "comment": "",
+  "files": [
+   "MetronomeView.swift",
+   "PracticePlayerView.swift"
+  ]
+ },
+ "Tempo %lld beats per minute": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift"
+  ]
+ },
+ "Tempo (beats per minute)": {
+  "comment": "",
+  "files": [
+   "AuditionItemEditView.swift"
+  ]
+ },
+ "Tempo marking": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailSections.swift"
+  ]
+ },
+ "Test connection": {
+  "comment": "",
+  "files": [
+   "SettingsView.swift"
+  ]
+ },
+ "Thanks": {
+  "comment": "",
+  "files": [
+   "FeedbackQueue.swift"
+  ]
+ },
+ "That bar couldn't be matched to the file.": {
+  "comment": "",
+  "files": [
+   "ScoreEditorModel.swift"
+  ]
+ },
+ "That bar is not in the part any more.": {
+  "comment": "",
+  "files": [
+   "ScoreEditing.swift"
+  ]
+ },
+ "That excerpt isn't in the catalogue on this device yet.": {
+  "comment": "",
+  "files": [
+   "RootView.swift"
+  ]
+ },
+ "That note couldn't be matched to the file.": {
+  "comment": "",
+  "files": [
+   "ScoreEditorModel.swift"
+  ]
+ },
+ "That note is not in the part any more. Tap a note first.": {
+  "comment": "",
+  "files": [
+   "ScoreEditing.swift"
+  ]
+ },
+ "The %@ catalogue is still being prepared. Check back after the next update.": {
+  "comment": "",
+  "files": [
+   "ExcerptBrowserView.swift"
+  ]
+ },
+ "The 5-list minimum": {
+  "comment": "",
+  "files": [
+   "RecommendationInfoSheet.swift"
+  ]
+ },
+ "The Auditioner server isn't set up yet. Add its address in Settings → Server.": {
+  "comment": "",
+  "files": [
+   "APIClient.swift"
+  ]
+ },
+ "The YouTube player couldn't load. Check your connection and try again.": {
+  "comment": "",
+  "files": [
+   "YouTubePlayerView.swift"
+  ]
+ },
+ "The address should start with https://": {
+  "comment": "",
+  "files": [
+   "SettingsView.swift"
+  ]
+ },
+ "The app follows your device language when a translation exists. Translations are machine-made and marked beta until a native speaker has checked them. Work titles and score markings stay in the original language. Spot a mistake? Use Send feedback.": {
+  "comment": "",
+  "files": [
+   "LanguageSettingsSection.swift"
+  ]
+ },
+ "The app's sound file is missing, so the instrument sound isn't available. Pure tone still works.": {
+  "comment": "",
+  "files": [
+   "DroneEngine.swift"
+  ]
+ },
+ "The app's sound file is missing, so there's no sound. Reinstalling the app should fix it.": {
+  "comment": "",
+  "files": [
+   "PlaybackEngine.swift"
+  ]
+ },
+ "The audio file couldn't be made (%@).": {
+  "comment": "",
+  "files": [
+   "PlaybackEngine.swift"
+  ]
+ },
+ "The audio file is removed from this device.": {
+  "comment": "",
+  "files": [
+   "TakesListView.swift"
+  ]
+ },
+ "The audio hardware didn't start in time. Please try again.": {
+  "comment": "",
+  "files": [
+   "RecordCompareSession.swift"
+  ]
+ },
+ "The catalogue has nothing for your instrument yet.": {
+  "comment": "",
+  "files": [
+   "MockAuditionSetupView.swift"
+  ]
+ },
+ "The drone couldn't start (%@).": {
+  "comment": "",
+  "files": [
+   "DroneEngine.swift"
+  ]
+ },
+ "The feed isn't connected yet": {
+  "comment": "",
+  "files": [
+   "AuditionsHomeView.swift"
+  ]
+ },
+ "The first scan after a quiet spell is the slowest, while the server wakes up.": {
+  "comment": "",
+  "files": [
+   "ScanFlowSteps.swift"
+  ]
+ },
+ "The instrument sound couldn't be loaded (%@). Pure tone still works.": {
+  "comment": "",
+  "files": [
+   "DroneEngine.swift"
+  ]
+ },
+ "The licence text is missing from this build.": {
+  "comment": "",
+  "files": [
+   "LicencesView.swift"
+  ]
+ },
+ "The line": {
+  "comment": "",
+  "files": [
+   "AuditionAddItemViews.swift"
+  ]
+ },
+ "The list": {
+  "comment": "",
+  "files": [
+   "AuditionFormView.swift"
+  ]
+ },
+ "The list is read on this device only. The picture is not kept and nothing is sent anywhere. You check every line before it is added.": {
+  "comment": "",
+  "files": [
+   "AuditionListImportView.swift"
+  ]
+ },
+ "The list is sent with the invitation. Add it here when it arrives.": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "The marked area went missing. Please start again.": {
+  "comment": "",
+  "files": [
+   "ScanFlowModel.swift"
+  ]
+ },
+ "The metronome couldn't start (%@).": {
+  "comment": "",
+  "files": [
+   "MetronomeEngine.swift"
+  ]
+ },
+ "The metronome couldn't start.": {
+  "comment": "",
+  "files": [
+   "MetronomeEngine.swift"
+  ]
+ },
+ "The microphone's audio format isn't supported on this device.": {
+  "comment": "",
+  "files": [
+   "RecordCompareSession.swift"
+  ]
+ },
+ "The music couldn't be drawn.": {
+  "comment": "",
+  "files": [
+   "EditorNotationWebView.swift",
+   "NotationWebView.swift"
+  ]
+ },
+ "The music couldn't be prepared for playback (%@).": {
+  "comment": "",
+  "files": [
+   "PlaybackEngine.swift"
+  ]
+ },
+ "The music isn't ready to play yet.": {
+  "comment": "",
+  "files": [
+   "PlaybackEngine.swift"
+  ]
+ },
+ "The notation editor is missing from the app.": {
+  "comment": "",
+  "files": [
+   "EditorNotationWebView.swift"
+  ]
+ },
+ "The notation viewer is missing from the app.": {
+  "comment": "",
+  "files": [
+   "NotationWebView.swift"
+  ]
+ },
+ "The notes you changed won't be kept.": {
+  "comment": "",
+  "files": [
+   "ScoreEditorView.swift"
+  ]
+ },
+ "The orchestra named the works but not the passages. Check the official list for the bars.": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "The orchestra published part of the list. The rest is sent to invited candidates — check your invitation.": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "The orchestra published the whole list.": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "The owner doesn't allow this video to play inside other apps.": {
+  "comment": "",
+  "files": [
+   "YouTubePlayerView.swift"
+  ]
+ },
+ "The page went missing. Please start again.": {
+  "comment": "",
+  "files": [
+   "ScanFlowModel.swift",
+   "ScanFlowView.swift"
+  ]
+ },
+ "The part couldn't be saved on this device.": {
+  "comment": "",
+  "files": [
+   "LibraryStore.swift"
+  ]
+ },
+ "The picture couldn't be prepared for upload.": {
+  "comment": "",
+  "files": [
+   "ScanFlowModel.swift"
+  ]
+ },
+ "The reference audio at your tempo and tuning, without the count-in. Share it, or save it to Files.": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift"
+  ]
+ },
+ "The reference notation for this excerpt isn't in this version of the app yet.": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailView.swift"
+  ]
+ },
+ "The repertoire lists orchestras publish for their own auditions. Each list counts once, however many of its excerpts are in the catalogue. We count lists for your instrument and chair, plus lists marked as for any chair. Include all chairs also counts principal, assistant and section lists together, and lists that don't say which chair they were for.": {
+  "comment": "",
+  "files": [
+   "RecommendationInfoSheet.swift"
+  ]
+ },
+ "The rest of the app — the catalogue, excerpt pages, recordings and your parts — works without sending anything.": {
+  "comment": "",
+  "files": [
+   "ScanFlowSteps.swift"
+  ]
+ },
+ "The server couldn't finish this (error %@). Try again in a few minutes.": {
+  "comment": "",
+  "files": [
+   "AccountStore.swift"
+  ]
+ },
+ "The server couldn't read this page (error %lld).": {
+  "comment": "",
+  "files": [
+   "APIClient.swift"
+  ]
+ },
+ "The server sent an answer the app didn't understand.": {
+  "comment": "",
+  "files": [
+   "APIClient.swift"
+  ]
+ },
+ "The share and the tiers": {
+  "comment": "",
+  "files": [
+   "RecommendationInfoSheet.swift"
+  ]
+ },
+ "The share is the weight of the lists that include the excerpt divided by the weight of all the lists. Core means at least half, Common at least a fifth, Occasional below that.": {
+  "comment": "",
+  "files": [
+   "RecommendationInfoSheet.swift"
+  ]
+ },
+ "The sounds couldn't be loaded (%@).": {
+  "comment": "",
+  "files": [
+   "PlaybackEngine.swift"
+  ]
+ },
+ "The text on this page didn't match an excerpt in the catalogue. Search below, or carry on without one.": {
+  "comment": "",
+  "files": [
+   "ScanFlowSteps.swift"
+  ]
+ },
+ "The tuning follows the A setting in Settings.": {
+  "comment": "",
+  "files": [
+   "DroneView.swift"
+  ]
+ },
+ "There is no next note to tie to.": {
+  "comment": "",
+  "files": [
+   "ScoreEditing.swift"
+  ]
+ },
+ "There's no public email: Send feedback and Report an error are how you reach us. A message carries your words, where in the app it came from, the excerpt, the app version and a scrambled install code — never your name, email or device. It's stored by our database provider (Supabase, in the US) until we've handled it, at most 12 months, and read by people, never by an AI service. If the server can't be reached it waits on this device.": {
+  "comment": "",
+  "files": [
+   "PrivacyView.swift"
+  ]
+ },
+ "These notes can't be edited": {
+  "comment": "",
+  "files": [
+   "ScoreEditorView.swift"
+  ]
+ },
+ "These photos couldn't be read.": {
+  "comment": "",
+  "files": [
+   "AuditionListImportModel.swift"
+  ]
+ },
+ "These settings are saved for this excerpt.": {
+  "comment": "",
+  "files": [
+   "MetronomeView.swift"
+  ]
+ },
+ "Things to check against your part": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift"
+  ]
+ },
+ "This MusicXML file couldn't be read (%@).": {
+  "comment": "",
+  "files": [
+   "MusicXMLParser.swift",
+   "MusicXMLTree.swift"
+  ]
+ },
+ "This MusicXML file has no content.": {
+  "comment": "",
+  "files": [
+   "MusicXMLTree.swift"
+  ]
+ },
+ "This MusicXML file has no part with measures.": {
+  "comment": "",
+  "files": [
+   "MusicXMLParser.swift"
+  ]
+ },
+ "This MusicXML file is in the timewise layout, which the app can't play yet.": {
+  "comment": "",
+  "files": [
+   "MusicXMLParser.swift"
+  ]
+ },
+ "This audition was deleted.": {
+  "comment": "",
+  "files": [
+   "AuditionsHomeView.swift"
+  ]
+ },
+ "This deletes your account on our server and disconnects Apple. Your parts, recordings, notes and auditions stay on this device.": {
+  "comment": "",
+  "files": [
+   "AccountSettingsSection.swift"
+  ]
+ },
+ "This excerpt is already on that list.": {
+  "comment": "",
+  "files": [
+   "AddToAuditionSheet.swift"
+  ]
+ },
+ "This excerpt isn't in the catalogue on this device yet.": {
+  "comment": "",
+  "files": [
+   "ExcerptBrowserView.swift"
+  ]
+ },
+ "This file couldn't be read. Try a PDF or a photo of your part.": {
+  "comment": "",
+  "files": [
+   "ScanFlowModel.swift",
+   "LibraryStore.swift"
+  ]
+ },
+ "This file couldn't be read. Try a PDF or a picture of the list, or paste its text.": {
+  "comment": "",
+  "files": [
+   "AuditionListImportModel.swift"
+  ]
+ },
+ "This file has no pages the app can read.": {
+  "comment": "",
+  "files": [
+   "ScanFlowModel.swift"
+  ]
+ },
+ "This file has no part to edit.": {
+  "comment": "",
+  "files": [
+   "ScoreEditing.swift"
+  ]
+ },
+ "This is the short version of our privacy policy (version 0.3, 11 October 2026). The full policy is online — the link below opens it.": {
+  "comment": "",
+  "files": [
+   "PrivacyView.swift"
+  ]
+ },
+ "This only works on a note, not a rest.": {
+  "comment": "",
+  "files": [
+   "ScoreEditing.swift"
+  ]
+ },
+ "This page couldn't be drawn.": {
+  "comment": "",
+  "files": [
+   "ScanFlowModel.swift"
+  ]
+ },
+ "This part couldn't be opened.": {
+  "comment": "",
+  "files": [
+   "ScanFlowModel.swift"
+  ]
+ },
+ "This part is no longer in My parts.": {
+  "comment": "",
+  "files": [
+   "ScanFlowModel.swift"
+  ]
+ },
+ "This part's file is missing. Delete it and add it again.": {
+  "comment": "",
+  "files": [
+   "PDFReaderView.swift"
+  ]
+ },
+ "This photo couldn't be read.": {
+  "comment": "",
+  "files": [
+   "ScanFlowModel.swift",
+   "ScanFlowView.swift"
+  ]
+ },
+ "This recording couldn't be opened (%@).": {
+  "comment": "",
+  "files": [
+   "TakePlayer.swift"
+  ]
+ },
+ "This recording has no Apple Music identifier yet.": {
+  "comment": "",
+  "files": [
+   "AppleMusicRecordingPlayer.swift"
+  ]
+ },
+ "This recording has no YouTube video id yet.": {
+  "comment": "",
+  "files": [
+   "RecordingPlayerView.swift"
+  ]
+ },
+ "This recording has no link yet.": {
+  "comment": "",
+  "files": [
+   "RecordingControls.swift"
+  ]
+ },
+ "This recording isn't in the Apple Music catalogue for your country.": {
+  "comment": "",
+  "files": [
+   "AppleMusicRecordingPlayer.swift"
+  ]
+ },
+ "This recording's file isn't available yet.": {
+  "comment": "",
+  "files": [
+   "RecordingPlayerView.swift"
+  ]
+ },
+ "This video has been removed or made private (YouTube error 100).": {
+  "comment": "",
+  "files": [
+   "YouTubePlayerView.swift"
+  ]
+ },
+ "This video link looks wrong (YouTube error 2).": {
+  "comment": "",
+  "files": [
+   "YouTubePlayerView.swift"
+  ]
+ },
+ "Tick the lines to keep, fix any misread words, and confirm the catalogue link for each. Nothing is saved until you add them.": {
+  "comment": "",
+  "files": [
+   "AuditionListReviewView.swift"
+  ]
+ },
+ "Tie": {
+  "comment": "",
+  "files": [
+   "EditorPalette.swift"
+  ]
+ },
+ "Time to prepare": {
+  "comment": "",
+  "files": [
+   "AuditionMockSetupSheet.swift",
+   "MockAuditionSetupView.swift"
+  ]
+ },
+ "Time to prepare between excerpts": {
+  "comment": "",
+  "files": [
+   "AuditionMockSetupSheet.swift",
+   "MockAuditionSetupView.swift"
+  ]
+ },
+ "Timpani": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Timpani and percussion": {
+  "comment": "",
+  "files": [
+   "ProfileOptions.swift"
+  ]
+ },
+ "Title": {
+  "comment": "",
+  "files": [
+   "LibraryView.swift",
+   "TakesListView.swift"
+  ]
+ },
+ "Titles are hidden: you only see “Excerpt 2 of 6”.": {
+  "comment": "",
+  "files": [
+   "AuditionMockSetupSheet.swift",
+   "MockAuditionSetupView.swift"
+  ]
+ },
+ "To bar %@": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift"
+  ]
+ },
+ "To read the notes, the app sends the part of the page you marked to the Auditioner server.": {
+  "comment": "",
+  "files": [
+   "ScanFlowSteps.swift"
+  ]
+ },
+ "Tools": {
+  "comment": "",
+  "files": [
+   "PracticeHomeView.swift"
+  ]
+ },
+ "Total time": {
+  "comment": "",
+  "files": [
+   "MockAuditionReviewView.swift"
+  ]
+ },
+ "Trombone": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Trumpet": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Try again": {
+  "comment": "",
+  "files": [
+   "AppleMusicRecordingPlayer.swift",
+   "AuditionsHomeView.swift"
+  ]
+ },
+ "Try another spelling, or clear the filters.": {
+  "comment": "",
+  "files": [
+   "ExcerptBrowserView.swift"
+  ]
+ },
+ "Try another way": {
+  "comment": "",
+  "files": [
+   "AuditionListImportView.swift"
+  ]
+ },
+ "Try the demo": {
+  "comment": "",
+  "files": [
+   "PracticeHomeView.swift",
+   "ScanFlowSteps.swift",
+   "ExcerptBrowserView.swift"
+  ]
+ },
+ "Tuba": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Tuning": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift"
+  ]
+ },
+ "Tuning (A4)": {
+  "comment": "",
+  "files": [
+   "SettingsView.swift"
+  ]
+ },
+ "Tuning of A": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift"
+  ]
+ },
+ "Type a line": {
+  "comment": "",
+  "files": [
+   "AuditionDetailView.swift",
+   "AuditionAddItemViews.swift"
+  ]
+ },
+ "Type the line to see catalogue suggestions.": {
+  "comment": "",
+  "files": [
+   "AuditionAddItemViews.swift"
+  ]
+ },
+ "Typical tempo": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailSections.swift"
+  ]
+ },
+ "Typical tempo %@": {
+  "comment": "",
+  "files": [
+   "AuditionItemEditView.swift"
+  ]
+ },
+ "UK": {
+  "comment": "",
+  "files": [
+   "ProfileOptions.swift"
+  ]
+ },
+ "Under tempo": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "Undo": {
+  "comment": "",
+  "files": [
+   "EditorPalette.swift"
+  ]
+ },
+ "Unlink": {
+  "comment": "",
+  "files": [
+   "AuditionListReviewView.swift",
+   "AuditionItemEditView.swift"
+  ]
+ },
+ "Untitled audition": {
+  "comment": "",
+  "files": [
+   "AuditionsComponents.swift",
+   "AddToAuditionSheet.swift"
+  ]
+ },
+ "Untitled part": {
+  "comment": "",
+  "files": [
+   "LibraryStore.swift"
+  ]
+ },
+ "Untitled take": {
+  "comment": "",
+  "files": [
+   "TakesListView.swift"
+  ]
+ },
+ "Up": {
+  "comment": "",
+  "files": [
+   "EditorPalette.swift"
+  ]
+ },
+ "Use this area": {
+  "comment": "",
+  "files": [
+   "ExcerptCropView.swift"
+  ]
+ },
+ "Use whole page": {
+  "comment": "",
+  "files": [
+   "ExcerptCropView.swift"
+  ]
+ },
+ "Used to pick which excerpts you see first. Nothing here leaves the device.": {
+  "comment": "",
+  "files": [
+   "SettingsView.swift"
+  ]
+ },
+ "Utility": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Verovio (music engraving)": {
+  "comment": "",
+  "files": [
+   "LicencesView.swift"
+  ]
+ },
+ "Version": {
+  "comment": "",
+  "files": [
+   "SettingsView.swift"
+  ]
+ },
+ "Very popular": {
+  "comment": "",
+  "files": [
+   "TrendsService.swift"
+  ]
+ },
+ "Viola": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Violin": {
+  "comment": "",
+  "files": [
+   "CatalogModels.swift"
+  ]
+ },
+ "Volume": {
+  "comment": "",
+  "files": [
+   "DroneView.swift"
+  ]
+ },
+ "We couldn't read your sign-in on this device, so the account wasn't deleted. Sign in again, then delete it.": {
+  "comment": "",
+  "files": [
+   "AccountStore.swift"
+  ]
+ },
+ "We haven't collected any %@ yet.": {
+  "comment": "",
+  "files": [
+   "LocalRecommendationEngine.swift"
+  ]
+ },
+ "We haven't collected any lists for your chair yet.": {
+  "comment": "",
+  "files": [
+   "MostAskedSection.swift"
+  ]
+ },
+ "We list only auditions published on orchestras' own websites and checked by a person. Pull down to look again.": {
+  "comment": "",
+  "files": [
+   "AuditionsHomeView.swift"
+  ]
+ },
+ "We name a tier only once we have at least %lld lists. With fewer we show the plain count and say so.": {
+  "comment": "",
+  "files": [
+   "RecommendationInfoSheet.swift"
+  ]
+ },
+ "Wear headphones so the microphone records only you, not the reference.": {
+  "comment": "",
+  "files": [
+   "RecordCompareViews.swift"
+  ]
+ },
+ "What do you play?": {
+  "comment": "",
+  "files": [
+   "OnboardingView.swift"
+  ]
+ },
+ "What the orchestra published": {
+  "comment": "",
+  "files": [
+   "AuditionFormView.swift"
+  ]
+ },
+ "What this is about": {
+  "comment": "",
+  "files": [
+   "ReportProblemSheet.swift"
+  ]
+ },
+ "What would you like to tell us?": {
+  "comment": "",
+  "files": [
+   "FeedbackLogic.swift"
+  ]
+ },
+ "What's wrong?": {
+  "comment": "",
+  "files": [
+   "FeedbackLogic.swift"
+  ]
+ },
+ "When the app can reach our server, this list uses the orchestra lists reviewed there, which are more and newer. Otherwise it uses the lists cited in the app's catalogue. The line under the list says which. On the server, a region with only a few lists is evened out with every region's lists for your chair, as if it had 10 more lists, so a handful of lists can't swing an excerpt to all or nothing. Each excerpt page always counts the catalogue's lists, so its number matches the sources shown under it.": {
+  "comment": "",
+  "files": [
+   "RecommendationInfoSheet.swift"
+  ]
+ },
+ "When you ask the app to read the notes on a page, the part you marked is sent to the Auditioner server, used only to read the notes, and deleted right after — within 24 hours at the latest. You're asked before the first time. The app also sends a random number for this install so the server can limit scans per device; it doesn't identify you.": {
+  "comment": "",
+  "files": [
+   "PrivacyView.swift"
+  ]
+ },
+ "When you open the app (at most twice a day) it sends your instrument, the week, and which catalogue excerpts you practised that week. No name, recordings, notes or scans. Shown only when at least 20 players share, as tiers, never numbers. Turning this off deletes what you've shared from our server.": {
+  "comment": "",
+  "files": [
+   "TrendsCopy.swift"
+  ]
+ },
+ "Where": {
+  "comment": "",
+  "files": [
+   "ReportProblemSheet.swift"
+  ]
+ },
+ "Where do you audition?": {
+  "comment": "",
+  "files": [
+   "OnboardingView.swift"
+  ]
+ },
+ "Where is the list?": {
+  "comment": "",
+  "files": [
+   "AuditionListImportView.swift"
+  ]
+ },
+ "Where we saw it": {
+  "comment": "",
+  "files": [
+   "ExcerptDetailSections.swift"
+  ]
+ },
+ "Which chair?": {
+  "comment": "",
+  "files": [
+   "OnboardingView.swift"
+  ]
+ },
+ "Which lists": {
+  "comment": "",
+  "files": [
+   "RecommendationInfoSheet.swift"
+  ]
+ },
+ "Which page has the excerpt?": {
+  "comment": "",
+  "files": [
+   "ScanFlowSteps.swift"
+  ]
+ },
+ "Whole": {
+  "comment": "",
+  "files": [
+   "ScoreEditing.swift"
+  ]
+ },
+ "Without an excerpt you still get reference audio; the excerpt page (tempo, techniques, recordings) needs a catalogue match.": {
+  "comment": "",
+  "files": [
+   "ScanFlowSteps.swift"
+  ]
+ },
+ "Woodblock": {
+  "comment": "",
+  "files": [
+   "ClickSynth.swift"
+  ]
+ },
+ "Woodwinds": {
+  "comment": "",
+  "files": [
+   "ProfileOptions.swift"
+  ]
+ },
+ "Works only": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "Yes, I'm 18 or older": {
+  "comment": "",
+  "files": [
+   "TrendsCopy.swift"
+  ]
+ },
+ "You": {
+  "comment": "",
+  "files": [
+   "SettingsView.swift",
+   "TakePlayer.swift"
+  ]
+ },
+ "You can still add a PDF or a photo of your part from Files or Photos.": {
+  "comment": "",
+  "files": [
+   "ScanComponents.swift"
+  ]
+ },
+ "You don't have to sign in. Your instrument, position, region, parts, markings, reference audio and practice recordings stay on this device. The microphone is used only while you record, and the recordings are never uploaded.": {
+  "comment": "",
+  "files": [
+   "PrivacyView.swift"
+  ]
+ },
+ "You haven't added an audition yet.": {
+  "comment": "",
+  "files": [
+   "AddToAuditionSheet.swift"
+  ]
+ },
+ "You're signed out. Sign in again.": {
+  "comment": "",
+  "files": [
+   "AccountStore.swift"
+  ]
+ },
+ "YouTube couldn't play this video here (error %lld).": {
+  "comment": "",
+  "files": [
+   "YouTubePlayerView.swift"
+  ]
+ },
+ "YouTube couldn't play this video here (error 5).": {
+  "comment": "",
+  "files": [
+   "YouTubePlayerView.swift"
+  ]
+ },
+ "YouTube refused to play this video inside the app (error 153).": {
+  "comment": "",
+  "files": [
+   "YouTubePlayerView.swift"
+  ]
+ },
+ "YouTube terms of service": {
+  "comment": "",
+  "files": [
+   "PrivacyView.swift"
+  ]
+ },
+ "YouTube videos": {
+  "comment": "",
+  "files": [
+   "PrivacyView.swift"
+  ]
+ },
+ "Your account is deleted.": {
+  "comment": "",
+  "files": [
+   "AccountSettingsSection.swift"
+  ]
+ },
+ "Your corrected version": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift"
+  ]
+ },
+ "Your message was sent. Thank you for helping us get this right.": {
+  "comment": "",
+  "files": [
+   "FeedbackQueue.swift"
+  ]
+ },
+ "Your own numbers. The catalogue's typical tempo, when it is verified, is shown above.": {
+  "comment": "",
+  "files": [
+   "AuditionItemEditView.swift"
+  ]
+ },
+ "Your rating": {
+  "comment": "",
+  "files": [
+   "TakesListView.swift"
+  ]
+ },
+ "Your reference audio": {
+  "comment": "",
+  "files": [
+   "PracticeHomeView.swift"
+  ]
+ },
+ "Your region": {
+  "comment": "",
+  "files": [
+   "RecommendationInfoSheet.swift"
+  ]
+ },
+ "Your region (%@)": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "Your scan": {
+  "comment": "",
+  "files": [
+   "ScoreEditorView.swift"
+  ]
+ },
+ "Your scans, parts and recordings are never sent to any AI service.": {
+  "comment": "",
+  "files": [
+   "PrivacyView.swift"
+  ]
+ },
+ "Your sign-in has expired, so the account wasn't deleted. Sign in again, then delete it.": {
+  "comment": "",
+  "files": [
+   "AccountStore.swift"
+  ]
+ },
+ "Your verdict": {
+  "comment": "",
+  "files": [
+   "MockAuditionReviewView.swift"
+  ]
+ },
+ "https://…": {
+  "comment": "",
+  "files": [
+   "SettingsView.swift"
+  ]
+ },
+ "in %lld days": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "list": {
+  "comment": "",
+  "files": [
+   "LocalRecommendationEngine.swift"
+  ]
+ },
+ "lists": {
+  "comment": "",
+  "files": [
+   "LocalRecommendationEngine.swift"
+  ]
+ },
+ "lists.phrase.allChairs": {
+  "comment": "Instrument followed by 'list'/'lists', e.g. 'cello lists'. Reorder the words as your language needs.",
+  "files": [
+   "LocalRecommendationEngine.swift"
+  ]
+ },
+ "lists.phrase.chair": {
+  "comment": "Chair, instrument, then 'list'/'lists', e.g. 'section cello lists'. Reorder the words as your language needs.",
+  "files": [
+   "LocalRecommendationEngine.swift"
+  ]
+ },
+ "today": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "tomorrow": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "yesterday": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "·": {
+  "comment": "",
+  "files": [
+   "LibraryView.swift"
+  ]
+ },
+ "· %@": {
+  "comment": "",
+  "files": [
+   "AuditionsComponents.swift"
+  ]
+ },
+ "· rough guide only": {
+  "comment": "",
+  "files": [
+   "MetronomeView.swift"
+  ]
+ },
+ "“Both” plays your take and the reference together from where you started, at the tempo you recorded at. Slowing down keeps them together.": {
+  "comment": "",
+  "files": [
+   "RecordCompareViews.swift"
+  ]
+ },
+ "−%lld": {
+  "comment": "",
+  "files": [
+   "MetronomeView.swift"
+  ]
+ },
+ "−5": {
+  "comment": "",
+  "files": [
+   "PracticePlayerView.swift"
+  ]
+ },
+ "★ %lld": {
+  "comment": "",
+  "files": [
+   "TakesListView.swift"
+  ]
+ },
+ "♩ = %lld": {
+  "comment": "",
+  "files": [
+   "TakesListView.swift"
+  ]
+ }
+}

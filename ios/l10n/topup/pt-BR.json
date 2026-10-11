@@ -1,0 +1,29 @@
+{
+ "All regions": "Todas as regiões",
+ "Archive audition": "Arquivar audição",
+ "Archive audition on an audition's page moves it here. You can restore it any time.": "Arquivar audição, na página de uma audição, move essa audição para cá. Você pode restaurá-la a qualquer momento.",
+ "Archived (%lld)": {
+  "one": "Arquivada (%lld)",
+  "other": "Arquivadas (%lld)"
+ },
+ "Archived auditions": "Audições arquivadas",
+ "Delete for good": "Apagar definitivamente",
+ "Delete this audition for good?": "Apagar esta audição definitivamente?",
+ "Deletes this audition and its list for good. This can't be undone.": "Apaga definitivamente esta audição e sua lista. Isso não pode ser desfeito.",
+ "Help and support": "Ajuda e suporte",
+ "Machine-translated": "Traduzido por máquina",
+ "Machine-translated from English — may contain errors. Use Show original to compare.": "Traduzido do inglês por máquina — pode conter erros. Use Mostrar original para comparar.",
+ "Nothing archived": "Nada arquivado",
+ "Privacy policy": "Política de privacidade",
+ "Read the full privacy policy": "Ler a política de privacidade completa",
+ "Restore": "Restaurar",
+ "Restore puts an audition back into My auditions with its list and readiness; reminders that were on are set again. Delete for good removes it from this device.": "Restaurar devolve uma audição a Minhas audições com sua lista e seu preparo; os lembretes que estavam ativados são programados de novo. Apagar definitivamente a remove deste dispositivo.",
+ "Show": "Mostrar",
+ "Show original": "Mostrar original",
+ "Show translation": "Mostrar tradução",
+ "Signing in is optional and only raises your daily scan limit. We don't ask Apple for your name or email. Our server keeps a scrambled code for your Apple ID (never the ID itself), an encrypted key whose only use is to disconnect Apple when you delete the account, the dates you joined and were last seen, and a scrambled code for your sign-in session, which stops working after a year unused. While you're signed in, only the app's scan uploads — and its requests about the account itself (checking it, signing out, deleting it) — carry the session, so the server can count your scans against your account instead of your device; feedback and Popular with other players are stored without it. Delete account in Settings removes all of it from our server straight away and disconnects Apple; your parts, recordings, notes and auditions on this device aren't touched.": "Iniciar sessão é opcional e só aumenta seu limite diário de escaneamentos. Não pedimos à Apple seu nome nem seu e-mail. Nosso servidor guarda um código embaralhado do seu ID Apple (nunca o ID em si), uma chave criptografada cujo único uso é desconectar a Apple quando você apaga a conta, as datas em que você entrou e foi visto pela última vez, e um código embaralhado da sua sessão, que para de funcionar após um ano sem uso. Enquanto você está com a sessão iniciada, só os envios de escaneamentos do app — e os pedidos dele sobre a própria conta (verificar, sair, apagar) — levam a sessão, para que o servidor conte seus escaneamentos pela sua conta, e não pelo dispositivo; o feedback e Popular entre outros músicos são guardados sem ela. Apagar conta, nos Ajustes, remove tudo isso do nosso servidor imediatamente e desconecta a Apple; suas partes, gravações, anotações e audições neste dispositivo não são afetadas.",
+ "This is the short version of our privacy policy (version 0.3, 11 October 2026). The full policy is online — the link below opens it.": "Esta é a versão resumida da nossa política de privacidade (versão 0.3, 11 de outubro de 2026). A política completa está online: o link abaixo a abre.",
+ "We couldn't read your sign-in on this device, so the account wasn't deleted. Sign in again, then delete it.": "Não foi possível ler sua sessão neste dispositivo, então a conta não foi apagada. Inicie sessão novamente e depois apague a conta.",
+ "Your region (%@)": "Sua região (%@)",
+ "Your sign-in has expired, so the account wasn't deleted. Sign in again, then delete it.": "Sua sessão expirou, então a conta não foi apagada. Inicie sessão novamente e depois apague a conta."
+}

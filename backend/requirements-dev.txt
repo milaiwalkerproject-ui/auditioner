@@ -1,0 +1,11 @@
+# Everything needed to run the tests — same as requirements.txt minus homr
+# (the tests drive a fake homr script, so the real engine and its models are not needed).
+fastapi>=0.115,<1
+uvicorn[standard]>=0.30,<1
+python-multipart>=0.0.9,<1
+pillow>=12.1.1,<13
+pytest>=8,<10
+httpx>=0.27,<1
+# Sign in with Apple (app/accounts.py) — see requirements.txt.
+PyJWT[crypto]>=2.12,<3
+cryptography>=46.0.5,<51

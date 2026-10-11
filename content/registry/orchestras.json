@@ -1,0 +1,2100 @@
+{
+  "version": "0.1.0",
+  "generatedAt": "2026-10-11",
+  "orchestras": [
+    {
+      "id": "calgary-philharmonic",
+      "name": "Calgary Philharmonic Orchestra",
+      "country": "CA",
+      "region": "north-america",
+      "city": "Calgary",
+      "type": "professional",
+      "auditionsUrl": "https://calgaryphil.com/about/orchestra-auditions/",
+      "homepageUrl": "https://calgaryphil.com",
+      "notes": "'Orchestra Auditions' page seen on calgaryphil.com (HTML list of upcoming auditions; audition packages and excerpts as PDFs). /careers/auditions could not be confirmed in the 2026-10-11 spot check and was replaced.",
+      "source": "https://calgaryphil.com/about/orchestra-auditions/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "canada-majors"
+      ]
+    },
+    {
+      "id": "hamilton-philharmonic",
+      "name": "Hamilton Philharmonic Orchestra",
+      "country": "CA",
+      "region": "north-america",
+      "city": "Hamilton",
+      "type": "professional",
+      "notes": "audition page not yet found. Nothing from hpo.org appeared in results.",
+      "source": "https://en.wikipedia.org/wiki/Hamilton_Philharmonic_Orchestra",
+      "asOf": "2026-10-11",
+      "groups": [
+        "canada-majors"
+      ]
+    },
+    {
+      "id": "nac-orchestra",
+      "name": "National Arts Centre Orchestra",
+      "country": "CA",
+      "region": "north-america",
+      "city": "Ottawa",
+      "type": "professional",
+      "auditionsUrl": "https://nac-cna.ca/en/orchestra/about/auditions",
+      "homepageUrl": "https://nac-cna.ca",
+      "notes": "'NAC Orchestra Auditions' page seen on nac-cna.ca (HTML; positions under /auditions/<position>).",
+      "source": "https://nac-cna.ca/en/orchestra/about/auditions",
+      "asOf": "2026-10-11",
+      "groups": [
+        "canada-majors"
+      ]
+    },
+    {
+      "id": "orchestre-symphonique-de-montreal",
+      "name": "Orchestre symphonique de Montréal",
+      "country": "CA",
+      "region": "north-america",
+      "city": "Montreal",
+      "type": "professional",
+      "homepageUrl": "https://www.osm.ca",
+      "notes": "audition page not yet found as an index page. Audition notices were seen only as PDFs under osm.ca/app/uploads/.",
+      "source": "https://www.osm.ca/app/uploads/2025/09/2025-09-05_affichage-audition-ntl-violons_dec-2025_en.pdf",
+      "asOf": "2026-10-11",
+      "groups": [
+        "canada-majors"
+      ]
+    },
+    {
+      "id": "toronto-symphony",
+      "name": "Toronto Symphony Orchestra",
+      "country": "CA",
+      "region": "north-america",
+      "city": "Toronto",
+      "type": "professional",
+      "auditionsUrl": "https://www.tso.ca/auditions",
+      "homepageUrl": "https://www.tso.ca",
+      "notes": "Auditions page seen on tso.ca (HTML; also /orchestra/auditions). Applications via Muvac; we read only tso.ca.",
+      "source": "https://www.tso.ca/auditions",
+      "asOf": "2026-10-11",
+      "groups": [
+        "canada-majors"
+      ]
+    },
+    {
+      "id": "vancouver-symphony",
+      "name": "Vancouver Symphony Orchestra",
+      "country": "CA",
+      "region": "north-america",
+      "city": "Vancouver",
+      "type": "professional",
+      "homepageUrl": "https://www.vancouversymphony.ca",
+      "notes": "audition page not yet found as an index page. Audition announcements were seen only as PDFs under vancouversymphony.ca/site-content/uploads/. Not to be confused with vancouversymphony.org (Vancouver, WA).",
+      "source": "https://www.vancouversymphony.ca/site-content/uploads/2026/05/Assoc-Pr-Bass-Section-Bass-Audition-Announcement.pdf",
+      "asOf": "2026-10-11",
+      "groups": [
+        "canada-majors"
+      ]
+    },
+    {
+      "id": "puerto-rico-symphony",
+      "name": "Orquesta Sinfónica de Puerto Rico",
+      "country": "PR",
+      "region": "north-america",
+      "city": "San Juan",
+      "type": "professional",
+      "notes": "audition page not yet found. No page from the orchestra or its corporation appeared in results (Spanish search).",
+      "source": "https://www.metro.pr/entretenimiento/2025/09/12/participantes-de-objetivo-fama-2025-visitan-ensayo-de-la-orquesta-sinfonica-de-puerto-rico/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "alabama-symphony",
+      "name": "Alabama Symphony Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Birmingham",
+      "type": "professional",
+      "homepageUrl": "https://alabamasymphony.org",
+      "notes": "audition page not yet found. Only youth-orchestra (ASYO) audition pages seen on alabamasymphony.org; an aggregator's text mentions an /auditions path but it was not seen on the site, so it is not recorded.",
+      "source": "https://www.icsom.org/about/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "atlanta-symphony",
+      "name": "Atlanta Symphony Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Atlanta",
+      "type": "professional",
+      "auditionsUrl": "https://www.aso.org/orchestra-auditions",
+      "homepageUrl": "https://aso.org",
+      "notes": "'Orchestra Auditions' page seen on aso.org (HTML; also /about-the-aso/about/jobs-auditions). Address normalised to the form seen in search results, 2026-10-11.",
+      "source": "https://www.aso.org/orchestra-auditions",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "baksym",
+      "name": "Bakersfield Symphony Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Downtown Bakersfield",
+      "type": "professional",
+      "auditionsUrl": "https://www.bsonow.org/auditions",
+      "homepageUrl": "https://www.bsonow.org/",
+      "notes": "From Tutti's verified data (Tutti applyUrl). Tutti metro: Kern County.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "baksym"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "byso",
+      "name": "Bakersfield Youth Symphony Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Bakersfield (CSUB campus)",
+      "type": "youth",
+      "auditionsUrl": "https://www.bysorocks.org/audition",
+      "homepageUrl": "https://www.bysorocks.org/",
+      "notes": "From Tutti's verified data (Tutti auditions[].source). Tutti metro: Kern County.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "byso"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "baltimore-symphony",
+      "name": "Baltimore Symphony Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Baltimore",
+      "type": "professional",
+      "homepageUrl": "https://bsomusic.org",
+      "notes": "audition page not yet found. Only the Baltimore Symphony Youth Orchestras page was seen on bsomusic.org.",
+      "source": "https://www.icsom.org/about/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "boston-symphony",
+      "name": "Boston Symphony Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Boston",
+      "type": "professional",
+      "auditionsUrl": "https://bso.org/about/jobs/bso-auditions",
+      "homepageUrl": "https://bso.org",
+      "notes": "'BSO Auditions' page seen on bso.org (HTML; audition announcements as PDFs on cdn.bso.org).",
+      "source": "https://bso.org/about/jobs/bso-auditions",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "buffalo-philharmonic",
+      "name": "Buffalo Philharmonic Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Buffalo",
+      "type": "professional",
+      "auditionsUrl": "https://bpo.org/employment-and-auditions",
+      "homepageUrl": "https://bpo.org",
+      "notes": "'Employment and Auditions' page seen on bpo.org (HTML; audition notices as PDFs under /wp-content/uploads/).",
+      "source": "https://bpo.org/employment-and-auditions",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "charlotte-symphony",
+      "name": "Charlotte Symphony Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Charlotte",
+      "type": "professional",
+      "auditionsUrl": "https://www.charlottesymphony.org/careers-and-auditions-q8qt",
+      "homepageUrl": "https://www.charlottesymphony.org",
+      "notes": "'Careers & Auditions' page seen on charlottesymphony.org (HTML).",
+      "source": "https://www.charlottesymphony.org/careers-and-auditions-q8qt",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "chicago-symphony",
+      "name": "Chicago Symphony Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Chicago",
+      "type": "professional",
+      "auditionsUrl": "https://cso.org/about/employment/",
+      "homepageUrl": "https://cso.org",
+      "notes": "Employment page seen on cso.org with the 'How to Audition for the CSO' section (HTML; the how-to page sits under /about/performers/cso-musicians/how-to-audition-for-the-cso/, repertoire lists as PDF/DOC under /media/). /about/auditions/ could not be confirmed in the 2026-10-11 spot check and was replaced.",
+      "source": "https://cso.org/about/employment/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "cincinnati-symphony",
+      "name": "Cincinnati Symphony Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Cincinnati",
+      "type": "professional",
+      "notes": "audition page not yet found. Two searches returned nothing from the orchestra's own site; homepage not seen either.",
+      "source": "https://www.icsom.org/about/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "claremont-so",
+      "name": "Claremont Symphony Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Claremont",
+      "type": "community",
+      "auditionsUrl": "https://www.claremontso.org/auditions.html",
+      "homepageUrl": "https://www.claremontso.org/",
+      "notes": "From Tutti's verified data (Tutti auditions[].source). Tutti metro: Greater Los Angeles.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "claremont-so"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "cymo",
+      "name": "Claremont Young Musicians Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Claremont",
+      "type": "youth",
+      "auditionsUrl": "https://www.cymo.org/audition.html",
+      "homepageUrl": "https://www.cymo.org/",
+      "notes": "From Tutti's verified data (Tutti auditions[].source). Tutti metro: Greater Los Angeles.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "cymo"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "colburn",
+      "name": "Colburn Community School of Performing Arts — Youth Orchestras",
+      "country": "US",
+      "region": "north-america",
+      "city": "Downtown LA",
+      "type": "youth",
+      "auditionsUrl": "https://colburnschool.edu/community-school/by-program/ensembles/",
+      "homepageUrl": "https://www.colburnschool.edu",
+      "notes": "From Tutti's verified data (Tutti applyUrl: the ensembles index; Tutti's audition sources are the Advanced Music Program and String Orchestra sub-pages). Tutti metro: Greater Los Angeles.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "colburn"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "colorado-symphony",
+      "name": "Colorado Symphony",
+      "country": "US",
+      "region": "north-america",
+      "city": "Denver",
+      "type": "professional",
+      "auditionsUrl": "https://coloradosymphony.org/about/employment/",
+      "homepageUrl": "https://coloradosymphony.org",
+      "notes": "Employment page seen on coloradosymphony.org; audition announcements are PDFs under /app/uploads/.",
+      "source": "https://coloradosymphony.org/about/employment/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "columbus-symphony",
+      "name": "Columbus Symphony Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Columbus",
+      "type": "professional",
+      "auditionsUrl": "https://columbussymphony.com/orchestra/auditions/",
+      "homepageUrl": "https://columbussymphony.com",
+      "notes": "Auditions page seen on columbussymphony.com (HTML; also youth Academy sub-pages).",
+      "source": "https://columbussymphony.com/orchestra/auditions/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "cyosc",
+      "name": "Community Youth Orchestra of Southern California",
+      "country": "US",
+      "region": "north-america",
+      "city": "Irvine/Tustin",
+      "type": "youth",
+      "auditionsUrl": "https://www.cyosc.org/apply.html",
+      "homepageUrl": "https://www.cyosc.org/",
+      "notes": "From Tutti's verified data (Tutti auditions[].source). Tutti metro: Orange County.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "cyosc"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "csun-yo",
+      "name": "CSUN Youth Orchestras",
+      "country": "US",
+      "region": "north-america",
+      "city": "Northridge",
+      "type": "youth",
+      "auditionsUrl": "https://www.csun.edu/csun-youth-orchestras/apply-orchestras-0",
+      "homepageUrl": "https://www.csun.edu/csun-youth-orchestras",
+      "notes": "'Apply to the Orchestras' page seen on csun.edu (HTML; video auditions, requirements as PDFs under /sites/default/files/). Tutti's applyUrl (/application-audition) could not be confirmed in the 2026-10-11 spot check and was replaced. Tutti metro: Greater Los Angeles.",
+      "source": "https://www.csun.edu/csun-youth-orchestras/apply-orchestras-0",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "csun-yo"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "culver",
+      "name": "Culver City Symphony Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Culver City",
+      "type": "community",
+      "homepageUrl": "https://www.culvercitysymphony.org",
+      "notes": "audition page not yet found (Tutti's audition source is only the homepage; a 2026-10-11 search of culvercitysymphony.org returned no auditions page). Tutti metro: Greater Los Angeles.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "culver"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "dallas-symphony",
+      "name": "Dallas Symphony Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Dallas",
+      "type": "professional",
+      "auditionsUrl": "https://dallassymphony.org/?p=670",
+      "homepageUrl": "https://dallassymphony.org",
+      "notes": "Audition page seen on dallassymphony.org as a WordPress short link (?p=670); audition notices are PDFs under /wp-content/uploads/. Replace with the pretty URL once seen.",
+      "source": "https://dallassymphony.org/?p=670",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "detroit-symphony",
+      "name": "Detroit Symphony Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Detroit",
+      "type": "professional",
+      "auditionsUrl": "https://www.dso.org/auditions",
+      "homepageUrl": "https://www.dso.org",
+      "notes": "Auditions page seen on dso.org (HTML; also /about-the-dso/auditions-and-employment/auditions).",
+      "source": "https://www.dso.org/auditions",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "ecys",
+      "name": "East County Youth Symphony",
+      "country": "US",
+      "region": "north-america",
+      "city": "Spring Valley / El Cajon (East County)",
+      "type": "youth",
+      "auditionsUrl": "https://www.ecysymphony.com/auditions.php",
+      "homepageUrl": "https://ecysymphony.com/",
+      "notes": "From Tutti's verified data (Tutti auditions[].source). Tutti metro: San Diego County.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "ecys"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "fort-worth-symphony",
+      "name": "Fort Worth Symphony Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Fort Worth",
+      "type": "professional",
+      "auditionsUrl": "https://fwsymphony.org/about/careers",
+      "homepageUrl": "https://fwsymphony.org",
+      "notes": "Careers page seen on fwsymphony.org; individual orchestra auditions live under /careers/orchestra-auditions/<position>.",
+      "source": "https://fwsymphony.org/about/careers",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "gyo",
+      "name": "Glendale Youth Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Glendale",
+      "type": "youth",
+      "auditionsUrl": "https://www.glendaleyouthorchestra.com/auditions",
+      "homepageUrl": "https://www.glendaleyouthorchestra.com",
+      "notes": "From Tutti's verified data (Tutti auditions[].source). Tutti metro: Greater Los Angeles.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "gyo"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "grand-rapids-symphony",
+      "name": "Grand Rapids Symphony",
+      "country": "US",
+      "region": "north-america",
+      "city": "Grand Rapids",
+      "type": "professional",
+      "notes": "audition page not yet found. Nothing from grsymphony.org appeared in results.",
+      "source": "https://en.wikipedia.org/wiki/Grand_Rapids_Symphony",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "grant-park-orchestra",
+      "name": "Grant Park Orchestra (Grant Park Music Festival)",
+      "country": "US",
+      "region": "north-america",
+      "city": "Chicago",
+      "type": "professional",
+      "auditionsUrl": "https://www.grantparkmusicfestival.com/auditions/orchestra-auditions",
+      "homepageUrl": "https://grantparkmusicfestival.com",
+      "notes": "'Orchestra Auditions' page seen on grantparkmusicfestival.com (HTML; summer festival orchestra).",
+      "source": "https://www.grantparkmusicfestival.com/auditions/orchestra-auditions",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "hawaii-symphony",
+      "name": "Hawaii Symphony Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Honolulu",
+      "type": "professional",
+      "auditionsUrl": "https://myhso.org/auditions",
+      "homepageUrl": "https://myhso.org",
+      "notes": "Auditions page seen on myhso.org (HTML).",
+      "source": "https://myhso.org/auditions",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "hollywood-bowl-orchestra",
+      "name": "Hollywood Bowl Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Los Angeles",
+      "type": "professional",
+      "auditionsUrl": "https://www.hollywoodbowl.com/about/hollywood-bowl-orchestra-auditions",
+      "homepageUrl": "https://www.hollywoodbowl.com",
+      "notes": "Auditions page seen on hollywoodbowl.com (LA Phil Association's summer orchestra; HTML).",
+      "source": "https://www.hollywoodbowl.com/about/hollywood-bowl-orchestra-auditions",
+      "asOf": "2026-10-11",
+      "groups": [
+        "la-phil-family"
+      ]
+    },
+    {
+      "id": "houston-symphony",
+      "name": "Houston Symphony",
+      "country": "US",
+      "region": "north-america",
+      "city": "Houston",
+      "type": "professional",
+      "auditionsUrl": "https://www.houstonsymphony.org/careers/",
+      "homepageUrl": "https://houstonsymphony.org",
+      "notes": "Careers page seen on houstonsymphony.org; lists orchestra and substitute auditions (HTML).",
+      "source": "https://www.houstonsymphony.org/careers/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "indianapolis-symphony",
+      "name": "Indianapolis Symphony Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Indianapolis",
+      "type": "professional",
+      "homepageUrl": "https://indianapolissymphony.org",
+      "notes": "audition page not yet found as an index page. Individual audition postings were seen on indianapolissymphony.org as WordPress short links (?p=...).",
+      "source": "https://indianapolissymphony.org/?p=12710",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "icyola",
+      "name": "Inner City Youth Orchestra of Los Angeles",
+      "country": "US",
+      "region": "north-america",
+      "city": "South Los Angeles",
+      "type": "youth",
+      "auditionsUrl": "https://icyola.org/join-our-orchestra/",
+      "homepageUrl": "https://icyola.org/",
+      "notes": "From Tutti's verified data (Tutti auditions[].source). Tutti metro: Greater Los Angeles.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "icyola"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "jacksonville-symphony",
+      "name": "Jacksonville Symphony",
+      "country": "US",
+      "region": "north-america",
+      "city": "Jacksonville",
+      "type": "professional",
+      "homepageUrl": "https://www.jaxsymphony.org",
+      "notes": "audition page not yet found. Only youth-orchestra and chorus audition pages seen on jaxsymphony.org.",
+      "source": "https://www.icsom.org/about/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "kansas-city-symphony",
+      "name": "Kansas City Symphony",
+      "country": "US",
+      "region": "north-america",
+      "city": "Kansas City",
+      "type": "professional",
+      "auditionsUrl": "https://www.kcsymphony.org/about-us/employment/orchestra-auditions/",
+      "homepageUrl": "https://www.kcsymphony.org",
+      "notes": "'Orchestra Auditions' page seen on kcsymphony.org (HTML; one sub-page per audition, e.g. /principal-bass-audition/; separate /substitute-auditions/ page). The older /StaticCtl/OrchestraAuditionsAct address could not be confirmed in the 2026-10-11 spot check and was replaced.",
+      "source": "https://www.kcsymphony.org/about-us/employment/orchestra-auditions/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "kennedy-center-opera-house-orchestra",
+      "name": "Kennedy Center Opera House Orchestra (Washington National Opera)",
+      "country": "US",
+      "region": "north-america",
+      "city": "Washington",
+      "type": "professional",
+      "homepageUrl": "https://www.kennedy-center.org/artists/k/ka-kn/the-kennedy-center-opera-house-orchestra/",
+      "notes": "audition page not yet found. Only the orchestra's profile page was seen on kennedy-center.org; openings are infrequent.",
+      "source": "https://www.kennedy-center.org/artists/k/ka-kn/the-kennedy-center-opera-house-orchestra/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "lbso",
+      "name": "Long Beach Symphony",
+      "country": "US",
+      "region": "north-america",
+      "city": "Long Beach",
+      "type": "professional",
+      "homepageUrl": "https://longbeachsymphony.org",
+      "notes": "'Upcoming Orchestra Auditions' page seen on longbeachsymphony.org (HTML announcements). Tutti's audition source is only the homepage. Tutti metro: Greater Los Angeles.",
+      "source": "https://longbeachsymphony.org/about-us/upcoming-orchestra-auditions/",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "lbso"
+      },
+      "groups": [
+        "tutti-socal"
+      ],
+      "auditionsUrl": "https://longbeachsymphony.org/about-us/upcoming-orchestra-auditions/"
+    },
+    {
+      "id": "laco",
+      "name": "Los Angeles Chamber Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Downtown LA",
+      "type": "professional",
+      "homepageUrl": "https://www.laco.org",
+      "notes": "audition page not yet found (Tutti's audition source is only the homepage; a 2026-10-11 search of laco.org returned no auditions page). Tutti metro: Greater Los Angeles.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "laco"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "laphil",
+      "name": "Los Angeles Philharmonic",
+      "country": "US",
+      "region": "north-america",
+      "city": "Downtown LA",
+      "type": "professional",
+      "homepageUrl": "https://www.laphil.com",
+      "notes": "ICSOM member. Auditions page seen on laphil.com (HTML list of upcoming sections, résumé by email). Tutti's audition source is only the homepage. Tutti metro: Greater Los Angeles.",
+      "source": "https://www.laphil.com/about/meet-the-orchestra/auditions",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "laphil"
+      },
+      "groups": [
+        "tutti-socal",
+        "icsom"
+      ],
+      "auditionsUrl": "https://www.laphil.com/about/meet-the-orchestra/auditions"
+    },
+    {
+      "id": "layo",
+      "name": "Los Angeles Youth Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Encino",
+      "type": "youth",
+      "auditionsUrl": "https://losangelesyouthorchestra.org/audition-information/",
+      "homepageUrl": "https://losangelesyouthorchestra.org",
+      "notes": "From Tutti's verified data (Tutti auditions[].source). Tutti metro: Greater Los Angeles.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "layo"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "louisville-orchestra",
+      "name": "Louisville Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Louisville",
+      "type": "professional",
+      "auditionsUrl": "https://www.louisvilleorchestra.org/about/jobs-auditions/orchestra-auditions",
+      "homepageUrl": "https://www.louisvilleorchestra.org",
+      "notes": "'Orchestra Auditions' page seen on louisvilleorchestra.org (HTML; audition letters as PDFs).",
+      "source": "https://www.louisvilleorchestra.org/about/jobs-auditions/orchestra-auditions",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "loyo",
+      "name": "Lyceum Oaks Youth Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Newbury Park (Thousand Oaks)",
+      "type": "youth",
+      "auditionsUrl": "https://loyo.lyceumoaks.org/auditions/",
+      "homepageUrl": "https://loyo.lyceumoaks.org/",
+      "notes": "From Tutti's verified data (Tutti auditions[].source). Tutti metro: Ventura County.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "loyo"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "lyric-opera-of-chicago-orchestra",
+      "name": "Lyric Opera of Chicago Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Chicago",
+      "type": "professional",
+      "auditionsUrl": "https://lyricopera.org/about/employment-auditions/lyric-opera-auditions",
+      "homepageUrl": "https://www.lyricopera.org",
+      "notes": "'Lyric Opera Auditions' page seen on lyricopera.org (HTML; orchestra, chorus and other auditions on one page).",
+      "source": "https://lyricopera.org/about/employment-auditions/lyric-opera-auditions",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "mmyo",
+      "name": "Mainly Mozart Youth Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Solana Beach",
+      "type": "youth",
+      "auditionsUrl": "https://www.mmyo.org/summer-auditions",
+      "homepageUrl": "https://www.mmyo.org/",
+      "notes": "From Tutti's verified data (Tutti auditions[].source). Tutti metro: San Diego County.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "mmyo"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "metropolitan-opera-orchestra",
+      "name": "Metropolitan Opera Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "New York",
+      "type": "professional",
+      "auditionsUrl": "https://www.metopera.org/about/auditions/orchestra/",
+      "homepageUrl": "https://metopera.org",
+      "notes": "Orchestra auditions page seen on metopera.org (HTML). Address normalised to the form seen in search results, 2026-10-11.",
+      "source": "https://www.metopera.org/about/auditions/orchestra/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "milwaukee-symphony",
+      "name": "Milwaukee Symphony Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Milwaukee",
+      "type": "professional",
+      "auditionsUrl": "https://mso.org/about/employment/orchestra_auditions",
+      "homepageUrl": "https://www.mso.org",
+      "notes": "Orchestra auditions page seen on mso.org (HTML; info sheets as PDFs under /app/uploads/).",
+      "source": "https://mso.org/about/employment/orchestra_auditions",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "minnesota-orchestra",
+      "name": "Minnesota Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Minneapolis",
+      "type": "professional",
+      "auditionsUrl": "https://minnesotaorchestra.org/about/careers-auditions/auditions/",
+      "homepageUrl": "https://minnesotaorchestra.org",
+      "notes": "Auditions page seen on minnesotaorchestra.org (HTML).",
+      "source": "https://minnesotaorchestra.org/about/careers-auditions/auditions/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "mslm-yo",
+      "name": "Musique Sur La Mer Youth Orchestras",
+      "country": "US",
+      "region": "north-america",
+      "city": "Long Beach",
+      "type": "youth",
+      "auditionsUrl": "https://www.mslmorchestra.com/audition/",
+      "homepageUrl": "https://www.mslmorchestra.com/",
+      "notes": "From Tutti's verified data (Tutti auditions[].source). Tutti metro: Greater Los Angeles.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "mslm-yo"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "nashville-symphony",
+      "name": "Nashville Symphony",
+      "country": "US",
+      "region": "north-america",
+      "city": "Nashville",
+      "type": "professional",
+      "auditionsUrl": "https://www.nashvillesymphony.org/about/auditions",
+      "homepageUrl": "https://www.nashvillesymphony.org",
+      "notes": "'Orchestra Auditions' page seen on nashvillesymphony.org (HTML; individual listings under /about/audition-listings/).",
+      "source": "https://www.nashvillesymphony.org/about/auditions",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "national-symphony",
+      "name": "National Symphony Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Washington",
+      "type": "professional",
+      "notes": "audition page not yet found. Only the NSO Youth Fellowship page was seen on kennedy-center.org; the NSO's own section was not in results.",
+      "source": "https://en.wikipedia.org/wiki/National_Symphony_Orchestra",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "new-jersey-symphony",
+      "name": "New Jersey Symphony",
+      "country": "US",
+      "region": "north-america",
+      "city": "Newark",
+      "type": "professional",
+      "auditionsUrl": "https://njsymphony.org/auditions",
+      "homepageUrl": "https://njsymphony.org",
+      "notes": "'Audition Information' page seen on njsymphony.org (HTML; individual auditions under /musicians-orchestra/audition-information/).",
+      "source": "https://njsymphony.org/auditions",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "newwest",
+      "name": "New West Symphony",
+      "country": "US",
+      "region": "north-america",
+      "city": "Thousand Oaks",
+      "type": "professional",
+      "auditionsUrl": "https://newwestsymphony.org/about/careers-auditions/",
+      "homepageUrl": "https://newwestsymphony.org/",
+      "notes": "From Tutti's verified data (Tutti applyUrl). Tutti metro: Ventura County.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "newwest"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "new-york-city-ballet-orchestra",
+      "name": "New York City Ballet Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "New York",
+      "type": "professional",
+      "auditionsUrl": "https://nycballet.com/about-us/careers-at-nycb",
+      "homepageUrl": "https://nycballet.com",
+      "notes": "Careers page seen on nycballet.com; orchestra openings are listed there alongside staff roles (HTML).",
+      "source": "https://nycballet.com/about-us/careers-at-nycb",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "new-york-philharmonic",
+      "name": "New York Philharmonic",
+      "country": "US",
+      "region": "north-america",
+      "city": "New York",
+      "type": "professional",
+      "notes": "audition page not yet found. Two searches returned nothing from nyphil.org; third-party ads point to an auditions page there.",
+      "source": "https://www.icsom.org/about/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "north-carolina-symphony",
+      "name": "North Carolina Symphony",
+      "country": "US",
+      "region": "north-america",
+      "city": "Raleigh",
+      "type": "professional",
+      "auditionsUrl": "https://ncsymphony.org/employment/",
+      "homepageUrl": "https://ncsymphony.org",
+      "notes": "Employment page seen on ncsymphony.org; lists orchestra auditions (HTML).",
+      "source": "https://ncsymphony.org/employment/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "ocys",
+      "name": "Orange County Youth Symphony and String Ensemble",
+      "country": "US",
+      "region": "north-america",
+      "city": "Irvine",
+      "type": "youth",
+      "auditionsUrl": "https://www.philharmonicsociety.org/education-community/orange-county-youth-symphony/audition-information",
+      "homepageUrl": "https://www.philharmonicsociety.org/education-community/orange-county-youth-symphony",
+      "notes": "From Tutti's verified data (Tutti auditions[].source). Tutti metro: Orange County.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "ocys"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "oregon-symphony",
+      "name": "Oregon Symphony",
+      "country": "US",
+      "region": "north-america",
+      "city": "Portland",
+      "type": "professional",
+      "auditionsUrl": "https://www.orsymphony.org/about/careers",
+      "homepageUrl": "https://www.orsymphony.org",
+      "notes": "Careers page seen on orsymphony.org; lists orchestra auditions (HTML).",
+      "source": "https://www.orsymphony.org/about/careers",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "pacsym",
+      "name": "Pacific Symphony",
+      "country": "US",
+      "region": "north-america",
+      "city": "Costa Mesa",
+      "type": "professional",
+      "auditionsUrl": "https://www.pacificsymphony.org/orchestra-auditions",
+      "homepageUrl": "https://www.pacificsymphony.org/",
+      "notes": "From Tutti's verified data (Tutti auditions[].source). Tutti metro: Orange County.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "pacsym"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "psye",
+      "name": "Pacific Symphony Youth Ensembles",
+      "country": "US",
+      "region": "north-america",
+      "city": "Irvine (UC Irvine)",
+      "type": "youth",
+      "auditionsUrl": "https://www.pacificsymphony.org/auditions",
+      "homepageUrl": "https://www.pacificsymphony.org/psye",
+      "notes": "From Tutti's verified data (Tutti auditions[].source). Tutti metro: Orange County.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "psye"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "passym",
+      "name": "Pasadena Symphony and POPS",
+      "country": "US",
+      "region": "north-america",
+      "city": "Pasadena",
+      "type": "professional",
+      "homepageUrl": "https://pasadenasymphony-pops.org",
+      "notes": "audition page not yet found (Tutti's audition source is only the homepage; a 2026-10-11 search of pasadenasymphony-pops.org returned only youth-orchestra pages). Tutti metro: Greater Los Angeles.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "passym"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "pyso",
+      "name": "Pasadena Youth Symphony Orchestras",
+      "country": "US",
+      "region": "north-america",
+      "city": "Pasadena",
+      "type": "youth",
+      "auditionsUrl": "https://pasadenasymphony-pops.org/education/pyso/auditions/",
+      "homepageUrl": "https://pasadenasymphony-pops.org/education/pyso/",
+      "notes": "From Tutti's verified data (Tutti auditions[].source). Tutti metro: Greater Los Angeles.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "pyso"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "pittsburgh-symphony",
+      "name": "Pittsburgh Symphony Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Pittsburgh",
+      "type": "professional",
+      "auditionsUrl": "https://pittsburghsymphony.org/pso_home/web/about-landing/career-opportunities/auditions",
+      "homepageUrl": "https://pittsburghsymphony.org",
+      "notes": "Auditions page seen on pittsburghsymphony.org (HTML; details as PDFs on assets.culturaldistrict.org).",
+      "source": "https://pittsburghsymphony.org/pso_home/web/about-landing/career-opportunities/auditions",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "redsym",
+      "name": "Redlands Symphony",
+      "country": "US",
+      "region": "north-america",
+      "city": "Redlands (University of Redlands)",
+      "type": "professional",
+      "auditionsUrl": "https://www.redlandssymphony.com/careers",
+      "homepageUrl": "https://www.redlandssymphony.com",
+      "notes": "From Tutti's verified data (Tutti auditions[].source). Tutti metro: Inland Empire.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "redsym"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "riverside-arts",
+      "name": "Riverside Arts Academy",
+      "country": "US",
+      "region": "north-america",
+      "city": "Riverside",
+      "type": "youth",
+      "auditionsUrl": "https://www.riversideartsacademy.com/ryo",
+      "homepageUrl": "https://www.riversideartsacademy.com",
+      "notes": "From Tutti's verified data (Tutti auditions[].source). Tutti metro: Inland Empire.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "riverside-arts"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "rochester-philharmonic",
+      "name": "Rochester Philharmonic Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Rochester",
+      "type": "professional",
+      "homepageUrl": "https://rpo.org",
+      "notes": "audition page not yet found. Only conductor-search and Young Artist pages seen on rpo.org.",
+      "source": "https://www.icsom.org/about/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "san-antonio-philharmonic",
+      "name": "San Antonio Philharmonic",
+      "country": "US",
+      "region": "north-america",
+      "city": "San Antonio",
+      "type": "professional",
+      "notes": "audition page not yet found. Nothing from saphil.org appeared in results; only local news about 2025-26 blind auditions.",
+      "source": "https://www.sacurrent.com/music/san-antonio-philharmonic-holding-blind-auditions-to-increase-representation-of-women-people-of-color-37125911/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "sbso",
+      "name": "San Bernardino Symphony Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Downtown San Bernardino",
+      "type": "professional",
+      "homepageUrl": "https://www.sanbernardinosymphony.org",
+      "notes": "audition page not yet found (Tutti's audition source is only the homepage; a 2026-10-11 search of sanbernardinosymphony.org returned only youth-orchestra pages). Tutti metro: Inland Empire.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "sbso"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "sbsyo",
+      "name": "San Bernardino Symphony Youth Orchestras",
+      "country": "US",
+      "region": "north-america",
+      "city": "San Bernardino",
+      "type": "youth",
+      "auditionsUrl": "https://www.sanbernardinosymphony.org/symphony-youth-orchestras",
+      "homepageUrl": "https://www.sanbernardinosymphony.org/symphony-youth-orchestras",
+      "notes": "From Tutti's verified data (Tutti auditions[].source) (this is the program page Tutti cites for audition info, not a separate auditions list). Tutti metro: Inland Empire.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "sbsyo"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "sdcyo",
+      "name": "San Diego Civic Youth Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Escondido (North County)",
+      "type": "youth",
+      "auditionsUrl": "https://www.civicyouthorchestra.org/audition-information",
+      "homepageUrl": "https://www.civicyouthorchestra.org/",
+      "notes": "From Tutti's verified data (Tutti applyUrl). Tutti metro: San Diego County.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "sdcyo"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "sdsym",
+      "name": "San Diego Symphony",
+      "country": "US",
+      "region": "north-america",
+      "city": "Downtown San Diego",
+      "type": "professional",
+      "auditionsUrl": "https://www.sandiegosymphony.org/about/san-diego-symphony-orchestra/auditions-san-diego-symphony/",
+      "homepageUrl": "https://www.sandiegosymphony.org/",
+      "notes": "ICSOM member. From Tutti's verified data (Tutti auditions[].source). Tutti metro: San Diego County.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "sdsym"
+      },
+      "groups": [
+        "tutti-socal",
+        "icsom"
+      ]
+    },
+    {
+      "id": "sdys",
+      "name": "San Diego Youth Symphony and Conservatory",
+      "country": "US",
+      "region": "north-america",
+      "city": "Balboa Park, San Diego",
+      "type": "youth",
+      "auditionsUrl": "https://www.keynote-music.org/sdys/how-to-join/",
+      "homepageUrl": "https://www.keynote-music.org/sdys/",
+      "notes": "From Tutti's verified data (Tutti auditions[].source). Tutti metro: San Diego County.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "sdys"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "san-francisco-ballet-orchestra",
+      "name": "San Francisco Ballet Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "San Francisco",
+      "type": "professional",
+      "auditionsUrl": "https://www.sfballet.org/careers-auditions/",
+      "homepageUrl": "https://www.sfballet.org",
+      "notes": "'Careers & Auditions' page seen on sfballet.org, with the orchestra vacancies (HTML; audition packets as PDFs under /app/uploads/). /discover/employment-auditions/ could not be confirmed in the 2026-10-11 spot check and was replaced. Early rounds sometimes run jointly with SF Opera.",
+      "source": "https://www.sfballet.org/careers-auditions/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "san-francisco-opera-orchestra",
+      "name": "San Francisco Opera Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "San Francisco",
+      "type": "professional",
+      "homepageUrl": "https://sfopera.com",
+      "notes": "audition page not yet found as an index page. Individual orchestra audition pages were seen under sfopera.com/about/auditions/<position>/ (e.g. horn-audition, assistant-principal-bass).",
+      "source": "https://www.sfopera.com/about/auditions/horn-audition/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "san-francisco-symphony",
+      "name": "San Francisco Symphony",
+      "country": "US",
+      "region": "north-america",
+      "city": "San Francisco",
+      "type": "professional",
+      "auditionsUrl": "https://www.sfsymphony.org/About-SFS/Auditions/Orchestra-Auditions",
+      "homepageUrl": "https://www.sfsymphony.org",
+      "notes": "'Orchestra Auditions' page seen on sfsymphony.org (HTML; applications via Acceptd).",
+      "source": "https://www.sfsymphony.org/About-SFS/Auditions/Orchestra-Auditions",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "scvyo",
+      "name": "Santa Clarita Valley Youth Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Santa Clarita",
+      "type": "youth",
+      "auditionsUrl": "https://www.scvyo.org/enroll-in-scvyo",
+      "homepageUrl": "https://www.scvyo.org/",
+      "notes": "From Tutti's verified data (Tutti auditions[].source). Tutti metro: Greater Los Angeles.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "scvyo"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "smyo",
+      "name": "Santa Monica Youth Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Santa Monica",
+      "type": "youth",
+      "auditionsUrl": "https://soundslikela.org/programs/santa-monica-youth-orchestra/",
+      "homepageUrl": "https://soundslikela.org/programs/santa-monica-youth-orchestra/",
+      "notes": "From Tutti's verified data (Tutti auditions[].source) (this is the program page Tutti cites for audition info, not a separate auditions list). Tutti metro: Greater Los Angeles.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "smyo"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "seattle-symphony",
+      "name": "Seattle Symphony",
+      "country": "US",
+      "region": "north-america",
+      "city": "Seattle",
+      "type": "professional",
+      "notes": "audition page not yet found. Two searches returned nothing from seattlesymphony.org (results were the volunteer Seattle Philharmonic and old third-party posts).",
+      "source": "https://www.icsom.org/about/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "scyso",
+      "name": "South Coast Youth Symphony Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Mission Viejo",
+      "type": "youth",
+      "auditionsUrl": "https://www.scysomusic.org/registration-audition",
+      "homepageUrl": "https://www.scysomusic.org/",
+      "notes": "From Tutti's verified data (Tutti auditions[].source). Tutti metro: Orange County.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "scyso"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "st-louis-symphony",
+      "name": "St. Louis Symphony Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "St. Louis",
+      "type": "professional",
+      "auditionsUrl": "https://www.slso.org/auditions",
+      "homepageUrl": "https://www.slso.org",
+      "notes": "Auditions page seen on slso.org (HTML; also /about-us/auditions/).",
+      "source": "https://www.slso.org/auditions",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "tvys",
+      "name": "Temecula Valley Youth Symphony",
+      "country": "US",
+      "region": "north-america",
+      "city": "Temecula / Murrieta",
+      "type": "youth",
+      "auditionsUrl": "https://temeculavalleysymphony.org/youth-symphony/apply/",
+      "homepageUrl": "https://temeculavalleysymphony.org/youth-symphony/",
+      "notes": "From Tutti's verified data (Tutti auditions[].source). Tutti metro: Inland Empire.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "tvys"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "cleveland-orchestra",
+      "name": "The Cleveland Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Cleveland",
+      "type": "professional",
+      "auditionsUrl": "https://www.clevelandorchestra.com/who-we-are/the-cleveland-orchestra/auditions",
+      "homepageUrl": "https://www.clevelandorchestra.com",
+      "notes": "Auditions page seen on clevelandorchestra.com (HTML; says 'no openings' when none).",
+      "source": "https://www.clevelandorchestra.com/who-we-are/the-cleveland-orchestra/auditions",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "florida-orchestra",
+      "name": "The Florida Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "St. Petersburg",
+      "type": "professional",
+      "notes": "audition page not yet found. Nothing from floridaorchestra.org appeared in results; third parties point to an 'Employment & Auditions' page there.",
+      "source": "https://www.icsom.org/about/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "philadelphia-orchestra",
+      "name": "The Philadelphia Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Philadelphia",
+      "type": "professional",
+      "homepageUrl": "https://philorch.org",
+      "notes": "audition page not yet found as an index page. Individual audition pages were seen under philorch.org/about-us/meet-your-orchestra/employment-opportunities/music-auditions/<position>.",
+      "source": "https://philorch.org/about-us/meet-your-orchestra/employment-opportunities/music-auditions/section-cello",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "phoenix-symphony",
+      "name": "The Phoenix Symphony",
+      "country": "US",
+      "region": "north-america",
+      "city": "Phoenix",
+      "type": "professional",
+      "homepageUrl": "https://www.phoenixsymphony.org",
+      "notes": "audition page not yet found as an index page. Individual audition postings were seen on phoenixsymphony.org as WordPress short links (?p=...).",
+      "source": "https://www.phoenixsymphony.org/?p=9612",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "saint-paul-chamber-orchestra",
+      "name": "The Saint Paul Chamber Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Saint Paul",
+      "type": "professional",
+      "auditionsUrl": "https://thespco.org/about-us/employment-and-auditions/",
+      "homepageUrl": "https://thespco.org",
+      "notes": "'Employment and Auditions' page seen on thespco.org (HTML).",
+      "source": "https://thespco.org/about-us/employment-and-auditions/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "utah-symphony",
+      "name": "Utah Symphony",
+      "country": "US",
+      "region": "north-america",
+      "city": "Salt Lake City",
+      "type": "professional",
+      "auditionsUrl": "https://utahsymphony.org/orchestra/auditions",
+      "homepageUrl": "https://utahsymphony.org",
+      "notes": "Auditions page seen on utahsymphony.org (HTML).",
+      "source": "https://utahsymphony.org/orchestra/auditions",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "virginia-symphony",
+      "name": "Virginia Symphony Orchestra",
+      "country": "US",
+      "region": "north-america",
+      "city": "Norfolk",
+      "type": "professional",
+      "auditionsUrl": "https://virginiasymphony.org/jobs-auditions/",
+      "homepageUrl": "https://virginiasymphony.org",
+      "notes": "'Jobs & Auditions' page seen on virginiasymphony.org (HTML; announcements as PDFs).",
+      "source": "https://virginiasymphony.org/jobs-auditions/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "icsom"
+      ]
+    },
+    {
+      "id": "yola",
+      "name": "Youth Orchestra Los Angeles (YOLA)",
+      "country": "US",
+      "region": "north-america",
+      "city": "Inglewood",
+      "type": "youth",
+      "auditionsUrl": "https://www.laphil.com/learn/yola",
+      "homepageUrl": "https://www.laphil.com/learn/yola",
+      "notes": "From Tutti's verified data (Tutti auditions[].source) (this is the program page Tutti cites for audition info, not a separate auditions list). Tutti metro: Greater Los Angeles.",
+      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "asOf": "2026-10-11",
+      "tutti": {
+        "orgId": "yola"
+      },
+      "groups": [
+        "tutti-socal"
+      ]
+    },
+    {
+      "id": "bbc-symphony-orchestra",
+      "name": "BBC Symphony Orchestra",
+      "country": "GB",
+      "region": "uk",
+      "city": "London",
+      "type": "professional",
+      "notes": "audition page not yet found. BBC orchestras recruit through BBC Careers; no orchestra-specific page was seen.",
+      "source": "https://journalofmusic.com/listing/30-10-25/tutti-cello-x-2",
+      "asOf": "2026-10-11",
+      "groups": [
+        "uk-majors"
+      ]
+    },
+    {
+      "id": "city-of-birmingham-symphony-orchestra",
+      "name": "City of Birmingham Symphony Orchestra",
+      "country": "GB",
+      "region": "uk",
+      "city": "Birmingham",
+      "type": "professional",
+      "notes": "audition page not yet found. Nothing from cbso.co.uk appeared in results.",
+      "source": "https://www.workincharities.co.uk/job/principal-no4-first-violin-78dceec8",
+      "asOf": "2026-10-11",
+      "groups": [
+        "uk-majors"
+      ]
+    },
+    {
+      "id": "london-philharmonic-orchestra",
+      "name": "London Philharmonic Orchestra",
+      "country": "GB",
+      "region": "uk",
+      "city": "London",
+      "type": "professional",
+      "homepageUrl": "https://lpo.org.uk",
+      "notes": "audition page not yet found. Only the Foyle Future Firsts and staff-vacancy pages were seen on lpo.org.uk.",
+      "source": "https://lpo.org.uk/project/future-firsts",
+      "asOf": "2026-10-11",
+      "groups": [
+        "uk-majors"
+      ]
+    },
+    {
+      "id": "london-symphony-orchestra",
+      "name": "London Symphony Orchestra",
+      "country": "GB",
+      "region": "uk",
+      "city": "London",
+      "type": "professional",
+      "auditionsUrl": "https://www.lso.co.uk/about-us/careers/",
+      "homepageUrl": "https://www.lso.co.uk",
+      "notes": "Careers page seen on lso.co.uk; lists player vacancies and staff roles (HTML). First rounds via Musical Chairs; we read only lso.co.uk.",
+      "source": "https://www.lso.co.uk/about-us/careers/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "uk-majors"
+      ]
+    },
+    {
+      "id": "philharmonia-orchestra",
+      "name": "Philharmonia Orchestra",
+      "country": "GB",
+      "region": "uk",
+      "city": "London",
+      "type": "professional",
+      "auditionsUrl": "https://philharmonia.co.uk/vacancies",
+      "homepageUrl": "https://philharmonia.co.uk",
+      "notes": "Vacancies page seen on philharmonia.co.uk (HTML; player and staff vacancies together).",
+      "source": "https://philharmonia.co.uk/vacancies",
+      "asOf": "2026-10-11",
+      "groups": [
+        "uk-majors"
+      ]
+    },
+    {
+      "id": "royal-liverpool-philharmonic",
+      "name": "Royal Liverpool Philharmonic Orchestra",
+      "country": "GB",
+      "region": "uk",
+      "city": "Liverpool",
+      "type": "professional",
+      "homepageUrl": "https://www.liverpoolphil.com",
+      "notes": "audition page not yet found as an index page. Individual vacancy pages were seen under liverpoolphil.com/about-us/careers/<role>/.",
+      "source": "https://www.liverpoolphil.com/about-us/careers/section-leader-clarinet/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "uk-majors"
+      ]
+    },
+    {
+      "id": "royal-scottish-national-orchestra",
+      "name": "Royal Scottish National Orchestra",
+      "country": "GB",
+      "region": "uk",
+      "city": "Glasgow",
+      "type": "professional",
+      "notes": "audition page not yet found. Nothing from rsno.org.uk appeared in results (only a development mirror, which we do not record).",
+      "source": "https://journalofmusic.com/listing/24-11-15/principal-clarinet",
+      "asOf": "2026-10-11",
+      "groups": [
+        "uk-majors"
+      ]
+    },
+    {
+      "id": "halle",
+      "name": "The Hallé",
+      "country": "GB",
+      "region": "uk",
+      "city": "Manchester",
+      "type": "professional",
+      "homepageUrl": "https://halle.co.uk",
+      "notes": "audition page not yet found as an index page. Individual vacancy pages (WordPress ?p= links) and recruitment packs (PDF) were seen on halle.co.uk.",
+      "source": "https://halle.co.uk/?p=10629",
+      "asOf": "2026-10-11",
+      "groups": [
+        "uk-majors"
+      ]
+    },
+    {
+      "id": "wiener-staatsoper-orchester",
+      "name": "Orchester der Wiener Staatsoper (Wiener Philharmoniker)",
+      "country": "AT",
+      "region": "europe-german",
+      "city": "Vienna",
+      "type": "professional",
+      "homepageUrl": "https://www.wiener-staatsoper.at",
+      "notes": "audition page not yet found. Only the orchestra's ensemble page was seen on wiener-staatsoper.at.",
+      "source": "https://www.wiener-staatsoper.at/en/ensemble/the-orchestra/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "europe-majors"
+      ]
+    },
+    {
+      "id": "berliner-philharmoniker",
+      "name": "Berliner Philharmoniker",
+      "country": "DE",
+      "region": "europe-german",
+      "city": "Berlin",
+      "type": "professional",
+      "homepageUrl": "https://www.berliner-philharmoniker.de",
+      "notes": "audition page not yet found as an index page. An application form (/en/vacant-positions/violin) and the Karajan-Akademie vacancies page were seen; the orchestra says vacancies are posted on its own site.",
+      "source": "https://berliner-philharmoniker.de/en/about-us/karajan-akademie/application-and-vacancies",
+      "asOf": "2026-10-11",
+      "groups": [
+        "europe-majors"
+      ]
+    },
+    {
+      "id": "gewandhausorchester",
+      "name": "Gewandhausorchester Leipzig",
+      "country": "DE",
+      "region": "europe-german",
+      "city": "Leipzig",
+      "type": "professional",
+      "auditionsUrl": "https://www.gewandhausorchester.de/en/orchester/vacancies/",
+      "homepageUrl": "https://www.gewandhausorchester.de",
+      "notes": "Vacancies page seen on gewandhausorchester.de (HTML list with Probespiel dates).",
+      "source": "https://www.gewandhausorchester.de/en/orchester/vacancies/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "europe-majors"
+      ]
+    },
+    {
+      "id": "muenchner-philharmoniker",
+      "name": "Münchner Philharmoniker",
+      "country": "DE",
+      "region": "europe-german",
+      "city": "Munich",
+      "type": "professional",
+      "homepageUrl": "https://www.mphil.de",
+      "notes": "audition page not yet found. Only press material was seen on mphil.de.",
+      "source": "https://www.mphil.de/fileadmin/Redaktion-mphil/Pressebereich/Bios/Bio_Orchester_deutsch_kurz_2026-08.pdf",
+      "asOf": "2026-10-11",
+      "groups": [
+        "europe-majors"
+      ]
+    },
+    {
+      "id": "br-symphonieorchester",
+      "name": "Symphonieorchester des Bayerischen Rundfunks",
+      "country": "DE",
+      "region": "europe-german",
+      "city": "Munich",
+      "type": "professional",
+      "notes": "audition page not yet found. Nothing from br-so.de appeared in results.",
+      "source": "https://www.salzburgerfestspiele.at/en/a/symphonieorchester-des-bayerischen-rundfunks",
+      "asOf": "2026-10-11",
+      "groups": [
+        "europe-majors"
+      ]
+    },
+    {
+      "id": "staatskapelle-dresden",
+      "name": "Sächsische Staatskapelle Dresden",
+      "country": "DE",
+      "region": "europe-german",
+      "city": "Dresden",
+      "type": "professional",
+      "homepageUrl": "https://www.staatskapelle-dresden.de",
+      "notes": "audition page not yet found. Only press and staff-job PDFs were seen on staatskapelle-dresden.de; Saxony's karriere.sachsen.de portal carries postings.",
+      "source": "https://www.staatskapelle-dresden.de/fileadmin/home/Archiv/pressematerial/Bio_Staatskapelle_23-24_DEU.pdf",
+      "asOf": "2026-10-11",
+      "groups": [
+        "europe-majors"
+      ]
+    },
+    {
+      "id": "dr-symphony-orchestra",
+      "name": "Danish National Symphony Orchestra (DR Symfoniorkestret)",
+      "country": "DK",
+      "region": "europe-other",
+      "city": "Copenhagen",
+      "type": "professional",
+      "notes": "audition page not yet found. Nothing from dr.dk appeared in results.",
+      "source": "https://lex.dk/DR_Symfoniorkestret",
+      "asOf": "2026-10-11",
+      "groups": [
+        "europe-majors"
+      ]
+    },
+    {
+      "id": "euskadiko-orkestra",
+      "name": "Euskadiko Orkestra (Basque National Orchestra)",
+      "country": "ES",
+      "region": "europe-other",
+      "city": "San Sebastián",
+      "type": "professional",
+      "homepageUrl": "https://en.euskadikoorkestra.eus",
+      "notes": "audition page not yet found as an index page. Audition rules were seen as PDFs under es.euskadikoorkestra.eus/sites/default/files/.",
+      "source": "https://es.euskadikoorkestra.eus/sites/default/files/basesejercicios_viola_colaborador_2026_1.pdf",
+      "asOf": "2026-10-11",
+      "groups": [
+        "europe-majors"
+      ]
+    },
+    {
+      "id": "orquesta-nacional-de-espana",
+      "name": "Orquesta Nacional de España (OCNE)",
+      "country": "ES",
+      "region": "europe-other",
+      "city": "Madrid",
+      "type": "professional",
+      "homepageUrl": "https://ocne.inaem.gob.es",
+      "notes": "audition page not yet found as an index page. One convocatoria page was seen on ocne.inaem.gob.es; permanent posts are also published in the BOE.",
+      "source": "https://ocne.inaem.gob.es/actualidad/convocatoria-de-una-plaza-de-concertino-2022",
+      "asOf": "2026-10-11",
+      "groups": [
+        "europe-majors"
+      ]
+    },
+    {
+      "id": "finnish-radio-symphony",
+      "name": "Finnish Radio Symphony Orchestra",
+      "country": "FI",
+      "region": "europe-other",
+      "city": "Helsinki",
+      "type": "professional",
+      "notes": "audition page not yet found. Postings were seen only on the Finnish orchestras' association board (sinfoniaorkesterit.fi), which we do not crawl.",
+      "source": "https://en.wikipedia.org/wiki/Finnish_Radio_Symphony_Orchestra",
+      "asOf": "2026-10-11",
+      "groups": [
+        "europe-majors"
+      ]
+    },
+    {
+      "id": "helsinki-philharmonic",
+      "name": "Helsinki Philharmonic Orchestra",
+      "country": "FI",
+      "region": "europe-other",
+      "city": "Helsinki",
+      "type": "professional",
+      "auditionsUrl": "https://helsinginkaupunginorkesteri.fi/en/auditions",
+      "homepageUrl": "https://helsinginkaupunginorkesteri.fi",
+      "notes": "Auditions page seen on helsinginkaupunginorkesteri.fi (HTML).",
+      "source": "https://helsinginkaupunginorkesteri.fi/en/auditions",
+      "asOf": "2026-10-11",
+      "groups": [
+        "europe-majors"
+      ]
+    },
+    {
+      "id": "orchestre-de-paris",
+      "name": "Orchestre de Paris",
+      "country": "FR",
+      "region": "europe-other",
+      "city": "Paris",
+      "type": "professional",
+      "homepageUrl": "https://www.orchestredeparis.com",
+      "notes": "audition page not yet found as an index page. Audition règlements were seen as PDFs under orchestredeparis.com/telechargement/ and medias.orchestredeparis.com/pdfs/.",
+      "source": "https://www.orchestredeparis.com/telechargement/violoncelle-rang-reglement-2025.pdf",
+      "asOf": "2026-10-11",
+      "groups": [
+        "europe-majors"
+      ]
+    },
+    {
+      "id": "santa-cecilia",
+      "name": "Orchestra dell'Accademia Nazionale di Santa Cecilia",
+      "country": "IT",
+      "region": "europe-other",
+      "city": "Rome",
+      "type": "professional",
+      "homepageUrl": "https://santacecilia.it",
+      "notes": "audition page not yet found as an index page. Individual calls were seen under santacecilia.it/en/auditions/<call>/ and as PDFs under /wp-content/uploads/.",
+      "source": "https://santacecilia.it/en/auditions/concorsi-2022-prima-viola-primo-fagotto/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "europe-majors"
+      ]
+    },
+    {
+      "id": "rotterdam-philharmonic",
+      "name": "Rotterdam Philharmonic Orchestra",
+      "country": "NL",
+      "region": "europe-other",
+      "city": "Rotterdam",
+      "type": "professional",
+      "auditionsUrl": "https://www.rotterdamsphilharmonisch.nl/en/vacancies",
+      "homepageUrl": "https://www.rotterdamsphilharmonisch.nl",
+      "notes": "Vacancies page seen on rotterdamsphilharmonisch.nl (HTML; also https://rpho.nl/en/vacancies).",
+      "source": "https://www.rotterdamsphilharmonisch.nl/en/vacancies",
+      "asOf": "2026-10-11",
+      "groups": [
+        "europe-majors"
+      ]
+    },
+    {
+      "id": "concertgebouworkest",
+      "name": "Royal Concertgebouw Orchestra (Concertgebouworkest)",
+      "country": "NL",
+      "region": "europe-other",
+      "city": "Amsterdam",
+      "type": "professional",
+      "auditionsUrl": "https://www.concertgebouworkest.nl/en/organisation/job-openings/",
+      "homepageUrl": "https://www.concertgebouworkest.nl",
+      "notes": "'Job openings' page seen on concertgebouworkest.nl (HTML preliminary audition schedule; individual vacancies under /en/vacancies/). Applications via Muvac; we read only concertgebouworkest.nl.",
+      "source": "https://www.concertgebouworkest.nl/en/organisation/job-openings/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "europe-majors"
+      ]
+    },
+    {
+      "id": "oslo-philharmonic",
+      "name": "Oslo Philharmonic",
+      "country": "NO",
+      "region": "europe-other",
+      "city": "Oslo",
+      "type": "professional",
+      "homepageUrl": "https://ofo.no",
+      "notes": "audition page not yet found as an index page. One individual listing was seen under ofo.no/en/stilling-ledig/.",
+      "source": "https://ofo.no/en/stilling-ledig/vikariat-og-vikargodkjenning-tutti-trompet",
+      "asOf": "2026-10-11",
+      "groups": [
+        "europe-majors"
+      ]
+    },
+    {
+      "id": "gothenburg-symphony",
+      "name": "Gothenburg Symphony Orchestra",
+      "country": "SE",
+      "region": "europe-other",
+      "city": "Gothenburg",
+      "type": "professional",
+      "homepageUrl": "https://www.gso.se",
+      "notes": "audition page not yet found. Only vocal-ensemble audition PDFs were seen on gso.se; the orchestra posts vacancies on Muvac.",
+      "source": "https://www.gso.se/wp-content/uploads/2024/03/gsve-bas2.pdf",
+      "asOf": "2026-10-11",
+      "groups": [
+        "europe-majors"
+      ]
+    },
+    {
+      "id": "royal-stockholm-philharmonic",
+      "name": "Royal Stockholm Philharmonic Orchestra",
+      "country": "SE",
+      "region": "europe-other",
+      "city": "Stockholm",
+      "type": "professional",
+      "notes": "audition page not yet found. Nothing from konserthuset.se appeared in results.",
+      "source": "https://en.wikipedia.org/wiki/Royal_Stockholm_Philharmonic_Orchestra",
+      "asOf": "2026-10-11",
+      "groups": [
+        "europe-majors"
+      ]
+    },
+    {
+      "id": "adelaide-symphony",
+      "name": "Adelaide Symphony Orchestra",
+      "country": "AU",
+      "region": "asia-pacific",
+      "city": "Adelaide",
+      "type": "professional",
+      "auditionsUrl": "https://www.aso.com.au/about/employment/orchestral-vacancies/",
+      "homepageUrl": "https://www.aso.com.au",
+      "notes": "'Orchestral Vacancies' page seen on aso.com.au (HTML).",
+      "source": "https://www.aso.com.au/about/employment/orchestral-vacancies/",
+      "asOf": "2026-10-11",
+      "groups": [
+        "australia-six"
+      ]
+    },
+    {
+      "id": "melbourne-symphony",
+      "name": "Melbourne Symphony Orchestra",
+      "country": "AU",
+      "region": "asia-pacific",
+      "city": "Melbourne",
+      "type": "professional",
+      "auditionsUrl": "https://www.mso.com.au/careers/orchestral-vacancies",
+      "homepageUrl": "https://www.mso.com.au",
+      "notes": "'Orchestral vacancies' page seen on mso.com.au (HTML).",
+      "source": "https://www.mso.com.au/careers/orchestral-vacancies",
+      "asOf": "2026-10-11",
+      "groups": [
+        "australia-six"
+      ]
+    },
+    {
+      "id": "queensland-symphony",
+      "name": "Queensland Symphony Orchestra",
+      "country": "AU",
+      "region": "asia-pacific",
+      "city": "Brisbane",
+      "type": "professional",
+      "homepageUrl": "https://qso.com.au",
+      "notes": "audition page not yet found as an index page. Individual job pages were seen under qso.com.au/about/employment/jobs/.",
+      "source": "https://qso.com.au/about/employment/jobs/principal-violin-1",
+      "asOf": "2026-10-11",
+      "groups": [
+        "australia-six"
+      ]
+    },
+    {
+      "id": "sydney-symphony",
+      "name": "Sydney Symphony Orchestra",
+      "country": "AU",
+      "region": "asia-pacific",
+      "city": "Sydney",
+      "type": "professional",
+      "auditionsUrl": "https://www.sydneysymphony.com/about-us/work-with-us",
+      "homepageUrl": "https://www.sydneysymphony.com",
+      "notes": "'Work With Us' page seen on sydneysymphony.com; lists live auditions and casual expressions of interest (HTML).",
+      "source": "https://www.sydneysymphony.com/about-us/work-with-us",
+      "asOf": "2026-10-11",
+      "groups": [
+        "australia-six"
+      ]
+    },
+    {
+      "id": "tasmanian-symphony",
+      "name": "Tasmanian Symphony Orchestra",
+      "country": "AU",
+      "region": "asia-pacific",
+      "city": "Hobart",
+      "type": "professional",
+      "auditionsUrl": "https://www.tso.com.au/careers-and-opportunities",
+      "homepageUrl": "https://www.tso.com.au",
+      "notes": "'Careers and opportunities' page seen on tso.com.au (HTML; audition ads as PDFs under /content/uploads/).",
+      "source": "https://www.tso.com.au/careers-and-opportunities",
+      "asOf": "2026-10-11",
+      "groups": [
+        "australia-six"
+      ]
+    },
+    {
+      "id": "west-australian-symphony",
+      "name": "West Australian Symphony Orchestra",
+      "country": "AU",
+      "region": "asia-pacific",
+      "city": "Perth",
+      "type": "professional",
+      "homepageUrl": "https://www.waso.com.au",
+      "notes": "audition page not yet found as an index page. Individual vacancy pages were seen under waso.com.au/about/work-with-us/<position> with audition packs as PDFs.",
+      "source": "https://www.waso.com.au/about/work-with-us/tutti-violin-2026",
+      "asOf": "2026-10-11",
+      "groups": [
+        "australia-six"
+      ]
+    },
+    {
+      "id": "hong-kong-philharmonic",
+      "name": "Hong Kong Philharmonic Orchestra",
+      "country": "HK",
+      "region": "asia-pacific",
+      "city": "Hong Kong",
+      "type": "professional",
+      "auditionsUrl": "https://hkphil.org/about-us/vacancies",
+      "homepageUrl": "https://www.hkphil.org",
+      "notes": "Vacancies page seen on hkphil.org (HTML). The page says orchestral vacancies are posted on muvac.com; we read only hkphil.org and link out.",
+      "source": "https://hkphil.org/about-us/vacancies",
+      "asOf": "2026-10-11",
+      "groups": [
+        "asia"
+      ]
+    },
+    {
+      "id": "sapporo-symphony",
+      "name": "Sapporo Symphony Orchestra",
+      "country": "JP",
+      "region": "asia-pacific",
+      "city": "Sapporo",
+      "type": "professional",
+      "auditionsUrl": "https://sso.or.jp/sso/audition/en.php",
+      "homepageUrl": "https://www.sso.or.jp",
+      "notes": "English audition page seen on sso.or.jp (HTML; notices as PDFs under /sso/audition/upload_img/).",
+      "source": "https://sso.or.jp/sso/audition/en.php",
+      "asOf": "2026-10-11",
+      "groups": [
+        "japan"
+      ]
+    },
+    {
+      "id": "tokyo-metropolitan-symphony",
+      "name": "Tokyo Metropolitan Symphony Orchestra",
+      "country": "JP",
+      "region": "asia-pacific",
+      "city": "Tokyo",
+      "type": "professional",
+      "homepageUrl": "https://www.tmso.or.jp",
+      "notes": "audition page not yet found as an index page. One individual English audition page (2023 percussion) was seen under tmso.or.jp/e/tmso/audition/.",
+      "source": "https://www.tmso.or.jp/e/tmso/audition/audition_percussion_230120e",
+      "asOf": "2026-10-11",
+      "groups": [
+        "japan"
+      ]
+    },
+    {
+      "id": "singapore-symphony",
+      "name": "Singapore Symphony Orchestra",
+      "country": "SG",
+      "region": "asia-pacific",
+      "city": "Singapore",
+      "type": "professional",
+      "homepageUrl": "https://www.sso.org.sg",
+      "notes": "audition page not yet found as an index page. Audition guidance documents were seen as PDFs under web-assets.sso.org.sg/documents/Auditions/.",
+      "source": "https://web-assets.sso.org.sg/documents/Auditions/Section-Viola-2025-Application-Guidance.pdf",
+      "asOf": "2026-10-11",
+      "groups": [
+        "asia"
+      ]
+    }
+  ]
+}

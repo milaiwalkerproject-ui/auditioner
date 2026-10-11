@@ -1,0 +1,100 @@
+name: iOS build & tests
+
+on:
+  push:
+    paths:
+      - "ios/**"
+      - "content/**"
+      - ".github/workflows/ios.yml"
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ios-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    runs-on: macos-15
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select newest Xcode
+        run: |
+          ls -d /Applications/Xcode*.app
+          XCODE="$(ls -d /Applications/Xcode_*.app | sort -V | tail -1)"
+          sudo xcode-select -s "$XCODE"
+          xcodebuild -version
+
+      - name: Catalogue in app matches content/
+        run: python3 content/sync_to_app.py --check
+
+      - name: Pick a simulator
+        id: sim
+        run: |
+          UDID=$(xcrun simctl list devices available -j | python3 -c '
+          import json, sys
+          data = json.load(sys.stdin)["devices"]
+          runtimes = sorted([r for r in data if "iOS" in r], key=lambda r: [int(x) for x in r.split("iOS-")[-1].split("-") if x.isdigit()])
+          for rt in reversed(runtimes):
+              for d in data[rt]:
+                  if d["name"].startswith("iPhone"):
+                      print(d["udid"]); sys.exit(0)
+          ')
+          echo "udid=$UDID" >> "$GITHUB_OUTPUT"
+          echo "Simulator: $UDID"
+
+      - name: Build and test
+        # Ad-hoc signing ("-", no team, no profile) for the simulator: unsigned apps get
+        # errSecMissingEntitlement (-34018) from the keychain, which the account tests use.
+        run: |
+          mkdir -p build
+          set +e
+          xcodebuild \
+            -project ios/Auditioner.xcodeproj \
+            -scheme Auditioner \
+            -destination "id=${{ steps.sim.outputs.udid }}" \
+            -derivedDataPath build/DerivedData \
+            CODE_SIGN_STYLE=Manual \
+            CODE_SIGN_IDENTITY=- \
+            DEVELOPMENT_TEAM= \
+            PROVISIONING_PROFILE_SPECIFIER= \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=YES \
+            -parallel-testing-enabled NO \
+            test > build/xcodebuild.log 2>&1
+          STATUS=$?
+          grep -iE "error:|\*\* (BUILD|TEST)|^Test case '[^']+' failed|Executed [0-9]+ test" build/xcodebuild.log | tail -300
+          echo "==== summary ===="
+          echo "tests passed: $(grep -ciE "^Test case '[^']+' passed" build/xcodebuild.log)"
+          echo "tests failed: $(grep -ciE "^Test case '[^']+' failed" build/xcodebuild.log)"
+          echo "compiler warnings (unique): $(grep -E ": warning: " build/xcodebuild.log | sort -u | wc -l | tr -d ' ')"
+          grep -E "^/.*: warning: " build/xcodebuild.log | sed -E 's#^.*/ios/#ios/#' | sort -u | head -60
+          exit $STATUS
+
+      - name: Error summary
+        if: failure()
+        run: |
+          echo "==== compiler errors ===="
+          grep -E "^/.*: error:" build/xcodebuild.log | sed -E 's#^.*/ios/#ios/#' | sort -u | head -150 || true
+          echo "==== other failures ===="
+          grep -E "error:|failed|FAILED" build/xcodebuild.log | grep -v "^/.*: error:" | sort -u | head -60 || true
+
+      - name: Upload log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: xcodebuild-log
+          path: build/xcodebuild.log
+          if-no-files-found: ignore
+
+      - name: Strings for translation
+        if: always()
+        continue-on-error: true
+        run: |
+          if [ -d build/DerivedData ]; then
+            python3 ios/scripts/collect_strings.py build/DerivedData ios/Auditioner/Localizable.xcstrings --dump
+          else
+            echo "no build output"
+          fi

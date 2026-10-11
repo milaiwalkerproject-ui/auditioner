@@ -1,0 +1,6 @@
+# Runtime dependencies of the audition-feed crawler (Python 3.12, see Dockerfile.crawler).
+# Pinned to the releases on PyPI on 2026-10-10 (checked via https://pypi.org/pypi/<name>/json).
+httpx==0.28.1            # polite fetcher + Supabase REST client (the Anthropic SDK uses its own httpx2)
+pypdf==6.20.0            # text layer of PDF repertoire lists
+beautifulsoup4==4.15.0   # HTML parsing (html.parser backend, no lxml)
+anthropic==1.13.0        # Claude: triage (Haiku) + extraction (Opus) with structured outputs

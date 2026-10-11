@@ -1,0 +1,14 @@
+# Docker build context ignore list for backend/Dockerfile (BuildKit reads
+# <Dockerfile>.dockerignore next to the Dockerfile). Only backend/app and
+# content/catalog are copied into the image; keep the rest out of the context.
+.git
+.github
+docs
+ios
+supabase
+backend/tests
+backend/.venv
+**/__pycache__
+**/*.pyc
+**/.pytest_cache
+**/.DS_Store

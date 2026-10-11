@@ -1,0 +1,207 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/milaiwalkerproject-ui/auditioner/content/schema/catalog.schema.json",
+  "title": "Auditioner excerpt catalogue (one file per instrument)",
+  "description": "Facts follow the honesty contract (CLAUDE.md): a verifiable fact is verified (value + source + asOf) or unverified (no value; optional source = the page to check). Prose carries origin + reviewStatus; the app shows only approved prose.",
+  "type": "object",
+  "required": ["version", "generatedAt", "instrument", "excerpts"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "type": "string" },
+    "generatedAt": { "type": "string", "format": "date" },
+    "instrument": { "$ref": "#/$defs/instrument" },
+    "licenseNotes": { "type": "array", "items": { "type": "string" }, "description": "Attribution required by imported datasets (e.g. BrassXcerpts MIT notice)." },
+    "excerpts": { "type": "array", "items": { "$ref": "#/$defs/excerpt" } }
+  },
+  "$defs": {
+    "instrument": {
+      "enum": ["violin", "viola", "cello", "double-bass", "harp", "flute", "piccolo", "oboe", "english-horn", "clarinet", "e-flat-clarinet", "bass-clarinet", "bassoon", "contrabassoon", "horn", "trumpet", "trombone", "bass-trombone", "tuba", "timpani", "percussion", "keyboard"]
+    },
+    "position": { "enum": ["principal", "assistant-principal", "section", "utility", "second", "high", "low", "concertmaster", "any"] },
+    "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "uri": { "type": "string", "pattern": "^https?://" },
+    "verifiable": {
+      "description": "Honesty-contract wrapper. Use with allOf + a value schema via the specific defs below.",
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": { "enum": ["verified", "unverified", "not_applicable"] },
+        "value": {},
+        "source": { "$ref": "#/$defs/uri" },
+        "asOf": { "$ref": "#/$defs/date" },
+        "note": { "type": "string" }
+      },
+      "allOf": [
+        { "if": { "properties": { "status": { "const": "verified" } } }, "then": { "required": ["value", "source", "asOf"] } },
+        { "if": { "properties": { "status": { "const": "unverified" } } }, "then": { "not": { "required": ["value"] } } },
+        { "if": { "properties": { "status": { "const": "not_applicable" } } }, "then": { "not": { "required": ["value"] } } }
+      ]
+    },
+    "vString": { "allOf": [ { "$ref": "#/$defs/verifiable" }, { "properties": { "value": { "type": "string" } } } ] },
+    "vInt": { "allOf": [ { "$ref": "#/$defs/verifiable" }, { "properties": { "value": { "type": "integer" } } } ] },
+    "vSeconds": { "allOf": [ { "$ref": "#/$defs/verifiable" }, { "properties": { "value": { "type": "number", "minimum": 0 } } } ] },
+    "vTempo": {
+      "allOf": [ { "$ref": "#/$defs/verifiable" }, { "properties": { "value": {
+        "type": "object", "required": ["beatUnit", "bpmMin", "bpmMax"], "additionalProperties": false,
+        "properties": {
+          "beatUnit": { "enum": ["whole", "half", "dotted-half", "quarter", "dotted-quarter", "eighth", "dotted-eighth", "sixteenth"] },
+          "bpmMin": { "type": "number", "minimum": 10, "maximum": 400 },
+          "bpmMax": { "type": "number", "minimum": 10, "maximum": 400 }
+        } } } } ]
+    },
+    "barPoint": {
+      "type": "object", "additionalProperties": false,
+      "description": "A point in the part: a bar number, and/or a rehearsal mark with a signed bar offset (e.g. mark 'C', offset -25 = 25 bars before [C]). 'beginning'/'end' for whole-movement edges.",
+      "properties": {
+        "bar": { "type": "integer", "minimum": 0 },
+        "mark": { "type": "string" },
+        "offset": { "type": "integer" },
+        "edge": { "enum": ["beginning", "end"] },
+        "beat": { "type": "number" }
+      }
+    },
+    "location": {
+      "type": "object", "required": ["text"], "additionalProperties": false,
+      "properties": {
+        "text": { "type": "string", "description": "As printed on lists, e.g. 'mm. 1–44' or 'Beginning to 13 after [C]'." },
+        "start": { "$ref": "#/$defs/barPoint" },
+        "end": { "$ref": "#/$defs/barPoint" },
+        "edition": { "type": "string", "description": "Edition the bar numbers / rehearsal marks refer to, if known." }
+      }
+    },
+    "vLocation": { "allOf": [ { "$ref": "#/$defs/verifiable" }, { "properties": { "value": { "$ref": "#/$defs/location" } } } ] },
+    "variant": {
+      "type": "object", "required": ["location", "source", "asOf"], "additionalProperties": false,
+      "properties": {
+        "location": { "$ref": "#/$defs/location" },
+        "orchestra": { "type": "string" },
+        "year": { "type": "integer" },
+        "position": { "$ref": "#/$defs/position" },
+        "source": { "$ref": "#/$defs/uri" },
+        "asOf": { "$ref": "#/$defs/date" }
+      }
+    },
+    "prose": {
+      "type": "object", "required": ["text", "origin", "reviewStatus"], "additionalProperties": false,
+      "properties": {
+        "text": { "type": "string" },
+        "origin": { "enum": ["curated", "ai"] },
+        "reviewStatus": { "enum": ["draft", "approved", "rejected"] },
+        "sources": { "type": "array", "items": { "$ref": "#/$defs/uri" } },
+        "model": { "type": "string" },
+        "generatedAt": { "$ref": "#/$defs/date" },
+        "reviewedBy": { "type": "string" },
+        "reviewedAt": { "$ref": "#/$defs/date" }
+      }
+    },
+    "frequencyEvidence": {
+      "type": "object", "required": ["description", "source", "asOf"], "additionalProperties": false,
+      "properties": {
+        "description": { "type": "string", "description": "e.g. 'On the 2025 Chicago Symphony section cello list'." },
+        "orchestra": { "type": "string" },
+        "year": { "type": "integer" },
+        "region": { "enum": ["north-america", "europe-german", "europe-other", "uk", "asia-pacific", "other"] },
+        "position": { "$ref": "#/$defs/position" },
+        "source": { "$ref": "#/$defs/uri" },
+        "asOf": { "$ref": "#/$defs/date" }
+      }
+    },
+    "recording": {
+      "type": "object", "required": ["id", "kind", "provider", "title"], "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "kind": { "enum": ["orchestra", "solo"] },
+        "provider": { "enum": ["youtube", "appleMusic", "hosted", "link"] },
+        "title": { "type": "string" },
+        "performer": { "type": "string" },
+        "youtubeId": { "type": "string", "pattern": "^[A-Za-z0-9_-]{11}$" },
+        "isrc": { "type": "string" },
+        "url": { "$ref": "#/$defs/uri" },
+        "license": { "type": "string" },
+        "start": { "$ref": "#/$defs/vSeconds" },
+        "end": { "$ref": "#/$defs/vSeconds" },
+        "foundVia": { "$ref": "#/$defs/uri", "description": "Where the recording link was found (audit trail)." }
+      }
+    },
+    "copyright": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "US": { "$ref": "#/$defs/vCopyright" },
+        "EU": { "$ref": "#/$defs/vCopyright" },
+        "CA": { "$ref": "#/$defs/vCopyright" }
+      }
+    },
+    "vCopyright": { "allOf": [ { "$ref": "#/$defs/verifiable" }, { "properties": { "value": { "enum": ["public-domain", "protected"] } } } ] },
+    "excerpt": {
+      "type": "object",
+      "required": ["id", "instrument", "positions", "composer", "work", "title", "location", "listingStatus", "sources"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+        "instrument": { "$ref": "#/$defs/instrument" },
+        "part": { "type": "string", "description": "Part name as on the list, e.g. 'Cello', 'Horn 1', 'Solo cello'." },
+        "positions": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/position" } },
+        "composer": { "type": "string" },
+        "work": { "type": "string" },
+        "catalogueNumber": { "type": "string" },
+        "movement": {
+          "type": "object", "additionalProperties": false,
+          "properties": { "number": { "type": "integer", "minimum": 1 }, "title": { "type": "string" } }
+        },
+        "title": { "type": "string", "description": "Short display label, e.g. 'Movement II, opening'." },
+        "workIds": {
+          "type": "object", "additionalProperties": false,
+          "properties": {
+            "wikidata": { "type": "string", "pattern": "^Q\\d+$" },
+            "imslpPage": { "type": "string" },
+            "openOpus": { "type": "string" },
+            "musicbrainz": { "type": "string" }
+          }
+        },
+        "location": { "$ref": "#/$defs/vLocation" },
+        "variants": { "type": "array", "items": { "$ref": "#/$defs/variant" } },
+        "tempoMarking": { "$ref": "#/$defs/vString", "description": "Verbatim score text, original language." },
+        "composerMetronome": { "$ref": "#/$defs/vTempo" },
+        "typicalTempo": { "$ref": "#/$defs/vTempo" },
+        "meter": { "$ref": "#/$defs/vString" },
+        "key": { "$ref": "#/$defs/vString" },
+        "clefs": { "type": "array", "items": { "enum": ["treble", "bass", "tenor", "alto", "percussion"] } },
+        "soundingTransposition": { "type": "integer", "description": "Semitones from written to sounding pitch (cello 0, double bass -12)." },
+        "techniques": { "type": "array", "items": { "type": "string", "pattern": "^[a-z0-9-]+$" } },
+        "difficulty": {
+          "type": "object", "required": ["value", "origin", "reviewStatus"], "additionalProperties": false,
+          "properties": {
+            "value": { "type": "integer", "minimum": 1, "maximum": 5 },
+            "origin": { "enum": ["curated", "ai"] },
+            "reviewStatus": { "enum": ["draft", "approved", "rejected"] }
+          }
+        },
+        "frequency": {
+          "type": "object", "additionalProperties": false,
+          "properties": {
+            "tier": { "enum": ["core", "common", "occasional", "unknown"] },
+            "tierStatus": { "enum": ["verified", "unverified"] },
+            "evidence": { "type": "array", "items": { "$ref": "#/$defs/frequencyEvidence" } }
+          }
+        },
+        "prose": {
+          "type": "object", "additionalProperties": false,
+          "properties": {
+            "history": { "$ref": "#/$defs/prose" },
+            "technique": { "$ref": "#/$defs/prose" },
+            "pitfalls": { "$ref": "#/$defs/prose" },
+            "practiceTips": { "$ref": "#/$defs/prose" }
+          }
+        },
+        "recordings": { "type": "array", "items": { "$ref": "#/$defs/recording" } },
+        "copyright": { "$ref": "#/$defs/copyright" },
+        "referenceMusicXML": { "type": "string", "description": "Path under content/musicxml/ of a checked transcription, if any." },
+        "sources": { "type": "array", "items": { "$ref": "#/$defs/uri" }, "description": "Every page consulted (audit trail)." },
+        "lastVerified": { "oneOf": [ { "$ref": "#/$defs/date" }, { "type": "null" } ] },
+        "listingStatus": { "enum": ["draft", "in_review", "published"] },
+        "provenanceType": { "enum": ["curated", "imported", "scraped", "user_submitted"] },
+        "importedFrom": { "type": "string" }
+      }
+    }
+  }
+}

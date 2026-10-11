@@ -1,0 +1,7 @@
+{
+ "Image of a part": "分谱图片",
+ "NSAppleMusicUsageDescription": "当你有 Apple Music 订阅时，Auditioner 会从片段开头播放 Apple Music 录音。",
+ "NSCameraUsageDescription": "Auditioner 使用相机扫描你的分谱，以识别片段并生成参考音频。",
+ "NSMicrophoneUsageDescription": "Auditioner 会录下你的练习，以便你与参考音频进行对比。",
+ "PDF part": "PDF 分谱"
+}

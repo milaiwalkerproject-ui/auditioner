@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/milaiwalkerproject-ui/auditioner/content/registry/schema.json",
+  "title": "Auditioner orchestra registry (crawl sources for the open-auditions feed)",
+  "description": "One entry per orchestra whose OWN public audition/vacancy page the crawler may read (PLAN F1/F2, docs/BOT.md). Honesty contract: every URL here was seen on the orchestra's own site (or in Tutti's verified data); never guessed from a pattern. Aggregator hosts are forbidden as auditionsUrl. If the audition page has not been found, auditionsUrl is omitted and notes says so.",
+  "type": "object",
+  "required": ["version", "generatedAt", "orchestras"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "type": "string" },
+    "generatedAt": { "$ref": "#/$defs/date" },
+    "orchestras": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/orchestra" }
+    }
+  },
+  "$defs": {
+    "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "httpsUrl": { "type": "string", "pattern": "^https://[^\\s]+$" },
+    "region": { "enum": ["north-america", "europe-german", "europe-other", "uk", "asia-pacific", "other"] },
+    "type": { "enum": ["professional", "youth", "collegiate", "community"] },
+    "orchestra": {
+      "type": "object",
+      "required": ["id", "name", "country", "region", "city", "type", "notes", "source", "asOf"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+          "description": "Stable kebab-case id, unique in the file."
+        },
+        "name": { "type": "string", "minLength": 1 },
+        "country": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}$",
+          "description": "ISO 3166-1 alpha-2 (PR for Puerto Rico, HK for Hong Kong)."
+        },
+        "region": { "$ref": "#/$defs/region" },
+        "city": { "type": "string", "minLength": 1 },
+        "type": { "$ref": "#/$defs/type" },
+        "auditionsUrl": {
+          "$ref": "#/$defs/httpsUrl",
+          "description": "The orchestra's OWN page that lists auditions/vacancies, exactly as seen. Never an aggregator. Omit if not yet found."
+        },
+        "homepageUrl": {
+          "$ref": "#/$defs/httpsUrl",
+          "description": "The orchestra's own site, only if seen (the root of a domain that appeared in a search result, or Tutti's website field)."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Plain words for the next person: where the URL came from, what the page looks like (HTML/PDF list, individual postings), or 'audition page not yet found'."
+        },
+        "source": {
+          "$ref": "#/$defs/httpsUrl",
+          "description": "Where this entry was seen: Tutti's data.json, the orchestra's own page (a search result), or a reference page (ICSOM roster, Wikipedia, news) when no official page has been seen yet."
+        },
+        "asOf": { "$ref": "#/$defs/date" },
+        "tutti": {
+          "type": "object",
+          "required": ["orgId"],
+          "additionalProperties": false,
+          "properties": {
+            "orgId": { "type": "string", "minLength": 1, "description": "Tutti organizations[].id (PLAN U2)." }
+          }
+        },
+        "groups": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+          "description": "Optional tags for the PLAN F2 buckets this entry fills, e.g. icsom, tutti-socal, canada-majors, australia-six, uk-majors, europe-majors, japan."
+        }
+      }
+    }
+  }
+}

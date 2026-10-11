@@ -1,0 +1,22 @@
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.xcscmblueprint
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Crawler dry-run output (local JSON, never committed)
+backend/crawler/out/
+
+# Secrets — never commit
+.env
+*.env
+!.env.example
+backend/secrets/

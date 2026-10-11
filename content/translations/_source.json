@@ -1,0 +1,851 @@
+{
+ "language": "en",
+ "notes": {
+  "cello-beethoven-symphony-5-mvt2": {
+   "history": {
+    "context": {
+     "composer": "Ludwig van Beethoven",
+     "title": "Opening and variations",
+     "work": "Symphony No. 5 in C minor"
+    },
+    "keepUnchanged": [
+     "Andante con moto",
+     "Andante"
+    ],
+    "sourceSha256": "9853e4efa0f46cb0e50fde98888eb10ff6b13e8cbacf4799fc089f0988828b39",
+    "text": "The second movement of Beethoven's Fifth Symphony, marked Andante con moto and in A-flat major, is a set of variations on two alternating themes; the cellos and violas open it with the first theme, which is why it is on almost every cello list."
+   },
+   "pitfalls": {
+    "context": {
+     "composer": "Ludwig van Beethoven",
+     "title": "Opening and variations",
+     "work": "Symphony No. 5 in C minor"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "b1c59a2cf7ec8047e8e2f0be8d08cec999aba92415bccb1e37c3ead1916c8b07",
+    "text": "The most common faults are rushing the dotted figures, letting the first note of each slur bulge, and losing the pulse between phrases. Intonation in A-flat major is exposed, especially in the upper notes of the melody where the hand tends to drift sharp. In the faster variations players often get louder as the notes get quicker; the dynamic should be decided by the marking, not by the note values."
+   },
+   "practiceTips": {
+    "context": {
+     "composer": "Ludwig van Beethoven",
+     "title": "Opening and variations",
+     "work": "Symphony No. 5 in C minor"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "7b6cdd35813a8c04f40166fcee0b33b257248fad8e029a7e3b2edf8486547808",
+    "text": "Practise the melody with a metronome subdividing the beat so the dotted rhythms sit in exactly the same place every time, then remove the subdivision and check that nothing has moved. Record yourself and listen only for the shape of the long notes. Play the fast variations slowly with full bows first, then at tempo with the bow kept close to the string. Sing the opening phrase before you play it to decide where it breathes."
+   },
+   "technique": {
+    "context": {
+     "composer": "Ludwig van Beethoven",
+     "title": "Opening and variations",
+     "work": "Symphony No. 5 in C minor"
+    },
+    "keepUnchanged": [
+     "legato"
+    ],
+    "sourceSha256": "3d90d1a4179bf30a1a17135e8c00f19167d5a0901bafaaa75a6781b72d586b13",
+    "text": "The opening melody asks for a warm, even legato in which the dotted rhythm is placed precisely without becoming stiff. Plan bow distribution so the long notes keep their core and the short notes speak clearly at the same volume. In the later variations the melody is decorated with faster note values; keep the left hand quiet and the string crossings smooth so the line still sounds like the same tune. Match the dynamics on the page exactly, since the panel is listening for control at piano as much as for tone at forte."
+   }
+  },
+  "cello-beethoven-symphony-5-mvt3": {
+   "history": {
+    "context": {
+     "composer": "Ludwig van Beethoven",
+     "title": "Scherzo and Trio",
+     "work": "Symphony No. 5 in C minor"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "42e12fe069822d844c579f4061552e5e6976c07a2346bad13bbabad5fc88b749",
+    "text": "The third movement of Beethoven's Fifth is a scherzo in C minor with a trio whose contrapuntal opening is given to the cellos and basses alone. That exposed passage is why the movement appears on cello lists alongside the famous slow movement."
+   },
+   "pitfalls": {
+    "context": {
+     "composer": "Ludwig van Beethoven",
+     "title": "Scherzo and Trio",
+     "work": "Symphony No. 5 in C minor"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "9d49beb2c3c5317fc1e6f43106d749b5301b1c03612f0878c272932b7167c2ff",
+    "text": "Players typically start the trio at a tempo they cannot sustain through the fastest bars, or let the bow bounce so the notes blur. The repeated-note figures tend to rush, and the awkward string crossings in the lower register can make the intonation sag. Dynamics are often flattened out: the contrast between the strong trio and the hushed return is part of what is being tested."
+   },
+   "practiceTips": {
+    "context": {
+     "composer": "Ludwig van Beethoven",
+     "title": "Scherzo and Trio",
+     "work": "Symphony No. 5 in C minor"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "40b2012d5ea208bd2a1efc69364f1d492277e22d1970a2a8a7d5f3b62a65de4f",
+    "text": "Choose your tempo from the hardest bar, not the first one, and build up with a metronome in small steps. Practise the running passages with varied rhythms and with separate bows before adding the written bowing. Isolate the string crossings and play them as double stops to check the left-hand frame. Play the whole excerpt once a day from the first note without stopping, as you would in the audition."
+   },
+   "technique": {
+    "context": {
+     "composer": "Ludwig van Beethoven",
+     "title": "Scherzo and Trio",
+     "work": "Symphony No. 5 in C minor"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "29fefec85a121ba81e717e166ee41cf0fcbd80115c1a60835af4956929798705",
+    "text": "The trio needs a clean, energetic stroke that stays on the string enough to project in a hall, with every note of the running passages articulated by the left hand as much as by the bow. Keep the pulse absolutely steady through the entries and rests; the panel can hear immediately if the tempo moves when the texture changes. The quiet reprise of the scherzo material asks for a completely different, lighter contact with the string."
+   }
+  },
+  "cello-beethoven-symphony-9-mvt4": {
+   "history": {
+    "context": {
+     "composer": "Ludwig van Beethoven",
+     "title": "Recitative",
+     "work": "Symphony No. 9 in D minor"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "0997983295f49b4b9b338ccd8fa00795c869afb3d6feac6a25ae6e91ebb0476e",
+    "text": "The finale of Beethoven's Ninth Symphony, the movement that sets Schiller's 'Ode to Joy', opens with an instrumental recitative for cellos and basses that answers and rejects material from the earlier movements before the 'Joy' theme arrives."
+   },
+   "pitfalls": {
+    "context": {
+     "composer": "Ludwig van Beethoven",
+     "title": "Recitative",
+     "work": "Symphony No. 9 in D minor"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "64e5b1986e7a8be70c19b7e80deca033c244166c5852ab33beae80879346b8a6",
+    "text": "The freedom of the recitative tempts players into vague rhythm; panels usually want a convincing, speech-like delivery that is still measurable. Long notes often lose their core towards the end of the bow, and the sudden dynamic changes get smoothed out. The passages that move into the upper register are exposed for intonation."
+   },
+   "practiceTips": {
+    "context": {
+     "composer": "Ludwig van Beethoven",
+     "title": "Recitative",
+     "work": "Symphony No. 9 in D minor"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "f9b4e904b47ca0f112d6d2571cdd62ac28ff0225cb7e3137952e050c81112951",
+    "text": "Decide on the character of each phrase (question, refusal, agreement) and mark the text accordingly, then play it for someone and ask whether they can hear the difference. Practise first strictly in time with a metronome and only then add the rhetorical freedom, so that the underlying pulse remains audible. Work on sustaining the long notes with slow bows at full sound. Listen to several orchestral recordings and note how the section plays the recitative together."
+   },
+   "technique": {
+    "context": {
+     "composer": "Ludwig van Beethoven",
+     "title": "Recitative",
+     "work": "Symphony No. 9 in D minor"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "a0f3c5b9bafdf7bbb0d66300dd253619c519106d42b46558f11c922ca1a59fc8",
+    "text": "The recitative is written to sound like speech, so the player has to shape each phrase with a clear sense of where the stress falls, while keeping the written note values honest enough that a whole section could play it together. Dynamic contrast is wide: the forceful declamatory gestures need a full, centred sound, and the quieter answers need the same intensity at a lower volume. Bow speed and contact point do most of the expressive work here."
+   }
+  },
+  "cello-brahms-piano-concerto-2-mvt3-solo": {
+   "history": {
+    "context": {
+     "composer": "Johannes Brahms",
+     "title": "Cello solo",
+     "work": "Piano Concerto No. 2 in B-flat major"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "07d5f67a03d1cdadab65431ca92d86e3c91be656403b8c6f74d12c519e133189",
+    "text": "Brahms composed his Second Piano Concerto in 1878–81 and was the soloist at its first performance in Budapest in 1881. Unusually for a piano concerto, the slow movement opens with a long cello solo that introduces the theme before the piano enters, and the solo is a standard requirement at principal cello auditions."
+   },
+   "pitfalls": {
+    "context": {
+     "composer": "Johannes Brahms",
+     "title": "Cello solo",
+     "work": "Piano Concerto No. 2 in B-flat major"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "58fce629678c5ba776c392dc97fdbfc7addc4ed029c8b9c458d3f9106b14b747",
+    "text": "Candidates often play too loudly from the start and leave nowhere to grow, or indulge the rubato so much that the pulse disappears. The high passage near the end is exposed for intonation, and nervous vibrato makes it worse. Bow changes that break the line undo the vocal character the panel is listening for."
+   },
+   "practiceTips": {
+    "context": {
+     "composer": "Johannes Brahms",
+     "title": "Cello solo",
+     "work": "Piano Concerto No. 2 in B-flat major"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "823a2f5ec8706cbfe7841e452ebd0291d99d1d0bb0251fcf6e3bf545399b4294",
+    "text": "Decide the dynamic shape of the whole solo on paper before practising it, then play it to someone who can tell you whether the plan is audible. Practise the shifts slowly and consistently so each one has the same sound every time. Use a drone for the high passage and practise it a semitone up and down to make the ear more demanding. Play along with a recording to learn how the solo sits with the piano and orchestra."
+   },
+   "technique": {
+    "context": {
+     "composer": "Johannes Brahms",
+     "title": "Cello solo",
+     "work": "Piano Concerto No. 2 in B-flat major"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "c278f3163963ca3c08a0fbb31037e3298029842fea7fa07f4fa065bee8e74c8d",
+    "text": "The solo calls for a full, singing sound that carries over an orchestra yet stays intimate, so bow speed and contact point need to be planned for every phrase. Shifts are part of the expression and should be timed and weighted deliberately. The later passage, after the piano has entered, rises higher and needs the same warmth with secure intonation and continuous vibrato."
+   }
+  },
+  "cello-brahms-symphony-2-mvt2": {
+   "history": {
+    "context": {
+     "composer": "Johannes Brahms",
+     "title": "Opening",
+     "work": "Symphony No. 2 in D major"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "53f3efee9d5a7af4c7f14aa2e27fcdb414c0d1ab6a88c97eb11e1febb30eeccd",
+    "text": "The slow movement of Brahms's Second Symphony, in B major, opens with a long cello melody over a bassoon counter-line, which is why the passage is so often asked for."
+   },
+   "pitfalls": {
+    "context": {
+     "composer": "Johannes Brahms",
+     "title": "Opening",
+     "work": "Symphony No. 2 in D major"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "988fde57097572c892380e18f20d23791dfccff82d4acc0b932595f67723156b",
+    "text": "B major is uncomfortable for the left hand, and the intonation of the opening descent is where most candidates lose marks. Players often let the tempo drag because the marking is slow, or let the phrase sag in the middle. Bow changes that click or swell interrupt a line that is supposed to sound unbroken."
+   },
+   "practiceTips": {
+    "context": {
+     "composer": "Johannes Brahms",
+     "title": "Opening",
+     "work": "Symphony No. 2 in D major"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "6b0ffc49e7501b316a0a45fe2c1e02caae3f6e87bb47ce0309f1a20e507eb5d7",
+    "text": "Play the melody first on open-string drones to check each note against the key, then with a tuner only for the notes you doubt. Practise the bow changes alone on one long note until they are inaudible. Record the opening phrase and listen for whether the dynamic shape matches what you intended. Count the rests and the bars where other instruments lead so your re-entries feel like part of the orchestra, not a solo."
+   },
+   "technique": {
+    "context": {
+     "composer": "Johannes Brahms",
+     "title": "Opening",
+     "work": "Symphony No. 2 in D major"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "2f07f767aec2053c2502747c9b4e743f2b64042e19de94bcaad9bbdb950d42be",
+    "text": "This is a test of sustained sound and line: the melody descends and climbs slowly, and every note has to be connected to the next with no gap at the bow change. Vibrato should be continuous but not wide, and the shifts need to be timed so they are inaudible or expressive on purpose. The dynamic level is modest, so the challenge is to project warmth without pushing."
+   }
+  },
+  "cello-brahms-symphony-3-mvt3": {
+   "history": {
+    "context": {
+     "composer": "Johannes Brahms",
+     "title": "Opening",
+     "work": "Symphony No. 3 in F major"
+    },
+    "keepUnchanged": [
+     "Poco allegretto"
+    ],
+    "sourceSha256": "02d8245de2cdd38467ea9f293e1f7331adf5725a4ab8eaff8912e780ae647105",
+    "text": "Instead of a fast scherzo, the third movement of Brahms's Third Symphony is a lyrical Poco allegretto in C minor and 3/8, in a waltz-like ternary form; its opening melody is given to the cellos."
+   },
+   "pitfalls": {
+    "context": {
+     "composer": "Johannes Brahms",
+     "title": "Opening",
+     "work": "Symphony No. 3 in F major"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "343147595a99762263c492ed7d8171a407852b684c490ee9ccc4773bf9b4b166",
+    "text": "Over-romanticising the rubato is the most common fault; panels want the shape to come from the bowing and the dynamics, not from distorting the pulse. The high notes of the phrase are frequently sharp, and the shifts can be audible in the wrong places. Players also tend to start too loudly and leave no room for the swell in the middle of the phrase."
+   },
+   "practiceTips": {
+    "context": {
+     "composer": "Johannes Brahms",
+     "title": "Opening",
+     "work": "Symphony No. 3 in F major"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "d769eac1975fe217549ca92ec6d1bbf408a9118ac6c361bc98a160470d0678c7",
+    "text": "Set a metronome at a comfortable tempo and play the melody absolutely in time until the phrasing comes from bow speed alone; then allow small, deliberate freedom. Practise the shifts as slow glissandi, then with the slide removed, checking the arrival note with a drone. Try the passage on one bow per bar and then with the written slurs to compare the sound. Listen to a few orchestral recordings to hear how the tempo moves across the phrase."
+   },
+   "technique": {
+    "context": {
+     "composer": "Johannes Brahms",
+     "title": "Opening",
+     "work": "Symphony No. 3 in F major"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "18242eb292ef694901bcf4f6e57a8f1680eaffb5658e709a80b0cde59bffab10",
+    "text": "The melody needs a singing, flexible line with a gentle lilt from the triple metre, but the rhythm underneath should stay honest enough that a section could play it in unison. The phrase rises into the upper register, so plan the shifts to arrive on pitch with the vibrato already going. Dynamics are intimate; the sound should be warm rather than loud, with the bow kept moving slowly and close to the bridge for colour."
+   }
+  },
+  "cello-debussy-la-mer-mvt1": {
+   "history": {
+    "context": {
+     "composer": "Claude Debussy",
+     "title": "Cello section passage at 9",
+     "work": "La mer"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "00599217c78f86e73ee90d4c76358e2bed738a57bf9611ce0a4ba0e25d756346",
+    "text": "La mer is Debussy's three-movement orchestral portrait of the sea. The first movement contains a celebrated passage for the divided cello section that appears on many cello audition lists, sometimes as the top line only and sometimes with all voices required."
+   },
+   "pitfalls": {
+    "context": {
+     "composer": "Claude Debussy",
+     "title": "Cello section passage at 9",
+     "work": "La mer"
+    },
+    "keepUnchanged": [
+     "crescendo"
+    ],
+    "sourceSha256": "6f3d9edac73135e127494e9a4714f6ba84af853ff85b8210bf661b92eca11efa",
+    "text": "The top line sits high enough that intonation drifts sharp under pressure, and the changing subdivisions are often smoothed into an approximate rhythm. Players tend to force the sound to be heard, which tightens the vibrato and the bow. Starting the crescendo too early leaves nothing for the peak of the phrase."
+   },
+   "practiceTips": {
+    "context": {
+     "composer": "Claude Debussy",
+     "title": "Cello section passage at 9",
+     "work": "La mer"
+    },
+    "keepUnchanged": [
+     "crescendo"
+    ],
+    "sourceSha256": "cd5147ce70aa181931f4e31106e1a3c9dcb2d352f5546ba6d44200410531f767",
+    "text": "Learn every voice you might be asked for, not just the top line, and practise them against a recording to feel how they fit. Use a metronome on the smallest subdivision until the rhythmic changes are automatic. Practise the high passage an octave lower first to fix the phrasing, then at pitch with a drone. Mark the dynamic peak and work backwards from it so the crescendo has somewhere to go."
+   },
+   "technique": {
+    "context": {
+     "composer": "Claude Debussy",
+     "title": "Cello section passage at 9",
+     "work": "La mer"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "c42621bdbb83c2fe13954db1106cf2ce156974f33f85e7b3a99c0d80e26f5fcf",
+    "text": "The passage is written for the section divided into several parts, and lists usually expect the top line or all voices; either way the player must sustain a warm, singing sound in the upper register with secure intonation. Rhythmic precision matters because the figures change their subdivision, and the whole section has to move together. Shifts should be prepared early and the vibrato kept continuous through the changes of position."
+   }
+  },
+  "cello-mendelssohn-midsummer-nights-dream-scherzo": {
+   "history": {
+    "context": {
+     "composer": "Felix Mendelssohn",
+     "title": "Scherzo, N to O",
+     "work": "A Midsummer Night's Dream, incidental music"
+    },
+    "keepUnchanged": [
+     "Scherzo"
+    ],
+    "sourceSha256": "c7fcf2149ab6f5eccd92bb99656845e362777bf603fe049337db137e5a489ce3",
+    "text": "Mendelssohn's incidental music for A Midsummer Night's Dream, Op. 61, was written in 1842–43 and first performed in Potsdam in October 1843. The Scherzo, which opens the set, is a fast, light movement whose string writing is a standard test of articulation."
+   },
+   "pitfalls": {
+    "context": {
+     "composer": "Felix Mendelssohn",
+     "title": "Scherzo, N to O",
+     "work": "A Midsummer Night's Dream, incidental music"
+    },
+    "keepUnchanged": [
+     "spiccato"
+    ],
+    "sourceSha256": "bbbc695c081cf17d350d7b9fa883f355bbd42192019a51002ee7efd0a9e2da43",
+    "text": "The stroke commonly gets heavier and louder as the passage goes on, and the tempo drifts faster in the easy bars and slower in the hard ones. Uneven spiccato on string crossings and smudged chromatic notes are what panels notice first. Choosing a tempo that is a shade too fast costs more than it gains."
+   },
+   "practiceTips": {
+    "context": {
+     "composer": "Felix Mendelssohn",
+     "title": "Scherzo, N to O",
+     "work": "A Midsummer Night's Dream, incidental music"
+    },
+    "keepUnchanged": [
+     "spiccato"
+    ],
+    "sourceSha256": "b24c3ced61997b109836e720c04f7eb1064ddcada5040dfb44ff53e2d326e0b5",
+    "text": "Practise on the string first, slowly, with every note articulated, then at a medium tempo with a small spiccato, and only then at speed. Loop the hardest two bars with a metronome and move the click up a notch only when they are clean three times in a row. Play with a drone to check the chromatic notes. Record a run-through and listen for bars where the volume or tempo changes without you intending it."
+   },
+   "technique": {
+    "context": {
+     "composer": "Felix Mendelssohn",
+     "title": "Scherzo, N to O",
+     "work": "A Midsummer Night's Dream, incidental music"
+    },
+    "keepUnchanged": [
+     "spiccato"
+    ],
+    "sourceSha256": "885d9161e2d5061b92535976e56649e45e943d622c64fcfe8719002b4951800d",
+    "text": "The passage demands a fast, very even spiccato that stays quiet, with the bow hand relaxed and the stroke generated from a small amount of arm weight rather than from the wrist alone. The left hand has to be ahead of the bow so each note speaks, especially in the chromatic turns. String crossings should be as small as possible, and the dynamic must stay at the written level even when the notes get harder."
+   }
+  },
+  "cello-mozart-symphony-35-mvt4": {
+   "history": {
+    "context": {
+     "composer": "Wolfgang Amadeus Mozart",
+     "title": "Finale",
+     "work": "Symphony No. 35 in D major ('Haffner')"
+    },
+    "keepUnchanged": [
+     "Presto"
+    ],
+    "sourceSha256": "7c3e76ace0f8ef54089823b0963c782bc41ba914e04c786f1359d5e8cdf26e80",
+    "text": "Mozart wrote the 'Haffner' Symphony in 1782. Its finale is marked Presto, in 2/2 and in sonata-rondo form, and Mozart told his father it should go as fast as possible."
+   },
+   "pitfalls": {
+    "context": {
+     "composer": "Wolfgang Amadeus Mozart",
+     "title": "Finale",
+     "work": "Symphony No. 35 in D major ('Haffner')"
+    },
+    "keepUnchanged": [
+     "spiccato"
+    ],
+    "sourceSha256": "eb3e1326bb9856ec41f74ec6d87c6c34e17fc95cdbdc523870abfbced7745fef",
+    "text": "The usual problems are a spiccato that is too high and therefore uneven, rushing through the repeated-note figures, and losing the tempo on the string crossings. Candidates often choose a tempo that is impressive for the first bars and then falls apart in the awkward passages. Intonation in the quick leaps is exposed because the texture is so thin."
+   },
+   "practiceTips": {
+    "context": {
+     "composer": "Wolfgang Amadeus Mozart",
+     "title": "Finale",
+     "work": "Symphony No. 35 in D major ('Haffner')"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "cb7111c37ace1ba4a0eb01d04e304dec970de0636d91cd6f74a8a5d5625c4833",
+    "text": "Build the passage with the metronome from a tempo where every note is clean, increasing in small steps, and practise it on the string before letting the bow leave the string. Use rhythm variants (dotted, reversed dotted, grouped in threes) on the fastest bars. Practise the string crossings as slow double stops. Finish each session with one performance run at full tempo without stopping."
+   },
+   "technique": {
+    "context": {
+     "composer": "Wolfgang Amadeus Mozart",
+     "title": "Finale",
+     "work": "Symphony No. 35 in D major ('Haffner')"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "cd468f1288195a79aed0baa3a8a60e5fc9e8324ef3092df8720906e9cdd0a18b",
+    "text": "The passage asks for a light, clean off-the-string stroke at a fast tempo, with the bow working from a small, controlled area near the balance point. Every note of the scale and arpeggio figures has to be clearly placed by the left hand so the articulation reads at speed. Keep the dynamics transparent: Mozart's piano must stay genuinely soft while remaining rhythmically exact."
+   }
+  },
+  "cello-prokofiev-symphony-5-mvt3": {
+   "history": {
+    "context": {
+     "composer": "Sergei Prokofiev",
+     "title": "Passage around 75–76",
+     "work": "Symphony No. 5 in B-flat major"
+    },
+    "keepUnchanged": [
+     "Adagio"
+    ],
+    "sourceSha256": "2ce2592349c01ce3a3357fe67c3adaa0357470b1ab140f990b90c01a37666ae9",
+    "text": "Prokofiev's Fifth Symphony, Op. 100, was composed in 1944. Its third movement is an Adagio in F major, and the cello passage from it appears alongside the finale on several recent section lists."
+   },
+   "pitfalls": {
+    "context": {
+     "composer": "Sergei Prokofiev",
+     "title": "Passage around 75–76",
+     "work": "Symphony No. 5 in B-flat major"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "8f4e05278412e97ba93ac6f665e956cec52ac684a1685cfcffeba035fe400d5c",
+    "text": "Intonation in the chromatic writing is the first thing to go, especially after a large shift. The slow tempo tempts players to lose the subdivision and let the rhythm drift. Sound can become thin at the top of the range if the bow stays too far from the bridge."
+   },
+   "practiceTips": {
+    "context": {
+     "composer": "Sergei Prokofiev",
+     "title": "Passage around 75–76",
+     "work": "Symphony No. 5 in B-flat major"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "085d5dde54ff2db8eb767895956350d2ca991131ca8a665caea30f7f3ba16426",
+    "text": "Practise with a metronome on the smallest subdivision so that the long notes and the moving notes share one pulse. Use a drone on the key note to anchor the chromatic passages. Work on the high passage with slow bows near the bridge for a fuller sound. Learn the surrounding orchestral material from a recording so your entries are placed confidently."
+   },
+   "technique": {
+    "context": {
+     "composer": "Sergei Prokofiev",
+     "title": "Passage around 75–76",
+     "work": "Symphony No. 5 in B-flat major"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "ad347d8d92548ebe979618e9e1fdfbefb3eba5d5e90586364264dc0b507560ec",
+    "text": "The passage is slow and exposed, so the challenge is to sustain a long line with warm tone through wide intervals and chromatic turns while keeping the pulse completely steady. The upper register asks for secure shifts and consistent vibrato. The dynamics should follow the printed hairpins closely, since the texture around the cellos is thin."
+   }
+  },
+  "cello-prokofiev-symphony-5-mvt4": {
+   "history": {
+    "context": {
+     "composer": "Sergei Prokofiev",
+     "title": "79 to 80",
+     "work": "Symphony No. 5 in B-flat major"
+    },
+    "keepUnchanged": [
+     "Allegro giocoso",
+     "Allegro"
+    ],
+    "sourceSha256": "81f5d99ef483c320b1f2502d52d4685f07aee7f9567fc907b7324276f4a81a12",
+    "text": "Prokofiev's Fifth Symphony, Op. 100, dates from 1944. The finale, Allegro giocoso in B-flat major, opens with the cellos recalling the first movement's theme and contains a fast, exposed passage that some orchestras set as a prepared excerpt and others use for sight-reading."
+   },
+   "pitfalls": {
+    "context": {
+     "composer": "Sergei Prokofiev",
+     "title": "79 to 80",
+     "work": "Symphony No. 5 in B-flat major"
+    },
+    "keepUnchanged": [
+     "divisi"
+    ],
+    "sourceSha256": "325e305762af3e9da59e120e52874f0640d139ab39a5ca27d7b2340ae297c370",
+    "text": "Players tend to rush the fast groups and arrive early on the accented notes, or lose the tempo in the awkward crossings. The upper line of a divisi passage can drift sharp under speed. If the excerpt is used for sight-reading, hesitation at the rhythmic changes is the most costly fault."
+   },
+   "practiceTips": {
+    "context": {
+     "composer": "Sergei Prokofiev",
+     "title": "79 to 80",
+     "work": "Symphony No. 5 in B-flat major"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "592033aece913918acbc643bde6d33989e9f6114f4e634ba97577634f8bb831d",
+    "text": "Work with a metronome from a slow tempo in rhythmic groups, moving up in small steps only when every note is clean. Practise the off-beat entries by tapping the pulse with your foot while playing. Isolate the string crossings and play them as double stops. Also practise sight-reading passages of similar character so you can read the rhythm at first sight if the panel asks."
+   },
+   "technique": {
+    "context": {
+     "composer": "Sergei Prokofiev",
+     "title": "79 to 80",
+     "work": "Symphony No. 5 in B-flat major"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "7a93109df5af9be040cb1879dbfbb56fc6ce1842fe236c082f5feeaf1a910652",
+    "text": "This is a test of fast, clear articulation under rhythmic pressure: the left hand must place every note of the running figures while the bow keeps a short, even stroke. Accents and off-beat entries have to be exactly in time, and the string crossings need to be small and prepared. Keep the sound bright and projecting without digging into the string."
+   }
+  },
+  "cello-rossini-william-tell-overture-opening": {
+   "history": {
+    "context": {
+     "composer": "Gioachino Rossini",
+     "title": "Opening cello solo",
+     "work": "Guillaume Tell (William Tell), overture"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "87616eca4151f4a02e33784cb4dc5df7a8a9f1cbfd657b431c8f55f158dd5173",
+    "text": "Rossini's opera Guillaume Tell was first performed at the Paris Opéra on 3 August 1829. Its overture opens with a slow passage for a small group of solo cellos, and the top line of that passage is one of the most frequently requested principal cello solos."
+   },
+   "pitfalls": {
+    "context": {
+     "composer": "Gioachino Rossini",
+     "title": "Opening cello solo",
+     "work": "Guillaume Tell (William Tell), overture"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "fcac7ca77ee067cd3160963b75f2e768e90f55a94f8837591342b2d5b7190809",
+    "text": "The exposed opening note and the high passages are where intonation fails most often, and the long notes tend to lose their core or wobble with nervous vibrato. Some players rush the written rests or ornaments. The accompanying cello lines are sometimes asked for too, and candidates who have not looked at them are caught out."
+   },
+   "practiceTips": {
+    "context": {
+     "composer": "Gioachino Rossini",
+     "title": "Opening cello solo",
+     "work": "Guillaume Tell (William Tell), overture"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "2909e375600a9c6a273ca15fd28745da4013388f2baf346b27e93e3be1891e13",
+    "text": "Practise the opening phrases with a drone and a slow metronome, listening for a steady pitch across each long note. Work on bow changes on open strings at pianissimo until they are inaudible. Learn the lower cello lines as well as the top one so you understand the harmony and can play either if asked. Record the solo and listen for whether the phrases have a clear direction."
+   },
+   "technique": {
+    "context": {
+     "composer": "Gioachino Rossini",
+     "title": "Opening cello solo",
+     "work": "Guillaume Tell (William Tell), overture"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "6205f1f7c6d627952d174426c587189256081ee7f1025c395c6506d48dc6ce09",
+    "text": "The solo is slow, quiet and high, so the player needs a beautiful sustained tone in thumb position with intonation that does not waver on long notes. Bow control at a soft dynamic is essential: slow, even bows with imperceptible changes. The phrasing is operatic, so each line should be shaped like a sung phrase with a clear peak and a natural ending."
+   }
+  },
+  "cello-shostakovich-symphony-1-mvt4-solo": {
+   "history": {
+    "context": {
+     "composer": "Dmitri Shostakovich",
+     "title": "Cello solo, 36 to 40",
+     "work": "Symphony No. 1 in F minor"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "cbab6dc6ca414e9b9d3af3a83fddeda9d56bd6f60b574877796431aa0d93e200",
+    "text": "The finale of Shostakovich's First Symphony, Op. 10, contains an extended solo for the principal cello that is a standard principal and assistant principal audition requirement."
+   },
+   "pitfalls": {
+    "context": {
+     "composer": "Dmitri Shostakovich",
+     "title": "Cello solo, 36 to 40",
+     "work": "Symphony No. 1 in F minor"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "6f90a3a0bd77937676117bff16128ae4eb0edc52b5222f06b41038bc443d019b",
+    "text": "The most frequent problems are intonation in the high passages, rhythm that drifts in the sustained bars, and a tone that becomes forced at the climax. Players also tend to ignore the quieter dynamics, flattening the drama the solo depends on. Entries that are not placed against the implied orchestral rhythm sound unconvincing."
+   },
+   "practiceTips": {
+    "context": {
+     "composer": "Dmitri Shostakovich",
+     "title": "Cello solo, 36 to 40",
+     "work": "Symphony No. 1 in F minor"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "578db75cb7dbcdc4cd9d7fdc842563389d33430d2b89e0cf447dc6fe3146f8a2",
+    "text": "Practise the solo with a metronome at the subdivision level, then with a recording, so your rhythm fits the orchestra exactly. Use a drone for the high passages and practise the shifts as slow slides before removing the glissando. Work on the loudest bars with fast bow and light left hand to avoid forcing. Mark every dynamic in the part and check in a recording of yourself that each one is audible."
+   },
+   "technique": {
+    "context": {
+     "composer": "Dmitri Shostakovich",
+     "title": "Cello solo, 36 to 40",
+     "work": "Symphony No. 1 in F minor"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "cfad68a0af850510d807a404cd56f679744115966345cdb338c17f3e42c45b43",
+    "text": "The solo moves between intense, sustained lyricism and sharp rhythmic gestures, so it needs a sound that can project over a large orchestra and still soften quickly. The line climbs into the high register and requires confident shifting with vibrato maintained through the changes of position. Dynamic contrasts are extreme and should be taken literally."
+   }
+  },
+  "cello-strauss-don-juan-opening": {
+   "history": {
+    "context": {
+     "composer": "Richard Strauss",
+     "title": "Opening",
+     "work": "Don Juan"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "ba0c2d2135f4d3478360a66c03f62a3054ed0811018691108df3e49e7481bccc",
+    "text": "Don Juan, Op. 20, is a tone poem for large orchestra that Richard Strauss completed in 1889 and conducted at its first performance in Weimar that year; it is dedicated to Ludwig Thuille. Its opening pages are a standard audition test for string players."
+   },
+   "pitfalls": {
+    "context": {
+     "composer": "Richard Strauss",
+     "title": "Opening",
+     "work": "Don Juan"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "f4217a65ebda276b21f64b266c740569ef99953659ac5972fac4d8b71fb521cd",
+    "text": "The usual faults are rushing the opening gesture, scrambling the fast runs so that only the first and last notes are in tune, and letting the sound become harsh under the effort. Candidates often play the passage louder than they can control, and the dotted and triplet rhythms blur into each other. Fatigue sets in quickly if the bow arm is tense."
+   },
+   "practiceTips": {
+    "context": {
+     "composer": "Richard Strauss",
+     "title": "Opening",
+     "work": "Don Juan"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "6ae428765a09faa0aed8da2af8581dc61e3375b69af1c58bdb210d10f7f9787c",
+    "text": "Practise the runs slowly in rhythmic groups with the metronome, then at tempo in short bursts with rests between them. Play the whole excerpt at half speed with full dynamics to make sure the sound stays open. Isolate the leaps and practise the shifts silently before adding the bow. Finish with a run-through from the first note at performance tempo and note where the rhythm moved."
+   },
+   "technique": {
+    "context": {
+     "composer": "Richard Strauss",
+     "title": "Opening",
+     "work": "Don Juan"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "876c3386c5e0a5f0993d7220f8202e68f517af4b4834dd31dd78e4e3be0f9727",
+    "text": "The opening needs a big, confident sound with a stroke that stays controlled at a fast tempo, and the energy must come from bow speed rather than pressure. The rapid upward runs and wide leaps require shifts prepared ahead of the bow and a left hand that stays close to the fingerboard. Rhythm is the real test: the syncopations and triplet figures have to be placed exactly against a pulse that never changes, even in the loudest bars."
+   }
+  },
+  "cello-strauss-don-quixote-solo": {
+   "history": {
+    "context": {
+     "composer": "Richard Strauss",
+     "title": "Solo cello passages",
+     "work": "Don Quixote"
+    },
+    "keepUnchanged": [
+     "tutti"
+    ],
+    "sourceSha256": "2f3dbf79d6c41f3ec12db92b08e656c34f3e1e8d89db8a0b246cd0fafb7de8e0",
+    "text": "Don Quixote, Op. 35, is a tone poem by Richard Strauss in the form of a theme and variations. The solo cello represents the knight throughout, so the part is both a solo and a tutti part and is required at principal cello auditions."
+   },
+   "pitfalls": {
+    "context": {
+     "composer": "Richard Strauss",
+     "title": "Solo cello passages",
+     "work": "Don Quixote"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "a71338abb45b63892ac5a52c61ddf9e70965f805c71d777292daadfea03e1515",
+    "text": "The theme is often over-played and loses its clarity, while the finale is under-sustained and the long notes fade too early. Intonation in the high register and the awkward leaps is unforgiving. Many candidates do not know the orchestral context well enough to place their entries convincingly."
+   },
+   "practiceTips": {
+    "context": {
+     "composer": "Richard Strauss",
+     "title": "Solo cello passages",
+     "work": "Don Quixote"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "77ed68abe8612d9873e5e0c5a419aff4c33149df3f760d9f5866123bfb942b30",
+    "text": "Learn the score, not just the solo part, and practise with a recording so you know what you are answering. Work on the theme with a metronome to keep the rhythm honest while you shape it. Practise the finale with very slow bows at pianissimo, counting the beats aloud. Prepare the exact passages on the list you are taking, since orchestras cut the solos differently."
+   },
+   "technique": {
+    "context": {
+     "composer": "Richard Strauss",
+     "title": "Solo cello passages",
+     "work": "Don Quixote"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "7bff706498d64857888a2bc9842a4499df6c030079a2fd992d731ac55c87c7fb",
+    "text": "The solo passages range from the declamatory statement of the knight's theme to the long, quiet dying away of the finale, so the player needs a wide palette: a big, projecting sound with rhythmic bite, and a fragile, sustained pianissimo in the upper register. Shifts and thumb-position passages must be secure enough that the expression comes through without effort. Rhythm has to be exact against an imagined orchestra, since the solo frequently interlocks with other instruments."
+   }
+  },
+  "cello-strauss-ein-heldenleben-opening": {
+   "history": {
+    "context": {
+     "composer": "Richard Strauss",
+     "title": "Opening",
+     "work": "Ein Heldenleben"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "4afebe56ed0bfa7cdcb2cd603f2e5c76dac9b6c84001ff6eb6041dd1dd2fad18",
+    "text": "Ein Heldenleben, Op. 40, is one of Richard Strauss's tone poems for large orchestra. The hero's theme that opens the work is given to the horns and low strings, so the first page of the cello part is one of the most demanding opening passages in the repertoire."
+   },
+   "pitfalls": {
+    "context": {
+     "composer": "Richard Strauss",
+     "title": "Opening",
+     "work": "Ein Heldenleben"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "08750d02c953c4ca82a330f8933ca644f21afdd1987e817160b865a91aee4f2d",
+    "text": "The high notes are the first casualty: they tend to be flat on the way up and sharp on the way down, and the leaps are often approximated. The tempo usually slows in the hardest bars and the rhythm of the dotted figures gets rounded off. Tension in the right arm makes the sound tight exactly where it should be most generous."
+   },
+   "practiceTips": {
+    "context": {
+     "composer": "Richard Strauss",
+     "title": "Opening",
+     "work": "Ein Heldenleben"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "3fca9f235cab085adc00c494ef2038f64310260e709141209db50d9e960634ee",
+    "text": "Practise the big leaps as slow shifts with a drone, naming the arrival note before you play it. Work the passage in short sections at a slower tempo with the full dynamic, then join the sections. Use a metronome to keep the dotted rhythms honest in the loud bars. Record a run and listen specifically for the top notes and the tempo in the second half."
+   },
+   "technique": {
+    "context": {
+     "composer": "Richard Strauss",
+     "title": "Opening",
+     "work": "Ein Heldenleben"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "fd4c9726539a8178dfbf3bd3c9208628b2e218683ab4d1855dc48516120dbbaf",
+    "text": "The opening theme sweeps across the whole range of the instrument, so the player needs secure shifting into the upper register, a sustained forte that does not crush the string, and rhythmic clarity in the wide leaps and dotted figures. The bow should travel fast and stay near the bridge for projection; the left hand has to move early so the top notes arrive in tune and with vibrato. Breathing points are few, so plan where the bow can be saved."
+   }
+  },
+  "cello-tchaikovsky-symphony-4-mvt2": {
+   "history": {
+    "context": {
+     "composer": "Pyotr Ilyich Tchaikovsky",
+     "title": "Cello entry after the oboe theme",
+     "work": "Symphony No. 4 in F minor"
+    },
+    "keepUnchanged": [
+     "Andantino in modo di canzona",
+     "Andantino"
+    ],
+    "sourceSha256": "cb44618fb9ed50513a3c7ed9c8223e6c3ca40ce839a428b842a33fd09e5f003d",
+    "text": "The slow movement of Tchaikovsky's Fourth Symphony, Andantino in modo di canzona in B-flat minor, opens with a melancholy oboe melody that the cellos then take up, which is the passage usually set."
+   },
+   "pitfalls": {
+    "context": {
+     "composer": "Pyotr Ilyich Tchaikovsky",
+     "title": "Cello entry after the oboe theme",
+     "work": "Symphony No. 4 in F minor"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "5946828e16a8ea16be6d01d1c1fbc00fb05f6097ed028dd490b4daf26809f51e",
+    "text": "Over-playing is the main danger; the melody loses its character if it is made too expressive or too loud. The repeated-note figures tend to be clipped or unevenly bowed, and the tempo can drag because the music is sad. Intonation in the minor key is exposed on the lower neighbour notes."
+   },
+   "practiceTips": {
+    "context": {
+     "composer": "Pyotr Ilyich Tchaikovsky",
+     "title": "Cello entry after the oboe theme",
+     "work": "Symphony No. 4 in F minor"
+    },
+    "keepUnchanged": [
+     "Andantino"
+    ],
+    "sourceSha256": "8426f09f0d223a81abdbff6ef0a433d77f5b9b60bfb78267ce1983093cdd7e26",
+    "text": "Listen to the oboe statement in a recording and try to copy its shaping exactly before adding anything of your own. Practise with a metronome to keep the Andantino moving. Play the melody on one string where possible to feel the line, then with the practical fingering. Record yourself at the written dynamic and check that the sound still has a core."
+   },
+   "technique": {
+    "context": {
+     "composer": "Pyotr Ilyich Tchaikovsky",
+     "title": "Cello entry after the oboe theme",
+     "work": "Symphony No. 4 in F minor"
+    },
+    "keepUnchanged": [
+     "legato"
+    ],
+    "sourceSha256": "07f6caedd629819ad4ad4458744fc818714bc976a7e3bba84e08b59a3a00edbe",
+    "text": "The cellos inherit the oboe's tune, so the aim is to match its simplicity: an even, unforced legato, a plain vibrato and phrasing that follows the melody's natural rise and fall. The dynamic is soft and the accompaniment is light, so every note is heard. Shifts should be gentle and the bow should stay close to the string with minimal pressure."
+   }
+  },
+  "cello-tchaikovsky-symphony-6-mvt2": {
+   "history": {
+    "context": {
+     "composer": "Pyotr Ilyich Tchaikovsky",
+     "title": "Opening",
+     "work": "Symphony No. 6 in B minor ('Pathétique')"
+    },
+    "keepUnchanged": [
+     "Allegro con grazia",
+     "Allegro"
+    ],
+    "sourceSha256": "b1b641c37b3dafc3209610a8eb0a20addbcdc08eb590ff1b8e81ccd5d29e1178",
+    "text": "Tchaikovsky composed the 'Pathétique' in 1893, and it was first performed in St Petersburg on 28 October that year. The second movement, Allegro con grazia in D major, is a dance in 5/4 time often described as a limping waltz; the cellos introduce its main theme."
+   },
+   "pitfalls": {
+    "context": {
+     "composer": "Pyotr Ilyich Tchaikovsky",
+     "title": "Opening",
+     "work": "Symphony No. 6 in B minor ('Pathétique')"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "d5b17f6f24e0affea4984beac72143ec825b0769c9858fe4a8e8d110e52ef5b9",
+    "text": "Rushing or stretching the fifth beat is the classic error, and the panel will hear it immediately. The melody sits in a comfortable register but the shifts are exposed and can be audible. Candidates sometimes over-accent the first beat and lose the dance character."
+   },
+   "practiceTips": {
+    "context": {
+     "composer": "Pyotr Ilyich Tchaikovsky",
+     "title": "Opening",
+     "work": "Symphony No. 6 in B minor ('Pathétique')"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "7aaa2f287d47decfd8340063a969daf9188e08d69ad5a547316a63fdb10bd7c3",
+    "text": "Count the bar as a group of two plus three (or three plus two, whichever the phrase suggests) with a metronome clicking the quarter note until the long bar feels natural. Sing the melody and conduct it before playing. Practise the shifts slowly with a glissando, then remove the slide. Play along with an orchestral recording to check that your tempo and phrasing match the section."
+   },
+   "technique": {
+    "context": {
+     "composer": "Pyotr Ilyich Tchaikovsky",
+     "title": "Opening",
+     "work": "Symphony No. 6 in B minor ('Pathétique')"
+    },
+    "keepUnchanged": [
+     "legato"
+    ],
+    "sourceSha256": "c02bb2fd2f3cbbe2026a948c78e67d0644eb52d817df4001a188cadfd33f263e",
+    "text": "The theme has to sound graceful and inevitable in a metre most players do not feel naturally, so the 5/4 pulse must be internalised as a steady unit rather than counted bar by bar. The melody needs a light, singing legato with clean shifts and a phrasing that makes the long bars breathe. Keep the dynamic modest and the vibrato warm but narrow."
+   }
+  },
+  "cello-verdi-requiem-offertorio": {
+   "history": {
+    "context": {
+     "composer": "Giuseppe Verdi",
+     "title": "Offertorio, opening",
+     "work": "Messa da Requiem"
+    },
+    "keepUnchanged": [
+     "Offertorio"
+    ],
+    "sourceSha256": "d3c8fdba23c87e27eabac5f9d20bd4f275cd2f780ce1da8421880a95f13cd0d5",
+    "text": "Verdi's Messa da Requiem was first performed on 22 May 1874. The Offertorio, its third number, opens with an exposed passage for the cellos that has become a fixture of audition lists."
+   },
+   "pitfalls": {
+    "context": {
+     "composer": "Giuseppe Verdi",
+     "title": "Offertorio, opening",
+     "work": "Messa da Requiem"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "17e4f5c352a93b0e2071bf8315f8a471122c713053f758c3b5962f16cd9bc610",
+    "text": "Intonation in the high entries is the main risk, especially on the first note, which has to be placed without any run-up. Players often use too much bow and the sound loses its soft focus, or the vibrato becomes nervous and wide. The divided lines can be confused if the player has not learned which part is being asked for."
+   },
+   "practiceTips": {
+    "context": {
+     "composer": "Giuseppe Verdi",
+     "title": "Offertorio, opening",
+     "work": "Messa da Requiem"
+    },
+    "keepUnchanged": [
+     "divisi"
+    ],
+    "sourceSha256": "1395d452ac9320b83c59b2ece35546344f84bcc991cd8d13432ad1ff398d81c2",
+    "text": "Practise finding the opening note silently from a rest position, then play it with the bow already moving so it does not bulge. Use a drone on the key centre and play the passage slowly to settle the high intonation. Work on long, slow bows at pianissimo to build control. Learn both divisi lines so you can play whichever the list specifies."
+   },
+   "technique": {
+    "context": {
+     "composer": "Giuseppe Verdi",
+     "title": "Offertorio, opening",
+     "work": "Messa da Requiem"
+    },
+    "keepUnchanged": [],
+    "sourceSha256": "b7a025660097d225ce8a36d2768db9ea43872e99b6b44cd7cafde10222ef4675",
+    "text": "The opening is quiet, lyrical and high, with the cellos divided, so the player needs a pure, sustained sound in the upper register and intonation that holds without the support of the rest of the orchestra. The bow has to move slowly and evenly at a soft dynamic, and the shifts between positions should be prepared so that the line sounds vocal rather than instrumental. Dynamics stay within a narrow soft range for most of the passage."
+   }
+  }
+ }
+}

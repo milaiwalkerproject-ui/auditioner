@@ -1,0 +1,6 @@
+# Everything needed to run backend/crawler/tests (no network, no real models).
+httpx==0.28.1
+pypdf==6.20.0
+beautifulsoup4==4.15.0
+anthropic==1.13.0
+pytest>=8,<10

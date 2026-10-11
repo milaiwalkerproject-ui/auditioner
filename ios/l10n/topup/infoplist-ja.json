@@ -1,0 +1,7 @@
+{
+ "Image of a part": "パート譜の画像",
+ "NSAppleMusicUsageDescription": "Auditionerは、サブスクリプションがある場合にApple Musicの録音をオケスタの開始位置から再生します。",
+ "NSCameraUsageDescription": "Auditionerはパート譜をスキャンしてオケスタを認識し、参考音源を作成するためにカメラを使用します。",
+ "NSMicrophoneUsageDescription": "Auditionerは、参考音源と比較できるように練習を録音します。",
+ "PDF part": "PDFのパート譜"
+}

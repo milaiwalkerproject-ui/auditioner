@@ -1,0 +1,7 @@
+{
+ "Image of a part": "파트보 이미지",
+ "NSAppleMusicUsageDescription": "Auditioner는 구독 중일 때 Apple Music 녹음을 발췌곡 시작 지점부터 재생합니다.",
+ "NSCameraUsageDescription": "Auditioner는 카메라로 파트보를 스캔하여 발췌곡을 인식하고 레퍼런스 오디오를 만듭니다.",
+ "NSMicrophoneUsageDescription": "Auditioner는 연습을 녹음하여 레퍼런스와 비교할 수 있게 합니다.",
+ "PDF part": "PDF 파트보"
+}

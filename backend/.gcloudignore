@@ -1,0 +1,13 @@
+# What `gcloud builds submit` leaves out when backend/deploy.sh uploads the repo
+# (passed with --ignore-file). Keeps the upload to backend/ and content/.
+.git
+.github
+docs
+ios
+supabase
+backend/tests
+backend/.venv
+**/__pycache__
+**/*.pyc
+**/.pytest_cache
+**/.DS_Store

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Notation editor</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --ink: #1E2E37;
+      --brass: #B5832A;
+      --teal: #2E6E6A;
+      --garnet: #8C2F36;
+      --paper: transparent;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ink: #E9ECEE;
+        --brass: #D9A54A;
+        --teal: #5FB3AC;
+        --garnet: #D96B61;
+      }
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--paper);
+      -webkit-text-size-adjust: 100%;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+      overscroll-behavior-y: contain;
+      touch-action: manipulation;
+    }
+    #score {
+      padding: 8px 0 120px 0;
+      min-height: 100px;
+    }
+    #score svg {
+      display: block;
+      margin: 0 auto;
+      fill: var(--ink);
+      color: var(--ink);
+      max-width: 100%;
+    }
+    #score svg .definition-scale {
+      color: var(--ink);
+    }
+    #score g.note.is-sounding *,
+    #score g.rest.is-sounding *,
+    #score g.mRest.is-sounding * {
+      fill: var(--brass);
+      stroke: var(--brass);
+    }
+    #score g.is-selected *,
+    #score g.is-selected.is-sounding * {
+      fill: var(--teal);
+      stroke: var(--teal);
+    }
+    #score g.note, #score g.rest, #score g.mRest, #score g.chord {
+      cursor: pointer;
+    }
+    #score rect.bar-flag {
+      fill: var(--garnet);
+      fill-opacity: 0.10;
+      stroke: var(--garnet);
+      stroke-opacity: 0.55;
+      stroke-width: 12;
+    }
+    #score g.bar-badge circle {
+      fill: var(--garnet);
+      stroke: none;
+    }
+    #score g.bar-badge text {
+      fill: #FFFFFF;
+      stroke: none;
+      font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+      font-weight: 700;
+      text-anchor: middle;
+    }
+  </style>
+</head>
+<body>
+  <div id="score"></div>
+  <script src="verovio-toolkit-wasm.js"></script>
+  <script src="editor.js"></script>
+</body>
+</html>

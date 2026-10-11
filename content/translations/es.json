@@ -1,0 +1,350 @@
+{
+ "language": "es",
+ "origin": "ai",
+ "machineTranslated": true,
+ "generatedAt": "2026-10-11",
+ "notes": {
+  "cello-beethoven-symphony-5-mvt2": {
+   "history": {
+    "text": "El segundo movimiento de la Quinta Sinfonía de Beethoven, marcado Andante con moto y en La bemol mayor, es una serie de variaciones sobre dos temas que se alternan; los violonchelos y las violas lo abren con el primer tema, y por eso figura en casi todas las listas de violonchelo.",
+    "sourceSha256": "9853e4efa0f46cb0e50fde98888eb10ff6b13e8cbacf4799fc089f0988828b39"
+   },
+   "pitfalls": {
+    "text": "Los errores más comunes son precipitar las figuras con puntillo, dejar que la primera nota de cada ligadura se hinche y perder el pulso entre frases. La afinación en La bemol mayor queda expuesta, sobre todo en las notas agudas de la melodía, donde la mano tiende a quedarse alta. En las variaciones más rápidas los intérpretes a menudo suben el volumen a medida que las notas se aceleran; la dinámica debe decidirla la indicación escrita, no los valores de las notas.",
+    "sourceSha256": "b1c59a2cf7ec8047e8e2f0be8d08cec999aba92415bccb1e37c3ead1916c8b07"
+   },
+   "practiceTips": {
+    "text": "Practica la melodía con el metrónomo subdividiendo el pulso para que los ritmos con puntillo caigan exactamente en el mismo lugar cada vez; luego quita la subdivisión y comprueba que nada se ha movido. Grábate y escucha solo la forma de las notas largas. Toca las variaciones rápidas primero despacio y con arcos completos, y después a tempo con el arco cerca de la cuerda. Canta la frase inicial antes de tocarla para decidir dónde respira.",
+    "sourceSha256": "7b6cdd35813a8c04f40166fcee0b33b257248fad8e029a7e3b2edf8486547808"
+   },
+   "technique": {
+    "text": "La melodía inicial pide un legato cálido y uniforme en el que el ritmo con puntillo esté colocado con precisión sin volverse rígido. Planifica la distribución del arco para que las notas largas conserven su núcleo y las cortas hablen con claridad al mismo volumen. En las variaciones posteriores la melodía se adorna con valores más rápidos; mantén la mano izquierda tranquila y los cambios de cuerda suaves para que la línea siga sonando como la misma melodía. Respeta exactamente las dinámicas escritas, porque el jurado escucha tanto el control en piano como el sonido en forte.",
+    "sourceSha256": "3d90d1a4179bf30a1a17135e8c00f19167d5a0901bafaaa75a6781b72d586b13"
+   }
+  },
+  "cello-beethoven-symphony-5-mvt3": {
+   "history": {
+    "text": "El tercer movimiento de la Quinta de Beethoven es un scherzo en Do menor con un trío cuyo comienzo contrapuntístico está confiado únicamente a los violonchelos y contrabajos. Ese pasaje expuesto es la razón por la que el movimiento aparece en las listas de violonchelo junto al famoso movimiento lento.",
+    "sourceSha256": "42e12fe069822d844c579f4061552e5e6976c07a2346bad13bbabad5fc88b749"
+   },
+   "pitfalls": {
+    "text": "Es habitual empezar el trío a un tempo que no se puede sostener en los compases más rápidos, o dejar que el arco rebote de modo que las notas se emborronen. Las figuras de notas repetidas tienden a precipitarse, y los incómodos cambios de cuerda en el registro grave pueden hacer que la afinación baje. A menudo las dinámicas se aplanan: el contraste entre el trío enérgico y la reaparición susurrada es parte de lo que se está evaluando.",
+    "sourceSha256": "9d49beb2c3c5317fc1e6f43106d749b5301b1c03612f0878c272932b7167c2ff"
+   },
+   "practiceTips": {
+    "text": "Elige el tempo a partir del compás más difícil, no del primero, y súbelo con el metrónomo en pasos pequeños. Practica los pasajes de notas corridas con ritmos variados y con arcos separados antes de añadir la arcada escrita. Aísla los cambios de cuerda y tócalos como dobles cuerdas para comprobar la estructura de la mano izquierda. Toca el fragmento completo una vez al día desde la primera nota y sin detenerte, como lo harías en la audición.",
+    "sourceSha256": "40b2012d5ea208bd2a1efc69364f1d492277e22d1970a2a8a7d5f3b62a65de4f"
+   },
+   "technique": {
+    "text": "El trío necesita un golpe de arco limpio y enérgico que permanezca lo suficiente en la cuerda para proyectar en una sala, con cada nota de los pasajes corridos articulada tanto por la mano izquierda como por el arco. Mantén el pulso absolutamente estable a través de las entradas y los silencios; el jurado oye de inmediato si el tempo se mueve cuando cambia la textura. La reaparición suave del material del scherzo pide un contacto con la cuerda completamente distinto y más ligero.",
+    "sourceSha256": "29fefec85a121ba81e717e166ee41cf0fcbd80115c1a60835af4956929798705"
+   }
+  },
+  "cello-beethoven-symphony-9-mvt4": {
+   "history": {
+    "text": "El final de la Novena Sinfonía de Beethoven, el movimiento que pone música a la 'Oda a la alegría' de Schiller, se abre con un recitativo instrumental para violonchelos y contrabajos que responde al material de los movimientos anteriores y lo rechaza, antes de que llegue el tema de la 'Alegría'.",
+    "sourceSha256": "0997983295f49b4b9b338ccd8fa00795c869afb3d6feac6a25ae6e91ebb0476e"
+   },
+   "pitfalls": {
+    "text": "La libertad del recitativo tienta a tocar con un ritmo impreciso; los jurados suelen querer una declamación convincente, parecida al habla, pero que siga siendo medible. Las notas largas a menudo pierden su núcleo hacia el final del arco, y los cambios bruscos de dinámica se suavizan. Los pasajes que suben al registro agudo quedan expuestos en la afinación.",
+    "sourceSha256": "64e5b1986e7a8be70c19b7e80deca033c244166c5852ab33beae80879346b8a6"
+   },
+   "practiceTips": {
+    "text": "Decide el carácter de cada frase (pregunta, negativa, asentimiento) y anótalo en la parte; luego tócasela a alguien y pregúntale si oye la diferencia. Practica primero estrictamente a tiempo con el metrónomo y solo después añade la libertad retórica, de modo que el pulso subyacente siga siendo audible. Trabaja en sostener las notas largas con arcos lentos y sonido pleno. Escucha varias grabaciones orquestales y observa cómo la sección toca el recitativo en conjunto.",
+    "sourceSha256": "f9b4e904b47ca0f112d6d2571cdd62ac28ff0225cb7e3137952e050c81112951"
+   },
+   "technique": {
+    "text": "El recitativo está escrito para sonar como el habla, así que hay que dar forma a cada frase con una idea clara de dónde recae el acento, manteniendo los valores escritos lo bastante fieles para que toda una sección pudiera tocarlo junta. El contraste dinámico es amplio: los gestos declamatorios enérgicos necesitan un sonido pleno y centrado, y las respuestas más suaves necesitan la misma intensidad a menor volumen. Aquí la velocidad del arco y el punto de contacto hacen la mayor parte del trabajo expresivo.",
+    "sourceSha256": "a0f3c5b9bafdf7bbb0d66300dd253619c519106d42b46558f11c922ca1a59fc8"
+   }
+  },
+  "cello-brahms-piano-concerto-2-mvt3-solo": {
+   "history": {
+    "text": "Brahms compuso su Segundo Concierto para piano en 1878–81 y fue el solista en su estreno en Budapest en 1881. Algo poco habitual en un concierto para piano: el movimiento lento se abre con un largo solo de violonchelo que presenta el tema antes de que entre el piano, y ese solo es un requisito habitual en las audiciones de violonchelo principal.",
+    "sourceSha256": "07d5f67a03d1cdadab65431ca92d86e3c91be656403b8c6f74d12c519e133189"
+   },
+   "pitfalls": {
+    "text": "Los candidatos suelen tocar demasiado fuerte desde el principio y no dejan margen para crecer, o abusan tanto del rubato que el pulso desaparece. El pasaje agudo cerca del final queda expuesto en la afinación, y un vibrato nervioso lo empeora. Los cambios de arco que rompen la línea deshacen el carácter vocal que el jurado espera oír.",
+    "sourceSha256": "58fce629678c5ba776c392dc97fdbfc7addc4ed029c8b9c458d3f9106b14b747"
+   },
+   "practiceTips": {
+    "text": "Decide sobre el papel la forma dinámica de todo el solo antes de practicarlo, y luego tócaselo a alguien que pueda decirte si el plan se oye. Practica los cambios de posición despacio y de manera constante para que cada uno suene igual cada vez. Usa una nota pedal para el pasaje agudo y practícalo un semitono arriba y abajo para hacer el oído más exigente. Toca junto con una grabación para aprender cómo encaja el solo con el piano y la orquesta.",
+    "sourceSha256": "823a2f5ec8706cbfe7841e452ebd0291d99d1d0bb0251fcf6e3bf545399b4294"
+   },
+   "technique": {
+    "text": "El solo exige un sonido pleno y cantable que se proyecte por encima de la orquesta sin dejar de ser íntimo, así que la velocidad del arco y el punto de contacto deben planificarse para cada frase. Los cambios de posición forman parte de la expresión, y su momento y su peso deben decidirse deliberadamente. El pasaje posterior, después de la entrada del piano, sube más y necesita la misma calidez con afinación segura y vibrato continuo.",
+    "sourceSha256": "c278f3163963ca3c08a0fbb31037e3298029842fea7fa07f4fa065bee8e74c8d"
+   }
+  },
+  "cello-brahms-symphony-2-mvt2": {
+   "history": {
+    "text": "El movimiento lento de la Segunda Sinfonía de Brahms, en Si mayor, se abre con una larga melodía de los violonchelos sobre una contramelodía del fagot, y por eso el pasaje se pide con tanta frecuencia.",
+    "sourceSha256": "53f3efee9d5a7af4c7f14aa2e27fcdb414c0d1ab6a88c97eb11e1febb30eeccd"
+   },
+   "pitfalls": {
+    "text": "Si mayor es incómodo para la mano izquierda, y la afinación del descenso inicial es donde la mayoría de los candidatos pierde puntos. Es frecuente dejar que el tempo se arrastre porque la indicación es lenta, o que la frase decaiga en el medio. Los cambios de arco que suenan o se hinchan interrumpen una línea que debería sonar ininterrumpida.",
+    "sourceSha256": "988fde57097572c892380e18f20d23791dfccff82d4acc0b932595f67723156b"
+   },
+   "practiceTips": {
+    "text": "Toca la melodía primero sobre cuerdas al aire como nota pedal para comprobar cada nota respecto a la tonalidad, y luego con el afinador solo en las notas de las que dudes. Practica los cambios de arco por separado sobre una sola nota larga hasta que sean inaudibles. Graba la frase inicial y escucha si la forma dinámica coincide con lo que pretendías. Cuenta los silencios y los compases en los que llevan la voz otros instrumentos, para que tus reentradas se sientan parte de la orquesta y no un solo.",
+    "sourceSha256": "6b0ffc49e7501b316a0a45fe2c1e02caae3f6e87bb47ce0309f1a20e507eb5d7"
+   },
+   "technique": {
+    "text": "Es una prueba de sonido sostenido y de línea: la melodía baja y sube despacio, y cada nota tiene que conectarse con la siguiente sin hueco en el cambio de arco. El vibrato debe ser continuo pero no ancho, y los cambios de posición deben calcularse para que sean inaudibles o expresivos a propósito. El nivel dinámico es moderado, así que el reto es proyectar calidez sin forzar.",
+    "sourceSha256": "2f07f767aec2053c2502747c9b4e743f2b64042e19de94bcaad9bbdb950d42be"
+   }
+  },
+  "cello-brahms-symphony-3-mvt3": {
+   "history": {
+    "text": "En lugar de un scherzo rápido, el tercer movimiento de la Tercera Sinfonía de Brahms es un lírico Poco allegretto en Do menor y 3/8, en una forma ternaria parecida a un vals; su melodía inicial está confiada a los violonchelos.",
+    "sourceSha256": "02d8245de2cdd38467ea9f293e1f7331adf5725a4ab8eaff8912e780ae647105"
+   },
+   "pitfalls": {
+    "text": "Exagerar el rubato de forma romántica es el error más común; los jurados quieren que la forma venga de la arcada y de las dinámicas, no de distorsionar el pulso. Las notas agudas de la frase suelen quedar altas, y los cambios de posición pueden oírse donde no deben. También es frecuente empezar demasiado fuerte y no dejar espacio para el crecimiento en el medio de la frase.",
+    "sourceSha256": "343147595a99762263c492ed7d8171a407852b684c490ee9ccc4773bf9b4b166"
+   },
+   "practiceTips": {
+    "text": "Pon el metrónomo a un tempo cómodo y toca la melodía absolutamente a tiempo hasta que el fraseo venga solo de la velocidad del arco; después permítete pequeñas libertades deliberadas. Practica los cambios de posición como glissandi lentos, luego sin el deslizamiento, comprobando la nota de llegada con una nota pedal. Prueba el pasaje con un arco por compás y después con las ligaduras escritas para comparar el sonido. Escucha algunas grabaciones orquestales para oír cómo se mueve el tempo a lo largo de la frase.",
+    "sourceSha256": "d769eac1975fe217549ca92ec6d1bbf408a9118ac6c361bc98a160470d0678c7"
+   },
+   "technique": {
+    "text": "La melodía necesita una línea cantable y flexible, con el suave balanceo del compás ternario, pero el ritmo de fondo debe mantenerse lo bastante fiel para que una sección pudiera tocarla al unísono. La frase sube al registro agudo, así que planifica los cambios de posición para llegar afinado y con el vibrato ya en marcha. Las dinámicas son íntimas; el sonido debe ser cálido más que fuerte, con el arco moviéndose despacio y cerca del puente para dar color.",
+    "sourceSha256": "18242eb292ef694901bcf4f6e57a8f1680eaffb5658e709a80b0cde59bffab10"
+   }
+  },
+  "cello-debussy-la-mer-mvt1": {
+   "history": {
+    "text": "La mer es el retrato orquestal del mar de Debussy, en tres movimientos. El primer movimiento contiene un célebre pasaje para la sección de violonchelos dividida que aparece en muchas listas de audición de violonchelo, a veces solo la voz superior y a veces con todas las voces exigidas.",
+    "sourceSha256": "00599217c78f86e73ee90d4c76358e2bed738a57bf9611ce0a4ba0e25d756346"
+   },
+   "pitfalls": {
+    "text": "La voz superior está lo bastante aguda para que la afinación tienda a subir bajo presión, y las subdivisiones cambiantes a menudo se diluyen en un ritmo aproximado. Es frecuente forzar el sonido para hacerse oír, lo que tensa el vibrato y el arco. Empezar el crescendo demasiado pronto no deja nada para el punto culminante de la frase.",
+    "sourceSha256": "6f3d9edac73135e127494e9a4714f6ba84af853ff85b8210bf661b92eca11efa"
+   },
+   "practiceTips": {
+    "text": "Aprende todas las voces que te puedan pedir, no solo la superior, y practícalas sobre una grabación para sentir cómo encajan. Usa el metrónomo en la subdivisión más pequeña hasta que los cambios rítmicos sean automáticos. Practica el pasaje agudo primero una octava más abajo para fijar el fraseo, y luego a la altura real con una nota pedal. Marca el punto culminante de la dinámica y trabaja hacia atrás desde él para que el crescendo tenga adónde ir.",
+    "sourceSha256": "cd5147ce70aa181931f4e31106e1a3c9dcb2d352f5546ba6d44200410531f767"
+   },
+   "technique": {
+    "text": "El pasaje está escrito para la sección dividida en varias partes, y las listas suelen esperar la voz superior o todas las voces; en cualquier caso hay que sostener un sonido cálido y cantable en el registro agudo con afinación segura. La precisión rítmica importa porque las figuras cambian de subdivisión y toda la sección tiene que moverse junta. Los cambios de posición deben prepararse con antelación, y el vibrato debe mantenerse continuo mientras la mano cambia de posición.",
+    "sourceSha256": "c42621bdbb83c2fe13954db1106cf2ce156974f33f85e7b3a99c0d80e26f5fcf"
+   }
+  },
+  "cello-mendelssohn-midsummer-nights-dream-scherzo": {
+   "history": {
+    "text": "La música incidental de Mendelssohn para A Midsummer Night's Dream (El sueño de una noche de verano), Op. 61, se escribió en 1842–43 y se estrenó en Potsdam en octubre de 1843. El Scherzo, que abre el conjunto, es un movimiento rápido y ligero cuya escritura para cuerdas es una prueba habitual de articulación.",
+    "sourceSha256": "c7fcf2149ab6f5eccd92bb99656845e362777bf603fe049337db137e5a489ce3"
+   },
+   "pitfalls": {
+    "text": "Es común que el golpe de arco se vuelva más pesado y más fuerte a medida que avanza el pasaje, y que el tempo se acelere en los compases fáciles y se frene en los difíciles. Un spiccato irregular en los cambios de cuerda y notas cromáticas emborronadas son lo primero que notan los jurados. Elegir un tempo un poco demasiado rápido cuesta más de lo que aporta.",
+    "sourceSha256": "bbbc695c081cf17d350d7b9fa883f355bbd42192019a51002ee7efd0a9e2da43"
+   },
+   "practiceTips": {
+    "text": "Practica primero en la cuerda, despacio, con cada nota articulada; luego a un tempo medio con un spiccato pequeño, y solo después a velocidad. Repite en bucle los dos compases más difíciles con el metrónomo y sube el clic un punto solo cuando salgan limpios tres veces seguidas. Toca con una nota pedal para comprobar las notas cromáticas. Graba una pasada completa y escucha en qué compases cambia el volumen o el tempo sin que lo pretendas.",
+    "sourceSha256": "b24c3ced61997b109836e720c04f7eb1064ddcada5040dfb44ff53e2d326e0b5"
+   },
+   "technique": {
+    "text": "El pasaje exige un spiccato rápido y muy uniforme que se mantenga suave, con la mano del arco relajada y el golpe generado por un poco de peso del brazo más que solo por la muñeca. La mano izquierda tiene que ir por delante del arco para que cada nota hable, sobre todo en los giros cromáticos. Los cambios de cuerda deben ser lo más pequeños posible, y la dinámica debe mantenerse en el nivel escrito aunque las notas se vuelvan más difíciles.",
+    "sourceSha256": "885d9161e2d5061b92535976e56649e45e943d622c64fcfe8719002b4951800d"
+   }
+  },
+  "cello-mozart-symphony-35-mvt4": {
+   "history": {
+    "text": "Mozart escribió la Sinfonía 'Haffner' en 1782. Su final está marcado Presto, en 2/2 y en forma de sonata-rondó, y Mozart le dijo a su padre que debía ir lo más rápido posible.",
+    "sourceSha256": "7c3e76ace0f8ef54089823b0963c782bc41ba914e04c786f1359d5e8cdf26e80"
+   },
+   "pitfalls": {
+    "text": "Los problemas habituales son un spiccato demasiado alto y por tanto irregular, precipitarse en las figuras de notas repetidas y perder el tempo en los cambios de cuerda. Los candidatos a menudo eligen un tempo que impresiona en los primeros compases y luego se desmorona en los pasajes incómodos. La afinación en los saltos rápidos queda expuesta porque la textura es muy ligera.",
+    "sourceSha256": "eb3e1326bb9856ec41f74ec6d87c6c34e17fc95cdbdc523870abfbced7745fef"
+   },
+   "practiceTips": {
+    "text": "Construye el pasaje con el metrónomo desde un tempo en el que todas las notas salgan limpias, subiendo en pasos pequeños, y practícalo en la cuerda antes de dejar que el arco la abandone. Usa variantes rítmicas (con puntillo, puntillo invertido, agrupado de tres en tres) en los compases más rápidos. Practica los cambios de cuerda como dobles cuerdas lentas. Termina cada sesión con una pasada de concierto a tempo completo sin detenerte.",
+    "sourceSha256": "cb7111c37ace1ba4a0eb01d04e304dec970de0636d91cd6f74a8a5d5625c4833"
+   },
+   "technique": {
+    "text": "El pasaje pide un golpe de arco ligero y limpio fuera de la cuerda a un tempo rápido, con el arco trabajando desde una zona pequeña y controlada cerca del punto de equilibrio. Cada nota de las figuras de escalas y arpegios tiene que estar colocada con claridad por la mano izquierda para que la articulación se entienda a velocidad. Mantén las dinámicas transparentes: el piano de Mozart debe seguir siendo realmente suave sin perder la exactitud rítmica.",
+    "sourceSha256": "cd468f1288195a79aed0baa3a8a60e5fc9e8324ef3092df8720906e9cdd0a18b"
+   }
+  },
+  "cello-prokofiev-symphony-5-mvt3": {
+   "history": {
+    "text": "La Quinta Sinfonía de Prokofiev, Op. 100, se compuso en 1944. Su tercer movimiento es un Adagio en Fa mayor, y el pasaje de violonchelo de este movimiento aparece junto con el del final en varias listas recientes de audición para sección.",
+    "sourceSha256": "2ce2592349c01ce3a3357fe67c3adaa0357470b1ab140f990b90c01a37666ae9"
+   },
+   "pitfalls": {
+    "text": "La afinación en la escritura cromática es lo primero que se pierde, sobre todo después de un cambio de posición grande. El tempo lento tienta a perder la subdivisión y dejar que el ritmo se desvíe. El sonido puede volverse delgado en la parte alta del registro si el arco se queda demasiado lejos del puente.",
+    "sourceSha256": "8f4e05278412e97ba93ac6f665e956cec52ac684a1685cfcffeba035fe400d5c"
+   },
+   "practiceTips": {
+    "text": "Practica con el metrónomo en la subdivisión más pequeña para que las notas largas y las notas en movimiento compartan un mismo pulso. Usa una nota pedal sobre la tónica para anclar los pasajes cromáticos. Trabaja el pasaje agudo con arcos lentos cerca del puente para conseguir un sonido más lleno. Aprende de una grabación el material orquestal que lo rodea para colocar tus entradas con seguridad.",
+    "sourceSha256": "085d5dde54ff2db8eb767895956350d2ca991131ca8a665caea30f7f3ba16426"
+   },
+   "technique": {
+    "text": "El pasaje es lento y expuesto, así que el reto es sostener una línea larga con sonido cálido a través de intervalos amplios y giros cromáticos, manteniendo el pulso completamente estable. El registro agudo pide cambios de posición seguros y un vibrato constante. Las dinámicas deben seguir de cerca los reguladores impresos, porque la textura alrededor de los violonchelos es ligera.",
+    "sourceSha256": "ad347d8d92548ebe979618e9e1fdfbefb3eba5d5e90586364264dc0b507560ec"
+   }
+  },
+  "cello-prokofiev-symphony-5-mvt4": {
+   "history": {
+    "text": "La Quinta Sinfonía de Prokofiev, Op. 100, data de 1944. El final, Allegro giocoso en Si bemol mayor, se abre con los violonchelos recordando el tema del primer movimiento y contiene un pasaje rápido y expuesto que algunas orquestas ponen como fragmento preparado y otras usan para lectura a primera vista.",
+    "sourceSha256": "81f5d99ef483c320b1f2502d52d4685f07aee7f9567fc907b7324276f4a81a12"
+   },
+   "pitfalls": {
+    "text": "Es frecuente precipitar los grupos rápidos y llegar antes de tiempo a las notas acentuadas, o perder el tempo en los cambios de cuerda incómodos. La voz superior de un pasaje divisi puede subir de afinación con la velocidad. Si el fragmento se usa para lectura a primera vista, dudar en los cambios rítmicos es el error que más cuesta.",
+    "sourceSha256": "325e305762af3e9da59e120e52874f0640d139ab39a5ca27d7b2340ae297c370"
+   },
+   "practiceTips": {
+    "text": "Trabaja con el metrónomo desde un tempo lento por grupos rítmicos, subiendo en pasos pequeños solo cuando todas las notas salgan limpias. Practica las entradas a contratiempo marcando el pulso con el pie mientras tocas. Aísla los cambios de cuerda y tócalos como dobles cuerdas. Practica también la lectura a primera vista de pasajes de carácter similar para poder leer el ritmo a la primera si el jurado lo pide.",
+    "sourceSha256": "592033aece913918acbc643bde6d33989e9f6114f4e634ba97577634f8bb831d"
+   },
+   "technique": {
+    "text": "Es una prueba de articulación rápida y clara bajo presión rítmica: la mano izquierda debe colocar cada nota de las figuras corridas mientras el arco mantiene un golpe corto y uniforme. Los acentos y las entradas a contratiempo tienen que estar exactamente a tiempo, y los cambios de cuerda deben ser pequeños y estar preparados. Mantén el sonido brillante y con proyección sin hundir el arco en la cuerda.",
+    "sourceSha256": "7a93109df5af9be040cb1879dbfbb56fc6ce1842fe236c082f5feeaf1a910652"
+   }
+  },
+  "cello-rossini-william-tell-overture-opening": {
+   "history": {
+    "text": "La ópera Guillaume Tell de Rossini se estrenó en la Ópera de París el 3 de agosto de 1829. Su obertura se abre con un pasaje lento para un pequeño grupo de violonchelos solistas, y la voz superior de ese pasaje es uno de los solos de violonchelo principal que más se piden.",
+    "sourceSha256": "87616eca4151f4a02e33784cb4dc5df7a8a9f1cbfd657b431c8f55f158dd5173"
+   },
+   "pitfalls": {
+    "text": "La nota inicial expuesta y los pasajes agudos son donde más falla la afinación, y las notas largas tienden a perder su núcleo o a temblar con un vibrato nervioso. Algunos intérpretes precipitan los silencios o los adornos escritos. A veces también se piden las líneas de violonchelo que acompañan, y los candidatos que no las han mirado quedan en evidencia.",
+    "sourceSha256": "fcac7ca77ee067cd3160963b75f2e768e90f55a94f8837591342b2d5b7190809"
+   },
+   "practiceTips": {
+    "text": "Practica las frases iniciales con una nota pedal y un metrónomo lento, escuchando que la afinación se mantenga estable a lo largo de cada nota larga. Trabaja los cambios de arco sobre cuerdas al aire en pianissimo hasta que sean inaudibles. Aprende las líneas inferiores de violonchelo además de la superior, para entender la armonía y poder tocar cualquiera de ellas si te lo piden. Graba el solo y escucha si las frases tienen una dirección clara.",
+    "sourceSha256": "2909e375600a9c6a273ca15fd28745da4013388f2baf346b27e93e3be1891e13"
+   },
+   "technique": {
+    "text": "El solo es lento, suave y agudo, así que se necesita un sonido sostenido y hermoso en posición de pulgar, con una afinación que no vacile en las notas largas. El control del arco en dinámica suave es esencial: arcos lentos y uniformes con cambios imperceptibles. El fraseo es operístico, así que cada línea debe modelarse como una frase cantada, con un punto culminante claro y un final natural.",
+    "sourceSha256": "6205f1f7c6d627952d174426c587189256081ee7f1025c395c6506d48dc6ce09"
+   }
+  },
+  "cello-shostakovich-symphony-1-mvt4-solo": {
+   "history": {
+    "text": "El final de la Primera Sinfonía de Shostakovich, Op. 10, contiene un extenso solo para el violonchelo principal que es un requisito habitual en las audiciones de principal y de asistente de principal.",
+    "sourceSha256": "cbab6dc6ca414e9b9d3af3a83fddeda9d56bd6f60b574877796431aa0d93e200"
+   },
+   "pitfalls": {
+    "text": "Los problemas más frecuentes son la afinación en los pasajes agudos, un ritmo que se desvía en los compases sostenidos y un sonido que se fuerza en el clímax. También es común ignorar las dinámicas más suaves, aplanando el drama del que depende el solo. Las entradas que no se colocan sobre el ritmo orquestal implícito suenan poco convincentes.",
+    "sourceSha256": "6f90a3a0bd77937676117bff16128ae4eb0edc52b5222f06b41038bc443d019b"
+   },
+   "practiceTips": {
+    "text": "Practica el solo con el metrónomo a nivel de subdivisión y luego con una grabación, para que tu ritmo encaje exactamente con la orquesta. Usa una nota pedal para los pasajes agudos y practica los cambios de posición como deslizamientos lentos antes de quitar el glissando. Trabaja los compases más fuertes con arco rápido y mano izquierda ligera para evitar forzar. Marca todas las dinámicas en la parte y comprueba en una grabación tuya que cada una se oye.",
+    "sourceSha256": "578db75cb7dbcdc4cd9d7fdc842563389d33430d2b89e0cf447dc6fe3146f8a2"
+   },
+   "technique": {
+    "text": "El solo alterna entre un lirismo intenso y sostenido y gestos rítmicos incisivos, así que necesita un sonido capaz de proyectarse por encima de una gran orquesta y de suavizarse rápidamente. La línea sube al registro agudo y requiere cambios de posición seguros, con el vibrato mantenido mientras la mano cambia de posición. Los contrastes dinámicos son extremos y deben tomarse al pie de la letra.",
+    "sourceSha256": "cfad68a0af850510d807a404cd56f679744115966345cdb338c17f3e42c45b43"
+   }
+  },
+  "cello-strauss-don-juan-opening": {
+   "history": {
+    "text": "Don Juan, Op. 20, es un poema sinfónico para gran orquesta que Richard Strauss completó en 1889 y dirigió en su estreno en Weimar ese mismo año; está dedicado a Ludwig Thuille. Sus páginas iniciales son una prueba habitual de audición para los instrumentistas de cuerda.",
+    "sourceSha256": "ba0c2d2135f4d3478360a66c03f62a3054ed0811018691108df3e49e7481bccc"
+   },
+   "pitfalls": {
+    "text": "Los errores habituales son precipitar el gesto inicial, atropellar los pasajes rápidos de modo que solo la primera y la última nota estén afinadas, y dejar que el sonido se vuelva áspero por el esfuerzo. Los candidatos suelen tocar el pasaje más fuerte de lo que pueden controlar, y los ritmos con puntillo y los tresillos se confunden entre sí. La fatiga llega rápido si el brazo del arco está tenso.",
+    "sourceSha256": "f4217a65ebda276b21f64b266c740569ef99953659ac5972fac4d8b71fb521cd"
+   },
+   "practiceTips": {
+    "text": "Practica los pasajes rápidos despacio, por grupos rítmicos y con el metrónomo; luego a tempo en ráfagas cortas con pausas entre ellas. Toca el fragmento completo a mitad de velocidad con todas las dinámicas para asegurarte de que el sonido se mantiene abierto. Aísla los saltos y practica los cambios de posición en silencio antes de añadir el arco. Termina con una pasada completa desde la primera nota a tempo de concierto y anota dónde se movió el ritmo.",
+    "sourceSha256": "6ae428765a09faa0aed8da2af8581dc61e3375b69af1c58bdb210d10f7f9787c"
+   },
+   "technique": {
+    "text": "El comienzo necesita un sonido grande y seguro, con un golpe de arco que se mantenga controlado a tempo rápido, y la energía debe venir de la velocidad del arco y no de la presión. Los pasajes ascendentes rápidos y los saltos amplios exigen cambios de posición preparados antes que el arco y una mano izquierda que se mantenga cerca del diapasón. El ritmo es la verdadera prueba: las síncopas y los tresillos tienen que colocarse exactamente sobre un pulso que nunca cambia, ni siquiera en los compases más fuertes.",
+    "sourceSha256": "876c3386c5e0a5f0993d7220f8202e68f517af4b4834dd31dd78e4e3be0f9727"
+   }
+  },
+  "cello-strauss-don-quixote-solo": {
+   "history": {
+    "text": "Don Quixote, Op. 35, es un poema sinfónico de Richard Strauss en forma de tema con variaciones. El violonchelo solista representa al caballero a lo largo de toda la obra, así que la parte es a la vez una parte solista y una parte de tutti, y se exige en las audiciones de violonchelo principal.",
+    "sourceSha256": "2f3dbf79d6c41f3ec12db92b08e656c34f3e1e8d89db8a0b246cd0fafb7de8e0"
+   },
+   "pitfalls": {
+    "text": "El tema a menudo se toca en exceso y pierde su claridad, mientras que el final no se sostiene lo suficiente y las notas largas se apagan demasiado pronto. La afinación en el registro agudo y en los saltos incómodos no perdona. Muchos candidatos no conocen el contexto orquestal lo bastante bien para colocar sus entradas de forma convincente.",
+    "sourceSha256": "a71338abb45b63892ac5a52c61ddf9e70965f805c71d777292daadfea03e1515"
+   },
+   "practiceTips": {
+    "text": "Aprende la partitura general, no solo la parte solista, y practica con una grabación para saber a qué estás respondiendo. Trabaja el tema con el metrónomo para mantener el ritmo fiel mientras le das forma. Practica el final con arcos muy lentos en pianissimo, contando los pulsos en voz alta. Prepara los pasajes exactos de la lista a la que te presentas, porque las orquestas recortan los solos de forma distinta.",
+    "sourceSha256": "77ed68abe8612d9873e5e0c5a419aff4c33149df3f760d9f5866123bfb942b30"
+   },
+   "technique": {
+    "text": "Los pasajes solistas van desde la exposición declamatoria del tema del caballero hasta el largo y silencioso apagarse del final, así que se necesita una paleta amplia: un sonido grande y con proyección, con mordiente rítmico, y un pianissimo frágil y sostenido en el registro agudo. Los cambios de posición y los pasajes en posición de pulgar deben ser lo bastante seguros para que la expresión salga sin esfuerzo. El ritmo tiene que ser exacto frente a una orquesta imaginada, porque el solo se entrelaza con frecuencia con otros instrumentos.",
+    "sourceSha256": "7bff706498d64857888a2bc9842a4499df6c030079a2fd992d731ac55c87c7fb"
+   }
+  },
+  "cello-strauss-ein-heldenleben-opening": {
+   "history": {
+    "text": "Ein Heldenleben, Op. 40, es uno de los poemas sinfónicos para gran orquesta de Richard Strauss. El tema del héroe que abre la obra está confiado a las trompas (cornos) y a las cuerdas graves, así que la primera página de la parte de violonchelo es uno de los pasajes iniciales más exigentes del repertorio.",
+    "sourceSha256": "4afebe56ed0bfa7cdcb2cd603f2e5c76dac9b6c84001ff6eb6041dd1dd2fad18"
+   },
+   "pitfalls": {
+    "text": "Las notas agudas son la primera víctima: tienden a quedar bajas al subir y altas al bajar, y los saltos a menudo se tocan de forma aproximada. El tempo suele frenarse en los compases más difíciles y el ritmo de las figuras con puntillo se redondea. La tensión en el brazo derecho hace que el sonido se cierre justo donde debería ser más generoso.",
+    "sourceSha256": "08750d02c953c4ca82a330f8933ca644f21afdd1987e817160b865a91aee4f2d"
+   },
+   "practiceTips": {
+    "text": "Practica los saltos grandes como cambios de posición lentos con una nota pedal, nombrando la nota de llegada antes de tocarla. Trabaja el pasaje en secciones cortas a un tempo más lento con la dinámica completa, y luego une las secciones. Usa el metrónomo para mantener fieles los ritmos con puntillo en los compases fuertes. Graba una pasada y escucha específicamente las notas más agudas y el tempo en la segunda mitad.",
+    "sourceSha256": "3fca9f235cab085adc00c494ef2038f64310260e709141209db50d9e960634ee"
+   },
+   "technique": {
+    "text": "El tema inicial recorre todo el registro del instrumento, así que se necesitan cambios de posición seguros hacia el registro agudo, un forte sostenido que no aplaste la cuerda y claridad rítmica en los saltos amplios y las figuras con puntillo. El arco debe viajar rápido y mantenerse cerca del puente para proyectar; la mano izquierda tiene que moverse con antelación para que las notas agudas lleguen afinadas y con vibrato. Hay pocos puntos para respirar, así que planifica dónde se puede ahorrar arco.",
+    "sourceSha256": "fd4c9726539a8178dfbf3bd3c9208628b2e218683ab4d1855dc48516120dbbaf"
+   }
+  },
+  "cello-tchaikovsky-symphony-4-mvt2": {
+   "history": {
+    "text": "El movimiento lento de la Cuarta Sinfonía de Tchaikovsky, Andantino in modo di canzona en Si bemol menor, se abre con una melancólica melodía del oboe que los violonchelos retoman después, y ese es el pasaje que suele pedirse.",
+    "sourceSha256": "cb44618fb9ed50513a3c7ed9c8223e6c3ca40ce839a428b842a33fd09e5f003d"
+   },
+   "pitfalls": {
+    "text": "El principal peligro es tocar en exceso; la melodía pierde su carácter si se hace demasiado expresiva o demasiado fuerte. Las figuras de notas repetidas tienden a recortarse o a tocarse con un arco desigual, y el tempo puede arrastrarse porque la música es triste. La afinación en la tonalidad menor queda expuesta en las bordaduras inferiores.",
+    "sourceSha256": "5946828e16a8ea16be6d01d1c1fbc00fb05f6097ed028dd490b4daf26809f51e"
+   },
+   "practiceTips": {
+    "text": "Escucha la exposición del oboe en una grabación e intenta copiar exactamente su fraseo antes de añadir nada propio. Practica con el metrónomo para que el Andantino no deje de avanzar. Toca la melodía en una sola cuerda donde sea posible para sentir la línea, y luego con la digitación práctica. Grábate a la dinámica escrita y comprueba que el sonido sigue teniendo núcleo.",
+    "sourceSha256": "8426f09f0d223a81abdbff6ef0a433d77f5b9b60bfb78267ce1983093cdd7e26"
+   },
+   "technique": {
+    "text": "Los violonchelos heredan la melodía del oboe, así que el objetivo es igualar su sencillez: un legato uniforme y sin forzar, un vibrato sencillo y un fraseo que siga la subida y bajada natural de la melodía. La dinámica es suave y el acompañamiento es ligero, así que cada nota se oye. Los cambios de posición deben ser delicados y el arco debe mantenerse cerca de la cuerda con la mínima presión.",
+    "sourceSha256": "07f6caedd629819ad4ad4458744fc818714bc976a7e3bba84e08b59a3a00edbe"
+   }
+  },
+  "cello-tchaikovsky-symphony-6-mvt2": {
+   "history": {
+    "text": "Tchaikovsky compuso la 'Pathétique' en 1893, y se estrenó en San Petersburgo el 28 de octubre de ese año. El segundo movimiento, Allegro con grazia en Re mayor, es una danza en compás de 5/4 que a menudo se describe como un vals cojo; los violonchelos presentan su tema principal.",
+    "sourceSha256": "b1b641c37b3dafc3209610a8eb0a20addbcdc08eb590ff1b8e81ccd5d29e1178"
+   },
+   "pitfalls": {
+    "text": "Precipitar o estirar el quinto pulso es el error clásico, y el jurado lo oirá de inmediato. La melodía está en un registro cómodo, pero los cambios de posición quedan expuestos y pueden oírse. A veces los candidatos acentúan en exceso el primer pulso y pierden el carácter de danza.",
+    "sourceSha256": "d5b17f6f24e0affea4984beac72143ec825b0769c9858fe4a8e8d110e52ef5b9"
+   },
+   "practiceTips": {
+    "text": "Cuenta el compás como un grupo de dos más tres (o tres más dos, según sugiera la frase) con el metrónomo marcando la negra, hasta que el compás largo se sienta natural. Canta la melodía y dirígela antes de tocar. Practica los cambios de posición despacio con un glissando y luego quita el deslizamiento. Toca junto con una grabación orquestal para comprobar que tu tempo y tu fraseo coinciden con los de la sección.",
+    "sourceSha256": "7aaa2f287d47decfd8340063a969daf9188e08d69ad5a547316a63fdb10bd7c3"
+   },
+   "technique": {
+    "text": "El tema tiene que sonar elegante e inevitable en un compás que la mayoría de los intérpretes no siente de forma natural, así que el pulso de 5/4 debe interiorizarse como una unidad estable en lugar de contarse compás a compás. La melodía necesita un legato ligero y cantable, con cambios de posición limpios y un fraseo que haga respirar los compases largos. Mantén la dinámica moderada y el vibrato cálido pero estrecho.",
+    "sourceSha256": "c02bb2fd2f3cbbe2026a948c78e67d0644eb52d817df4001a188cadfd33f263e"
+   }
+  },
+  "cello-verdi-requiem-offertorio": {
+   "history": {
+    "text": "La Messa da Requiem de Verdi se estrenó el 22 de mayo de 1874. El Offertorio, su tercer número, se abre con un pasaje expuesto para los violonchelos que se ha convertido en un fijo de las listas de audición.",
+    "sourceSha256": "d3c8fdba23c87e27eabac5f9d20bd4f275cd2f780ce1da8421880a95f13cd0d5"
+   },
+   "pitfalls": {
+    "text": "La afinación en las entradas agudas es el principal riesgo, sobre todo en la primera nota, que hay que colocar sin preparación alguna. Es frecuente usar demasiado arco, con lo que el sonido pierde su foco suave, o que el vibrato se vuelva nervioso y ancho. Las líneas divididas pueden confundirse si no se ha aprendido qué parte se está pidiendo.",
+    "sourceSha256": "17e4f5c352a93b0e2071bf8315f8a471122c713053f758c3b5962f16cd9bc610"
+   },
+   "practiceTips": {
+    "text": "Practica encontrar la nota inicial en silencio desde una posición de reposo, y luego tócala con el arco ya en movimiento para que no se hinche. Usa una nota pedal sobre el centro tonal y toca el pasaje despacio para asentar la afinación aguda. Trabaja arcos largos y lentos en pianissimo para ganar control. Aprende las dos líneas del divisi para poder tocar la que especifique la lista.",
+    "sourceSha256": "1395d452ac9320b83c59b2ece35546344f84bcc991cd8d13432ad1ff398d81c2"
+   },
+   "technique": {
+    "text": "El comienzo es suave, lírico y agudo, con los violonchelos divididos, así que se necesita un sonido puro y sostenido en el registro agudo y una afinación que se mantenga sin el apoyo del resto de la orquesta. El arco tiene que moverse despacio y de manera uniforme en dinámica suave, y los cambios de posición deben prepararse para que la línea suene vocal y no instrumental. Las dinámicas se mantienen en un rango suave y estrecho durante la mayor parte del pasaje.",
+    "sourceSha256": "b7a025660097d225ce8a36d2768db9ea43872e99b6b44cd7cafde10222ef4675"
+   }
+  }
+ }
+}

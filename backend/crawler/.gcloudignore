@@ -1,0 +1,19 @@
+# What `gcloud builds submit` leaves out when backend/crawler/deploy_job.sh uploads
+# the repo (passed with --ignore-file). Keeps the upload to backend/crawler and content/.
+.git
+.github
+docs
+ios
+supabase
+backend/app
+backend/tests
+backend/.venv
+backend/crawler/tests
+backend/crawler/out
+content/musicxml
+content/review
+content/importers
+**/__pycache__
+**/*.pyc
+**/.pytest_cache
+**/.DS_Store
