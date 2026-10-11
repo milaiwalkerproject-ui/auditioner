@@ -73,8 +73,9 @@ On your device the app keeps the session key and Apple's identifier for the app
 in that device's keychain; they do not move to another device, even from a
 backup.
 
-While you are signed in, the app's requests to our server carry the session, so
-the server can count your scans against your account instead of your device.
+While you are signed in, only the app's scan uploads — and its requests about
+the account itself (checking it, signing out, deleting it) — carry the session,
+so the server can count your scans against your account instead of your device.
 It uses the session for nothing else: feedback and "Popular with other players"
 are stored without it. Nothing else in the app changes: your parts, recordings,
 notes and auditions stay on your device, and the server never sees them.

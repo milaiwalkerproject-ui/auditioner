@@ -9,10 +9,14 @@ Two directions:
 1. **Tutti → Auditioner.** A Tutti audition card gets a "Prepare in Auditioner"
    button. Tapping it opens Auditioner on the right screen with the details
    already typed in. Auditioner **saves nothing** on its own: the player sees
-   the "New audition" form filled in and decides with **Add**.
+   the "New audition" form filled in and decides with **Add**. If a form is
+   already open when the link arrives, the link waits until the player closes
+   that form, then the filled-in form opens; nothing typed is lost (PLAN U1c).
 2. **Auditioner → Tutti.** Settings → About has a row "Find an orchestra near
    you" that opens Tutti's website, **https://tutti-orchestra.com** (PLAN U1b),
-   inside Auditioner. The row is live (see "The Tutti row in Settings" below).
+   inside Auditioner. Two more rows, "Privacy policy" and "Help and support",
+   open Auditioner's own pages, which live on Tutti's site (PLAN U1c). All three
+   are live (see "The Tutti rows in Settings" below).
 
 ---
 
@@ -112,21 +116,32 @@ audition. Those stay with the player.
 
 ---
 
-## 3. The Tutti row in Settings
+## 3. The Tutti rows in Settings
 
-The row "Find an orchestra near you" (Settings → About) opens Tutti's site,
-https://tutti-orchestra.com (confirmed by Milai on 2026-10-11, PLAN U1b). The
-address is one constant in `ios/Auditioner/Core/Routing/DeepLink.swift`:
+Three rows under Settings → About open pages on Tutti's site (confirmed by Milai
+on 2026-10-11, PLAN U1b and U1c):
+
+- "Find an orchestra near you" → https://tutti-orchestra.com
+- "Privacy policy" → https://tutti-orchestra.com/auditioner/privacy (the full
+  text of `docs/PRIVACY.md`; the same address is in App Store Connect, and the
+  "Read the full privacy policy" link on the in-app Privacy page opens it too)
+- "Help and support" → https://tutti-orchestra.com/auditioner/support (the same
+  address is App Store Connect's support URL)
+
+The addresses are three constants in `ios/Auditioner/Core/Routing/DeepLink.swift`:
 
 ```swift
 enum TuttiLink {
     static let findOrchestraURL: URL? = URL(string: "https://tutti-orchestra.com")
+    static let privacyPolicyURL: URL? = URL(string: "https://tutti-orchestra.com/auditioner/privacy")
+    static let supportURL: URL? = URL(string: "https://tutti-orchestra.com/auditioner/support")
 }
 ```
 
-If the address ever changes, change it there — only an https address works; the
+If an address ever changes, change it there — only an https address works; the
 page opens in the in-app Safari view, the same one used for IMSLP links. Setting
-it to `nil` hides the row again. Nothing else needs to change.
+one to `nil` hides that row again. Nothing else needs to change. What the two
+Auditioner pages say is in `docs/TUTTI-PAGES-PROMPT.md`.
 
 ---
 
@@ -155,6 +170,7 @@ contents: the paths stay `/excerpt/<id>` and `/audition/new?…`.
 
 A link is read once, on the device, and then forgotten. Auditioner stores
 nothing from it until the player taps **Add**, and it never sends the link's
-contents anywhere. Opening Tutti's website from Settings is an ordinary web
-visit inside the app (Apple's in-app Safari view); Tutti sees it as a visit
-from Safari, with nothing from Auditioner attached.
+contents anywhere. Opening Tutti's website, the privacy policy or the support
+page from Settings is an ordinary web visit inside the app (Apple's in-app
+Safari view); Tutti sees it as a visit from Safari, with nothing from Auditioner
+attached.

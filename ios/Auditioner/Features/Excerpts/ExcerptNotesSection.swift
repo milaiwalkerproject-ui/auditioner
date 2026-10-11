@@ -11,14 +11,6 @@ struct ExcerptProseItem: Identifiable {
     var translation: String? = nil
 }
 
-/// What the notes section lists for one excerpt.
-struct ExcerptNotesListing {
-    var items: [ExcerptProseItem]
-    /// Notes dropped because AI notes are hidden in this region (PLAN A6). When > 0 the section says
-    /// once "Some notes aren't available in your region."
-    var hiddenByRegion: Int
-}
-
 /// History / technique / pitfalls / practice tips. Honesty contract: a block is shown only when
 /// approved, or in reviewer mode (then with a "Draft — not reviewed" banner). AI text always
 /// carries the AI label with thumbs up/down and "Report an error" — also a machine translation,
@@ -26,34 +18,24 @@ struct ExcerptNotesListing {
 /// quiet page-level "Report an error" link for the facts.
 /// In another app language an approved note may show its machine translation instead of the
 /// English (`NoteTranslations`), with a "Machine-translated" pill and a "Show original" toggle.
-/// In Hong Kong and Macau (PLAN A6, `AINotesAvailability`) AI notes and translations are left out.
+/// The same notes show everywhere: the app has no region rules (PLAN A6b).
 struct ExcerptNotesSection: View {
     let excerpt: Excerpt
     let reviewerMode: Bool
 
     @ObservedObject private var translations: NoteTranslations = NoteTranslations.shared
-    @ObservedObject private var aiNotes: AINotesAvailability = AINotesAvailability.shared
 
-    private var listing: ExcerptNotesListing {
-        ExcerptNotesLogic.listing(for: excerpt,
-                                  reviewerMode: reviewerMode,
-                                  translations: translations,
-                                  hidesAINotes: aiNotes.hidesAINotes)
+    private var items: [ExcerptProseItem] {
+        ExcerptNotesLogic.proseItems(for: excerpt, reviewerMode: reviewerMode, translations: translations)
     }
 
     var body: some View {
-        let listing: ExcerptNotesListing = self.listing
+        let items: [ExcerptProseItem] = self.items
         return VStack(alignment: .leading, spacing: 14) {
-            if !listing.items.isEmpty || listing.hiddenByRegion > 0 {
+            if !items.isEmpty {
                 ExcerptSectionBox(Text("Notes")) {
-                    ForEach(listing.items) { item in
+                    ForEach(items) { item in
                         ExcerptProseBlockView(excerptId: excerpt.id, item: item, reviewerMode: reviewerMode)
-                    }
-                    if listing.hiddenByRegion > 0 {
-                        Label("Some notes aren't available in your region.", systemImage: "globe")
-                            .font(.footnote)
-                            .foregroundStyle(Theme.inkSoft)
-                            .padding(.top, 2)
                     }
                 }
             }
@@ -65,47 +47,29 @@ struct ExcerptNotesSection: View {
 /// The pure part of the notes section, kept off the `View` type so the tests can call it from any
 /// context (`View` is main-actor-isolated in the iOS 18+ SDK; a static on the view would inherit that).
 enum ExcerptNotesLogic {
-    /// The notes to show, in page order, and how many the region rule dropped. The approved-only
-    /// rule comes first: a block is listed only when approved (or in reviewer mode), and a translation
-    /// is attached only to an approved block — a draft is never shown translated, whatever the mode.
-    /// With `hidesAINotes` (PLAN A6) every AI block is left out, in any mode, and no translation is
-    /// attached to the curated ones (a translation is AI prose). Pure, so it can be unit-tested.
-    static func listing(for excerpt: Excerpt,
-                        reviewerMode: Bool,
-                        translations: NoteTranslations,
-                        hidesAINotes: Bool) -> ExcerptNotesListing {
-        guard let prose: ExcerptProse = excerpt.prose else {
-            return ExcerptNotesListing(items: [], hiddenByRegion: 0)
-        }
+    /// The notes to show, in page order. The approved-only rule comes first: a block is listed only
+    /// when approved (or in reviewer mode), and a translation is attached only to an approved
+    /// block — a draft is never shown translated, whatever the mode. Pure, so it can be unit-tested.
+    static func proseItems(for excerpt: Excerpt,
+                           reviewerMode: Bool,
+                           translations: NoteTranslations) -> [ExcerptProseItem] {
+        guard let prose: ExcerptProse = excerpt.prose else { return [] }
         let fields: [(id: String, title: String, block: ProseBlock?)] = [
             (id: "history", title: String(localized: "History"), block: prose.history),
             (id: "technique", title: String(localized: "Technique"), block: prose.technique),
             (id: "pitfalls", title: String(localized: "Common pitfalls"), block: prose.pitfalls),
             (id: "practiceTips", title: String(localized: "Practice tips"), block: prose.practiceTips),
         ]
-        var items: [ExcerptProseItem] = []
-        var hidden: Int = 0
+        var result: [ExcerptProseItem] = []
         for field in fields {
             guard let block: ProseBlock = field.block else { continue }
             guard block.isApproved || reviewerMode else { continue }
-            if hidesAINotes && block.origin == .ai {
-                hidden += 1
-                continue
-            }
-            let translation: String? = (block.isApproved && !hidesAINotes)
+            let translation: String? = block.isApproved
                 ? translations.translation(excerptId: excerpt.id, field: field.id)
                 : nil
-            items.append(ExcerptProseItem(id: field.id, title: field.title, block: block, translation: translation))
+            result.append(ExcerptProseItem(id: field.id, title: field.title, block: block, translation: translation))
         }
-        return ExcerptNotesListing(items: items, hiddenByRegion: hidden)
-    }
-
-    /// The notes to show, in page order (see `listing`).
-    static func proseItems(for excerpt: Excerpt,
-                           reviewerMode: Bool,
-                           translations: NoteTranslations,
-                           hidesAINotes: Bool = false) -> [ExcerptProseItem] {
-        listing(for: excerpt, reviewerMode: reviewerMode, translations: translations, hidesAINotes: hidesAINotes).items
+        return result
     }
 }
 

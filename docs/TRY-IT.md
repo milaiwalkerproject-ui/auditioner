@@ -216,7 +216,13 @@ of the error list and send it to me.
   The app switches to **Auditions** and opens the **New audition** form with
   "Example Philharmonic", "Section cello", both dates and the link already
   filled in. Nothing is saved until you tap **Add**; **Cancel** throws it away.
-  (The orchestra, dates and address are invented for the example.) An excerpt
+  (The orchestra, dates and address are invented for the example.) If a form
+  is already open when the link arrives — say you are halfway through adding an
+  audition by hand — the link **waits**: finish or cancel that form as usual,
+  and the New audition form then opens with the link's details. Nothing you
+  typed is lost, and the link is never dropped. To see it: on the Auditions tab
+  tap **+** (**New audition**), type something, switch to Safari, open the
+  link above, come back, tap **Cancel** — the prefilled form appears. An excerpt
   link looks like `auditioner://excerpt/<excerpt id>` and opens that excerpt
   page; an id the catalogue doesn't have shows "That excerpt isn't in the
   catalogue on this device yet." The same links also work pasted into Notes and
@@ -252,21 +258,18 @@ of the error list and send it to me.
   when you switch that note to its English original. An AI note keeps the line
   either way. Draft notes (reviewer mode) are never translated. Work titles,
   composer names and score markings stay as they are.
-- **Hong Kong and Macau: AI notes hidden (plan row A6).** On an App Store
-  account from Hong Kong or Macau the excerpt pages leave out every AI-written
-  note and every machine translation; notes a person wrote (the ones with the
-  "Curated" tag) still show, in English, and the Notes box says once "Some notes
-  aren't available in your region." The App Store country decides; the
-  simulator has no App Store, so there the device's region decides instead. To
-  see it on the Mac: in the simulator, **Settings (the iOS one) → General →
-  Language & Region → Region → Hong Kong**, then open the app again and an
-  excerpt page with AI notes. Set the region back afterwards. On a real device
-  the storefront is read once when the app starts.
 - **Privacy page.** **Settings → About → Privacy** has new blocks for signing in
   with Apple and for "Popular with other players"; the full text is
-  `docs/PRIVACY.md` (version 0.3). It is a promise to users — please read both
-  once.
-- **Find an orchestra near you.** **Settings → About** now shows this row; it
+  `docs/PRIVACY.md` (version 0.3, the one you approved). The app shows the same
+  notes everywhere — there are no country rules in it; the countries where the
+  app isn't offered are set in App Store Connect only (`docs/TESTFLIGHT.md`, A4).
+- **Two new rows under Settings → About: "Privacy policy" and "Help and
+  support".** Each opens the matching page on Tutti's site inside the app
+  (https://tutti-orchestra.com/auditioner/privacy and
+  https://tutti-orchestra.com/auditioner/support — the same addresses App Store
+  Connect gets). They need internet but no server of ours. Check that both
+  pages open and that the privacy page's text matches `docs/PRIVACY.md`.
+- **Find an orchestra near you.** **Settings → About** also shows this row; it
   opens Tutti's site (https://tutti-orchestra.com) inside the app.
 
 **Your answers of 11 October, applied (Auditions tab):**

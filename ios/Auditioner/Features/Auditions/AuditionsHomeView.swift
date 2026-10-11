@@ -87,18 +87,18 @@ struct AuditionsHomeView: View {
         settings.instrumentRaw + "|" + settings.region + "|" + settings.serverURL
     }
 
-    /// Opens the "New audition" form filled in from an `auditioner://audition/new` link (PLAN U1). The
-    /// request stays in the router until a form has actually shown it (`formDidShowPrefill`), so it is
-    /// not lost when a sheet is already up: that sheet is closed first, and its `onDismiss` comes back
-    /// here to present a fresh form. Nothing is saved until the player taps Add.
+    /// Opens the "New audition" form filled in from an `auditioner://audition/new` link (PLAN U1, U1c).
+    /// While a sheet is up (a form the player may be typing in, or the in-app browser) nothing visible
+    /// happens: the request waits in the router, and that sheet's `onDismiss` comes back here to present
+    /// the form with it, so nothing typed is lost and the link is not dropped. A newer link replaces a
+    /// waiting one (`DeepLinkRouting.follow` overwrites the router's request). The request is cleared
+    /// only once a form has actually shown it (`formDidShowPrefill`). Nothing is saved until the player
+    /// taps Add.
     private func consumeLinkPrefill() {
         switch AuditionLinkPresentation.step(pending: router.auditionPrefill,
                                              sheetIsUp: isCreating || safariItem != nil) {
-        case .nothing:
+        case .nothing, .waitForSheetToClose:
             return
-        case .dismissSheetFirst:
-            isCreating = false
-            safariItem = nil
         case .present(let prefill):
             createPrefill = prefill
             createFormId = UUID()
@@ -264,21 +264,22 @@ struct AuditionsHomeView: View {
 
 // MARK: - Link prefill (pure)
 
-/// How the Auditions tab answers an `auditioner://audition/new` request (PLAN U1) given what is on
-/// screen. Pure, so it can be unit-tested; `AuditionsHomeView.consumeLinkPrefill` acts on the step.
+/// How the Auditions tab answers an `auditioner://audition/new` request (PLAN U1, U1c) given what is
+/// on screen. Pure, so it can be unit-tested; `AuditionsHomeView.consumeLinkPrefill` acts on the step.
 enum AuditionLinkPresentation {
     enum Step: Equatable {
         /// No request pending.
         case nothing
-        /// A sheet is up (a form or the in-app browser): close it; its `onDismiss` asks again.
-        case dismissSheetFirst
+        /// A sheet is up (a form the player may be typing in, or the in-app browser): leave it alone.
+        /// The request stays in the router and the sheet's `onDismiss` asks again.
+        case waitForSheetToClose
         /// Present a fresh form with this prefill.
         case present(AuditionPrefill)
     }
 
     static func step(pending: AuditionPrefill?, sheetIsUp: Bool) -> Step {
         guard let prefill: AuditionPrefill = pending else { return .nothing }
-        return sheetIsUp ? .dismissSheetFirst : .present(prefill)
+        return sheetIsUp ? .waitForSheetToClose : .present(prefill)
     }
 
     /// The router's request is cleared only once a form showing exactly it is on screen — not

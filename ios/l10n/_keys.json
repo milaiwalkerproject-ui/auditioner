@@ -1668,6 +1668,12 @@
    "CatalogModels.swift"
   ]
  },
+ "Help and support": {
+  "comment": "",
+  "files": [
+   "TuttiLinkRow.swift"
+  ]
+ },
  "Helpful": {
   "comment": "",
   "files": [
@@ -3141,6 +3147,12 @@
    "PrivacyView.swift"
   ]
  },
+ "Privacy policy": {
+  "comment": "",
+  "files": [
+   "TuttiLinkRow.swift"
+  ]
+ },
  "Protected in Canada": {
   "comment": "",
   "files": [
@@ -3229,6 +3241,12 @@
   "comment": "",
   "files": [
    "PracticePlayerView.swift"
+  ]
+ },
+ "Read the full privacy policy": {
+  "comment": "",
+  "files": [
+   "PrivacyView.swift"
   ]
  },
  "Read the lines": {
@@ -3776,7 +3794,7 @@
    "AccountSettingsSection.swift"
   ]
  },
- "Signing in is optional and only raises your daily scan limit. We don't ask Apple for your name or email. Our server keeps a scrambled code for your Apple ID (never the ID itself), an encrypted key whose only use is to disconnect Apple when you delete the account, the dates you joined and were last seen, and a scrambled code for your sign-in session, which stops working after a year unused. Delete account in Settings removes all of it from our server straight away and disconnects Apple; your parts, recordings, notes and auditions on this device aren't touched.": {
+ "Signing in is optional and only raises your daily scan limit. We don't ask Apple for your name or email. Our server keeps a scrambled code for your Apple ID (never the ID itself), an encrypted key whose only use is to disconnect Apple when you delete the account, the dates you joined and were last seen, and a scrambled code for your sign-in session, which stops working after a year unused. While you're signed in, only the app's scan uploads — and its requests about the account itself (checking it, signing out, deleting it) — carry the session, so the server can count your scans against your account instead of your device; feedback and Popular with other players are stored without it. Delete account in Settings removes all of it from our server straight away and disconnects Apple; your parts, recordings, notes and auditions on this device aren't touched.": {
   "comment": "",
   "files": [
    "PrivacyView.swift"
@@ -3805,12 +3823,6 @@
   "files": [
    "AuditionsLogic.swift",
    "ExcerptRecordingsSection.swift"
-  ]
- },
- "Some notes aren't available in your region.": {
-  "comment": "",
-  "files": [
-   "ExcerptNotesSection.swift"
   ]
  },
  "Something went wrong": {
@@ -4510,7 +4522,7 @@
    "ScoreEditing.swift"
   ]
  },
- "This is the short version of our privacy policy (version 0.3, 11 October 2026). The full text will be published before the App Store release.": {
+ "This is the short version of our privacy policy (version 0.3, 11 October 2026). The full policy is online — the link below opens it.": {
   "comment": "",
   "files": [
    "PrivacyView.swift"

@@ -240,6 +240,8 @@ struct SettingsView: View {
             } label: {
                 Text("Privacy")
             }
+            PrivacyPolicyLinkRow()
+            SupportLinkRow()
             TuttiLinkRow()
             Button {
                 isSendingFeedback = true

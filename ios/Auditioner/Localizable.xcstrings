@@ -18045,6 +18045,70 @@
         }
       }
     },
+    "Help and support" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hilfe und Support"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ayuda y soporte"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aide et assistance"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aiuto e supporto"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ヘルプとサポート"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "도움말 및 지원"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajuda e suporte"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Помощь и поддержка"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "帮助与支持"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "說明與支援"
+          }
+        }
+      }
+    },
     "Helpful" : {
       "localizations" : {
         "de" : {
@@ -33265,6 +33329,70 @@
         }
       }
     },
+    "Privacy policy" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datenschutzerklärung"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Política de privacidad"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Politique de confidentialité"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informativa sulla privacy"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プライバシーポリシー"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "개인정보 처리방침"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Política de privacidade"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Политика конфиденциальности"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "隐私政策"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "隱私權政策"
+          }
+        }
+      }
+    },
     "Protected in Canada" : {
       "localizations" : {
         "de" : {
@@ -34221,6 +34349,70 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "從你的掃描辨識：請檢查音符"
+          }
+        }
+      }
+    },
+    "Read the full privacy policy" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die vollständige Datenschutzerklärung lesen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leer la política de privacidad completa"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lire la politique de confidentialité complète"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leggi l'informativa sulla privacy completa"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プライバシーポリシーの全文を読む"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "개인정보 처리방침 전문 읽기"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ler a política de privacidade completa"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Прочитать полную политику конфиденциальности"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "阅读完整隐私政策"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "閱讀完整的隱私權政策"
           }
         }
       }
@@ -39857,66 +40049,66 @@
         }
       }
     },
-    "Signing in is optional and only raises your daily scan limit. We don't ask Apple for your name or email. Our server keeps a scrambled code for your Apple ID (never the ID itself), an encrypted key whose only use is to disconnect Apple when you delete the account, the dates you joined and were last seen, and a scrambled code for your sign-in session, which stops working after a year unused. Delete account in Settings removes all of it from our server straight away and disconnects Apple; your parts, recordings, notes and auditions on this device aren't touched." : {
+    "Signing in is optional and only raises your daily scan limit. We don't ask Apple for your name or email. Our server keeps a scrambled code for your Apple ID (never the ID itself), an encrypted key whose only use is to disconnect Apple when you delete the account, the dates you joined and were last seen, and a scrambled code for your sign-in session, which stops working after a year unused. While you're signed in, only the app's scan uploads — and its requests about the account itself (checking it, signing out, deleting it) — carry the session, so the server can count your scans against your account instead of your device; feedback and Popular with other players are stored without it. Delete account in Settings removes all of it from our server straight away and disconnects Apple; your parts, recordings, notes and auditions on this device aren't touched." : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Die Anmeldung ist optional und erhöht nur dein tägliches Scan-Limit. Wir fragen Apple nicht nach deinem Namen oder deiner E-Mail. Unser Server speichert einen verwürfelten Code für deine Apple-ID (nie die ID selbst), einen verschlüsselten Schlüssel, der nur dazu dient, die Verbindung zu Apple zu trennen, wenn du den Account löschst, wann du beigetreten bist und wann du zuletzt gesehen wurdest, sowie einen verwürfelten Code für deine Anmeldesitzung, der nach einem Jahr ohne Nutzung nicht mehr funktioniert. „Account löschen“ in den Einstellungen entfernt all das sofort von unserem Server und trennt die Verbindung zu Apple; deine Noten, Aufnahmen, Notizen und Probespiele auf diesem Gerät bleiben unberührt."
+            "value" : "Die Anmeldung ist optional und erhöht nur dein tägliches Scan-Limit. Wir fragen Apple nicht nach deinem Namen oder deiner E-Mail. Unser Server speichert einen verwürfelten Code für deine Apple-ID (nie die ID selbst), einen verschlüsselten Schlüssel, der nur dazu dient, die Verbindung zu Apple zu trennen, wenn du den Account löschst, wann du beigetreten bist und wann du zuletzt gesehen wurdest, sowie einen verwürfelten Code für deine Anmeldesitzung, der nach einem Jahr ohne Nutzung nicht mehr funktioniert. Solange du angemeldet bist, tragen nur die Scan-Uploads der App – und ihre Anfragen zum Account selbst (prüfen, abmelden, löschen) – die Sitzung, damit der Server deine Scans deinem Account statt deinem Gerät zurechnen kann; Feedback und „Beliebt bei anderen“ werden ohne sie gespeichert. „Account löschen“ in den Einstellungen entfernt all das sofort von unserem Server und trennt die Verbindung zu Apple; deine Noten, Aufnahmen, Notizen und Probespiele auf diesem Gerät bleiben unberührt."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Iniciar sesión es opcional y solo aumenta tu límite diario de escaneos. No le pedimos a Apple tu nombre ni tu correo. Nuestro servidor guarda un código anonimizado de tu ID de Apple (nunca el ID en sí), una clave cifrada cuyo único uso es desconectar Apple cuando eliminas la cuenta, las fechas en que te registraste y en que se te vio por última vez, y un código anonimizado de tu sesión, que deja de funcionar tras un año sin usarse. Eliminar cuenta en Ajustes borra todo eso de nuestro servidor de inmediato y desconecta Apple; tus partes, grabaciones, notas y audiciones en este dispositivo no se tocan."
+            "value" : "Iniciar sesión es opcional y solo aumenta tu límite diario de escaneos. No le pedimos a Apple tu nombre ni tu correo. Nuestro servidor guarda un código anonimizado de tu ID de Apple (nunca el ID en sí), una clave cifrada cuyo único uso es desconectar Apple cuando eliminas la cuenta, las fechas en que te registraste y en que se te vio por última vez, y un código anonimizado de tu sesión, que deja de funcionar tras un año sin usarse. Mientras tienes la sesión iniciada, solo los envíos de escaneos de la app (y sus peticiones sobre la propia cuenta: comprobarla, cerrar sesión o eliminarla) llevan la sesión, para que el servidor cuente tus escaneos en tu cuenta y no en tu dispositivo; los comentarios y Popular entre otros músicos se guardan sin ella. Eliminar cuenta en Ajustes borra todo eso de nuestro servidor de inmediato y desconecta Apple; tus partes, grabaciones, notas y audiciones en este dispositivo no se tocan."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "La connexion est facultative et sert uniquement à relever votre limite quotidienne de scans. Nous ne demandons à Apple ni votre nom ni votre e-mail. Notre serveur conserve un code brouillé pour votre identifiant Apple (jamais l'identifiant lui-même), une clé chiffrée dont le seul usage est de déconnecter Apple quand vous supprimez le compte, les dates de votre inscription et de votre dernière visite, et un code brouillé pour votre session de connexion, qui cesse de fonctionner après un an sans utilisation. Supprimer le compte dans Réglages retire tout cela de notre serveur immédiatement et déconnecte Apple ; vos partitions, enregistrements, notes et auditions sur cet appareil ne sont pas touchés."
+            "value" : "La connexion est facultative et sert uniquement à relever votre limite quotidienne de scans. Nous ne demandons à Apple ni votre nom ni votre e-mail. Notre serveur conserve un code brouillé pour votre identifiant Apple (jamais l'identifiant lui-même), une clé chiffrée dont le seul usage est de déconnecter Apple quand vous supprimez le compte, les dates de votre inscription et de votre dernière visite, et un code brouillé pour votre session de connexion, qui cesse de fonctionner après un an sans utilisation. Tant que vous êtes connecté, seuls les envois de scans de l'app — et ses requêtes concernant le compte lui-même (le vérifier, se déconnecter, le supprimer) — portent la session, pour que le serveur compte vos scans sur votre compte plutôt que sur votre appareil ; les commentaires et « Populaire chez les autres musiciens » sont enregistrés sans elle. Supprimer le compte dans Réglages retire tout cela de notre serveur immédiatement et déconnecte Apple ; vos partitions, enregistrements, notes et auditions sur cet appareil ne sont pas touchés."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "L'accesso è facoltativo e serve solo ad aumentare il tuo limite giornaliero di scansioni. Non chiediamo ad Apple il tuo nome né la tua email. Il nostro server conserva un codice mascherato del tuo ID Apple (mai l'ID stesso), una chiave cifrata il cui unico uso è scollegare Apple quando elimini l'account, le date di iscrizione e dell'ultimo accesso, e un codice mascherato della tua sessione di accesso, che smette di funzionare dopo un anno di inutilizzo. Elimina account in Impostazioni rimuove subito tutto questo dal nostro server e scollega Apple; le tue parti, registrazioni, note e audizioni su questo dispositivo non vengono toccate."
+            "value" : "L'accesso è facoltativo e serve solo ad aumentare il tuo limite giornaliero di scansioni. Non chiediamo ad Apple il tuo nome né la tua email. Il nostro server conserva un codice mascherato del tuo ID Apple (mai l'ID stesso), una chiave cifrata il cui unico uso è scollegare Apple quando elimini l'account, le date di iscrizione e dell'ultimo accesso, e un codice mascherato della tua sessione di accesso, che smette di funzionare dopo un anno di inutilizzo. Finché hai effettuato l'accesso, solo gli invii delle scansioni dell'app — e le sue richieste sull'account stesso (verificarlo, uscire, eliminarlo) — portano con sé la sessione, così il server può contare le tue scansioni sul tuo account invece che sul dispositivo; il feedback e Popolari tra gli altri musicisti vengono salvati senza la sessione. Elimina account in Impostazioni rimuove subito tutto questo dal nostro server e scollega Apple; le tue parti, registrazioni, note e audizioni su questo dispositivo non vengono toccate."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サインインは任意で、1日のスキャン上限が上がるだけです。Appleに名前やメールアドレスを求めることはありません。サーバに保存されるのは、Apple IDを判読できない形に変換したコード（Apple IDそのものは保存しません）、アカウント削除時にAppleとの接続を解除するためだけに使う暗号化されたキー、登録日と最終利用日、そして1年間使われないと無効になる、サインインセッションを判読できない形に変換したコードです。「設定」の「アカウントを削除」で、これらすべてをサーバから直ちに削除し、Appleとの接続を解除します。このデバイス上のパート譜、録音、ノート、オーディションには影響しません。"
+            "value" : "サインインは任意で、1日のスキャン上限が上がるだけです。Appleに名前やメールアドレスを求めることはありません。サーバに保存されるのは、Apple IDを判読できない形に変換したコード（Apple IDそのものは保存しません）、アカウント削除時にAppleとの接続を解除するためだけに使う暗号化されたキー、登録日と最終利用日、そして1年間使われないと無効になる、サインインセッションを判読できない形に変換したコードです。サインイン中にセッションを送るのは、アプリのスキャンのアップロードと、アカウント自体に関するリクエスト（確認、サインアウト、削除）だけです。これにより、サーバはスキャン数をデバイスではなくアカウントごとに数えられます。フィードバックと「ほかの奏者に人気」はセッションなしで保存されます。「設定」の「アカウントを削除」で、これらすべてをサーバから直ちに削除し、Appleとの接続を解除します。このデバイス上のパート譜、録音、ノート、オーディションには影響しません。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "로그인은 선택 사항이고, 하루 스캔 한도만 늘려 줘요. Apple에 이름이나 이메일을 요청하지 않아요. 서버에는 Apple ID의 뒤섞인 코드(ID 자체는 절대 아님), 계정을 삭제할 때 Apple 연결을 해제하는 데만 쓰이는 암호화된 키, 가입한 날짜와 마지막으로 접속한 날짜, 그리고 1년 동안 쓰지 않으면 만료되는 로그인 세션의 뒤섞인 코드를 보관해요. 설정에서 계정 삭제를 누르면 이 모든 것이 서버에서 즉시 제거되고 Apple 연결이 해제돼요. 이 기기의 파트보, 녹음, 노트, 오디션은 건드리지 않아요."
+            "value" : "로그인은 선택 사항이고, 하루 스캔 한도만 늘려 줘요. Apple에 이름이나 이메일을 요청하지 않아요. 서버에는 Apple ID의 뒤섞인 코드(ID 자체는 절대 아님), 계정을 삭제할 때 Apple 연결을 해제하는 데만 쓰이는 암호화된 키, 가입한 날짜와 마지막으로 접속한 날짜, 그리고 1년 동안 쓰지 않으면 만료되는 로그인 세션의 뒤섞인 코드를 보관해요. 로그인한 동안에는 앱의 스캔 업로드와 계정 자체에 대한 요청(확인, 로그아웃, 삭제)만 세션을 함께 보내요. 그래서 서버가 스캔 횟수를 기기가 아니라 계정 기준으로 집계할 수 있어요. 의견과 ‘다른 연주자들에게 인기’는 세션 없이 저장돼요. 설정에서 계정 삭제를 누르면 이 모든 것이 서버에서 즉시 제거되고 Apple 연결이 해제돼요. 이 기기의 파트보, 녹음, 노트, 오디션은 건드리지 않아요."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Iniciar sessão é opcional e só aumenta seu limite diário de escaneamentos. Não pedimos à Apple seu nome nem seu e-mail. Nosso servidor guarda um código embaralhado do seu ID Apple (nunca o ID em si), uma chave criptografada cujo único uso é desconectar a Apple quando você apaga a conta, as datas em que você entrou e foi visto pela última vez, e um código embaralhado da sua sessão, que para de funcionar após um ano sem uso. Apagar conta, nos Ajustes, remove tudo isso do nosso servidor imediatamente e desconecta a Apple; suas partes, gravações, anotações e audições neste dispositivo não são afetadas."
+            "value" : "Iniciar sessão é opcional e só aumenta seu limite diário de escaneamentos. Não pedimos à Apple seu nome nem seu e-mail. Nosso servidor guarda um código embaralhado do seu ID Apple (nunca o ID em si), uma chave criptografada cujo único uso é desconectar a Apple quando você apaga a conta, as datas em que você entrou e foi visto pela última vez, e um código embaralhado da sua sessão, que para de funcionar após um ano sem uso. Enquanto você está com a sessão iniciada, só os envios de escaneamentos do app — e os pedidos dele sobre a própria conta (verificar, sair, apagar) — levam a sessão, para que o servidor conte seus escaneamentos pela sua conta, e não pelo dispositivo; o feedback e Popular entre outros músicos são guardados sem ela. Apagar conta, nos Ajustes, remove tudo isso do nosso servidor imediatamente e desconecta a Apple; suas partes, gravações, anotações e audições neste dispositivo não são afetadas."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Вход необязателен и лишь повышает дневной лимит сканов. Мы не запрашиваем у Apple ваше имя и e-mail. Наш сервер хранит обезличенный код вашего Apple ID (никогда не сам ID), зашифрованный ключ, единственное назначение которого — отключить Apple при удалении аккаунта, даты регистрации и последнего визита, а также обезличенный код вашей сессии входа, который перестаёт работать через год без использования. «Удалить аккаунт» в Настройках сразу удаляет всё это с нашего сервера и отключает Apple; ваши партии, записи, заметки и прослушивания на этом устройстве не затрагиваются."
+            "value" : "Вход необязателен и лишь повышает дневной лимит сканов. Мы не запрашиваем у Apple ваше имя и e-mail. Наш сервер хранит обезличенный код вашего Apple ID (никогда не сам ID), зашифрованный ключ, единственное назначение которого — отключить Apple при удалении аккаунта, даты регистрации и последнего визита, а также обезличенный код вашей сессии входа, который перестаёт работать через год без использования. Пока вы вошли, сессия передаётся только при загрузке сканов из приложения и в его запросах о самом аккаунте (проверить, выйти, удалить) — так сервер засчитывает ваши сканы на аккаунт, а не на устройство; отзывы и «Популярно у других музыкантов» сохраняются без неё. «Удалить аккаунт» в Настройках сразу удаляет всё это с нашего сервера и отключает Apple; ваши партии, записи, заметки и прослушивания на этом устройстве не затрагиваются."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "登录是可选的，只会提高你的每日扫描上限。我们不会向 Apple 索取你的姓名或电子邮件。我们的服务器保存你 Apple ID 的一个加扰码（绝不保存 ID 本身）、一个仅用于在你删除账户时断开 Apple 连接的加密密钥、你加入和最近使用的日期，以及你登录会话的一个加扰码（一年未使用后失效）。在“设置”中删除账户会立即从我们的服务器移除以上所有内容并断开 Apple 连接；这台设备上的分谱、录音、笔记和试奏不受影响。"
+            "value" : "登录是可选的，只会提高你的每日扫描上限。我们不会向 Apple 索取你的姓名或电子邮件。我们的服务器保存你 Apple ID 的一个加扰码（绝不保存 ID 本身）、一个仅用于在你删除账户时断开 Apple 连接的加密密钥、你加入和最近使用的日期，以及你登录会话的一个加扰码（一年未使用后失效）。登录期间，只有 App 上传扫描时，以及它对账户本身的请求（检查账户、退出登录、删除账户），才会带上会话，这样服务器就能把你的扫描计入你的账户而不是这台设备；反馈和“其他演奏者中的热门片段”在保存时不带会话。在“设置”中删除账户会立即从我们的服务器移除以上所有内容并断开 Apple 连接；这台设备上的分谱、录音、笔记和试奏不受影响。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "登入是選用的，只會提高你的每日掃描上限。我們不會向 Apple 索取你的姓名或電子郵件。我們的伺服器會保存：你 Apple ID 的一組打亂代碼（絕不保存 ID 本身）、一把只用於刪除帳號時解除 Apple 連結的加密金鑰、你加入和最後使用的日期，以及你登入工作階段的一組打亂代碼（一年未使用即失效）。在「設定」中刪除帳號會立即從我們的伺服器移除以上所有資料並解除 Apple 連結；這部裝置上的分譜、錄音、筆記和甄選不受影響。"
+            "value" : "登入是選用的，只會提高你的每日掃描上限。我們不會向 Apple 索取你的姓名或電子郵件。我們的伺服器會保存：你 Apple ID 的一組打亂代碼（絕不保存 ID 本身）、一把只用於刪除帳號時解除 Apple 連結的加密金鑰、你加入和最後使用的日期，以及你登入工作階段的一組打亂代碼（一年未使用即失效）。登入期間，只有 App 上傳掃描時，以及它對帳號本身的請求（檢查帳號、登出、刪除帳號），才會附帶工作階段，讓伺服器能把你的掃描計入你的帳號而不是這部裝置；意見回饋和「其他演奏者的熱門片段」儲存時不會附帶工作階段。在「設定」中刪除帳號會立即從我們的伺服器移除以上所有資料並解除 Apple 連結；這部裝置上的分譜、錄音、筆記和甄選不受影響。"
           }
         }
       }
@@ -40197,70 +40389,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "獨奏"
-          }
-        }
-      }
-    },
-    "Some notes aren't available in your region." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Einige Notizen sind in deiner Region nicht verfügbar."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algunas notas no están disponibles en tu región."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Certaines notes ne sont pas disponibles dans votre région."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Alcune note non sono disponibili nella tua regione."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "一部のノートはあなたの地域では利用できません。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "일부 노트는 내 지역에서 이용할 수 없어요."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algumas anotações não estão disponíveis na sua região."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Некоторые заметки недоступны в вашем регионе."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "部分笔记在你所在的地区不可用。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "部分筆記在你所在的地區無法使用。"
           }
         }
       }
@@ -47669,66 +47797,66 @@
         }
       }
     },
-    "This is the short version of our privacy policy (version 0.3, 11 October 2026). The full text will be published before the App Store release." : {
+    "This is the short version of our privacy policy (version 0.3, 11 October 2026). The full policy is online — the link below opens it." : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Das ist die Kurzfassung unserer Datenschutzerklärung (Version 0.3, 11. Oktober 2026). Der vollständige Text erscheint vor der Veröffentlichung im App Store."
+            "value" : "Das ist die Kurzfassung unserer Datenschutzerklärung (Version 0.3, 11. Oktober 2026). Die vollständige Erklärung steht online – der Link darunter öffnet sie."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Esta es la versión corta de nuestra política de privacidad (versión 0.3, 11 de octubre de 2026). El texto completo se publicará antes del lanzamiento en el App Store."
+            "value" : "Esta es la versión corta de nuestra política de privacidad (versión 0.3, 11 de octubre de 2026). La política completa está en línea: el enlace de abajo la abre."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ceci est la version courte de notre politique de confidentialité (version 0.3, 11 octobre 2026). Le texte complet sera publié avant la sortie sur l'App Store."
+            "value" : "Ceci est la version courte de notre politique de confidentialité (version 0.3, 11 octobre 2026). La politique complète est en ligne : le lien ci-dessous l'ouvre."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Questa è la versione breve della nostra informativa sulla privacy (versione 0.3, 11 ottobre 2026). Il testo completo sarà pubblicato prima dell'uscita sull'App Store."
+            "value" : "Questa è la versione breve della nostra informativa sulla privacy (versione 0.3, 11 ottobre 2026). L'informativa completa è online: il link qui sotto la apre."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "これはプライバシーポリシーの要約版です（バージョン0.3、2026年10月11日）。全文はApp Storeでの公開前に公表します。"
+            "value" : "これはプライバシーポリシーの要約版です（バージョン0.3、2026年10月11日）。全文はオンラインで公開しています。下のリンクから開けます。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "개인정보 처리방침의 요약본이에요 (버전 0.3, 2026년 10월 11일). 전문은 App Store 출시 전에 공개할 예정이에요."
+            "value" : "개인정보 처리방침의 요약본이에요 (버전 0.3, 2026년 10월 11일). 전문은 온라인에 있어요. 아래 링크로 열 수 있어요."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Esta é a versão resumida da nossa política de privacidade (versão 0.3, 11 de outubro de 2026). O texto completo será publicado antes do lançamento na App Store."
+            "value" : "Esta é a versão resumida da nossa política de privacidade (versão 0.3, 11 de outubro de 2026). A política completa está online: o link abaixo a abre."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Это краткая версия нашей политики конфиденциальности (версия 0.3, 11 октября 2026 г.). Полный текст будет опубликован до выхода в App Store."
+            "value" : "Это краткая версия нашей политики конфиденциальности (версия 0.3, 11 октября 2026 г.). Полный текст опубликован онлайн — его открывает ссылка ниже."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "这是我们隐私政策的简版（0.3 版，2026 年 10 月 11 日）。完整文本将在 App Store 发布前公布。"
+            "value" : "这是我们隐私政策的简版（0.3 版，2026 年 10 月 11 日）。完整政策已在网上发布，可通过下方链接打开。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "這是我們隱私權政策的簡短版本（0.3 版，2026 年 10 月 11 日）。完整版本會在 App Store 上架前發布。"
+            "value" : "這是我們隱私權政策的簡短版本（0.3 版，2026 年 10 月 11 日）。完整版本已在網路上公開，可透過下方連結開啟。"
           }
         }
       }

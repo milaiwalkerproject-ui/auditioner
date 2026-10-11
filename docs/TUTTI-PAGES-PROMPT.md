@@ -1,5 +1,34 @@
 # Prompt for the Tutti project: Auditioner privacy and support pages
 
+## Update for the privacy page (2026-10-11)
+
+Milai: the two pages are live at https://tutti-orchestra.com/auditioner/privacy
+and https://tutti-orchestra.com/auditioner/support. One sentence of the policy
+has been made more precise since you pasted it. Copy **everything between the
+two lines below** into your Tutti session — it changes that one sentence and
+nothing else. (If the privacy page was never built, skip this and use the full
+prompt further down; its policy text already has the new wording.)
+
+---
+
+On the page https://tutti-orchestra.com/auditioner/privacy ("Auditioner —
+Privacy policy"), in the section "If you sign in with Apple (optional)", replace
+this one sentence:
+
+> While you are signed in, the app's requests to our server carry the session, so the server can count your scans against your account instead of your device.
+
+with exactly this sentence:
+
+> While you are signed in, only the app's scan uploads — and its requests about the account itself (checking it, signing out, deleting it) — carry the session, so the server can count your scans against your account instead of your device.
+
+Change nothing else on the page: the version stays 0.3, the date stays
+11 October 2026, and the sentence that follows ("It uses the session for nothing
+else: …") stays as it is. Tell me when it is done.
+
+---
+
+## The full prompt (both pages)
+
 Milai: copy **everything between the two lines below** (from "I need two simple
 pages" down to the end of the policy) and paste it into a Claude session that
 works on the Tutti website. When the pages are live, send me their two addresses
@@ -174,8 +203,9 @@ On your device the app keeps the session key and Apple's identifier for the app
 in that device's keychain; they do not move to another device, even from a
 backup.
 
-While you are signed in, the app's requests to our server carry the session, so
-the server can count your scans against your account instead of your device.
+While you are signed in, only the app's scan uploads — and its requests about
+the account itself (checking it, signing out, deleting it) — carry the session,
+so the server can count your scans against your account instead of your device.
 It uses the session for nothing else: feedback and "Popular with other players"
 are stored without it. Nothing else in the app changes: your parts, recordings,
 notes and auditions stay on your device, and the server never sees them.

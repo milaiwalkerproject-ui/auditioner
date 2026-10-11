@@ -154,9 +154,17 @@ enum DeepLinkRouting {
     }
 }
 
-/// Links out to Tutti, the sister app that helps people find an orchestra (PLAN U1, U1b).
+/// Links out to Tutti, the sister app that helps people find an orchestra (PLAN U1, U1b), and to
+/// Auditioner's own public pages, which live on Tutti's site (PLAN U1c). All https; a row in Settings
+/// → About shows nothing if its address were ever `nil`. Opening one is an ordinary visit in the
+/// in-app Safari view, with nothing from Auditioner attached (docs/TUTTI.md).
 enum TuttiLink {
     /// "Find an orchestra near you" in Settings → About opens Tutti's site (PLAN U1b, confirmed by Milai
-    /// on 2026-10-11). https only; the row would be hidden again if this were ever `nil`.
+    /// on 2026-10-11).
     static let findOrchestraURL: URL? = URL(string: "https://tutti-orchestra.com")
+    /// The full privacy policy (docs/PRIVACY.md, published): "Privacy policy" in Settings → About, "Read
+    /// the full privacy policy" on the Privacy page, and App Store Connect's privacy policy URL.
+    static let privacyPolicyURL: URL? = URL(string: "https://tutti-orchestra.com/auditioner/privacy")
+    /// "Help and support" in Settings → About, and App Store Connect's support URL.
+    static let supportURL: URL? = URL(string: "https://tutti-orchestra.com/auditioner/support")
 }

@@ -36,8 +36,8 @@ every build you send out.
    - **Bundle ID**: pick the identifier from A1.
    - **SKU**: any short word you'll recognise, e.g. `auditioner-ios`.
    - **User access**: Full Access.
-3. **Create**. You land on the app's page. Nothing else is needed here for
-   TestFlight.
+3. **Create**. You land on the app's page. Then do A4 and A5 once, while you
+   are there.
 
 ### A3. Export compliance — already answered
 
@@ -45,6 +45,49 @@ The project sets `ITSAppUsesNonExemptEncryption = NO` in its build settings, so
 App Store Connect will **not** ask the "Does your app use encryption?" question
 on every upload. (The app only uses the standard HTTPS built into iOS, which is
 exempt.)
+
+### A4. Where the app is offered (countries)
+
+Your decision (PLAN.md rows A6 and A6b): the app is **not offered in mainland
+China, Russia, Belarus, Hong Kong or Macau**. The app itself has no
+country-specific behaviour — this list in App Store Connect is the only place
+the rule lives.
+
+1. On the app's page, left-hand menu → **Pricing and Availability**.
+2. **Price**: Free (the app is free during TestFlight, PLAN.md row B5).
+3. Under **Availability** click **Edit** (the first time it may say **Set Up
+   Availability**). Every country and region is ticked.
+4. Untick **China mainland**, **Russia**, **Belarus**, **Hong Kong** and
+   **Macau** (Apple's list may spell it "Macao"). Leave everything else ticked.
+5. **Done** → **Save**.
+
+TestFlight does not look at this list — an invitation works anywhere — so when
+you add testers in B3, **don't invite people who live in those five places**,
+and don't post the public link where they would pick it up.
+
+### A5. Privacy policy and support addresses
+
+Both pages are live on Tutti's site (PLAN.md row U1c):
+
+- Privacy policy: **https://tutti-orchestra.com/auditioner/privacy**
+- Support: **https://tutti-orchestra.com/auditioner/support**
+
+Paste them in three places (copy the addresses exactly, with `https://`):
+
+1. **TestFlight** tab → left-hand list → **Test Information** → **Privacy Policy
+   URL**: the privacy address. On the same page, **Feedback Email** stays your
+   own email address — only testers see it, inside the TestFlight app. **Save**.
+2. **App Store** tab → left-hand list → **App Privacy** → next to **Privacy
+   Policy URL** click **Edit** → paste the privacy address → **Save**. This is
+   the one shown on the App Store page later.
+3. **App Store** tab → the version at the top of the left-hand list (**1.0
+   Prepare for Submission**) → scroll down to the **Support URL** field (it sits
+   near **Keywords**) → paste the support address → **Save** (top right).
+   **Marketing URL** can stay empty. The App Store needs this before review, not
+   TestFlight, but it takes a minute while you are here.
+
+The same two addresses are the **Privacy policy** and **Help and support** rows
+under **Settings → About** in the app.
 
 ## B. Send a build (every time)
 
@@ -104,16 +147,15 @@ There are two kinds of groups:
   - **What to Test** — a few lines, e.g. "Open the cello excerpt pages, try the
     demo in Practice, add a PDF to My parts. Scanning needs the server, which
     isn't live yet."
-  - **Test Information** (under the TestFlight tab): a **feedback email** (yours)
-    and a **privacy policy URL**. The privacy policy URL is **required** for
-    external testing. A simple page is enough for now — the short text under
-    **Settings → About → Privacy** in the app is the summary; put the same
-    text on a web page you control and paste its address. (The full policy
-    comes before the App Store release, see PLAN.md §6.)
+  - **Test Information** (under the TestFlight tab): a **feedback email** (your
+    own — only testers see it, in the TestFlight app) and the **privacy policy
+    URL**, which is **required** for external testing:
+    `https://tutti-orchestra.com/auditioner/privacy` (A5 above).
   - **Beta App Description**, contact name, phone — fill in once.
 - TestFlight → **External Testing** → **+** → group name (`Testers`) → add
   testers by email, or turn on **Public Link** and share the link → add the
-  build → **Submit for Review**.
+  build → **Submit for Review**. Invite only people outside mainland China,
+  Russia, Belarus, Hong Kong and Macau (A4).
 
 ### B4. What testers see
 

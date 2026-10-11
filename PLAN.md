@@ -222,15 +222,24 @@ are machine-translated into the 10 other languages, each reviewed by a second pa
 12 Nov 2026 (A7b). A native speaker's check is still to come. Privacy policy v0.3
 (`docs/PRIVACY.md`) and the in-app Privacy page describe accounts and trends. Two
 Supabase migrations (`20261012000000_accounts.sql`, `20261012010000_trends.sql`).
+Milai's evening answers (A6b, B3b, U1c), applied: the Hong Kong / Macau note-hiding
+code is gone — the app has no country rules, and those two places are simply left
+out in App Store Connect (`docs/TESTFLIGHT.md` A4); a Tutti link that arrives while a
+form is open waits for the form to close; Settings → About gets "Privacy policy" and
+"Help and support" rows to the live Tutti pages, whose addresses also go into App
+Store Connect (`docs/TESTFLIGHT.md` A5). Privacy policy v0.3 is approved; one
+sentence was made precise (only scan uploads and account requests carry the session)
+and `docs/TUTTI-PAGES-PROMPT.md` starts with the one-line update for the live page.
 
-Still needs Milai: (1) read and approve `docs/PRIVACY.md` v0.3 — it is a promise to
-users; (2) Apple Developer: switch on Sign in with Apple for the bundle id, create
-the `.p8` key and run `docs/SETUP.md` step 8; (3) apply the two migrations and
-redeploy with Supabase so trends get their salt (`docs/SETUP.md` step 7); (4) Tutti's
-https address for the Settings row; (5) answers to the builders' open questions
-(who sees the popularity lists; whether "Play" alone counts as practised; whether B1
-"Supabase handles Sign in with Apple" is fine as "our server checks Apple's token"
-instead; TestFlight before App Attest); (6) the translations and the external
+Still needs Milai: (1) Apple Developer: switch on Sign in with Apple for the bundle
+id, create the `.p8` key and run `docs/SETUP.md` step 8; (2) apply the two
+migrations and redeploy with Supabase so trends get their salt (`docs/SETUP.md`
+step 7); (3) in App Store Connect, set the countries (A6b) and paste the privacy and
+support addresses (`docs/TESTFLIGHT.md` A4–A5), and paste the privacy-page update at
+the top of `docs/TUTTI-PAGES-PROMPT.md` into the Tutti session; (4) answers to the
+builders' remaining open questions (who sees the popularity lists; whether "Play"
+alone counts as practised; whether B1 "Supabase handles Sign in with Apple" is fine
+as "our server checks Apple's token" instead); (5) the translations and the external
 TestFlight build (`docs/TESTFLIGHT.md`).
 
 Milai wants testers (orchestra/tour colleagues) as early as possible, so M1 aims at an

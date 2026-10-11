@@ -237,6 +237,20 @@ final class DeepLinkTests: XCTestCase {
         XCTAssertNotNil(SafariLinkItem.make(url), "the in-app Safari view must accept the address")
     }
 
+    /// PLAN U1c: Auditioner's privacy policy and support pages live on Tutti's site, https only — the
+    /// same two addresses App Store Connect gets — and the in-app Safari view must accept both.
+    func testPrivacyPolicyAndSupportPagesAreOnTuttisSiteOverHTTPS() throws {
+        let privacy: URL = try XCTUnwrap(TuttiLink.privacyPolicyURL, "the Privacy policy row must be live (PLAN U1c)")
+        let support: URL = try XCTUnwrap(TuttiLink.supportURL, "the Help and support row must be live (PLAN U1c)")
+        XCTAssertEqual(privacy.absoluteString, "https://tutti-orchestra.com/auditioner/privacy")
+        XCTAssertEqual(support.absoluteString, "https://tutti-orchestra.com/auditioner/support")
+        for url: URL in [privacy, support] {
+            XCTAssertEqual(url.scheme?.lowercased(), "https", "\(url) must be https")
+            XCTAssertEqual(url.host?.lowercased(), "tutti-orchestra.com", "\(url) must be on Tutti's site")
+            XCTAssertNotNil(SafariLinkItem.make(url), "the in-app Safari view must accept \(url)")
+        }
+    }
+
     // MARK: Beta translation pill (PLAN A7)
 
     func testBetaTranslationShowsOnlyOutsideEnglish() {
