@@ -44,6 +44,22 @@ SCORE_TERMS = [
 NUMBER = re.compile(r"\d+")
 
 
+MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August",
+          "September", "October", "November", "December"]
+# Chinese, Japanese and Korean write a month as a number (8月, 8월), so for them a month
+# name in the English may become that number; nothing else may be added or changed.
+NUMERIC_MONTH_LANGUAGES = {"zh-Hans", "zh-Hant", "ja", "ko"}
+
+
+def expected_numbers(text: str, lang: str) -> list[list[str]]:
+    """The digit sequences a faithful translation may contain, as sorted lists."""
+    plain = sorted(NUMBER.findall(text))
+    if lang not in NUMERIC_MONTH_LANGUAGES:
+        return [plain]
+    months = [str(i + 1) for i, name in enumerate(MONTHS) for _ in re.findall(rf"\b{name}\b", text)]
+    return [plain, sorted(plain + months)] if months else [plain]
+
+
 def sha(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
@@ -106,7 +122,7 @@ def check(lang: str, source: dict) -> list[str]:
                 continue
             if text == src["text"].strip():
                 problems.append(f"{where}: identical to the English")
-            if sorted(NUMBER.findall(text)) != sorted(NUMBER.findall(src["text"])):
+            if sorted(NUMBER.findall(text)) not in expected_numbers(src["text"], lang):
                 problems.append(f"{where}: numbers differ {sorted(NUMBER.findall(src['text']))} -> {sorted(NUMBER.findall(text))}")
             for term in src["keepUnchanged"]:
                 if src["text"].count(term) and term not in text:

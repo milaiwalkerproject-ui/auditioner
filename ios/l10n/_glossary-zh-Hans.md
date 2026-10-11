@@ -15,11 +15,11 @@ Arabic numerals (`第 %lld 页`, `A = 440 Hz`), none when the argument is itself
 | excerpt | 片段 | orchestral excerpts = 乐队片段 |
 | excerpt page | 片段页面 | |
 | part (sheet music) | 分谱 | My parts = 我的分谱 |
-| list (audition repertoire list) | 曲目单 | measure word 份; "list"/"lists" both 曲目单 |
-| official list | 官方曲目单 | |
+| list (audition repertoire list) | 曲目单 | measure word 份; "list"/"lists" both 曲目单; lists.phrase.allChairs = 你所选乐器的曲目单, lists.phrase.chair = 你所选席位的曲目单 (no placeholders: the checker compares these keys against the key name) |
+| official list | 官方曲目单 | for a deadline (not repertoire) the unverified text says 官方公告 |
 | repertoire | 曲目 | |
 | catalogue (the app's excerpt catalogue) | 曲库 | match to catalogue = 匹配曲库; link = 关联 |
-| chair / position | 席位 | "Which chair?" = 哪个席位？; "Include all chairs" = 包含所有席位 |
+| chair / position | 席位 | "Which chair?" = 哪个席位？; "Include all chairs" = 包含所有席位; the ", all chairs" fragment in evidence lines = （所有席位）, placed right after the lists phrase |
 | principal | 首席 | |
 | assistant principal | 助理首席 | |
 | section (player) | 声部演奏员 | |
@@ -29,7 +29,7 @@ Arabic numerals (`第 %lld 页`, `A = 440 Hz`), none when the argument is itself
 | concertmaster | 乐队首席 | |
 | any (chair) | 不限 | |
 | round | 轮次 | preliminary = 初试, semi-final = 复试, final = 终试 |
-| readiness | 准备程度 | audition-ready = 可以上场, under tempo = 未达速度 |
+| readiness | 准备程度 | not started = 尚未开始, learning the notes = 正在学谱, under tempo = 未达速度, nearly there = 基本就绪, audition-ready = 可以上场 |
 | reference audio | 参考音频 | "Reference" (segment) = 参考音频 |
 | recording / take | 录音 | "Record" (button) = 录音 |
 | mock audition | 模拟试奏 | behind the screen = 拉幕模式 |
@@ -53,12 +53,12 @@ Arabic numerals (`第 %lld 页`, `A = 440 Hz`), none when the argument is itself
 | checked / verified | 已核对 | |
 | draft | 草稿 | |
 | curated (prose) | 人工撰写 | AI-generated = AI 生成 |
-| notes (text, all senses) | 笔记 | |
-| tier: core / common / occasional | 核心 / 常见 / 偶见 | share = 占比 |
+| notes (text, all senses) | 笔记 | prose sections: history = 历史背景, technique = 技巧, common pitfalls = 常见易错点, practice tips = 练习建议 |
+| tier: core / common / occasional | 核心 / 常见 / 偶见 | share = 占比; "How often it's asked" = 出现频率 |
 | popular / very popular | 热门 / 非常热门 | |
 | server | 服务器 | |
 | account / sign in / sign out | 账户 / 登录 / 退出登录 | Sign in with Apple = 通过 Apple 登录 |
-| Share (iOS) | 共享 | |
+| Share (iOS) | 共享 | Markup (iOS PDF tool) = 标记 |
 | Save (iOS) | 存储 | |
 | OK (iOS) | 好 | |
 | Settings / Files / Photos (apps) | 设置 / 文件 / 照片 | quoted with “ ” when named as apps |
