@@ -1,7 +1,7 @@
 # Glossary — German (de)
 
-Machine translation (PLAN A7, shown with the "Beta-Übersetzung" label until a native speaker
-checks it). The user is addressed as **du** (lowercase mid-sentence, "Du" only at the start of a
+Machine translation, reviewed once by a second pass (PLAN A7, shown with the "Beta-Übersetzung" label
+until a native speaker checks it). The user is addressed as **du** (lowercase mid-sentence, "Du" only at the start of a
 sentence). iOS system wording: Einstellungen, Abbrechen, Fertig, Sichern (Save), Löschen, Teilen,
 Dateien (Files), Fotos (Photos), Markieren (Markup), Mitteilungen (Notifications), Widerrufen /
 Wiederholen (Undo / Redo), Account, Mit Apple anmelden (Sign in with Apple), Apple-ID.
@@ -18,7 +18,7 @@ Sentence case throughout. Typography: „…“ quotes, en dash (–) with space
 | excerpt page | Seite zur Stelle | avoids "Stellenseite", which reads as a job-listings page |
 | part (the player's printed part) | Noten | "Meine Noten scannen", tab "Meine Noten", "Noten hinzufügen"; "Stimme" only for a MusicXML part or the top voice in the editor |
 | notes (musical) | Noten | same word as the printed part; sentences are written so the meaning is clear |
-| reference audio / reference | Referenzaudio / Referenz | "Referenz abspielen" = Play reference |
+| reference audio / reference | Referenzaudio / Referenz | "Referenz abspielen" = Play reference; "Referenzaudio erstellen" = Make reference audio |
 | take | Take | the word used in recording contexts |
 | recording / Record (button) | Aufnahme / Aufnehmen | |
 | save audio (export to Files) | Audio sichern | "Sichern" is Apple's word for Save |
@@ -52,7 +52,7 @@ Sentence case throughout. Typography: „…“ quotes, en dash (–) with space
 | metronome | Metronom | |
 | tap tempo | Tempo tippen | |
 | tuning (A) | Stimmung | "Stimmung (A4)"; "Kammerton" = Tuning of A; "A = 440 Hz" stays as is |
-| loop | Loop | "Zwischen meinen Marken wiederholen" = Loop my marks |
+| loop | Loop / loopen | "Meine Marken loopen" = Loop my marks (toggle); "verlangsamen und loopen" |
 | Mark start / Mark end | Anfang markieren / Ende markieren | "Marken" = marks |
 | play / pause / stop | Abspielen / Pause / Stopp | |
 | note values | Ganze, Halbe, Viertel, Achtel, Sechzehntel, Zweiunddreißigstel | "Punktierte Viertel" = dotted quarter; "Halbe Note", "Viertelnote", "Achtelnote" for the long names |
@@ -66,13 +66,18 @@ Sentence case throughout. Typography: „…“ quotes, en dash (–) with space
 | practise / Practice (tab) | üben / Üben | "Als Nächstes üben" = Practise next; "Übetipps", "Übewerkzeuge" |
 | curated (prose written by people) | Redaktionell | pill label |
 | draft | Entwurf | |
-| checked / verified | geprüft | "Siehe offizielle Liste" = Check the official list |
+| checked / verified | geprüft | never "verifiziert"; "Siehe offizielle Liste" = Check the official list |
 | scrambled (code) | verwürfelt | a code that cannot be turned back into the original |
 | match (catalogue link) | Zuordnung / zuordnen | "Katalog-Zuordnung", "Dem Katalog zuordnen", "Verknüpfen" = Link, "Verknüpfung lösen" = Unlink |
 | Settings → Server | Einstellungen → Server | |
 | Send feedback / Report an error | Feedback senden / Fehler melden | |
 | Sign in / Sign out / Delete account | Anmelden / Abmelden / Account löschen | |
 | Done / OK / Cancel | Fertig / OK / Abbrechen | |
+| Retry / Try again | Erneut versuchen | Apple's wording; one button label for both keys |
+| Scan / Part / Photo(s) + date (default titles) | Scan vom … / Noten vom … / Foto(s) vom … | "Gescannte Noten vom …" = Scanned part … |
+| badge (the open-auditions count) | Hinweis | "Ein eigener Hinweis" in the info sheet |
+| As listed / Random (mock-audition order) | In Listenreihenfolge / Zufällig | |
+| check against your part | mit deinen Noten abgleichen | header "Mit deinen Noten abgleichen"; AI label "gleiche es mit deinen Noten ab" |
 | Add / Remove / Delete | Hinzufügen / Entfernen / Löschen | |
 | Horn / English horn | Horn / Englischhorn | |
 | Timpani / Percussion | Pauken / Schlagzeug | |
