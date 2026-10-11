@@ -4,7 +4,7 @@ would break at runtime.
 
 Usage:
     python3 ios/scripts/merge_translations.py KEYS.json TRANSLATIONS_DIR \
-        [--catalog ios/Auditioner/Localizable.xcstrings] [--check]
+        [--catalog ios/Auditioner/Localizable.xcstrings] [--check] [--only LANG]
 
 KEYS.json         every key the app uses, as dumped by collect_strings.py
                   ({key: {"comment": str, "files": [str]}}).
@@ -17,7 +17,7 @@ A translation is accepted only if it consumes exactly the same format arguments
 as the English key (same types; positional %1$@ forms allowed for reordering),
 keeps "%%" literals, and is not empty. Rejected entries are left out, so the app
 shows English there rather than garbled or crashing text. --check reports and
-writes nothing.
+writes nothing. --only LANG checks/merges just that language (for translators).
 """
 from __future__ import annotations
 
@@ -131,6 +131,11 @@ def main(argv: list[str]) -> int:
     if "--catalog" in argv:
         catalog_path = Path(argv[argv.index("--catalog") + 1])
         args = [a for a in args if a != str(catalog_path)]
+    languages = LANGUAGES
+    if "--only" in argv:
+        only = argv[argv.index("--only") + 1]
+        args = [a for a in args if a != only]
+        languages = [only]
     if len(args) < 2:
         print(__doc__)
         return 2
@@ -148,7 +153,7 @@ def main(argv: list[str]) -> int:
         if info.get("comment") and not entry.get("comment"):
             entry["comment"] = info["comment"]
 
-    for lang in LANGUAGES:
+    for lang in languages:
         path = tdir / f"{lang}.json"
         if not path.exists():
             problems.append(f"{lang}: no {path.name}")
@@ -196,7 +201,7 @@ def main(argv: list[str]) -> int:
                 entry.pop("localizations")
             accepted[lang] += 1
 
-    for lang in LANGUAGES:
+    for lang in languages:
         have = sum(1 for k in keys if lang in ((strings.get(k) or {}).get("localizations") or {}))
         print(f"{lang}: {accepted.get(lang, 0)} accepted, {len(keys) - have} keys still untranslated")
     for p in problems:
