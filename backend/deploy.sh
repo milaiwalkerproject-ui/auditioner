@@ -15,6 +15,20 @@
 #     export SUPABASE_URL=https://xxxx.supabase.co
 #     export SUPABASE_SERVICE_ROLE_KEY=...        # secret — see docs/SETUP.md
 # Without them the deploy is exactly as before and feedback storage stays as it was.
+#
+# Community trends (/v1/trends) need one more secret, TRENDS_SALT. On a run with the
+# Supabase values above, the script makes sure it exists in Secret Manager: the first
+# time it creates a random one (or stores yours if you exported TRENDS_SALT); after
+# that it is NEVER replaced, because a new salt would stop players from deleting
+# what they shared.
+#
+# Sign in with Apple accounts (/v1/account…) turn on when BOTH of these are exported:
+#     export APPLE_TEAM_ID=ABCDE12345       # developer.apple.com → Membership details
+#     export APPLE_KEY_ID=FGHIJ67890        # the Sign in with Apple key's Key ID
+# The two secrets they need — the .p8 key file and ACCOUNT_SECRET — must already be in
+# Secret Manager (docs/SETUP.md, "Sign in with Apple (once)", has the exact commands).
+# This script only checks they exist and lets the server read them; it never reads,
+# prints or changes them.
 
 set -euo pipefail
 
@@ -27,6 +41,15 @@ DAILY_FEEDBACK_LIMIT="${DAILY_FEEDBACK_LIMIT:-20}"
 FEEDBACK_SECRET="${FEEDBACK_SECRET:-auditioner-supabase-service-key}"
 SUPABASE_URL="${SUPABASE_URL:-}"
 SUPABASE_SERVICE_ROLE_KEY="${SUPABASE_SERVICE_ROLE_KEY:-}"
+# Name of the secret that holds TRENDS_SALT (community trends), and an optional value.
+TRENDS_SECRET="${TRENDS_SECRET:-auditioner-trends-salt}"
+TRENDS_SALT="${TRENDS_SALT:-}"
+# Sign in with Apple: the two plain ids, and the names of the two secrets in Secret Manager.
+APPLE_TEAM_ID="${APPLE_TEAM_ID:-}"
+APPLE_KEY_ID="${APPLE_KEY_ID:-}"
+APPLE_KEY_SECRET="${APPLE_KEY_SECRET:-auditioner-apple-signin-key}"
+ACCOUNT_SECRET_NAME="${ACCOUNT_SECRET_NAME:-auditioner-account-secret}"
+SIGNED_IN_DAILY_SCAN_LIMIT="${SIGNED_IN_DAILY_SCAN_LIMIT:-60}"
 
 say() { printf '\n==> %s\n' "$*"; }
 die() { printf '\nStopped: %s\n' "$*" >&2; exit 1; }
@@ -50,6 +73,20 @@ if [ -n "$SUPABASE_URL" ] && [ -n "$SUPABASE_SERVICE_ROLE_KEY" ]; then
 elif [ -n "$SUPABASE_URL" ] || [ -n "$SUPABASE_SERVICE_ROLE_KEY" ]; then
   die "Set both SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY (export them in this Terminal), or neither."
 fi
+
+# 0c. Sign in with Apple on or off for this run? Both ids or neither. Apple's Team ID
+#     and Key ID are each 10 capital letters and digits.
+ACCOUNTS_ON=0
+if [ -n "$APPLE_TEAM_ID" ] && [ -n "$APPLE_KEY_ID" ]; then
+  ACCOUNTS_ON=1
+  [[ "$APPLE_TEAM_ID" =~ ^[A-Z0-9]{10}$ ]] \
+    || die "APPLE_TEAM_ID should be 10 capital letters and digits (developer.apple.com → Account → Membership details → Team ID)."
+  [[ "$APPLE_KEY_ID" =~ ^[A-Z0-9]{10}$ ]] \
+    || die "APPLE_KEY_ID should be 10 capital letters and digits (the Key ID shown next to your Sign in with Apple key)."
+elif [ -n "$APPLE_TEAM_ID" ] || [ -n "$APPLE_KEY_ID" ]; then
+  die "Set both APPLE_TEAM_ID and APPLE_KEY_ID (export them in this Terminal), or neither."
+fi
+[[ "$SIGNED_IN_DAILY_SCAN_LIMIT" =~ ^[0-9]+$ ]] || die "SIGNED_IN_DAILY_SCAN_LIMIT should be a whole number."
 
 # 1. Tools and sign-in.
 command -v gcloud >/dev/null 2>&1 \
@@ -117,6 +154,66 @@ if [ "$FEEDBACK_ON" = 1 ]; then
     --project "$PROJECT" >/dev/null
 fi
 
+# 3c. Community trends: the salt for hashing device ids (TRENDS_SALT). Created once —
+#     random unless you exported your own — and never replaced afterwards: a new salt
+#     would orphan every stored row, so "turn sharing off" could no longer delete them.
+#     The salt only ever travels through a pipe into gcloud; it is never echoed.
+if [ "$FEEDBACK_ON" = 1 ]; then
+  say "Making sure the community-trends salt is in Secret Manager as '$TRENDS_SECRET' (never shown)"
+  if gcloud secrets describe "$TRENDS_SECRET" --project "$PROJECT" >/dev/null 2>&1; then
+    if [ -n "$TRENDS_SALT" ]; then
+      STORED_SALT="$(gcloud secrets versions access latest --secret "$TRENDS_SECRET" --project "$PROJECT" 2>/dev/null || true)"
+      if [ "$STORED_SALT" != "$TRENDS_SALT" ]; then
+        unset STORED_SALT
+        die "A different TRENDS_SALT is already stored. Changing it would stop players from deleting what they shared. Run  unset TRENDS_SALT  and run this script again (the stored salt is kept)."
+      fi
+      unset STORED_SALT
+    fi
+    echo "The stored salt is kept (it must never change)."
+  else
+    if [ -z "$TRENDS_SALT" ]; then
+      TRENDS_SALT="$(od -A n -t x1 -N 32 /dev/urandom | tr -d ' \n')"
+    fi
+    [ "${#TRENDS_SALT}" -ge 32 ] || die "TRENDS_SALT is too short — use at least 32 characters, or unset it to get a random one."
+    printf '%s' "$TRENDS_SALT" \
+      | gcloud secrets create "$TRENDS_SECRET" --data-file=- --replication-policy automatic --project "$PROJECT" >/dev/null
+    echo "Created the secret."
+  fi
+  unset TRENDS_SALT
+  gcloud secrets add-iam-policy-binding "$TRENDS_SECRET" \
+    --member "serviceAccount:$RUNTIME_SA" \
+    --role roles/secretmanager.secretAccessor \
+    --project "$PROJECT" >/dev/null
+fi
+
+# 3d. Sign in with Apple: the .p8 key and ACCOUNT_SECRET must already be in Secret
+#     Manager (docs/SETUP.md, "Sign in with Apple (once)"). Only their existence is
+#     checked; their contents are never read here. Then the server may read them.
+if [ "$ACCOUNTS_ON" = 1 ]; then
+  say "Checking the Sign in with Apple secrets in Secret Manager (never shown)"
+  gcloud services enable secretmanager.googleapis.com --project "$PROJECT"
+  for NAME in "$APPLE_KEY_SECRET" "$ACCOUNT_SECRET_NAME"; do
+    gcloud secrets describe "$NAME" --project "$PROJECT" >/dev/null 2>&1 \
+      || die "The secret '$NAME' isn't in Secret Manager yet. Follow docs/SETUP.md → 'Sign in with Apple (once)', then run this script again."
+  done
+  if [ -z "${RUNTIME_SA:-}" ]; then
+    RUNTIME_SA="$(gcloud run services describe "$SERVICE" --region "$REGION" --project "$PROJECT" \
+      --format 'value(spec.template.spec.serviceAccountName)' 2>/dev/null || true)"
+  fi
+  if [ -z "$RUNTIME_SA" ]; then
+    PROJECT_NUMBER="$(gcloud projects describe "$PROJECT" --format 'value(projectNumber)')"
+    [ -n "$PROJECT_NUMBER" ] || die "Couldn't read the project number to find the server's service account."
+    RUNTIME_SA="$PROJECT_NUMBER-compute@developer.gserviceaccount.com"
+  fi
+  say "Allowing $RUNTIME_SA to read the Sign in with Apple secrets"
+  for NAME in "$APPLE_KEY_SECRET" "$ACCOUNT_SECRET_NAME"; do
+    gcloud secrets add-iam-policy-binding "$NAME" \
+      --member "serviceAccount:$RUNTIME_SA" \
+      --role roles/secretmanager.secretAccessor \
+      --project "$PROJECT" >/dev/null
+  done
+fi
+
 # 4. Build the image on Google's machines (this is the slow step: 5–15 minutes the
 #    first time, because it downloads the note-reading models).
 SHORT_SHA="$(git rev-parse --short HEAD 2>/dev/null || echo nogit)"
@@ -144,6 +241,16 @@ FEEDBACK_FLAGS=()
 if [ "$FEEDBACK_ON" = 1 ]; then
   ENV_VARS="$ENV_VARS,SUPABASE_URL=$SUPABASE_URL"
   FEEDBACK_FLAGS=(--update-secrets "SUPABASE_SERVICE_ROLE_KEY=$FEEDBACK_SECRET:latest")
+  # Community trends salt (step 3c). gcloud merges repeated --update-secrets flags.
+  FEEDBACK_FLAGS+=(--update-secrets "TRENDS_SALT=$TRENDS_SECRET:latest")
+fi
+# Sign in with Apple (step 3d): the scan limit for signed-in players always; the two
+# ids and the two secrets only on a run that turns accounts on.
+ENV_VARS="$ENV_VARS,SIGNED_IN_DAILY_SCAN_LIMIT=$SIGNED_IN_DAILY_SCAN_LIMIT"
+ACCOUNT_FLAGS=()
+if [ "$ACCOUNTS_ON" = 1 ]; then
+  ENV_VARS="$ENV_VARS,APPLE_TEAM_ID=$APPLE_TEAM_ID,APPLE_KEY_ID=$APPLE_KEY_ID"
+  ACCOUNT_FLAGS=(--update-secrets "APPLE_PRIVATE_KEY=$APPLE_KEY_SECRET:latest,ACCOUNT_SECRET=$ACCOUNT_SECRET_NAME:latest")
 fi
 
 say "Deploying to Cloud Run service '$SERVICE'"
@@ -163,6 +270,7 @@ gcloud run deploy "$SERVICE" \
   --port 8080 \
   --update-env-vars "$ENV_VARS" \
   ${FEEDBACK_FLAGS[@]+"${FEEDBACK_FLAGS[@]}"} \
+  ${ACCOUNT_FLAGS[@]+"${ACCOUNT_FLAGS[@]}"} \
   --quiet
 
 # 6. Check it answers and print the address for the app.
@@ -177,10 +285,20 @@ fi
 
 if [ "$FEEDBACK_ON" = 1 ]; then
   say "Feedback storage is ON: 'Send feedback' and 'Report an error' in the app now land in your Supabase table 'feedback'."
+  echo "Community trends are ON too, once the trends migration (supabase/migrations/20261012010000_trends.sql) is applied."
 else
   say "Feedback storage: not changed this run (SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY weren't set)."
   echo "If you never turned it on, it is OFF: the app keeps players' messages on their device until the server"
   echo "accepts them. To turn it on, follow docs/SETUP.md → 'Turn on feedback (Supabase)' and run this script again."
+fi
+
+if [ "$ACCOUNTS_ON" = 1 ]; then
+  say "Sign in with Apple is ON (team $APPLE_TEAM_ID, key $APPLE_KEY_ID), once the accounts migration"
+  echo "(supabase/migrations/20261012000000_accounts.sql) is applied and feedback storage (Supabase) is on."
+else
+  say "Sign in with Apple: not changed this run (APPLE_TEAM_ID / APPLE_KEY_ID weren't set)."
+  echo "If you never turned it on, it is OFF: nobody can sign in yet, and everything else in the app works"
+  echo "without an account. See docs/SETUP.md → 'Sign in with Apple (once)'."
 fi
 
 printf '\nPaste this into the app: Settings → Server\n\n    %s\n\n' "$URL"

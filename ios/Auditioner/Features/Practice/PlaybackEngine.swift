@@ -171,6 +171,7 @@ final class PlaybackEngine: ObservableObject {
             return
         }
         isPlaying = true
+        TrendsTracker.shared.notePractised(excerptId: document.excerptId, instrument: document.instrument) // D6, only while sharing is on
         startPolling()
         poll()
     }

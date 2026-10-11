@@ -25,20 +25,24 @@ struct AuditionFormView: View {
     @State private var sourceURL: String
     @State private var notes: String
 
-    init(mode: Mode, onSaved: @escaping (Audition) -> Void) {
+    /// `prefill` (create only) fills the fields in from an `auditioner://audition/new` link (PLAN U1);
+    /// the player still has to tap Add, so nothing is saved by the link itself.
+    init(mode: Mode, prefill: AuditionPrefill? = nil, onSaved: @escaping (Audition) -> Void) {
         self.mode = mode
         self.onSaved = onSaved
         switch mode {
         case .create:
-            _orchestra = State(initialValue: "")
-            _position = State(initialValue: "")
-            _instrumentRaw = State(initialValue: AppSettings.shared.instrument.rawValue)
-            _hasDeadline = State(initialValue: false)
-            _deadline = State(initialValue: Date())
-            _hasAuditionDate = State(initialValue: false)
-            _auditionDate = State(initialValue: Date())
+            let given: AuditionPrefill = prefill ?? AuditionPrefill()
+            let instrument: Instrument = given.instrument ?? AppSettings.shared.instrument
+            _orchestra = State(initialValue: given.orchestra)
+            _position = State(initialValue: given.position)
+            _instrumentRaw = State(initialValue: instrument.rawValue)
+            _hasDeadline = State(initialValue: given.deadline != nil)
+            _deadline = State(initialValue: given.deadline ?? Date())
+            _hasAuditionDate = State(initialValue: given.auditionDate != nil)
+            _auditionDate = State(initialValue: given.auditionDate ?? Date())
             _completeness = State(initialValue: .unknown)
-            _sourceURL = State(initialValue: "")
+            _sourceURL = State(initialValue: given.sourceURL ?? "")
             _notes = State(initialValue: "")
         case .edit(let audition):
             _orchestra = State(initialValue: audition.orchestra)

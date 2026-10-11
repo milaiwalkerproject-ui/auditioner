@@ -27,6 +27,9 @@ final class AppRouter: ObservableObject {
     @Published var practiceDocument: ScoreDocument?
     /// Excerpt opened from elsewhere (e.g. after a scan was identified).
     @Published var openedExcerptId: String?
+    /// A "New audition" form to open pre-filled (from an `auditioner://audition/new` link, PLAN U1).
+    /// The Auditions tab consumes it; nothing is saved until the player taps Add.
+    @Published var auditionPrefill: AuditionPrefill?
 
     func startScan(_ source: ScanSource, excerpt: Excerpt? = nil) {
         scanContext = ScanContext(source: source, excerpt: excerpt)

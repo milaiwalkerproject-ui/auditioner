@@ -12,6 +12,7 @@ enum AuditionsRoute: Hashable {
 struct AuditionsHomeView: View {
     @EnvironmentObject private var settings: AppSettings
     @EnvironmentObject private var catalog: CatalogStore
+    @EnvironmentObject private var router: AppRouter
     @Environment(\.modelContext) private var modelContext
 
     @Query(sort: \Audition.createdAt, order: .reverse) private var auditions: [Audition]
@@ -20,6 +21,8 @@ struct AuditionsHomeView: View {
     @StateObject private var feed = OpenAuditionsFeedModel()
     @State private var path = NavigationPath()
     @State private var isCreating: Bool = false
+    /// What the "New audition" form starts with: empty from the + button, filled in from a link (PLAN U1).
+    @State private var createPrefill: AuditionPrefill = AuditionPrefill()
     @State private var safariItem: SafariLinkItem? = nil
 
     var body: some View {
@@ -35,6 +38,7 @@ struct AuditionsHomeView: View {
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button {
+                        createPrefill = AuditionPrefill()
                         isCreating = true
                     } label: {
                         Label("New audition", systemImage: "plus")
@@ -51,9 +55,15 @@ struct AuditionsHomeView: View {
         .task(id: feedKey) {
             await feed.refresh(settings: settings)
         }
+        .onAppear {
+            consumeLinkPrefill()
+        }
+        .onChange(of: router.auditionPrefill) { _, _ in
+            consumeLinkPrefill()
+        }
         .sheet(isPresented: $isCreating) {
             NavigationStack {
-                AuditionFormView(mode: .create) { created in
+                AuditionFormView(mode: .create, prefill: createPrefill) { created in
                     path.append(AuditionsRoute.audition(created.id))
                 }
             }
@@ -67,6 +77,15 @@ struct AuditionsHomeView: View {
     /// Reload the feed when the instrument, region or server changes.
     private var feedKey: String {
         settings.instrumentRaw + "|" + settings.region + "|" + settings.serverURL
+    }
+
+    /// Opens the "New audition" form filled in from an `auditioner://audition/new` link, then clears the request.
+    /// Nothing is saved until the player taps Add.
+    private func consumeLinkPrefill() {
+        guard let prefill = router.auditionPrefill else { return }
+        router.auditionPrefill = nil
+        createPrefill = prefill
+        isCreating = true
     }
 
     // MARK: My auditions

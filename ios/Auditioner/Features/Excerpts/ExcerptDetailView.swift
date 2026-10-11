@@ -127,6 +127,7 @@ struct ExcerptDetailView: View {
         ExcerptCopyrightSection(excerpt: excerpt)
         ExcerptFrequencySection(excerpt: excerpt)
         ExcerptNotesSection(excerpt: excerpt, reviewerMode: reviewerMode)
+        PopularBadgeRow(excerpt: excerpt) // D6: its own row, never inside "How often it's asked"
     }
 
     /// iPad: the player for the chosen recording, above the list. One player per screen.

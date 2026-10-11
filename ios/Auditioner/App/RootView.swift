@@ -4,6 +4,7 @@ import SwiftData
 struct RootView: View {
     @EnvironmentObject private var router: AppRouter
     @EnvironmentObject private var settings: AppSettings
+    @EnvironmentObject private var catalog: CatalogStore
     @Environment(\.modelContext) private var modelContext
 
     /// The player is presented from this copy of `router.practiceDocument` so it can wait until the scan
@@ -11,6 +12,8 @@ struct RootView: View {
     /// one go, and SwiftUI can drop a cover that is presented while another one is still animating away.
     @State private var presentedPractice: ScoreDocument? = nil
     @State private var isScanCoverShowing: Bool = false
+    /// An `auditioner://excerpt/…` link named an excerpt this device's catalogue doesn't have (PLAN U1).
+    @State private var isShowingMissingExcerptNote: Bool = false
 
     var body: some View {
         tabs
@@ -31,7 +34,14 @@ struct RootView: View {
                 practiceDocumentChanged(newValue)
             }
             .onOpenURL { url in
-                importSharedFile(url)
+                if url.isFileURL {
+                    importSharedFile(url)
+                } else {
+                    openDeepLink(url)
+                }
+            }
+            .alert("That excerpt isn't in the catalogue yet.", isPresented: $isShowingMissingExcerptNote) {
+                Button("OK", role: .cancel) { }
             }
     }
 
@@ -90,6 +100,16 @@ struct RootView: View {
     private func practiceCoverDidClose() {
         if router.practiceDocument != nil {
             router.practiceDocument = nil
+        }
+    }
+
+    /// An `auditioner://` link from Tutti or elsewhere (PLAN U1, docs/TUTTI.md): open an excerpt page, or the
+    /// Auditions tab with the "New audition" form filled in. Anything else is ignored.
+    private func openDeepLink(_ url: URL) {
+        guard let link = DeepLink.parse(url) else { return }
+        let outcome: DeepLinkRouting.Outcome = DeepLinkRouting.follow(link, router: router, catalog: catalog)
+        if outcome == .excerptMissing {
+            isShowingMissingExcerptNote = true
         }
     }
 

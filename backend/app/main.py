@@ -12,6 +12,10 @@
     GET  /v1/recommendations?instrument=&position=&region=
                                     → {"recommendations": [Recommendation]} (published lists only)
                                     (both: 503 while Supabase isn't configured, 502 when it doesn't answer)
+    POST/DELETE/GET /v1/trends      community practice trends, opt-in (app/trends.py; 503 without TRENDS_SALT)
+    POST /v1/account/apple · GET /v1/account · POST /v1/account/signout · DELETE /v1/account
+                                    optional Sign in with Apple accounts (app/accounts_api.py);
+                                    a valid Bearer session on /v1/omr uses SIGNED_IN_DAILY_SCAN_LIMIT
 
 Errors are always JSON {"detail": "<plain words for a musician>"} — the app decodes the
 error body as a flat {string: string} dictionary, so nothing else may appear in it.
@@ -32,6 +36,7 @@ from starlette.datastructures import Headers
 from starlette.types import ASGIApp, Message, Receive, Scope, Send
 
 from . import __version__
+from .accounts_api import install_accounts, scan_limiter
 from .catalog import Catalog
 from .config import Settings
 from .feed import (
@@ -51,6 +56,8 @@ from .instruments import INSTRUMENT_IDS, lookup
 from .limits import Busy, ConcurrencyGuard, DailyLimiter, clean_device_id
 from .omr import EngineError, EngineTimeout, recognise
 from .postprocess import MalformedMusicXML, parse_meter, postprocess
+from .trends import TrendsService
+from .trends import router as trends_router
 
 log = logging.getLogger("auditioner.api")
 
@@ -184,6 +191,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     )
     # Open-auditions feed (GET /v1/auditions, /v1/recommendations): read-only, published rows only.
     app.state.feed = FeedService(settings.supabase_url, settings.supabase_service_role_key)
+    # Community trends (POST/DELETE/GET /v1/trends): opt-in, hashed contributors, tiers only.
+    app.state.trends = TrendsService(settings.supabase_url, settings.supabase_service_role_key, settings.trends_salt)
+    app.include_router(trends_router)
+    # Optional Sign in with Apple accounts (/v1/account…) and the signed-in scan limiter.
+    install_accounts(app, settings)
     if app.state.feedback.configured and app.state.feedback.salt_is_fallback:
         log.warning("FEEDBACK_HASH_SALT is not set; device ids are hashed with a fallback salt derived from SUPABASE_URL")
     app.add_middleware(UploadSizeLimit, limit=settings.max_upload_bytes + FORM_OVERHEAD_BYTES)
@@ -258,8 +270,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         except ImageTooLarge:
             raise HTTPException(400, MSG_TOO_MANY_PIXELS) from None
 
-        limiter: DailyLimiter = app.state.limiter
-        if not limiter.allow(device_id):
+        # Signed in (valid Bearer session) → per-account limit; otherwise per device.
+        limiter, limit_key = await scan_limiter(request, device_id)
+        if not limiter.allow(limit_key):
             raise HTTPException(429, MSG_LIMIT)
 
         guard: ConcurrencyGuard = app.state.guard
@@ -271,7 +284,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                     raise Busy()
                 raw_xml = await recognise(data, settings, timeout=left)
         except Busy:
-            limiter.refund(device_id)
+            limiter.refund(limit_key)
             raise HTTPException(503, MSG_BUSY, headers={"Retry-After": "60"}) from None
         except NotAnImage:
             raise HTTPException(415, MSG_NOT_IMAGE) from None

@@ -8,6 +8,7 @@ import Foundation
 //                      (503 when feedback storage isn't set up on the server; the app keeps the report queued)
 //   GET  /v1/auditions?instrument=&region=   → {auditions: [FeedVacancy]} (published only)
 //   GET  /v1/recommendations?instrument=&position=&region= → {recommendations: [Recommendation]}
+//   POST/DELETE/GET /v1/trends  → see APIClient+Trends.swift (opt-in "Popular with other players", PLAN D6)
 //   GET  /healthz      → {"status":"ok"}
 // Every request carries X-Device-Id (random per install) and X-App-Version.
 
@@ -108,6 +109,10 @@ final class APIClient {
         req.httpMethod = method
         req.setValue(deviceId, forHTTPHeaderField: "X-Device-Id")
         req.setValue(appVersion, forHTTPHeaderField: "X-App-Version")
+        // Signed in (PLAN B2): the server counts scans per account instead of per device. See APIClient+Account.swift.
+        if let sessionToken: String = KeychainStore.currentSessionToken() {
+            req.setValue("Bearer " + sessionToken, forHTTPHeaderField: "Authorization")
+        }
         req.timeoutInterval = 120
         return req
     }

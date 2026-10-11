@@ -1,0 +1,42 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "NSAppleMusicUsageDescription" : {
+      "comment" : "Permission prompt (Apple Music). Keep the exact meaning: the app only plays recordings from the start of an excerpt when the player has a subscription.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auditioner plays Apple Music recordings from the start of an excerpt when you have a subscription."
+          }
+        }
+      }
+    },
+    "NSCameraUsageDescription" : {
+      "comment" : "Permission prompt (camera). Shown the first time the player scans a part.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auditioner uses the camera to scan your part so it can recognise the excerpt and make reference audio."
+          }
+        }
+      }
+    },
+    "NSMicrophoneUsageDescription" : {
+      "comment" : "Permission prompt (microphone). Shown the first time the player records a take.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auditioner records your practice so you can compare it with the reference."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

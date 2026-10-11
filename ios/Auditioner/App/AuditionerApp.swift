@@ -12,6 +12,10 @@ struct AuditionerApp: App {
             RootView()
                 // Resends queued "Report an error" / "Send feedback" messages on launch and when the app comes back.
                 .flushesFeedbackQueue()
+                // Signed in with Apple? Ask Apple once per launch whether that still stands (PLAN B2).
+                .task { await AccountStore.shared.refreshCredentialState() }
+                // Opt-in "Popular with other players" (PLAN D6): uploads this week's practised excerpts, at most once per 12 h.
+                .syncsPracticeTrends()
                 .environmentObject(catalog)
                 .environmentObject(router)
                 .environmentObject(settings)

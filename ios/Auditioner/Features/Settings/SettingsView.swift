@@ -32,8 +32,11 @@ struct SettingsView: View {
         NavigationStack {
             Form {
                 profileSection
+                AccountSettingsSection()
+                TrendsSettingsSection()
                 tuningSection
                 serverSection
+                LanguageSettingsSection()
                 aboutSection
                 if reviewerRevealed || reviewerMode {
                     reviewerSection
@@ -237,6 +240,7 @@ struct SettingsView: View {
             } label: {
                 Text("Privacy")
             }
+            TuttiLinkRow()
             Button {
                 isSendingFeedback = true
             } label: {

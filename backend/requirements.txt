@@ -5,6 +5,11 @@ python-multipart>=0.0.9,<1
 pillow>=12.1.1,<13
 # Feedback storage: one PostgREST insert per report (app/feedback.py).
 httpx>=0.27,<1
+# Sign in with Apple (app/accounts.py): RS256 check of Apple's identity token, the
+# ES256 client secret, Fernet + HKDF for the stored refresh token. PyJWT 2.10.1 fixed
+# a partial issuer match (CVE-2024-53861); later 2.x fixes are welcome.
+PyJWT[crypto]>=2.12,<3
+cryptography>=46.0.5,<51
 
 # homr — the note-reading engine. AGPL-3.0: it is installed for its command line
 # only and run as a separate process (app/omr.py); nothing in app/ imports it.

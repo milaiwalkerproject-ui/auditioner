@@ -237,6 +237,7 @@ struct PracticePlayerContent: View {
         guard let result = compare.stop() else { return }
         let take = PracticeTake(title: result.plan.title, fileName: result.fileName, durationSeconds: result.durationSeconds)
         take.excerptId = document.excerptId
+        TrendsTracker.shared.notePractised(excerptId: document.excerptId, instrument: document.instrument) // D6, only while sharing is on
         take.scoreId = (document.origin == .demo) ? nil : document.id
         take.referenceBPM = result.plan.tempoBPM
         take.referenceStartBeat = result.plan.startBeat

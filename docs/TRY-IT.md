@@ -174,6 +174,15 @@ of the error list and send it to me.
 - The first time you read notes the app asks for your consent: the marked part
   of the page goes to our server, is used only to read the notes, and is deleted
   within 24 hours. Nothing is ever sent to an AI service.
+- **Popular with other players** (off by default) — **Settings → Popular with
+  other players → Share what I practise**; the app asks "Are you 18 or older?"
+  first. Then play a reference, record a take or finish a mock audition: the
+  excerpts are remembered for this week and sent when the app comes to the front
+  (at most twice a day). The Excerpts tab gets a "Popular with cello players"
+  section under "Most asked for your chair", and excerpt pages a small
+  "Very popular" / "Popular" line. With fewer than 20 players sharing you see
+  "Not enough players share yet to show this." — expected during TestFlight.
+  Turning the switch off deletes what you shared.
 
 ## 8. Reviewer mode (to see draft excerpts)
 

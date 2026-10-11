@@ -12,6 +12,7 @@ twice is harmless (`create table if not exists`, …).
 |---|---|
 | `20261011000000_feedback.sql` | `public.feedback` — in-app "Report an error" / "Send feedback" messages (server-only, no RLS policies) |
 | `20261011010000_auditions.sql` | Open-auditions feed: `orchestras`, `audition_sources`, `vacancies`, `vacancy_items`, `crawl_runs`, the `open_auditions` / `excerpt_frequency` / `excerpt_open_now` views and the `excerpt_recommendations` function (written by the crawler, read by the app — published rows only; see `docs/FEED.md`) |
+| `20261012000000_accounts.sql` | Optional Sign in with Apple accounts: `accounts` (hashed Apple id, encrypted Apple refresh token, two dates — no name, no email) and `account_sessions` (sha256 of each session token); server-only, no RLS policies (`backend/app/accounts.py`, `docs/SETUP.md` step 8) |
 
 ## Applying a migration (Milai, plain words)
 

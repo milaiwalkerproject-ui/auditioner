@@ -4,8 +4,8 @@
 (test version 0.1.0).*
 
 Auditioner helps orchestral musicians prepare for auditions. We designed it to
-collect as little as possible. You do not need an account, and the app has no
-ads, no tracking and no analytics.
+collect as little as possible. You do not need an account (signing in with Apple
+is optional, see below), and the app has no ads, no tracking and no analytics.
 
 ## What stays on your device
 
@@ -47,6 +47,42 @@ and troubleshooting. We do not use them to identify you.
 The first time you read notes, the app asks for your permission and explains
 this. You can use everything else in the app without ever sending a scan.
 
+## If you sign in with Apple (optional)
+
+You can use the whole app without an account. Signing in with Apple only raises
+your daily scan limit (the server allows more scans per signed-in account than
+per device). **Skip** is always available, and you can sign in or out at any
+time in **Settings → Account**.
+
+When you sign in, the app asks Apple for **no name and no email**. Our server
+checks the sign-in with Apple and then stores:
+
+- a one-way scrambled code (HMAC) of the identifier Apple gives us for you —
+  not the identifier itself, so it cannot be turned back into your Apple ID;
+- an encrypted key from Apple whose only use is to disconnect the app from your
+  Apple ID when you delete the account;
+- the date the account was created and when it was last used;
+- a scrambled code for the sign-in session on your device, so the server can
+  recognise it. A session not used for a year stops working.
+
+On your device the app keeps the session key and Apple's identifier for the app
+in the keychain of that device only; they are not copied to other devices or to
+backups.
+
+While signed in, scan requests carry the session so the server can count them
+against your account instead of your device. Nothing else in the app changes:
+your parts, recordings, notes and auditions stay on your device, and the server
+cannot link them to the account.
+
+**Delete account** (Settings → Account) asks Apple to disconnect the app from
+your Apple ID and then deletes the account and its sessions from our server. If
+Apple cannot be reached, nothing is deleted and the app says so; try again a
+few minutes later. Deleting the account does not remove anything from your
+device. **Sign out** only removes the session from the device.
+
+Account records are kept by our database provider, **Supabase** (hosted in the
+United States), in tables only our server can read.
+
 ## Feedback you send
 
 There is no public contact email. You reach us through **Send feedback**
@@ -71,6 +107,34 @@ people; it is **never sent to any AI service**.
 If the server is not reachable the message waits on your device and is sent
 later. Deleting the app deletes unsent messages.
 
+## Popular with other players (optional, off unless you turn it on)
+
+In **Settings → Popular with other players** you can choose to **share what you
+practise**. It is off until you turn it on, and the app first asks whether you
+are 18 or older; the feature is for players 18 and older only.
+
+While it is on, the app sends our server **about once a week** (at most twice a
+day), for each instrument you practised:
+
+- your instrument,
+- the week (for example "2026-W41"),
+- which **catalogue excerpts** you practised that week — the excerpts whose
+  reference you played, recorded against, or put in a mock audition. Nothing you
+  typed, no recordings, notes, scans or parts.
+
+The server stores this against a one-way scrambled code of the random install
+number (not the number itself), in a table only our server can read, at our
+database provider **Supabase** (United States). Rows older than 26 weeks are
+deleted. From these rows the server works out which excerpts are **popular**
+with players of your instrument over the last eight weeks, and shows that only
+when **at least 20 players** share, as two tiers ("Very popular", "Popular") —
+never as numbers, and never mixed into "what orchestras ask". Only players who
+share see these lists.
+
+**Turning sharing off deletes everything you shared** from our server (the app
+asks the server straight away and tries again later if it couldn't be reached)
+and forgets this week's list on your device.
+
 ## Videos and music from other services
 
 - **YouTube.** Excerpt pages can play videos in YouTube's own embedded player.
@@ -86,13 +150,16 @@ later. Deleting the app deletes unsent messages.
 
 ## Children
 
-Auditioner is intended for people aged 13 and over.
+Auditioner is intended for people aged 13 and over. Sharing what you practise,
+and the "Popular with other players" lists, are for players 18 and older only.
 
 ## Your choices
 
 - You can use the app without reading notes from scans; then nothing leaves
   your device except when you play a video or music.
 - You can delete everything on the device by deleting the app.
+- You can stop sharing what you practise at any time (Settings → Popular with
+  other players); that deletes what you shared from our server.
 - Questions or requests about your data — including asking us to delete feedback
   you sent — go through **Send feedback** in Settings or **Report an error** on an
   excerpt page. Mention the date you sent the message so we can find it; we don't

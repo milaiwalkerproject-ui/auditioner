@@ -21,6 +21,13 @@ the two in step.
 | `GET /v1/instruments` | — | `{"instruments": ["violin", …]}` (handy for checks) |
 | `GET /v1/auditions?instrument=cello&region=uk` | `instrument` (catalogue id, required), `region` (optional; absent = every region) | `{"auditions": [FeedVacancy]}` — open, published auditions only (see below) |
 | `GET /v1/recommendations?instrument=cello&position=section&region=uk` | `instrument`, `position` (the app's position id), `region` (optional; absent = every region) | `{"recommendations": [Recommendation]}` — most asked first, from published lists only (see below) |
+| `POST /v1/trends` | JSON `{"instrument": "cello", "week": "2026-W41", "excerptIds": ["…"]}` — this or last ISO week (UTC), at most 50 ids. Header `X-Device-Id` required. | `204` — community trends, opt-in (see "Community trends" below) |
+| `DELETE /v1/trends` | header `X-Device-Id` | `204` — everything this device shared is deleted |
+| `GET /v1/trends?instrument=cello` | `instrument` (catalogue id) | `{"enough": true, "fromWeek": "2026-W34", "toWeek": "2026-W41", "trends": [{"excerptId": "…", "tier": "very-popular"}]}` — tiers only, never counts |
+| `POST /v1/account/apple` | JSON `{"identityToken": "…", "authorizationCode": "…", "nonce": "<raw nonce>"}` from Sign in with Apple | `{"accountId": "<uuid>", "sessionToken": "…", "dailyScanLimit": 60}` (see "Accounts" below) |
+| `GET /v1/account` | header `Authorization: Bearer <sessionToken>` | `{"accountId": "…", "dailyScanLimit": 60, "createdAt": "YYYY-MM-DD"}` |
+| `POST /v1/account/signout` | Bearer | `204` — this session only |
+| `DELETE /v1/account` | Bearer | `204` — Apple token revoked, then the account and all its sessions deleted |
 
 Errors are always JSON `{"detail": "plain words for a musician"}` and nothing else
 in the body — the app decodes it as a flat `[String: String]` dictionary:
@@ -28,6 +35,7 @@ in the body — the app decodes it as a flat `[String: String]` dictionary:
 | Status | When |
 |---|---|
 | 400 | missing `X-Device-Id`, unknown instrument, bad meter / transposition / hints, or a picture claiming over 50 megapixels; for `/v1/feedback` also a blank message or one over 2000 characters after trimming; for `/v1/auditions` and `/v1/recommendations` a missing or unknown instrument, position or region |
+| 401 | `/v1/account…`: no, malformed, unknown or expired Bearer session — `"You're signed out. Sign in again."` (never on `/v1/omr`: a bad token there just means the device limit) |
 | 413 | upload over 15 MB (refused by Content-Length before reading, or cut off while a chunked body streams in) |
 | 415 | the file isn't a JPEG/PNG (or another picture Pillow can read) |
 | 422 | a field is missing or has the wrong type (for `/v1/feedback`: `context` outside `[a-z0-9:-]{1,64}`, over-long fields) |
@@ -154,6 +162,142 @@ then says "No … lists … yet" for that region, and the every-region sum leave
 out); and `excerpt_open_now` counts a deadline as open up to *today* (database time),
 while the feed keeps it one day longer.
 
+### Community trends (`/v1/trends`)
+
+`app/trends.py`. "Popular with cellists" (PLAN D6): **opt-in in the app, off by
+default**, shown only with **at least 20 contributors**, as **tiers, never counts**,
+hidden for under-18s and never mixed into "What orchestras ask" (those last two are the
+app's job). Same `SUPABASE_URL` + service-role key as the feed, plus `TRENDS_SALT`;
+the table is `trend_contributions`
+(`supabase/migrations/20261012010000_trends.sql`, RLS on, no policies, service role
+only).
+
+**What is stored.** One row per contributor + instrument + ISO week: the instrument,
+the excerpt ids, the week, `updated_at`. The contributor is
+`HMAC-SHA256(TRENDS_SALT, X-Device-Id)` (hex) — the raw device id is never stored,
+sent to Supabase or logged, and neither the hash nor the salt is ever logged (httpx's
+own request log line has the hash blanked out). **Never change `TRENDS_SALT` once it
+is set**: rows hashed with the old salt can no longer be found, so a player who turns
+sharing off could not have them deleted (the 26-week retention would still remove
+them). `deploy.sh` creates it once and refuses to replace it.
+
+**`POST /v1/trends`** — checks, in order: `X-Device-Id` (400), `instrument` (one of
+the 22 ids, 400), `week` (`YYYY-Www` with ASCII digits and a capital W; a real ISO week —
+`2025-W53` is not one; and only **this week or last week, reckoned in UTC** — 400 in
+plain words otherwise), at most **50** `excerptIds` (more → 400, nothing stored), then
+503 while not set up. Excerpt ids the **server catalogue** does not list for that
+instrument are dropped silently: `Catalog.excerpts` — the `content/catalog/<instrument>.json`
+file baked into the image, `published` only (drafts too when `INCLUDE_DRAFTS=1`); an
+instrument without a catalogue file keeps nothing. Repeats and blanks are dropped,
+the rest sorted, and the row is **upserted** (PostgREST `on_conflict` +
+`Prefer: resolution=merge-duplicates`), replacing that week's earlier post. If no
+known id is left, that week's row is **deleted** instead (an empty list is never
+stored). 204, no body.
+
+**`DELETE /v1/trends`** — deletes every row of that contributor, every instrument and
+week (the app calls it when the player turns sharing off). 204.
+
+**`GET /v1/trends?instrument=`** — no device id needed. Reads the 8 most recent ISO
+weeks, the current one included (`fromWeek`…`toWeek`), paged at 1,000 rows. A
+contributor counts once however many weeks they shared; an excerpt counts once per
+contributor who listed it. `enough` is true from **20 distinct contributors**; below
+that `trends` is `[]`. Otherwise each excerpt still in the catalogue gets a tier from
+the share of contributors who listed it — `very-popular` ≥ 40 %, `popular` ≥ 15 %
+(whole-number maths: 8 of 20 is exactly 40 %), left out below — sorted by tier, then
+by excerpt id, so not even the ranking within a tier leaks. **No counts or shares are
+ever in the answer.** Kept in memory for **an hour** per instrument and week (per
+instance; a failed answer is never kept) and sent with
+`Cache-Control: public, max-age=3600`.
+
+**Retention.** Rows for weeks more than 26 weeks before the current one are deleted
+(`DELETE …?week=lt.<cutoff>`; the fixed-width week text sorts in week order), at most
+once an hour per instance, on any `/v1/trends` request. A failed retention delete is
+logged and retried on the next request; it never fails the request itself.
+
+**Errors.** 400 as above; 422 when `excerptIds` is not a list of strings; 502
+`"Practice trends didn't answer. Try again in a few minutes."` when Supabase is
+unreachable, refuses (e.g. the migration isn't applied) or sends something
+unexpected — only the status or exception class is logged; 503 `"Sharing what you
+practise isn't set up on the server yet."` while `SUPABASE_URL`,
+`SUPABASE_SERVICE_ROLE_KEY` or `TRENDS_SALT` is missing (parameters are checked first,
+so a bad one is still a 400).
+
+**Known limits.** Device ids are minted by the app, so someone determined could post
+as many "contributors" as they like and push an excerpt up a tier; the 20-contributor
+floor and the coarse tiers limit what that achieves, and App Attest (PLAN B3) is the
+real fix. Counting is per Supabase project, not per Cloud Run instance; only the cache
+and the retention timer are per instance.
+
+### Accounts (`/v1/account…`, Sign in with Apple)
+
+`app/accounts.py` (Apple, crypto, Supabase, sessions) and `app/accounts_api.py`
+(routes, scan limit). PLAN B2: optional — every part of the app works without an
+account; signing in only raises the daily scan limit for now — and deletable in the
+app, which revokes Apple's token. Off (503 `"Accounts aren't set up on the server
+yet."`) until `APPLE_TEAM_ID`, `APPLE_KEY_ID`, `APPLE_PRIVATE_KEY`, `ACCOUNT_SECRET`,
+`SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` are all set, the key reads as an EC
+P-256 `.p8` and `ACCOUNT_SECRET` is at least 32 characters (the server logs which
+names are missing, never values). Tables: `supabase/migrations/20261012000000_accounts.sql`.
+
+**Signing in** (`POST /v1/account/apple`):
+
+1. The identity token is checked: RS256 against Apple's keys
+   (`https://appleid.apple.com/auth/keys`, kept 24 h; a token signed with a key id we
+   haven't seen makes the server look again, at most once a minute; if Apple can't be
+   reached the last good set is used), issuer `https://appleid.apple.com`, audience
+   `APPLE_BUNDLE_ID`, not expired (60 s leeway for clocks), and its `nonce` claim must
+   be the sha256 hex of the raw `nonce` in the request (the app sends Apple the hash
+   and us the raw value). Anything wrong → 400 `"Apple couldn't confirm this sign-in.
+   Try signing in again."`
+2. The one-time `authorizationCode` is swapped at `https://appleid.apple.com/auth/token`
+   with a client secret the server signs per call (ES256 with the `.p8` key: `iss` =
+   Team ID, `sub` = bundle id, `aud` = `https://appleid.apple.com`, `kid` = Key ID,
+   5 minutes). An expired or used code → 400; the `id_token` Apple returns must name
+   the same user. Apple unreachable, refusing our client secret or answering without
+   a refresh token → 502 `"Couldn't reach Apple to finish signing in. Try again in a
+   few minutes."` — and **nothing is stored**.
+3. One upsert into `accounts` keyed on `apple_sub_hash = HMAC-SHA256(ACCOUNT_SECRET,
+   sub)` (a returning player gets the same account; the newest refresh token replaces
+   the old one), then a session: `secrets.token_urlsafe(32)` goes to the app, only its
+   sha256 hex goes into `account_sessions`. Sessions unused for 365 days are deleted on
+   the next sign-in. Supabase trouble → 502 `"Our account store didn't answer. …"`.
+
+**Using a session.** `Authorization: Bearer <sessionToken>`. `last_used_at` (and the
+account's `last_seen_at`) are written at most once a day. A session unused for 365
+days → 401 and it is deleted.
+
+**Deleting** (`DELETE /v1/account`): the stored refresh token is decrypted and
+revoked at `https://appleid.apple.com/auth/revoke` (`token_type_hint=refresh_token`);
+only when Apple confirms (or says the token was already invalid) are the account and
+— by `on delete cascade` — all its sessions deleted. Apple unreachable or refusing →
+502 `"Couldn't reach Apple to finish deleting your account. Try again in a few
+minutes."` and nothing is deleted. One exception: if the stored token can't be
+decrypted (only possible after `ACCOUNT_SECRET` changed) it can never be revoked by
+us, so the account is deleted anyway and a warning is logged.
+
+**What is kept.** Per account: the HMAC of Apple's user id (never the id), the
+refresh token encrypted with Fernet (key = HKDF-SHA256 of `ACCOUNT_SECRET`), two
+dates. No email, no name — the app doesn't ask Apple for them. Per session: the
+sha256 of the token and two dates. Log lines carry only HTTP status codes, Apple's
+fixed error codes and exception class names — never a token, code, nonce, refresh
+token, Apple id or secret (`tests/test_accounts.py` checks this). Answers carrying a
+session token are sent with `Cache-Control: no-store`.
+
+**`ACCOUNT_SECRET` must never change** once players have signed in: a new value
+gives every returning player a fresh, empty account (their old one is orphaned) and
+makes the stored refresh tokens unreadable, so deleting an old account can no longer
+revoke Apple's token.
+
+**Scan limit.** A `/v1/omr` request with a valid Bearer session counts against a
+per-account allowance (`SIGNED_IN_DAILY_SCAN_LIMIT`, default 60, a separate in-memory
+`DailyLimiter` keyed by account id) instead of the device's `DAILY_SCAN_LIMIT`. The
+session look-up has a 3-second budget and its answer (also "no such session") is
+kept 5 minutes per token per instance; signing out or deleting on the same instance
+forgets it at once (another instance may keep counting the old token as signed in for
+up to 5 minutes — only the limit is affected). A missing, malformed, unknown or
+expired token, accounts being off or Supabase being down **never fail a scan**: it
+simply counts against the device limit.
+
 ### What `/v1/omr` does with the picture
 
 1. Reads the upload (chunked, capped at 15 MB) and reads the picture's header only:
@@ -216,8 +360,10 @@ In-memory, per instance, per `X-Device-Id`: a sliding 24-hour window of
 device's daily limit. This stops a runaway client; it is not a security boundary
 (anyone can mint device ids, and the counters reset with the instance). **M5
 (PLAN.md B3): App Attest replaces/augments it** — the app proves it is the genuine
-build on a real device and signed-in users get a higher, server-stored limit. The
-header-based limiter stays as the fallback.
+build on a real device. The header-based limiter stays as the fallback. Signed-in
+players (a valid Bearer session) already get their own per-account allowance,
+`SIGNED_IN_DAILY_SCAN_LIMIT` (default 60) — see "Accounts" above; it is in memory per
+instance too.
 
 ## Environment variables
 
@@ -239,10 +385,23 @@ header-based limiter stays as the fallback.
 | `SUPABASE_SERVICE_ROLE_KEY` | unset | Supabase service-role key — **a secret**: on Cloud Run it comes from Secret Manager (`backend/deploy.sh`, secret `auditioner-supabase-service-key`), never from the repo |
 | `FEEDBACK_HASH_SALT` | unset | salt for hashing device ids in feedback rows; empty → fallback derived from `SUPABASE_URL` (see above) |
 | `DAILY_FEEDBACK_LIMIT` | `20` | feedback messages per device per sliding 24 h |
+| `APPLE_TEAM_ID` | unset | Apple Developer Team ID (10 characters); one of the settings that turn `/v1/account…` on |
+| `APPLE_KEY_ID` | unset | Key ID of the Sign in with Apple key (10 characters) |
+| `APPLE_PRIVATE_KEY` | unset | **a secret**: the text of the Sign in with Apple `.p8` key (EC P-256). On Cloud Run it comes from Secret Manager (secret `auditioner-apple-signin-key`) |
+| `APPLE_BUNDLE_ID` | `com.milaiwalker.auditioner` | the app's bundle id: the identity token's audience and the `client_id` sent to Apple |
+| `ACCOUNT_SECRET` | unset | **a secret**, at least 32 characters: key for `HMAC-SHA256` of Apple's user id and (through HKDF-SHA256) for encrypting Apple refresh tokens. On Cloud Run it comes from Secret Manager (secret `auditioner-account-secret`). Never change it once set |
+| `SIGNED_IN_DAILY_SCAN_LIMIT` | `60` | scans per signed-in account per sliding 24 h (instead of `DAILY_SCAN_LIMIT`) |
+| `TRENDS_SALT` | unset | **a secret**: key for `HMAC-SHA256(TRENDS_SALT, X-Device-Id)` in `trend_contributions`; with Supabase it turns `/v1/trends` on (503 without it). On Cloud Run it comes from Secret Manager (`deploy.sh`, secret `auditioner-trends-salt`, created once with a random value). Never change it once set |
 
 The only secret so far is the Supabase service-role key, and it lives in Google
 Secret Manager (`deploy.sh` stores it from the `SUPABASE_SERVICE_ROLE_KEY` variable
-in Milai's Terminal and mounts it with `--update-secrets`; it is never echoed). Later
+in Milai's Terminal and mounts it with `--update-secrets`; it is never echoed).
+`TRENDS_SALT` takes the same route (secret `auditioner-trends-salt`), except that
+`deploy.sh` makes it up itself the first time and never replaces it. The Sign in
+with Apple key (`.p8`) and `ACCOUNT_SECRET` are put into Secret Manager once by hand
+with the commands in `docs/SETUP.md` ("Sign in with Apple (once)"); `deploy.sh` only
+checks they exist and mounts them (`APPLE_PRIVATE_KEY`, `ACCOUNT_SECRET`) when
+`APPLE_TEAM_ID` and `APPLE_KEY_ID` are exported. Later
 keys (Anthropic, YouTube) follow the same route — never into the repo (CLAUDE.md).
 
 ## Run it locally
@@ -286,7 +445,25 @@ evidence wording, the all-regions sum, the 10-minute cache (fake clock), 400/503
 and that PostgREST error bodies are never logged. Its orchestras and works are
 fictional and it contains no bar numbers. The fixture catalogue in `tests/fixtures/catalog/`
 keeps the tests independent of `content/catalog`, which is also exercised when files
-exist there. `.github/workflows/backend.yml` runs the suite on every push that
+exist there. `tests/test_trends.py` drives `/v1/trends` against a fake
+`trend_contributions` table on an `httpx.MockTransport`: ISO-week helpers (week 53,
+the year boundary, UTC), the 19/20-contributor threshold, the 40 %/15 % tier
+boundaries, no numbers anywhere in the answer, unknown and draft excerpts dropped,
+the 50-id cap, replace-on-repost, delete-everything, 26-week retention (hourly, never
+failing a request), the one-hour cache, 400/422/502/503, and that neither the raw
+device id, the contributor hash nor the salt reaches Supabase or a log line.
+`tests/test_accounts.py` drives `/v1/account…` and the signed-in scan limit against a
+fake Apple and a fake Supabase on one `httpx.MockTransport`, with an RSA key (Apple's
+signing key) and an EC P-256 key (the `.p8`) generated at test time — no key material
+in the repo: the happy path (hashed id, encrypted refresh token, hashed session, a
+valid ES256 client secret), wrong audience/issuer, expired, nonce mismatch, HS256,
+key rotation and the 24-hour key cache, 503 for each missing setting, code-exchange
+failures (502, nothing stored), GET/sign-out/delete, delete with Apple down (502,
+account kept), the 365-day expiry, signed-in vs device limits on `/v1/omr` with
+valid, bad and unknown tokens and with Supabase down, the 5-minute look-up cache, and
+that no token, code, nonce, refresh token, Apple id or secret reaches a log line or a
+response.
+`.github/workflows/backend.yml` runs the suite on every push that
 touches `backend/**` or `content/**`.
 
 ## Docker and Cloud Run
@@ -311,7 +488,11 @@ script also enables Secret Manager, stores the key as `auditioner-supabase-servi
 SUPABASE_SERVICE_ROLE_KEY=auditioner-supabase-service-key:latest` plus
 `SUPABASE_URL` in the env vars (this also turns on the auditions feed endpoints, which
 read with the same key); without them it deploys as before and leaves those settings
-untouched. The non-programmer walkthrough is in `docs/SETUP.md`.
+untouched. On the same runs it makes sure the community-trends salt exists as
+`auditioner-trends-salt` (created once — random, or `TRENDS_SALT` if exported — and
+never replaced; a different exported value stops the script), grants the same
+account access, and mounts it with `--update-secrets TRENDS_SALT=auditioner-trends-salt:latest`.
+The non-programmer walkthrough is in `docs/SETUP.md`.
 
 The image has not been built in the cloud coding environment (no Docker daemon,
 GitHub release downloads blocked), so the first `deploy.sh` run is the first real

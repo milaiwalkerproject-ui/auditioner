@@ -107,6 +107,7 @@ struct ExcerptBrowserView: View {
         List {
             if showsMostAsked {
                 mostAskedSection
+                PopularSection(instrument: instrument, pool: allForInstrument) // D6: its own section, never mixed into the above
             }
             ForEach(sections) { section in
                 Section(section.title) {

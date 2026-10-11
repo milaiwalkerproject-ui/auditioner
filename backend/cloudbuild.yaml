@@ -4,6 +4,13 @@
 #   gcloud builds submit . --config backend/cloudbuild.yaml \
 #       --substitutions _IMAGE=us-central1-docker.pkg.dev/PROJECT/auditioner/auditioner-api:TAG \
 #       --ignore-file backend/.gcloudignore
+#
+# No secret belongs in this build or in the image. Runtime secrets (the Supabase
+# service-role key, TRENDS_SALT for community trends, …) live in Secret Manager and are
+# attached to the Cloud Run service by deploy.sh with --update-secrets at deploy time.
+# The same goes for Sign in with Apple: the .p8 key (secret auditioner-apple-signin-key
+# → APPLE_PRIVATE_KEY) and ACCOUNT_SECRET (secret auditioner-account-secret); the
+# plain APPLE_TEAM_ID / APPLE_KEY_ID / SIGNED_IN_DAILY_SCAN_LIMIT are env vars set there.
 steps:
   - name: gcr.io/cloud-builders/docker
     # BuildKit reads backend/Dockerfile.dockerignore (the classic builder ignores it).

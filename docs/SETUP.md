@@ -169,6 +169,12 @@ the two apps' data and keys never mix.
 
    Later runs of `./backend/deploy.sh` *without* those two lines leave feedback
    exactly as it is. Run them again only to change the key or the project.
+
+   The same run also sets up **community trends** ("Popular with cellists"): it
+   makes a random secret salt once, stores it as `auditioner-trends-salt` and never
+   shows or changes it. If feedback was already on before trends existed, apply
+   `supabase/migrations/20261012010000_trends.sql` (step 2) and run the three lines
+   above once more.
 5. **Try it.** In the app: Settings → **Send feedback** → write "test" → Send. The
    app says "Thanks". Then in Supabase: left bar → **Table Editor** → `feedback` —
    your row is there within a few seconds.
@@ -183,6 +189,97 @@ gone within 12 months.
 
 **Limits.** Each phone can send 20 messages a day (`DAILY_FEEDBACK_LIMIT` in
 `backend/deploy.sh`). Messages are at most 2000 characters.
+
+## 8. Sign in with Apple (once)
+
+Accounts are optional for players: everything in the app works without one, and
+there is always a Skip button. Signing in gives a player 60 scans a day instead of
+30, and they can delete the account from the app at any time. Until this step is
+done nobody can sign in; nothing else changes. Budget about 20 minutes. Step 7
+(Supabase) must be done first.
+
+The server never sees a player's name or email: it keeps a scrambled version of
+Apple's id for them and, locked with a secret, the token it needs to tell Apple
+"this player deleted their account".
+
+**On developer.apple.com**
+
+1. **Note your Team ID.** Go to <https://developer.apple.com/account> → scroll to
+   **Membership details** → **Team ID**: 10 capital letters and digits, e.g.
+   `ABCDE12345`. Write it down (it isn't secret).
+2. **Switch Sign in with Apple on for the app.** **Certificates, Identifiers &
+   Profiles** → **Identifiers** → click `com.milaiwalker.auditioner` (if it isn't
+   there yet, create it first — `docs/TESTFLIGHT.md`, step A1) → under
+   **Capabilities** tick **Sign in with Apple** (leave "Enable as a primary App ID"
+   as it is) → **Save** → **Confirm**.
+3. **Create the key.** Left bar → **Keys** → the blue **+**:
+   - **Key Name**: `Auditioner Sign in with Apple`
+   - tick **Sign in with Apple** → **Configure** → **Primary App ID**: pick
+     `com.milaiwalker.auditioner` → **Save**
+   - **Continue** → **Register**.
+4. **Download the key — you can do this only once.** Click **Download**. A file
+   called `AuthKey_XXXXXXXXXX.p8` lands in your Downloads folder. The ten characters
+   after `AuthKey_` are the **Key ID** (also shown on the page); write it down. The
+   file itself is a **secret**: never put it in the app, GitHub, a chat, an email or
+   a screenshot. Keep one copy somewhere safe (your password manager can hold it as
+   an attachment).
+
+**Into Google Secret Manager** (Terminal, in the Auditioner folder, one line at a
+time)
+
+5. **Store the key.** Replace `XXXXXXXXXX` with your Key ID:
+
+   ```
+   gcloud services enable secretmanager.googleapis.com
+   gcloud secrets create auditioner-apple-signin-key --replication-policy automatic --data-file="$HOME/Downloads/AuthKey_XXXXXXXXXX.p8"
+   ```
+
+   "Created version [1] of the secret" is the right answer.
+6. **Make the account secret.** This makes a long random secret and puts it straight
+   into Secret Manager — you never see it and never need to:
+
+   ```
+   openssl rand -base64 48 | tr -d '\n' | gcloud secrets create auditioner-account-secret --replication-policy automatic --data-file=-
+   ```
+
+   Run it **only once**. If it ever says the secret "already exists", that is fine —
+   leave it alone. **Never replace this secret**: a new one would cut every player
+   off from their account.
+
+**In Supabase**
+
+7. **Create the tables.** Supabase → **SQL Editor** → **New query** → paste all of
+   `supabase/migrations/20261012000000_accounts.sql` → **Run** ("Success. No rows
+   returned").
+
+**Tell the server**
+
+8. Replace the two ids with yours (keep the quotes):
+
+   ```
+   export APPLE_TEAM_ID="ABCDE12345"
+   export APPLE_KEY_ID="XXXXXXXXXX"
+   ./backend/deploy.sh
+   ```
+
+   The script checks that both secrets are there, lets the server read them and
+   redeploys. At the end it says **"Sign in with Apple is ON"**. Later runs without
+   the two `export` lines leave it exactly as it is.
+9. **Tidy up.** Move `AuthKey_….p8` out of Downloads into your safe place (or
+   delete it once your password manager has a copy).
+10. **Try it.** In the app, sign in with Apple, then look in Supabase → **Table
+    Editor** → `accounts`: one row, all scrambled letters, no name or email. Delete
+    the account in the app: the row disappears, and on your iPhone **Settings →
+    [your name] → Sign-In & Security → Sign in with Apple** no longer lists
+    Auditioner.
+
+**If you lose the key or think someone saw it:** on developer.apple.com → **Keys**
+→ click it → **Revoke**. Make a new one (steps 3–4), then store it with
+`gcloud secrets versions add auditioner-apple-signin-key --data-file="$HOME/Downloads/AuthKey_NEWKEYID.p8"`
+(not `create`), and run step 8 again with the new Key ID. Players stay signed in.
+
+**Limits.** Signed-in players get 60 scans a day (`SIGNED_IN_DAILY_SCAN_LIMIT` in
+`backend/deploy.sh`); a signed-in session that isn't used for a year ends by itself.
 
 ## Looking at what the server is doing
 
@@ -237,7 +334,7 @@ gone within 12 months.
 
 These come in later milestones; don't set them up now:
 
-- **Supabase beyond feedback** (accounts, catalogue updates, audition feed) — M4/M5.
+- **Supabase beyond feedback and accounts** (catalogue updates, audition feed) — M4/M5.
   The `auditioner` project from step 7 is the one they will use; nothing more to
   create yet.
 - **Anthropic API key** (AI-written excerpt notes, generated offline) — later, and

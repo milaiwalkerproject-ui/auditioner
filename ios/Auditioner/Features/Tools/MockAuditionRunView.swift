@@ -269,6 +269,7 @@ struct MockAuditionRunView: View {
 
     private func finish() {
         let result = model.finish()
+        TrendsTracker.shared.notePractised(excerptIds: result.items.compactMap { $0.excerptId }, instrument: AppSettings.shared.instrument) // D6, only while sharing is on
         let run = MockAuditionRun(title: MockAuditionLogic.runTitle(date: Date()),
                                   itemsData: MockAuditionLogic.encode(result.items))
         run.recordingFileName = result.recordingFileName
