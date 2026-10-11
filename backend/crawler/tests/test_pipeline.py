@@ -41,9 +41,9 @@ PDF_LINES = [
     "Example Philharmonic - Section Cello Audition",
     "Application deadline: 15 November 2026",
     "Preliminary round:",
-    "Beethoven: Symphony No. 5, II: mm. 1-106",
-    "Strauss: Don Juan, beginning to 4 before C",
-    "Brahms: Symphony No. 2, IV: mm. 1-44",
+    "Quill: Symphony No. 5, II: mm. 1-106",
+    "Reine: Night Fanfare, beginning to 4 before C",
+    "Thornquist: Symphony No. 2, IV: mm. 1-44",
 ]
 
 
@@ -70,10 +70,10 @@ def fake_claude(kwargs: dict[str, Any]) -> Any:
             "auditionDates": [{"value": "2026-12-01", "sourceLineIds": find_lines(lines, "deadline")}],  # not printed → must be dropped
             "listCompleteness": "full",
             "items": [
-                item("Beethoven", "Symphony No. 5", "II", {"type": "measures", "startText": "mm. 1", "endText": "106", "startBar": 1, "endBar": 106}, "Beethoven"),
-                item("Strauss", "Don Juan", "", {"type": "rehearsal_mark", "startText": "beginning", "endText": "4 before C"}, "Strauss"),
-                item("Brahms", "Symphony No. 2", "IV", {"type": "measures", "startText": "mm. 1", "endText": "44", "startBar": 1, "endBar": 44}, "Brahms"),
-                item("Mahler", "Symphony No. 5", "", {"type": "unknown"}, "Brahms"),  # invented: cites a line without Mahler
+                item("Quill", "Symphony No. 5", "II", {"type": "measures", "startText": "mm. 1", "endText": "106", "startBar": 1, "endBar": 106}, "Quill"),
+                item("Reine", "Night Fanfare", "", {"type": "rehearsal_mark", "startText": "beginning", "endText": "4 before C"}, "Reine"),
+                item("Thornquist", "Symphony No. 2", "IV", {"type": "measures", "startText": "mm. 1", "endText": "44", "startBar": 1, "endBar": 44}, "Thornquist"),
+                item("Morvane", "Symphony No. 5", "", {"type": "unknown"}, "Thornquist"),  # invented: cites a line without Morvane
             ],
         }],
         "sourceNotes": "",
@@ -124,13 +124,13 @@ def test_first_run_extracts_verifies_maps_and_writes(web, clock, registry, catal
     assert vacancy["sourceUrl"] == PDF and vacancy["reviewStatus"] == "in_review"
     assert vacancy["extraction"]["model"] == "claude-opus-5-5"
     items = {i["composer"]: i for i in vacancy["items"]}
-    assert items["Beethoven"]["verification"]["ok"] and items["Beethoven"]["mapping"]["bucket"] == "auto"
-    assert items["Beethoven"]["mapping"]["excerptId"] == "cello-fixture-sym-5-mvt2"
-    assert items["Strauss"]["verification"]["ok"] and items["Strauss"]["mapping"]["bucket"] in ("review", "auto")
-    assert items["Brahms"]["verification"]["ok"] and items["Brahms"]["mapping"]["bucket"] == "new_candidate"
-    assert not items["Mahler"]["verification"]["ok"]
-    assert "composer_not_in_cited_lines" in items["Mahler"]["verification"]["flags"]
-    assert items["Mahler"]["mapping"]["bucket"] != "auto"
+    assert items["Quill"]["verification"]["ok"] and items["Quill"]["mapping"]["bucket"] == "auto"
+    assert items["Quill"]["mapping"]["excerptId"] == "cello-fixture-sym-5-mvt2"
+    assert items["Reine"]["verification"]["ok"] and items["Reine"]["mapping"]["bucket"] in ("review", "auto")
+    assert items["Thornquist"]["verification"]["ok"] and items["Thornquist"]["mapping"]["bucket"] == "new_candidate"
+    assert not items["Morvane"]["verification"]["ok"]
+    assert "composer_not_in_cited_lines" in items["Morvane"]["verification"]["flags"]
+    assert items["Morvane"]["mapping"]["bucket"] != "auto"
 
     totals = report.to_dict()["totals"]
     assert totals["vacanciesWritten"] == 1 and totals["llmCalls"] == 2 and totals["estimatedCostUsd"] > 0
@@ -283,7 +283,7 @@ def test_contact_details_are_stripped_before_anything_is_stored(web, clock, regi
     orchestra = registry.get("example-phil")
     source = text_document(
         "Section Cello audition\n"
-        "Beethoven: Symphony No. 5, II: mm. 1-106\n"
+        "Quill: Symphony No. 5, II: mm. 1-106\n"
         "Questions: auditions@example-phil.org or +1 (555) 010-2030"
     )
     data = {
@@ -294,8 +294,8 @@ def test_contact_details_are_stripped_before_anything_is_stored(web, clock, regi
             "applicationDeadline": {"value": "", "sourceLineIds": []}, "auditionDates": [], "listCompleteness": "full",
             "items": [{
                 "sourceLineIds": ["L0002", "L0003"],
-                "rawText": "Beethoven: Symphony No. 5, II: mm. 1-106 Questions: auditions@example-phil.org or +1 (555) 010-2030",
-                "round": "", "category": "excerpt", "composer": "Beethoven", "work": "Symphony No. 5", "catalogueNumber": "Op. 67",
+                "rawText": "Quill: Symphony No. 5, II: mm. 1-106 Questions: auditions@example-phil.org or +1 (555) 010-2030",
+                "round": "", "category": "excerpt", "composer": "Quill", "work": "Symphony No. 5", "catalogueNumber": "Op. 12",
                 "movement": "II", "part": "",
                 "location": {"type": "measures", "startText": "mm. 1", "endText": "106", "startBar": 1, "endBar": 106},
                 "notes": "Tel. 555-010-2030",
@@ -310,8 +310,8 @@ def test_contact_details_are_stripped_before_anything_is_stored(web, clock, regi
     assert "@" not in dumped and "010-2030" not in dumped and "555" not in dumped, dumped
     assert "[email removed]" in record.position and "contact_details_removed" in record.flags
     item = record.items[0]
-    assert item["rawText"].startswith("Beethoven: Symphony No. 5, II: mm. 1-106")  # the facts survive
-    assert item["location"]["startBar"] == 1 and item["location"]["endBar"] == 106 and item["catalogueNumber"] == "Op. 67"
+    assert item["rawText"].startswith("Quill: Symphony No. 5, II: mm. 1-106")  # the facts survive
+    assert item["location"]["startBar"] == 1 and item["location"]["endBar"] == 106 and item["catalogueNumber"] == "Op. 12"
     assert item["verification"]["ok"]  # verification ran on the source lines, not on the redacted text
     assert record.extraction["sourceNotes"] == "Contact [email removed] for the list"
     assert report.contacts_redacted >= 4 and report.to_dict()["contactsRedacted"] == report.contacts_redacted

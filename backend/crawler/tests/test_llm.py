@@ -16,7 +16,7 @@ from crawler.llm import (
 
 from .conftest import FakeAnthropic, FakeResponse, make_pdf, user_text
 
-LINES = ["Section Cello", "Beethoven: Symphony No. 5, II, mm. 1-106"]
+LINES = ["Section Cello", "Quill: Symphony No. 5, II, mm. 1-106"]
 
 
 def extraction_json(**overrides):
@@ -28,7 +28,7 @@ def extraction_json(**overrides):
                 "orchestra": "Example", "position": "Section Cello", "instrument": "cello", "chair": "",
                 "applicationDeadline": {"value": "", "sourceLineIds": []}, "auditionDates": [], "listCompleteness": "full",
                 "items": [
-                    {"sourceLineIds": ["L0002"], "rawText": LINES[1], "round": "", "category": "excerpt", "composer": "Beethoven",
+                    {"sourceLineIds": ["L0002"], "rawText": LINES[1], "round": "", "category": "excerpt", "composer": "Quill",
                      "work": "Symphony No. 5", "catalogueNumber": "", "movement": "II", "part": "",
                      "location": {"type": "measures", "startText": "mm. 1", "endText": "106", "startBar": 1, "endBar": 106}, "notes": ""}
                 ],
@@ -46,7 +46,7 @@ def test_extraction_request_shape_follows_the_sdk_rules():
     pdf = make_pdf(LINES)
     result = client.extract(orchestra_name="Example Phil", orchestra_country="US", source_url="https://x.example/list.pdf",
                             source=pdf_text(pdf), pdf_bytes=pdf, hints=["registry notes: fixture"])
-    assert result.ok and result.data["vacancies"][0]["items"][0]["composer"] == "Beethoven"
+    assert result.ok and result.data["vacancies"][0]["items"][0]["composer"] == "Quill"
     path, kwargs = fake.calls[0]
     assert path == "beta.messages"  # refusal fallback on by default for the Opus call
     assert kwargs["betas"] == [FALLBACK_BETA] and kwargs["fallbacks"] == "default"

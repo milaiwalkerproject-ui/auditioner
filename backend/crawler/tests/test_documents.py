@@ -14,7 +14,7 @@ from crawler.documents import (
 
 from .conftest import make_docx, make_pdf
 
-LINES = ["Section Cello audition", "Beethoven: Symphony No. 5, mvt. II, mm. 1-106", "Strauss: Don Juan, mm. 1-62"]
+LINES = ["Section Cello audition", "Quill: Symphony No. 5, mvt. II, mm. 1-106", "Reine: Night Fanfare, mm. 1-62"]
 
 
 def test_pdf_lines_get_stable_ids_and_pages():
@@ -38,9 +38,9 @@ def test_pdf_without_text_layer_is_flagged_not_fatal():
 
 
 def test_docx_is_read_without_libreoffice():
-    doc = docx = extract_document(make_docx(["Probespiel Violoncello", "Dvořák: Sinfonie Nr. 8, 1. Satz, T. 1-18"]), url="https://x.example/liste.docx")
+    doc = docx = extract_document(make_docx(["Probespiel Violoncello", "Lindovář: Sinfonie Nr. 8, 1. Satz, T. 1-18"]), url="https://x.example/liste.docx")
     assert docx.kind == "docx"
-    assert [line.text for line in doc.lines] == ["Probespiel Violoncello", "Dvořák: Sinfonie Nr. 8, 1. Satz, T. 1-18"]
+    assert [line.text for line in doc.lines] == ["Probespiel Violoncello", "Lindovář: Sinfonie Nr. 8, 1. Satz, T. 1-18"]
 
 
 def test_legacy_doc_is_skipped_with_a_note_when_soffice_is_missing():

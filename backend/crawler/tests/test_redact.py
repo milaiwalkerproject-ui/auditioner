@@ -51,17 +51,17 @@ def test_phone_numbers_are_removed(phone):
 @pytest.mark.parametrize(
     "keep",
     [
-        "Beethoven: Symphony No. 5, II: mm. 1-106",
-        "Mozart: Symphony No. 40, K. 550",
-        "Bach: Suite No. 1, BWV 1007",
+        "Quill: Symphony No. 5, II: mm. 1-106",
+        "Amberlin: Symphony No. 14, K. 312",
+        "Dunmere: Suite No. 1, BWV 2207",
         "Application deadline: 2026-11-15",
         "Deadline 15 November 2026, 17:00",
         "Deadline 01/02/2026 10:00",
         "Bewerbungsschluss 15.11.2026",
-        "Strauss: Don Juan, Op. 20, mm. 1-62, 90-175",
-        "Shostakovich: Symphony No. 5, Op. 47, I: reh. 9-12",
+        "Reine: Night Fanfare, Op. 30, mm. 1-62, 90-175",
+        "Zarkhovin: Symphony No. 5, Op. 38, I: reh. 9-12",
         "Saxophone and 2 trumpets; cello section",
-        "Haydn: Cello Concerto in C, Hob. VIIb:1, mvt. 1 to bar 100",
+        "Eskholm: Cello Concerto in A, Hob. VIIb:9, mvt. 1 to bar 100",
         "Salary $71,592 per 42-week season",
     ],
 )

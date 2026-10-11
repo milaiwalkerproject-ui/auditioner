@@ -354,7 +354,9 @@ enum LocalRecommendationEngine {
             out.append(String(localized: "Counting lists from every region."))
         }
         if result.undatedLists > 0 {
-            if let oldest = result.oldestYear {
+            if let oldestYear = result.oldestYear {
+                // A year is a label, not a quantity: as an Int it would be shown as "2,020".
+                let oldest: String = String(oldestYear)
                 if result.undatedLists == 1 {
                     out.append(String(localized: "1 of these lists has no date and counts as the oldest year we have (\(oldest))."))
                 } else {

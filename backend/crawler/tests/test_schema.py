@@ -56,7 +56,7 @@ def test_coercion_fills_sentinels_and_drops_junk():
                     "auditionDates": "not a list",
                     "listCompleteness": "complete",
                     "items": [
-                        {"composer": "Beethoven", "category": "excerpt", "location": {"type": "measures", "startBar": "1", "endBar": 106.0}, "sourceLineIds": ["L0003"]},
+                        {"composer": "Quill", "category": "excerpt", "location": {"type": "measures", "startBar": "1", "endBar": 106.0}, "sourceLineIds": ["L0003"]},
                         "garbage",
                     ],
                 }

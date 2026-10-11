@@ -81,3 +81,13 @@ jobs:
           name: xcodebuild-log
           path: build/xcodebuild.log
           if-no-files-found: ignore
+
+      - name: Strings for translation
+        if: always()
+        continue-on-error: true
+        run: |
+          if [ -d build/DerivedData ]; then
+            python3 ios/scripts/collect_strings.py build/DerivedData ios/Auditioner/Localizable.xcstrings --dump
+          else
+            echo "no build output"
+          fi

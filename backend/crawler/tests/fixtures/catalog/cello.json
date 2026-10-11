@@ -3,7 +3,7 @@
   "generatedAt": "2026-10-10",
   "instrument": "cello",
   "licenseNotes": [
-    "TEST FIXTURE ONLY. Bar numbers and sources here are fictional (example.org) and exist to exercise the mapping code. They are not audition facts."
+    "TEST FIXTURE ONLY. Composers, works, bar numbers and sources here are fictional (example.org) and exist to exercise the mapping code. They are not audition facts."
   ],
   "excerpts": [
     {
@@ -11,10 +11,10 @@
       "instrument": "cello",
       "part": "Cello",
       "positions": ["section", "principal"],
-      "composer": "Ludwig van Beethoven",
-      "work": "Symphony No. 5 in C minor",
-      "catalogueNumber": "Op. 67",
-      "movement": { "number": 2, "title": "Andante con moto" },
+      "composer": "Lorenz van Quill",
+      "work": "Symphony No. 5 in F minor",
+      "catalogueNumber": "Op. 12",
+      "movement": { "number": 2, "title": "Second movement" },
       "title": "Fixture: movement II opening",
       "location": {
         "status": "verified",
@@ -40,10 +40,10 @@
       "instrument": "cello",
       "part": "Cello",
       "positions": ["section"],
-      "composer": "Ludwig van Beethoven",
-      "work": "Symphony No. 5 in C minor",
-      "catalogueNumber": "Op. 67",
-      "movement": { "number": 3, "title": "Scherzo" },
+      "composer": "Lorenz van Quill",
+      "work": "Symphony No. 5 in F minor",
+      "catalogueNumber": "Op. 12",
+      "movement": { "number": 3, "title": "Third movement" },
       "title": "Fixture: movement III",
       "location": {
         "status": "verified",
@@ -55,14 +55,14 @@
       "listingStatus": "published"
     },
     {
-      "id": "cello-fixture-dvorak-sym-8-mvt1",
+      "id": "cello-fixture-lindovar-sym-8-mvt1",
       "instrument": "cello",
       "part": "Cello",
       "positions": ["section"],
-      "composer": "Antonín Dvořák",
-      "work": "Symphony No. 8 in G major",
-      "catalogueNumber": "Op. 88",
-      "movement": { "number": 1, "title": "Allegro con brio" },
+      "composer": "Ondřej Lindovář",
+      "work": "Symphony No. 8 in E major",
+      "catalogueNumber": "Op. 54",
+      "movement": { "number": 1, "title": "First movement" },
       "title": "Fixture: movement I opening",
       "location": {
         "status": "unverified",
@@ -81,13 +81,13 @@
       "listingStatus": "published"
     },
     {
-      "id": "cello-fixture-strauss-don-juan",
+      "id": "cello-fixture-reine-night-fanfare",
       "instrument": "cello",
       "part": "Cello",
       "positions": ["section"],
-      "composer": "Richard Strauss",
-      "work": "Don Juan",
-      "catalogueNumber": "Op. 20",
+      "composer": "Rosa Reine",
+      "work": "Night Fanfare",
+      "catalogueNumber": "Op. 30",
       "title": "Fixture: opening",
       "location": {
         "status": "verified",

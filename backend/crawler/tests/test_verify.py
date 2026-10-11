@@ -9,9 +9,9 @@ LINES = text_document(
         [
             "Example Philharmonic — Section Cello",
             "Application deadline: 15 November 2026",
-            "Dvořák: Symphony No. 8, mvt. I, mm. 1–18",
-            "Beethoven: Symphony No. 5, II: mm. 1-106",
-            "Strauss: Don Juan, beginning to 4 before [C]",
+            "Lindovář: Symphony No. 8, mvt. I, mm. 1–18",
+            "Quill: Symphony No. 5, II: mm. 1-106",
+            "Reine: Night Fanfare, beginning to 4 before [C]",
             "Sight reading may be required",
         ]
     )
@@ -19,7 +19,7 @@ LINES = text_document(
 
 
 def item(**fields):
-    base = {"sourceLineIds": ["L0003"], "category": "excerpt", "composer": "Dvořák", "work": "Symphony No. 8",
+    base = {"sourceLineIds": ["L0003"], "category": "excerpt", "composer": "Lindovář", "work": "Symphony No. 8",
             "movement": "I", "location": {"type": "measures", "startBar": 1, "endBar": 18}}
     base.update(fields)
     return coerce_item(base)
@@ -32,12 +32,12 @@ def test_item_passes_when_cited_lines_carry_composer_work_and_bars():
 
 
 def test_diacritics_do_not_matter():
-    assert verify_item(item(composer="Dvorak"), LINES).ok
-    assert verify_item(item(composer="Antonin Dvorák"), LINES).ok
+    assert verify_item(item(composer="Lindovar"), LINES).ok
+    assert verify_item(item(composer="Ondrej Lindovár"), LINES).ok
 
 
 def test_item_is_rejected_when_cited_lines_lack_the_composer():
-    verification = verify_item(item(composer="Brahms"), LINES)
+    verification = verify_item(item(composer="Thornquist"), LINES)
     assert not verification.ok and "composer_not_in_cited_lines" in verification.flags
 
 
@@ -57,7 +57,7 @@ def test_bars_must_parse_and_be_printed_in_the_cited_lines():
     assert "bars_invalid" in bad.flags and not bad.ok
     invented = verify_item(item(location={"type": "measures", "startBar": 1, "endBar": 44}), LINES)
     assert "bars_not_in_cited_lines" in invented.flags and not invented.ok
-    rehearsal = verify_item(item(sourceLineIds=["L0005"], composer="Strauss", work="Don Juan", movement="",
+    rehearsal = verify_item(item(sourceLineIds=["L0005"], composer="Reine", work="Night Fanfare", movement="",
                                  location={"type": "rehearsal_mark", "startText": "beginning", "endText": "4 before [C]"}), LINES)
     assert rehearsal.ok
     soft = verify_item(item(location={"type": "unknown", "startBar": 1, "endBar": 18}), LINES)
@@ -65,7 +65,7 @@ def test_bars_must_parse_and_be_printed_in_the_cited_lines():
 
 
 def test_catalogue_number_must_be_printed_too():
-    flagged = verify_item(item(catalogueNumber="Op. 88"), LINES)
+    flagged = verify_item(item(catalogueNumber="Op. 54"), LINES)
     assert "catalogue_number_not_in_cited_lines" in flagged.flags and flagged.ok  # soft flag
 
 
@@ -85,7 +85,7 @@ def test_verify_vacancy_blanks_unverified_dates_and_flags_gaps():
         "position": "", "instrument": "other",
         "applicationDeadline": {"value": "2026-12-01", "sourceLineIds": ["L0002"]},
         "auditionDates": [{"value": "2026-11-15", "sourceLineIds": ["L0002"]}, {"value": "2027-01-01", "sourceLineIds": ["L0001"]}],
-        "items": [item(), item(composer="Brahms")],
+        "items": [item(), item(composer="Thornquist")],
     })
     cleaned, verifications, flags = verify_vacancy(vacancy, LINES)
     assert cleaned["applicationDeadline"]["value"] == ""

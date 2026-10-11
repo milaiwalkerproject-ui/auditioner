@@ -101,7 +101,8 @@ final class APIClient {
         Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "0"
     }
 
-    private func request(path: String, method: String) throws -> URLRequest {
+    // Internal (not private) so feature files can add endpoints in their own `extension APIClient`.
+    func request(path: String, method: String) throws -> URLRequest {
         guard let baseURL else { throw APIError.notConfigured }
         var req = URLRequest(url: baseURL.appendingPathComponent(path))
         req.httpMethod = method
@@ -111,7 +112,7 @@ final class APIClient {
         return req
     }
 
-    private func send(_ req: URLRequest) async throws -> Data {
+    func send(_ req: URLRequest) async throws -> Data {
         let (data, response) = try await session.data(for: req)
         guard let http = response as? HTTPURLResponse else { throw APIError.invalidResponse }
         guard (200..<300).contains(http.statusCode) else {
