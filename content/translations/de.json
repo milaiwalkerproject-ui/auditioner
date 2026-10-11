@@ -10,7 +10,7 @@
     "sourceSha256": "9853e4efa0f46cb0e50fde98888eb10ff6b13e8cbacf4799fc089f0988828b39"
    },
    "pitfalls": {
-    "text": "Die häufigsten Fehler sind das Eilen in den punktierten Figuren, ein Anschwellen der ersten Note jedes Bindebogens und der Verlust des Pulses zwischen den Phrasen. Die Intonation in As-Dur ist exponiert, besonders in den hohen Tönen der Melodie, wo die Hand dazu neigt, nach oben abzudriften. In den schnelleren Variationen werden viele Spieler lauter, sobald die Noten schneller werden; die Dynamik sollte sich nach der Bezeichnung richten, nicht nach den Notenwerten.",
+    "text": "Die häufigsten Fehler sind das Eilen in den punktierten Figuren, ein Anschwellen der ersten Note jedes Bindebogens und der Verlust des Pulses zwischen den Phrasen. Die Intonation in As-Dur ist exponiert, besonders in den hohen Tönen der Melodie, wo die Hand dazu neigt, zu hoch zu greifen. In den schnelleren Variationen werden Spieler oft lauter, sobald die Noten schneller werden; die Dynamik sollte sich nach der Bezeichnung richten, nicht nach den Notenwerten.",
     "sourceSha256": "b1c59a2cf7ec8047e8e2f0be8d08cec999aba92415bccb1e37c3ead1916c8b07"
    },
    "practiceTips": {
@@ -60,7 +60,7 @@
   },
   "cello-brahms-piano-concerto-2-mvt3-solo": {
    "history": {
-    "text": "Brahms komponierte sein Zweites Klavierkonzert 1878–81 und war bei der Uraufführung 1881 in Budapest selbst der Solist. Ungewöhnlich für ein Klavierkonzert, beginnt der langsame Satz mit einem langen Cellosolo, das das Thema vorstellt, bevor das Klavier einsetzt; das Solo gehört zu den Standardanforderungen bei Probespielen für Solocello.",
+    "text": "Brahms komponierte sein Zweites Klavierkonzert 1878–81 und war bei der Uraufführung 1881 in Budapest selbst der Solist. Ungewöhnlich für ein Klavierkonzert beginnt der langsame Satz mit einem langen Cellosolo, das das Thema vorstellt, bevor das Klavier einsetzt; das Solo gehört zu den Standardanforderungen bei Probespielen für Solocello.",
     "sourceSha256": "07d5f67a03d1cdadab65431ca92d86e3c91be656403b8c6f74d12c519e133189"
    },
    "pitfalls": {
@@ -82,7 +82,7 @@
     "sourceSha256": "53f3efee9d5a7af4c7f14aa2e27fcdb414c0d1ab6a88c97eb11e1febb30eeccd"
    },
    "pitfalls": {
-    "text": "H-Dur ist unbequem für die linke Hand, und bei der Intonation des absteigenden Anfangs verlieren die meisten Kandidaten Punkte. Viele Spieler lassen das Tempo schleppen, weil die Bezeichnung langsam ist, oder lassen die Phrase in der Mitte durchhängen. Bogenwechsel, die knacken oder anschwellen, unterbrechen eine Linie, die ununterbrochen klingen soll.",
+    "text": "H-Dur ist unbequem für die linke Hand, und bei der Intonation des absteigenden Anfangs verlieren die meisten Kandidaten Punkte. Spieler lassen das Tempo oft schleppen, weil die Bezeichnung langsam ist, oder lassen die Phrase in der Mitte durchhängen. Bogenwechsel, die knacken oder anschwellen, unterbrechen eine Linie, die ununterbrochen klingen soll.",
     "sourceSha256": "988fde57097572c892380e18f20d23791dfccff82d4acc0b932595f67723156b"
    },
    "practiceTips": {
@@ -122,7 +122,7 @@
     "sourceSha256": "6f3d9edac73135e127494e9a4714f6ba84af853ff85b8210bf661b92eca11efa"
    },
    "practiceTips": {
-    "text": "Lerne jede Stimme, die verlangt werden könnte, nicht nur die Oberstimme, und übe sie zu einer Aufnahme, um zu spüren, wie sie zusammenpassen. Benutze das Metronom auf der kleinsten Unterteilung, bis die rhythmischen Wechsel automatisch laufen. Übe die hohe Passage zuerst eine Oktave tiefer, um die Phrasierung festzulegen, dann in der Originalhöhe mit einem Bordunton. Markiere den dynamischen Höhepunkt und arbeite von dort rückwärts, damit das crescendo irgendwohin führen kann.",
+    "text": "Lerne jede Stimme, die verlangt werden könnte, nicht nur die Oberstimme, und übe sie zu einer Aufnahme, um zu spüren, wie sie zusammenpassen. Benutze das Metronom auf der kleinsten Unterteilung, bis die rhythmischen Wechsel automatisch laufen. Übe die hohe Passage zuerst eine Oktave tiefer, um die Phrasierung festzulegen, dann in der Originalhöhe mit einem Bordunton. Markiere den dynamischen Höhepunkt und arbeite von dort rückwärts, damit das crescendo noch ein Ziel hat.",
     "sourceSha256": "cd5147ce70aa181931f4e31106e1a3c9dcb2d352f5546ba6d44200410531f767"
    },
    "technique": {
@@ -154,7 +154,7 @@
     "sourceSha256": "7c3e76ace0f8ef54089823b0963c782bc41ba914e04c786f1359d5e8cdf26e80"
    },
    "pitfalls": {
-    "text": "Die üblichen Probleme sind ein spiccato, das zu hoch springt und deshalb ungleichmäßig wird, das Eilen in den Tonrepetitionen und der Verlust des Tempos bei den Saitenwechseln. Kandidaten wählen oft ein Tempo, das in den ersten Takten beeindruckt und dann in den unbequemen Passagen auseinanderfällt. Die Intonation in den schnellen Sprüngen ist exponiert, weil der Satz so dünn ist.",
+    "text": "Die üblichen Probleme sind ein spiccato, das zu hoch springt und deshalb ungleichmäßig wird, das Eilen in den Tonrepetitionen und der Verlust des Tempos bei den Saitenwechseln. Kandidaten wählen oft ein Tempo, das in den ersten Takten beeindruckt und dann in den unbequemen Passagen auseinanderfällt. Die Intonation in den schnellen Sprüngen ist exponiert, weil der Orchestersatz so dünn ist.",
     "sourceSha256": "eb3e1326bb9856ec41f74ec6d87c6c34e17fc95cdbdc523870abfbced7745fef"
    },
    "practiceTips": {
@@ -172,7 +172,7 @@
     "sourceSha256": "2ce2592349c01ce3a3357fe67c3adaa0357470b1ab140f990b90c01a37666ae9"
    },
    "pitfalls": {
-    "text": "Die Intonation in den chromatischen Passagen geht als Erstes verloren, besonders nach einem großen Lagenwechsel. Das langsame Tempo verleitet dazu, die Unterteilung zu verlieren und den Rhythmus driften zu lassen. Der Klang kann oben im Tonumfang dünn werden, wenn der Bogen zu weit vom Steg entfernt bleibt.",
+    "text": "Die Intonation in den chromatischen Passagen geht als Erstes verloren, besonders nach einem großen Lagenwechsel. Das langsame Tempo verleitet dazu, die Unterteilung zu verlieren und den Rhythmus driften zu lassen. Der Klang kann in der höchsten Lage dünn werden, wenn der Bogen zu weit vom Steg entfernt bleibt.",
     "sourceSha256": "8f4e05278412e97ba93ac6f665e956cec52ac684a1685cfcffeba035fe400d5c"
    },
    "practiceTips": {
@@ -180,7 +180,7 @@
     "sourceSha256": "085d5dde54ff2db8eb767895956350d2ca991131ca8a665caea30f7f3ba16426"
    },
    "technique": {
-    "text": "Die Stelle ist langsam und exponiert; die Herausforderung besteht also darin, eine lange Linie mit warmem Ton durch weite Intervalle und chromatische Wendungen zu halten und dabei den Puls völlig stabil zu lassen. Die hohe Lage verlangt sichere Lagenwechsel und gleichmäßiges Vibrato. Die Dynamik sollte den gedruckten Gabeln genau folgen, da der Satz um die Celli herum dünn ist.",
+    "text": "Die Stelle ist langsam und exponiert; die Herausforderung besteht also darin, eine lange Linie mit warmem Ton durch weite Intervalle und chromatische Wendungen zu halten und dabei den Puls völlig stabil zu lassen. Die hohe Lage verlangt sichere Lagenwechsel und gleichmäßiges Vibrato. Die Dynamik sollte den gedruckten Gabeln genau folgen, da der Orchestersatz um die Celli herum dünn ist.",
     "sourceSha256": "ad347d8d92548ebe979618e9e1fdfbefb3eba5d5e90586364264dc0b507560ec"
    }
   },
@@ -190,7 +190,7 @@
     "sourceSha256": "81f5d99ef483c320b1f2502d52d4685f07aee7f9567fc907b7324276f4a81a12"
    },
    "pitfalls": {
-    "text": "Spieler neigen dazu, die schnellen Gruppen zu eilen und zu früh auf den akzentuierten Noten anzukommen, oder das Tempo in den unbequemen Saitenwechseln zu verlieren. Die Oberstimme einer divisi-Stelle kann unter Tempo nach oben abdriften. Wird die Stelle zum Blattspiel verwendet, ist Zögern bei den rhythmischen Wechseln der teuerste Fehler.",
+    "text": "Spieler neigen dazu, in den schnellen Gruppen zu eilen und auf den akzentuierten Noten zu früh anzukommen, oder das Tempo in den unbequemen Saitenwechseln zu verlieren. Die Oberstimme einer divisi-Stelle kann im schnellen Tempo nach oben abdriften. Wird die Stelle zum Blattspiel verwendet, ist Zögern bei den rhythmischen Wechseln der Fehler, der am meisten kostet.",
     "sourceSha256": "325e305762af3e9da59e120e52874f0640d139ab39a5ca27d7b2340ae297c370"
    },
    "practiceTips": {
@@ -198,7 +198,7 @@
     "sourceSha256": "592033aece913918acbc643bde6d33989e9f6114f4e634ba97577634f8bb831d"
    },
    "technique": {
-    "text": "Dies ist eine Prüfung schneller, klarer Artikulation unter rhythmischem Druck: Die linke Hand muss jede Note der Läufe setzen, während der Bogen einen kurzen, gleichmäßigen Strich beibehält. Akzente und Einsätze auf den leichten Zählzeiten müssen genau im Takt sein, und die Saitenwechsel müssen klein und vorbereitet sein. Halte den Klang hell und tragend, ohne in die Saite zu graben.",
+    "text": "Dies ist eine Prüfung schneller, klarer Artikulation unter rhythmischem Druck: Die linke Hand muss jede Note der Läufe setzen, während der Bogen einen kurzen, gleichmäßigen Strich beibehält. Akzente und Einsätze auf den leichten Zählzeiten müssen genau im Takt sein, und die Saitenwechsel müssen klein und vorbereitet sein. Halte den Klang hell und tragend, ohne in die Saite zu drücken.",
     "sourceSha256": "7a93109df5af9be040cb1879dbfbb56fc6ce1842fe236c082f5feeaf1a910652"
    }
   },
@@ -262,11 +262,11 @@
     "sourceSha256": "2f3dbf79d6c41f3ec12db92b08e656c34f3e1e8d89db8a0b246cd0fafb7de8e0"
    },
    "pitfalls": {
-    "text": "Das Thema wird oft überspielt und verliert seine Klarheit, während das Finale zu wenig getragen wird und die langen Töne zu früh verklingen. Die Intonation in der hohen Lage und in den unbequemen Sprüngen ist unerbittlich. Viele Kandidaten kennen den Orchesterzusammenhang nicht gut genug, um ihre Einsätze überzeugend zu setzen.",
+    "text": "Das Thema wird oft zu dick aufgetragen und verliert seine Klarheit, während das Finale zu wenig getragen wird und die langen Töne zu früh verklingen. Die Intonation in der hohen Lage und in den unbequemen Sprüngen ist unerbittlich. Viele Kandidaten kennen den Orchesterzusammenhang nicht gut genug, um ihre Einsätze überzeugend zu setzen.",
     "sourceSha256": "a71338abb45b63892ac5a52c61ddf9e70965f805c71d777292daadfea03e1515"
    },
    "practiceTips": {
-    "text": "Lerne die Partitur, nicht nur die Solostimme, und übe mit einer Aufnahme, damit du weißt, worauf du antwortest. Arbeite am Thema mit dem Metronom, um den Rhythmus ehrlich zu halten, während du es gestaltest. Übe das Finale mit sehr langsamem Bogen im pianissimo und zähle die Schläge dabei laut. Bereite genau die Passagen vor, die auf der Liste stehen, für die du antrittst, denn die Orchester schneiden die Soli unterschiedlich zu.",
+    "text": "Lerne die Partitur, nicht nur die Solostimme, und übe mit einer Aufnahme, damit du weißt, worauf du antwortest. Arbeite am Thema mit dem Metronom, um den Rhythmus ehrlich zu halten, während du es gestaltest. Übe das Finale mit sehr langsamem Bogen im pianissimo und zähle die Schläge dabei laut. Bereite genau die Passagen vor, die auf der Liste des Probespiels stehen, zu dem du antrittst, denn die Orchester schneiden die Soli unterschiedlich zu.",
     "sourceSha256": "77ed68abe8612d9873e5e0c5a419aff4c33149df3f760d9f5866123bfb942b30"
    },
    "technique": {
@@ -288,7 +288,7 @@
     "sourceSha256": "3fca9f235cab085adc00c494ef2038f64310260e709141209db50d9e960634ee"
    },
    "technique": {
-    "text": "Das Anfangsthema zieht sich über den gesamten Tonumfang des Instruments; der Spieler braucht also sichere Lagenwechsel in die hohe Lage, ein getragenes forte, das die Saite nicht erdrückt, und rhythmische Klarheit in den weiten Sprüngen und punktierten Figuren. Der Bogen sollte schnell laufen und nah am Steg bleiben, damit der Klang trägt; die linke Hand muss sich früh bewegen, damit die hohen Töne sauber und mit Vibrato ankommen. Atempunkte gibt es wenige; plane also, wo du Bogen sparen kannst.",
+    "text": "Das Anfangsthema durchmisst den gesamten Tonumfang des Instruments; der Spieler braucht also sichere Lagenwechsel in die hohe Lage, ein getragenes forte, das die Saite nicht erdrückt, und rhythmische Klarheit in den weiten Sprüngen und punktierten Figuren. Der Bogen sollte schnell laufen und nah am Steg bleiben, damit der Klang trägt; die linke Hand muss sich früh bewegen, damit die hohen Töne sauber und mit Vibrato ankommen. Atempunkte gibt es wenige; plane also, wo du Bogen sparen kannst.",
     "sourceSha256": "fd4c9726539a8178dfbf3bd3c9208628b2e218683ab4d1855dc48516120dbbaf"
    }
   },
@@ -298,7 +298,7 @@
     "sourceSha256": "cb44618fb9ed50513a3c7ed9c8223e6c3ca40ce839a428b842a33fd09e5f003d"
    },
    "pitfalls": {
-    "text": "Überspielen ist die Hauptgefahr; die Melodie verliert ihren Charakter, wenn sie zu ausdrucksvoll oder zu laut gemacht wird. Die Tonrepetitionen werden leicht abgehackt oder ungleichmäßig gestrichen, und das Tempo kann schleppen, weil die Musik traurig ist. Die Intonation in der Molltonart ist bei den unteren Nebennoten exponiert.",
+    "text": "Die Hauptgefahr ist, zu viel zu machen; die Melodie verliert ihren Charakter, wenn sie zu ausdrucksvoll oder zu laut gespielt wird. Die Tonrepetitionen werden leicht abgehackt oder ungleichmäßig gestrichen, und das Tempo kann schleppen, weil die Musik traurig ist. Die Intonation in der Molltonart ist bei den unteren Nebennoten exponiert.",
     "sourceSha256": "5946828e16a8ea16be6d01d1c1fbc00fb05f6097ed028dd490b4daf26809f51e"
    },
    "practiceTips": {
