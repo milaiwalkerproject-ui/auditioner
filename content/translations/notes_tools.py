@@ -2,17 +2,18 @@
 """Machine translations of approved excerpt notes (PLAN A7b).
 
     python3 content/translations/notes_tools.py source      # write _source.json
-    python3 content/translations/notes_tools.py check [lang] # verify <lang>.json files
+    python3 content/translations/notes_tools.py check [lang] [--strict]  # verify <lang>.json files
 
 _source.json lists every approved note (prose with reviewStatus "approved") with a
 sha256 of its English text and the terms that must survive translation unchanged.
 <lang>.json mirrors it: {"language", "origin": "ai", "machineTranslated": true,
 "generatedAt", "notes": {excerptId: {field: {"text", "sourceSha256"}}}}.
 
-The check refuses (exit 1) a translation that is stale (English changed since),
+The check refuses (exit 1) a current translation (one the app would ship) that is
 empty, identical to the English, or that changes any number or any protected term
-(composer and work names, the excerpt's tempo marking, score words such as
-"Andante con moto"). The app ships only translations whose sourceSha256 matches
+(the excerpt's tempo marking, score words such as "Andante con moto"). Missing and
+stale translations (the English changed since) are listed as notes shown in English
+for now; they fail only with --strict, which translators use to finish a language. The app ships only translations whose sourceSha256 matches
 the current English text; content/sync_to_app.py drops the rest.
 """
 from __future__ import annotations
@@ -96,42 +97,53 @@ def build_source() -> dict:
     return {"language": "en", "notes": notes}
 
 
-def check(lang: str, source: dict) -> list[str]:
+def check(lang: str, source: dict) -> tuple[list[str], list[str]]:
+    """(errors, notices) for one language.
+
+    Errors are translations the app would ship that are wrong: a broken file header, or a
+    current translation (its sourceSha256 matches today's English) that is empty, still
+    English, or changed a number or a protected term. Notices are notes the app will show
+    in English for now: missing, stale (the English was corrected or extended since) or no
+    longer approved. content/sync_to_app.py never ships those, so a correction to an English
+    note never has to wait for ten re-translations.
+    """
     path = HERE / f"{lang}.json"
     if not path.exists():
-        return [f"{lang}: no {path.name}"]
+        return [], [f"{lang}: no {path.name} — every note shows in English"]
     data = json.loads(path.read_text(encoding="utf-8"))
-    problems: list[str] = []
+    errors: list[str] = []
+    notices: list[str] = []
     if data.get("language") != lang:
-        problems.append(f"{lang}: language field is {data.get('language')!r}")
+        errors.append(f"{lang}: language field is {data.get('language')!r}")
     if data.get("origin") != "ai" or data.get("machineTranslated") is not True:
-        problems.append(f"{lang}: origin must be 'ai' and machineTranslated true")
+        errors.append(f"{lang}: origin must be 'ai' and machineTranslated true")
     got = data.get("notes") or {}
     for eid, fields in source["notes"].items():
         for field, src in fields.items():
             t = (got.get(eid) or {}).get(field)
             where = f"{lang}: {eid}.{field}"
             if not t:
-                problems.append(f"{where}: missing")
+                notices.append(f"{where}: missing (shows in English)")
+                continue
+            if t.get("sourceSha256") != src["sourceSha256"]:
+                notices.append(f"{where}: stale — the English changed since it was translated (shows in English)")
                 continue
             text = (t.get("text") or "").strip()
-            if t.get("sourceSha256") != src["sourceSha256"]:
-                problems.append(f"{where}: stale (English changed since it was translated)")
             if not text:
-                problems.append(f"{where}: empty")
+                errors.append(f"{where}: empty")
                 continue
             if text == src["text"].strip():
-                problems.append(f"{where}: identical to the English")
+                errors.append(f"{where}: identical to the English")
             if sorted(NUMBER.findall(text)) not in expected_numbers(src["text"], lang):
-                problems.append(f"{where}: numbers differ {sorted(NUMBER.findall(src['text']))} -> {sorted(NUMBER.findall(text))}")
+                errors.append(f"{where}: numbers differ {sorted(NUMBER.findall(src['text']))} -> {sorted(NUMBER.findall(text))}")
             for term in src["keepUnchanged"]:
                 if src["text"].count(term) and term not in text:
-                    problems.append(f"{where}: lost the original-language term {term!r}")
+                    errors.append(f"{where}: lost the original-language term {term!r}")
     for eid, fields in got.items():
         for field in fields:
             if field not in (source["notes"].get(eid) or {}):
-                problems.append(f"{lang}: {eid}.{field}: not an approved note (remove it)")
-    return problems
+                notices.append(f"{lang}: {eid}.{field}: not an approved English note any more (not shipped; remove it)")
+    return errors, notices
 
 
 def main(argv: list[str]) -> int:
@@ -144,15 +156,24 @@ def main(argv: list[str]) -> int:
         n = sum(len(f) for f in source["notes"].values())
         print(f"_source.json: {n} approved notes in {len(source['notes'])} excerpts")
         return 0
-    langs = argv[1:] or [l for l in LANGUAGES if (HERE / f"{l}.json").exists()]
-    problems: list[str] = []
+    strict = "--strict" in argv
+    langs = [a for a in argv[1:] if not a.startswith("--")] or [l for l in LANGUAGES if (HERE / f"{l}.json").exists()]
+    errors: list[str] = []
+    notices: list[str] = []
     for lang in langs:
-        p = check(lang, source)
-        problems += p
-        print(f"{lang}: {'ok' if not p else f'{len(p)} problems'}")
-    for p in problems:
+        e, n = check(lang, source)
+        errors += e
+        notices += n
+        if not e and not n:
+            print(f"{lang}: ok")
+        else:
+            print(f"{lang}: {len(e)} errors, {len(n)} notes shown in English for now")
+    for p in errors:
         print("  !", p)
-    return 1 if problems else 0
+    for p in notices:
+        print("  ·", p)
+    # Errors always fail. Notices fail only with --strict (translators use it to finish a language).
+    return 1 if errors or (strict and notices) else 0
 
 
 if __name__ == "__main__":
