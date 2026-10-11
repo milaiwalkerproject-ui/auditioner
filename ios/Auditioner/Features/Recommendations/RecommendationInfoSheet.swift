@@ -66,7 +66,7 @@ enum RecommendationInfoCopy {
                       text: String(localized: "Each excerpt page lists every source we counted for it, with a link to the orchestra's own page.")),
             Paragraph(id: "server",
                       title: String(localized: "Server or catalogue"),
-                      text: String(localized: "When the app can reach our server, this list uses the orchestra lists reviewed there, which are more and newer. Otherwise it uses the lists cited in the app's catalogue. The line under the list says which. Each excerpt page always counts the catalogue's lists, so its number matches the sources shown under it.")),
+                      text: String(localized: "When the app can reach our server, this list uses the orchestra lists reviewed there, which are more and newer. Otherwise it uses the lists cited in the app's catalogue. The line under the list says which. On the server, a region with only a few lists is evened out with every region's lists for your chair, as if it had 10 more lists, so a handful of lists can't swing an excerpt to all or nothing. Each excerpt page always counts the catalogue's lists, so its number matches the sources shown under it.")),
             Paragraph(id: "open-now",
                       title: String(localized: "On N open auditions now"),
                       text: String(localized: "A separate badge: how many auditions open right now list the excerpt. It appears only when the server can be reached, and never changes the share.")),

@@ -49,9 +49,10 @@ final class AuditionListImportModel: ObservableObject {
 
     func read(fileURL: URL, pool: [Excerpt]) {
         stage = .loading(String(localized: "Opening the file…"))
+        let limit: Int = AuditionListImportModel.maxPages
         Task {
             let pages: [UIImage] = await Task.detached(priority: .userInitiated) {
-                AuditionListPages.images(from: fileURL, maxPages: AuditionListImportModel.maxPages)
+                AuditionListPages.images(from: fileURL, maxPages: limit)
             }.value
             guard !pages.isEmpty else {
                 self.stage = .failed(String(localized: "This file couldn't be read. Try a PDF or a picture of the list, or paste its text."))

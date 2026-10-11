@@ -151,7 +151,7 @@ enum AuditionListParser {
         guard !text.isEmpty, text.count <= 48 else { return nil }
         if matches(text, pattern: preliminaryPattern) { return AuditionRounds.preliminary }
         if matches(text, pattern: semiFinalPattern) { return AuditionRounds.semiFinal }
-        if matches(text, pattern: finalPattern) { return AuditionRounds.final }
+        if matches(text, pattern: finalPattern) { return AuditionRounds.finalRound }
         return nil
     }
 
@@ -183,7 +183,7 @@ enum AuditionListParser {
         let rest: String = groups[2].trimmingCharacters(in: .whitespacesAndNewlines)
         guard !rest.isEmpty else { return nil }
         let round: String = AuditionRounds.canonical(groups[1].replacingOccurrences(of: "  ", with: " "))
-        guard round == AuditionRounds.preliminary || round == AuditionRounds.semiFinal || round == AuditionRounds.final else {
+        guard round == AuditionRounds.preliminary || round == AuditionRounds.semiFinal || round == AuditionRounds.finalRound else {
             return nil
         }
         return (round, rest)

@@ -247,7 +247,9 @@ Views and a function for the app:
 The app never reads Supabase directly for the feed. It asks our server
 (`backend/app/feed.py`), which reads with the service-role key and only ever passes
 on **published** rows — the service role skips row level security, so each query
-asks for `published` itself. Details, field by field: `backend/README.md`.
+asks for `published` itself, and every audition the `open_auditions` view returns is
+checked once more against the `vacancies` table before it is sent. Details, field by
+field: `backend/README.md`.
 
 - `GET /v1/auditions?instrument=cello&region=uk` → `{"auditions": [...]}`: vacancies
   from `open_auditions` for that instrument (and region; none = every region) that
@@ -262,6 +264,11 @@ asks for `published` itself. Details, field by field: `backend/README.md`.
   share it comes from, the plain counts and an evidence line written from those
   counts ("On 7 of 12 section cello lists in North America, 2024–2026").
 
+When the server isn't set up, can't be reached or has no reviewed lists for the
+player's chair yet, the app counts the lists cited in its own catalogue instead, on
+the phone, and says which source it used ("From the lists in the app's catalogue" /
+"From orchestra lists on our server").
+
 The app's positions map to the database's classes like this: principal,
 concertmaster and high horn → `principal`; assistant principal → `assistant-principal`;
 section, utility and "any" → `section`; "second" → `section` on violin, viola, cello
@@ -274,13 +281,18 @@ What this means for you as the reviewer:
 - something you publish (or unpublish) reaches the app **within 10 minutes** — the
   server keeps each answer that long;
 - an item you leave `in_review` or set to `rejected` is never sent, even when its
-  vacancy is published;
+  vacancy is published; a vacancy that isn't `published` is never sent at all;
 - a vacancy drops out of the feed the day after its deadline, but its list keeps
   counting for "What orchestras ask";
-- a vacancy **without a deadline** stays in the feed for 60 days after the crawler
-  last *read* it (`last_seen_at`). The crawler only re-reads a page that changed, so a
-  long-running notice without a deadline on an unchanged page drops out after 60
-  days — give it a deadline in the table editor if you know one from the source;
+- a vacancy **without a deadline** stays in the feed for 60 days after `last_seen_at`.
+  Today the crawler moves `last_seen_at` only when it re-extracts a page or document
+  that changed, so a long-running notice without a deadline on an unchanged page
+  drops out after 60 days (and "Last checked" in the app shows that older date) —
+  give it a deadline in the table editor if the source states one;
+- for "What orchestras ask", a region's lists for one chair are counted only once at
+  least one item on one of them is matched to a catalogue excerpt; until then that
+  region shows as having no lists for that chair (a gap in the database views, noted
+  in `backend/README.md`);
 - with Supabase not set up on the server the app gets "The auditions feed isn't set
   up on the server yet."; if Supabase doesn't answer, "The auditions feed didn't
   answer. Try again in a few minutes."

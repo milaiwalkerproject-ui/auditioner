@@ -6,8 +6,10 @@ server. The service role bypasses row level security, so every query here asks f
 published data itself (supabase/migrations/20261011010000_auditions.sql):
 
 - ``open_auditions`` — a view of published vacancies only — narrowed to auditions
-  that are still open (see ``open_filter``);
-- ``vacancy_items`` with ``review_status=eq.published``, for those vacancies only;
+  that are still open (see ``open_filter``); every id it returns is then checked
+  against the ``vacancies`` table itself (``review_status=eq.published``), so a later
+  change to the view can never put an unpublished audition in the app;
+- ``vacancy_items`` with ``review_status=eq.published``, for those checked vacancies only;
 - ``rpc/excerpt_recommendations`` and ``excerpt_open_now`` — both built from
   published lists only — for "What orchestras ask" and "On N open auditions now";
 - ``excerpt_frequency`` (published lists only) when the app asks for every region at
@@ -539,7 +541,7 @@ class FeedService:
     async def _get(self, client: httpx.AsyncClient, resource: str, params: dict[str, str]) -> list[dict[str, Any]]:
         try:
             response = await client.get(f"{self.url}/rest/v1/{resource}", params=params)
-        except httpx.HTTPError as exc:
+        except (httpx.HTTPError, httpx.InvalidURL) as exc:
             log.warning("feed: Supabase unreachable for %s: %s", resource, type(exc).__name__)
             raise FeedUpstreamError(f"{resource}: {type(exc).__name__}") from exc
         return self._rows(response, resource)
@@ -563,7 +565,7 @@ class FeedService:
         what = f"rpc/{function}"
         try:
             response = await client.post(f"{self.url}/rest/v1/{what}", json=body)
-        except httpx.HTTPError as exc:
+        except (httpx.HTTPError, httpx.InvalidURL) as exc:
             log.warning("feed: Supabase unreachable for %s: %s", what, type(exc).__name__)
             raise FeedUpstreamError(f"{what}: {type(exc).__name__}") from exc
         return self._rows(response, what)
@@ -581,6 +583,30 @@ class FeedService:
             if excerpt_id and count:
                 counts[excerpt_id] = counts.get(excerpt_id, 0) + count
         return counts
+
+    async def _published_ids(self, client: httpx.AsyncClient, ids: list[str], instrument: str) -> set[str]:
+        """The ids among `ids` that the ``vacancies`` table itself marks published (and
+        for this instrument). A second lock behind the view's own filter: the service
+        role skips row level security, so this check is what keeps an unpublished
+        audition out of the app if ``open_auditions`` is ever redefined."""
+        published: set[str] = set()
+        for start in range(0, len(ids), self.item_chunk):
+            chunk = ids[start:start + self.item_chunk]
+            rows = await self._get_all(
+                client, "vacancies",
+                {
+                    "select": "id",
+                    "id": f"in.({','.join(chunk)})",
+                    "review_status": "eq.published",
+                    "instrument": f"eq.{instrument}",
+                },
+                order="id.asc",
+            )
+            for row in rows:
+                vacancy_id = _uuid(row.get("id"))
+                if vacancy_id in chunk:
+                    published.add(vacancy_id)
+        return published
 
     async def _items_by_vacancy(self, client: httpx.AsyncClient, ids: list[str]) -> dict[str, list[dict[str, Any]]]:
         found: dict[str, list[tuple[int, dict[str, Any]]]] = {vacancy_id: [] for vacancy_id in ids}
@@ -629,15 +655,24 @@ class FeedService:
             if len(rows) >= MAX_VACANCIES:
                 log.warning("feed: %s open auditions for %s/%s; showing the first %d",
                             len(rows), instrument, region or "all", MAX_VACANCIES)
-            ids = [vacancy_id for vacancy_id in (_uuid(row.get("id")) for row in rows) if vacancy_id]
-            items = await self._items_by_vacancy(client, list(dict.fromkeys(ids)))
+            ids = list(dict.fromkeys(vacancy_id for vacancy_id in (_uuid(row.get("id")) for row in rows) if vacancy_id))
+            published = await self._published_ids(client, ids, instrument) if ids else set()
+            if len(published) < len(ids):
+                log.warning("feed: open_auditions returned %d vacancies the vacancies table does not mark "
+                            "published for %s; left out", len(ids) - len(published), instrument)
+            items = await self._items_by_vacancy(client, [vacancy_id for vacancy_id in ids if vacancy_id in published])
         result: list[dict[str, Any]] = []
+        sent: set[str] = set()
         skipped = 0
         for row in rows:
-            vacancy = map_vacancy(row, items.get(_uuid(row.get("id")) or "", []))
+            vacancy_id = _uuid(row.get("id"))
+            if vacancy_id is not None and (vacancy_id not in published or vacancy_id in sent):
+                continue  # not published (logged above) or a duplicate row
+            vacancy = map_vacancy(row, items.get(vacancy_id or "", []))
             if vacancy is None:
                 skipped += 1
             else:
+                sent.add(vacancy["id"])
                 result.append(vacancy)
         if skipped:
             log.warning("feed: skipped %d open_auditions rows missing a required field", skipped)

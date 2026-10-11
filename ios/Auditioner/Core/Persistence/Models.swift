@@ -221,7 +221,7 @@ final class AuditionItem {
     var id: UUID = UUID()
     var auditionId: UUID = UUID()
     var order: Int = 0
-    /// Text exactly as on the list (e.g. "Brahms Sym. 2, mvt. II, mm. 1–15").
+    /// Text exactly as on the list (e.g. "Composer – Work, movement, bars").
     var rawText: String = ""
     /// Matched catalogue excerpt, once the player confirms it.
     var excerptId: String?

@@ -109,8 +109,12 @@ def rec_row(excerpt: str, **changes: Any) -> dict[str, Any]:
 
 
 class FakeSupabase:
-    """Just enough PostgREST: filters by eq./in., the published filter on items,
-    select, limit/offset, and the RPC. Records every request."""
+    """Just enough PostgREST: filters by eq./in., the published filter on items and
+    on the vacancies table, select, limit/offset, and the RPC. Records every request.
+
+    `vacancies` stand for both the vacancies table and the open_auditions view. The
+    fake view does *not* filter on review_status (a row without one counts as
+    published), so a test can play a view that was redefined without its filter."""
 
     def __init__(self) -> None:
         self.requests: list[httpx.Request] = []
@@ -123,6 +127,7 @@ class FakeSupabase:
         self.fail_body: bytes = b'{"message": "relation does not exist: SECRET-DETAIL"}'
         self.fail_path: str | None = None
         self.raise_error: Exception | None = None
+        self.open_auditions_ignores_instrument = False
 
     # -- helpers
 
@@ -132,6 +137,10 @@ class FakeSupabase:
             if column in params:
                 rows = [r for r in rows if f"eq.{r.get(column)}" == params[column]]
         return rows
+
+    @staticmethod
+    def _in(params: httpx.QueryParams, column: str) -> list[str]:
+        return params[column].removeprefix("in.(").removesuffix(")").split(",")
 
     @staticmethod
     def _page(rows: list[dict[str, Any]], params: httpx.QueryParams) -> list[dict[str, Any]]:
@@ -160,10 +169,17 @@ class FakeSupabase:
             return httpx.Response(self.fail_status, content=self.fail_body)
         params = request.url.params
         if path == "/rest/v1/open_auditions" and request.method == "GET":
-            rows = self._eq(self.vacancies, params, "instrument", "region")
+            columns = ("region",) if self.open_auditions_ignores_instrument else ("instrument", "region")
+            rows = self._eq(self.vacancies, params, *columns)
+            return httpx.Response(200, json=self._page(rows, params))
+        if path == "/rest/v1/vacancies" and request.method == "GET":
+            wanted = self._in(params, "id")
+            rows = [{"review_status": "published", **r} for r in self.vacancies if r.get("id") in wanted]
+            rows = self._eq(rows, params, "review_status", "instrument")
+            rows.sort(key=lambda r: str(r["id"]))
             return httpx.Response(200, json=self._page(rows, params))
         if path == "/rest/v1/vacancy_items" and request.method == "GET":
-            wanted = params["vacancy_id"].removeprefix("in.(").removesuffix(")").split(",")
+            wanted = self._in(params, "vacancy_id")
             rows = [r for r in self.items if r["vacancy_id"] in wanted]
             rows = self._eq(rows, params, "review_status")
             rows.sort(key=lambda r: (r["vacancy_id"], r["ordinal"], r["id"]))
@@ -415,9 +431,17 @@ def test_auditions_ask_only_for_open_published_rows(feed_client, fake):
     assert params["order"] == "application_deadline.asc.nullslast,orchestra_name.asc,id.asc"
     assert params["limit"] == "500"
 
+    (check,) = fake.requests_to("/rest/v1/vacancies")
+    assert check.method == "GET"
+    assert check.url.params["select"] == "id"
+    assert check.url.params["id"] == f"in.({vid(1)})"
+    assert check.url.params["review_status"] == "eq.published"
+    assert check.url.params["instrument"] == "eq.cello"
+
     (items,) = fake.requests_to("/rest/v1/vacancy_items")
     assert items.url.params["review_status"] == "eq.published"
     assert items.url.params["vacancy_id"] == f"in.({vid(1)})"
+    assert fake.paths() == ["/rest/v1/open_auditions", "/rest/v1/vacancies", "/rest/v1/vacancy_items"]
     for request in fake.requests:
         assert request.headers["apikey"] == SERVICE_KEY
         assert request.headers["authorization"] == f"Bearer {SERVICE_KEY}"
@@ -442,6 +466,37 @@ def test_unpublished_items_never_reach_the_app(feed_client, fake):
     items = response.json()["auditions"][0]["items"]
     assert [i["rawText"] for i in items] == ["Testmann: Fixture Symphony No. 1, second movement"]
     assert "NOT REVIEWED" not in response.text and "REJECTED" not in response.text and "ANOTHER" not in response.text
+
+
+@pytest.mark.parametrize("status", ["in_review", "draft", "rejected"])
+def test_unpublished_vacancies_never_reach_the_app_even_if_the_view_changes(feed_client, fake, caplog, status):
+    # The fake view ignores review_status, like an open_auditions view redefined without
+    # its filter: the check against the vacancies table still keeps the row out.
+    fake.vacancies = [vacancy_row(1), vacancy_row(2, review_status=status, position="UNPUBLISHED POSITION")]
+    fake.items = [item_row(1, vacancy=1), item_row(2, vacancy=2, raw_text="ITEM OF AN UNPUBLISHED VACANCY")]
+    with caplog.at_level(logging.WARNING, logger="auditioner.feed"):
+        response = feed_client.get("/v1/auditions?instrument=cello")
+    assert [v["id"] for v in response.json()["auditions"]] == [vid(1)]
+    assert "UNPUBLISHED" not in response.text
+    (items,) = fake.requests_to("/rest/v1/vacancy_items")
+    assert items.url.params["vacancy_id"] == f"in.({vid(1)})"  # never even asked for its items
+    assert "1 vacancies the vacancies table does not mark published" in caplog.text
+
+
+def test_vacancy_of_another_instrument_is_left_out(feed_client, fake):
+    # Same lock: a view that stopped filtering by instrument cannot mix instruments.
+    fake.vacancies = [vacancy_row(1), vacancy_row(2, instrument="viola", position="Section Viola")]
+    fake.open_auditions_ignores_instrument = True
+    response = feed_client.get("/v1/auditions?instrument=cello")
+    assert [v["id"] for v in response.json()["auditions"]] == [vid(1)]
+
+
+def test_duplicate_rows_are_sent_once(feed_client, fake):
+    fake.vacancies = [vacancy_row(1), vacancy_row(1)]
+    fake.items = [item_row(1)]
+    auditions = feed_client.get("/v1/auditions?instrument=cello").json()["auditions"]
+    assert [v["id"] for v in auditions] == [vid(1)]
+    assert len(auditions[0]["items"]) == 1
 
 
 def test_items_keep_the_list_order(feed_client, fake):
@@ -679,7 +734,7 @@ def test_answers_are_cached_for_ten_minutes(feed_client, fake, clock):
     fake.items = [item_row(1)]
     first = feed_client.get("/v1/auditions?instrument=cello&region=north-america").json()
     calls = len(fake.requests)
-    assert calls == 2
+    assert calls == 3  # open_auditions, the published check on vacancies, vacancy_items
 
     fake.vacancies = []  # the database changes; the cached answer stands for ten minutes
     clock.now += 599
@@ -737,10 +792,11 @@ def test_supabase_error_status_is_502(feed_client, fake, caplog, path, status):
     assert "SECRET-DETAIL" not in caplog.text  # PostgREST bodies are never logged
 
 
-def test_failure_on_the_second_request_is_502(feed_client, fake):
+@pytest.mark.parametrize("fail_path", ["/rest/v1/vacancies", "/rest/v1/vacancy_items"])
+def test_failure_on_a_later_request_is_502(feed_client, fake, fail_path):
     fake.vacancies = [vacancy_row(1)]
     fake.fail_status = 500
-    fake.fail_path = "/rest/v1/vacancy_items"
+    fake.fail_path = fail_path
     response = feed_client.get("/v1/auditions?instrument=cello")
     assert response.status_code == 502
     assert response.json() == {"detail": MSG_FEED_UPSTREAM}
@@ -763,6 +819,17 @@ def test_unexpected_body_is_502(feed_client, fake, body):
     response = feed_client.get("/v1/auditions?instrument=cello")
     assert response.status_code == 502
     assert response.json() == {"detail": MSG_FEED_UPSTREAM}
+
+
+@pytest.mark.parametrize(
+    "error", [httpx.InvalidURL("bad address"), httpx.UnsupportedProtocol("no scheme")]
+)
+def test_unusable_supabase_address_is_502(feed_client, fake, error):
+    fake.raise_error = error
+    for path in ("/v1/auditions?instrument=cello", "/v1/recommendations?instrument=cello&position=section&region=uk"):
+        response = feed_client.get(path)
+        assert response.status_code == 502
+        assert response.json() == {"detail": MSG_FEED_UPSTREAM}
 
 
 def test_the_key_is_never_shown():

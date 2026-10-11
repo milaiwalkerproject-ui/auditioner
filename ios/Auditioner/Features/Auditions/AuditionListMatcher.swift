@@ -187,7 +187,7 @@ struct AuditionReviewLine: Identifiable, Equatable {
 enum AuditionReviewLogic {
     /// Review lines for parsed items: every line included, strong lone matches pre-ticked.
     static func lines(from items: [ParsedListItem], pool: [Excerpt]) -> [AuditionReviewLine] {
-        items.map { item in
+        items.map { (item: ParsedListItem) -> AuditionReviewLine in
             let candidates: [AuditionMatchCandidate] = AuditionListMatcher.candidates(for: item, in: pool)
             return AuditionReviewLine(id: UUID(),
                                       include: true,

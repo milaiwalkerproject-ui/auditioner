@@ -86,7 +86,7 @@ enum AuditionCountdown {
     /// "In 12 days" — for the start of a line.
     static func capitalized(_ phrase: String) -> String {
         guard let first = phrase.first else { return phrase }
-        return String(first).uppercased() + phrase.dropFirst()
+        return String(first).uppercased() + String(phrase.dropFirst())
     }
 
     static func isPast(days: Int) -> Bool {
@@ -145,10 +145,10 @@ enum AuditionReadiness {
 enum AuditionRounds {
     static let preliminary: String = "Preliminary"
     static let semiFinal: String = "Semi-final"
-    static let final: String = "Final"
+    static let finalRound: String = "Final"
 
     /// The three usual rounds, for pickers. "" means the list doesn't split rounds.
-    static let choices: [String] = ["", preliminary, semiFinal, final]
+    static let choices: [String] = ["", preliminary, semiFinal, finalRound]
 
     /// Maps what a list (or the crawler) prints to one of the three canonical names when it clearly is one;
     /// "All rounds" and blanks become "" (applies everywhere); anything else is kept as typed.
@@ -170,7 +170,7 @@ enum AuditionRounds {
             return semiFinal
         }
         if key == "final" || key == "finals" || key == "final round" || key == "third round" || key == "round 3" || key == "round three" {
-            return final
+            return finalRound
         }
         return trimmed
     }
@@ -181,7 +181,7 @@ enum AuditionRounds {
         if name.isEmpty { return 0 }
         if name == preliminary { return 1 }
         if name == semiFinal { return 2 }
-        if name == final { return 3 }
+        if name == finalRound { return 3 }
         return 4
     }
 
@@ -191,7 +191,7 @@ enum AuditionRounds {
         if name.isEmpty { return String(localized: "All rounds") }
         if name == preliminary { return String(localized: "Preliminary round") }
         if name == semiFinal { return String(localized: "Semi-final") }
-        if name == final { return String(localized: "Final round") }
+        if name == finalRound { return String(localized: "Final round") }
         return name
     }
 }
@@ -514,14 +514,31 @@ enum AuditionBuilder {
     /// The `order` values after moving rows inside one section: the same set of values, handed out in the new sequence,
     /// so the section keeps its place among the others.
     static func reorderedOrders(_ orders: [Int], from source: IndexSet, to destination: Int) -> [Int] {
-        var indices: [Int] = Array(orders.indices)
-        indices.move(fromOffsets: source, toOffset: destination)
+        let indices: [Int] = moved(Array(orders.indices), from: source, to: destination)
         let slots: [Int] = orders.sorted()
         var result: [Int] = Array(repeating: 0, count: orders.count)
         for (slot, originalIndex) in indices.enumerated() where slot < slots.count {
             result[originalIndex] = slots[slot]
         }
         return result
+    }
+
+    /// The same move a SwiftUI list performs (`move(fromOffsets:toOffset:)`), written out here so this file needs
+    /// only Foundation: the picked elements, in their old order, are put back in front of the element that sat at
+    /// `destination` before the move. Offsets outside the array are ignored.
+    static func moved<Element>(_ array: [Element], from source: IndexSet, to destination: Int) -> [Element] {
+        let picked: [Int] = Array(source).filter { $0 >= 0 && $0 < array.count }
+        guard !picked.isEmpty else { return array }
+        let pickedSet: Set<Int> = Set(picked)
+        let moving: [Element] = picked.map { array[$0] }
+        var remaining: [Element] = []
+        for (index, element) in array.enumerated() where !pickedSet.contains(index) {
+            remaining.append(element)
+        }
+        let removedBefore: Int = picked.filter { $0 < destination }.count
+        let insertAt: Int = min(max(0, destination - removedBefore), remaining.count)
+        remaining.insert(contentsOf: moving, at: insertAt)
+        return remaining
     }
 }
 

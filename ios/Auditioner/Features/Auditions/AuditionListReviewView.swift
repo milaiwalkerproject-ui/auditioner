@@ -89,7 +89,7 @@ struct AuditionReviewLineRow: View {
                         .foregroundStyle(line.include ? Theme.teal : Theme.inkFaint)
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel(Text(line.include ? "Keep this line" : "Line left out"))
+                .accessibilityLabel(Text(line.include ? String(localized: "Keep this line") : String(localized: "Line left out")))
                 TextField("Line", text: $line.text, axis: .vertical)
                     .lineLimit(1...4)
                     .foregroundStyle(line.include ? Theme.ink : Theme.inkFaint)

@@ -42,7 +42,9 @@ struct AuditionDetailView: View {
     init(audition: Audition) {
         self.audition = audition
         let auditionId: UUID = audition.id
-        _items = Query(filter: #Predicate<AuditionItem> { $0.auditionId == auditionId }, sort: \AuditionItem.order)
+        var descriptor = FetchDescriptor<AuditionItem>(predicate: #Predicate<AuditionItem> { $0.auditionId == auditionId })
+        descriptor.sortBy = [SortDescriptor(\AuditionItem.order)]
+        _items = Query(descriptor)
     }
 
     private var groups: [AuditionItemGroup<AuditionItem>] {

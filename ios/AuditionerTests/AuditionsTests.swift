@@ -340,6 +340,11 @@ final class AuditionsTests: XCTestCase {
         XCTAssertEqual(AuditionBuilder.reorderedOrders([2, 5, 7], from: IndexSet(integer: 0), to: 3), [7, 2, 5])
         XCTAssertEqual(AuditionBuilder.reorderedOrders([2, 5, 7], from: IndexSet(integer: 2), to: 0), [5, 7, 2])
         XCTAssertEqual(AuditionBuilder.reorderedOrders([0, 1], from: IndexSet(integer: 0), to: 1), [0, 1])
+        // Same semantics as a SwiftUI list's move: picked rows go in front of the row that sat at `to` before the move.
+        XCTAssertEqual(AuditionBuilder.moved(["a", "b", "c", "d"], from: IndexSet([0, 2]), to: 4), ["b", "d", "a", "c"])
+        XCTAssertEqual(AuditionBuilder.moved(["a", "b", "c"], from: IndexSet(integer: 2), to: 0), ["c", "a", "b"])
+        XCTAssertEqual(AuditionBuilder.moved(["a", "b", "c"], from: IndexSet(integer: 1), to: 1), ["a", "b", "c"], "moving a row onto its own slot changes nothing")
+        XCTAssertEqual(AuditionBuilder.moved(["a", "b", "c"], from: IndexSet(integer: 9), to: 0), ["a", "b", "c"], "offsets outside the list are ignored")
         XCTAssertEqual(AuditionBuilder.nextOrder(existingOrders: []), 0)
         XCTAssertEqual(AuditionBuilder.nextOrder(existingOrders: [3, 9, 4]), 10)
     }

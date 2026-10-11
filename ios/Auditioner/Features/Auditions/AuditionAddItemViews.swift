@@ -37,7 +37,7 @@ struct AuditionTypeLineView: View {
     var body: some View {
         Form {
             Section {
-                TextField("e.g. Brahms – Symphony No. 2, mvt. II, mm. 1–15", text: $text, axis: .vertical)
+                TextField("Line as printed, e.g. Composer – Work, movement, bars", text: $text, axis: .vertical)
                     .lineLimit(1...4)
                 Picker(selection: $round) {
                     ForEach(AuditionRounds.choices, id: \.self) { choice in

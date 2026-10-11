@@ -82,9 +82,14 @@ their orchestra's registry facts) for the instrument (and region), narrowed to
 auditions **still open**: a deadline from yesterday (UTC) on — so a deadline that is
 still today somewhere in the world stays listed — or no deadline and seen on the
 orchestra's page in the last 60 days (the window of the `excerpt_open_now` view).
-Soonest deadline first (no deadline last), at most 500. Then `vacancy_items` with
-`review_status=eq.published` for exactly those vacancies (20 ids per request, paged
-at 1,000 rows — Supabase's default maximum), in list order.
+Soonest deadline first (no deadline last), at most 500. Every id the view returns is
+then checked against the `vacancies` **table** itself (`review_status=eq.published`
+and the same instrument): the view already filters on published, but the service
+role skips row level security, so this second lock keeps an unpublished audition out
+of the app even if the view is ever redefined (a mismatch is left out and logged).
+Then `vacancy_items` with `review_status=eq.published` for exactly the checked
+vacancies (20 ids per request, paged at 1,000 rows — Supabase's default maximum), in
+list order. A vacancy id appears at most once in an answer.
 
 | field | from |
 |---|---|
@@ -133,9 +138,21 @@ second and other chairs"), so the mapping never claims more than the lists show.
 **Cache and errors.** Answers are kept in memory for **10 minutes per query** (per
 Cloud Run instance; a failed answer is never kept), so something Milai publishes or
 unpublishes reaches the app within ten minutes. 503 while Supabase isn't configured;
-502 when it is unreachable, answers with an error, or sends something that isn't a
-list of rows — only the status code or the exception class is logged, never
-PostgREST's error body.
+502 when it is unreachable (including a malformed `SUPABASE_URL`), answers with an
+error, or sends something that isn't a list of rows — only the status code or the
+exception class is logged, never PostgREST's error body.
+
+**What rests on the database views.** `/v1/recommendations` sends only counts and
+excerpt ids, never a vacancy or an item; those counts come from `excerpt_frequency`,
+`excerpt_recommendations` and `excerpt_open_now`, which count published lists and
+published items only. Unlike `/v1/auditions` there is no row to re-check, so a change
+to those views must keep their `review_status = 'published'` filters. Two known gaps
+of the views as written (migration `20261011010000`): a region and position class
+whose published lists have **no** item matched to the catalogue yet does not appear in
+`excerpt_frequency` at all, so its lists are missing from `totalLists` (the function
+then says "No … lists … yet" for that region, and the every-region sum leaves them
+out); and `excerpt_open_now` counts a deadline as open up to *today* (database time),
+while the feed keeps it one day longer.
 
 ### What `/v1/omr` does with the picture
 
@@ -263,7 +280,8 @@ unconfigured, 400/422 validation, 429 after 20, 502 on Supabase errors, and a
 `caplog` check that the message never reaches a log line) — no network either.
 `tests/test_feed.py` drives `/v1/auditions` and `/v1/recommendations` against a small
 fake PostgREST on an `httpx.MockTransport`: the exact app contract, published-only and
-still-open filters, item order, chunking and paging, every position mapping, the
+still-open filters (including a fake view that "forgot" its published or instrument
+filter, which the check against the `vacancies` table must catch), item order, chunking and paging, every position mapping, the
 evidence wording, the all-regions sum, the 10-minute cache (fake clock), 400/503/502
 and that PostgREST error bodies are never logged. Its orchestras and works are
 fictional and it contains no bar numbers. The fixture catalogue in `tests/fixtures/catalog/`

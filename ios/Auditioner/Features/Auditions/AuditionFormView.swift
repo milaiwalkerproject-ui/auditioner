@@ -63,6 +63,14 @@ struct AuditionFormView: View {
         !orchestra.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
 
+    private var screenTitle: String {
+        isCreating ? String(localized: "New audition") : String(localized: "Edit audition")
+    }
+
+    private var saveTitle: String {
+        isCreating ? String(localized: "Add") : String(localized: "Save")
+    }
+
     var body: some View {
         Form {
             whoSection
@@ -72,14 +80,14 @@ struct AuditionFormView: View {
         }
         .scrollContentBackground(.hidden)
         .background(Theme.paper.ignoresSafeArea())
-        .navigationTitle(isCreating ? "New audition" : "Edit audition")
+        .navigationTitle(screenTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button("Cancel") { dismiss() }
             }
             ToolbarItem(placement: .confirmationAction) {
-                Button(isCreating ? "Add" : "Save") { save() }
+                Button(saveTitle) { save() }
                     .disabled(!canSave)
             }
         }

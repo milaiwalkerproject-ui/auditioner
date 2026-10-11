@@ -190,7 +190,12 @@ notes, pitch/accidental/duration/rest/tie/insert/delete, bar check, undo); in-ap
 feedback built end to end (queued on the device, stored in a separate Auditioner
 Supabase project via the server). M4 backend built: polite crawler, Claude list
 extraction with code verification, Supabase schema with RLS, 128-orchestra registry
-(80 confirmed audition pages). Next: M4 app screens, then M5.
+(80 confirmed audition pages). M4 app screens built: an Auditions tab with open
+auditions from the feed and "My upcoming audition" (add from the feed, the catalogue,
+a typed line or a list read on the device, readiness per excerpt, practise-next,
+reminders, mock audition from the list); "Most asked for your chair" in the excerpt
+browser, counted on the device from the catalogue's lists or from the server
+(`/v1/auditions`, `/v1/recommendations`). Next: M5.
 
 Milai wants testers (orchestra/tour colleagues) as early as possible, so M1 aims at an
 **internal TestFlight** build: the app works offline for catalogue, excerpt pages,

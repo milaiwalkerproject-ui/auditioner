@@ -165,9 +165,9 @@ final class ExcerptsMediaTests: XCTestCase {
     }
 
     func testVariantLine() {
-        let variant = LocationVariant(location: ExcerptLocation(text: "II: mm. 1-10"), orchestra: "Dallas Symphony Orchestra",
+        let variant = LocationVariant(location: ExcerptLocation(text: "II: mm. 1-10"), orchestra: "Example Orchestra",
                                       year: 2025, position: .section, source: "https://example.org/list.pdf", asOf: "2026-10-10")
-        XCTAssertEqual(ExcerptFormat.variantLine(variant), "Dallas Symphony Orchestra 2025: II: mm. 1-10")
+        XCTAssertEqual(ExcerptFormat.variantLine(variant), "Example Orchestra 2025: II: mm. 1-10")
         let bare = LocationVariant(location: ExcerptLocation(text: "mm. 5-9"), source: "https://example.org", asOf: "2026-10-10")
         XCTAssertEqual(ExcerptFormat.variantLine(bare), "mm. 5-9")
     }

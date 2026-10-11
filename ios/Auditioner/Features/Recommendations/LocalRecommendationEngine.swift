@@ -226,17 +226,21 @@ enum LocalRecommendationEngine {
             guard let low = years.min(), let high = years.max() else { return nil }
             return low...high
         }()
-        var items: [ExcerptAsk] = keysByExcerpt.map { (excerptId: String, keys: Set<String>) -> ExcerptAsk in
-            let hits: Double = keys.reduce(0) { $0 + (weightByKey[$1] ?? 0) }
+        var items: [ExcerptAsk] = []
+        for (excerptId, keys) in keysByExcerpt {
+            var hits: Double = 0
+            for key in keys {
+                hits += weightByKey[key] ?? 0
+            }
             let share: Double = totalWeight > 0 ? min(1, hits / totalWeight) : 0
-            return ExcerptAsk(excerptId: excerptId,
-                              listCount: keys.count,
-                              totalLists: lists.count,
-                              share: share,
-                              tier: tier(share: share, totalLists: lists.count),
-                              evidence: evidenceText(listCount: keys.count, totalLists: lists.count,
-                                                     instrument: query.instrument, position: query.position,
-                                                     includeAllChairs: query.includeAllChairs, years: yearSpan))
+            items.append(ExcerptAsk(excerptId: excerptId,
+                                    listCount: keys.count,
+                                    totalLists: lists.count,
+                                    share: share,
+                                    tier: tier(share: share, totalLists: lists.count),
+                                    evidence: evidenceText(listCount: keys.count, totalLists: lists.count,
+                                                           instrument: query.instrument, position: query.position,
+                                                           includeAllChairs: query.includeAllChairs, years: yearSpan)))
         }
         items.sort(by: askOrder)
 
