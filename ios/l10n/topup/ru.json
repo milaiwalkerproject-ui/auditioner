@@ -1,0 +1,20 @@
+{
+ "All regions": "Все регионы",
+ "Archive audition": "Архивировать прослушивание",
+ "Archive audition on an audition's page moves it here. You can restore it any time.": "«Архивировать прослушивание» на странице прослушивания переносит его сюда. Его можно восстановить в любой момент.",
+ "Archived (%lld)": "В архиве (%lld)",
+ "Archived auditions": "Архив прослушиваний",
+ "Delete for good": "Удалить навсегда",
+ "Delete this audition for good?": "Удалить это прослушивание навсегда?",
+ "Deletes this audition and its list for good. This can't be undone.": "Прослушивание и его список будут удалены навсегда. Это действие нельзя отменить.",
+ "Machine-translated": "Машинный перевод",
+ "Machine-translated from English — may contain errors. Use Show original to compare.": "Машинный перевод с английского — возможны ошибки. Нажмите «Показать оригинал», чтобы сравнить.",
+ "Nothing archived": "В архиве пусто",
+ "Restore": "Восстановить",
+ "Restore puts an audition back into My auditions with its list and readiness; reminders that were on are set again. Delete for good removes it from this device.": "«Восстановить» возвращает прослушивание в «Мои прослушивания» вместе со списком и готовностью; включённые ранее напоминания устанавливаются снова. «Удалить навсегда» убирает его с этого устройства.",
+ "Show": "Показывать",
+ "Show original": "Показать оригинал",
+ "Show translation": "Показать перевод",
+ "This is the short version of our privacy policy (version 0.3, 11 October 2026). The full text will be published before the App Store release.": "Это краткая версия нашей политики конфиденциальности (версия 0.3, 11 октября 2026 г.). Полный текст будет опубликован до выхода в App Store.",
+ "Your region (%@)": "Ваш регион (%@)"
+}

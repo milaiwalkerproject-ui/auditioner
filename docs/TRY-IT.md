@@ -224,12 +224,15 @@ of the error list and send it to me.
   `xcrun simctl openurl booted "auditioner://audition/new?orchestra=Example%20Philharmonic"`.
 - **Language.** iOS lets you pick a language per app: on the device, **Settings
   (the iOS one) → scroll down to Auditioner → Language**. Inside the app,
-  **Settings → Language → App language** jumps to that page. iOS shows the
-  Language row only once the app contains more than one language, and right now
-  it contains only English (the string catalogue is in place, the translations
-  aren't yet), so the row may not appear until the translations land. When they
-  do, the app will show a "Beta translation" tag in Settings while it runs in
-  another language.
+  **Settings → Language → App language** jumps to that page. The app speaks
+  English, Spanish, Chinese (simplified and traditional), Italian, Russian,
+  Japanese, Korean, German, French and Portuguese (Brazil); with no choice made it
+  follows the device's language. The translations are machine-made and checked
+  by a second pass, not yet by a native speaker, so the app shows a "Beta
+  translation" tag in Settings while it runs in another language. Spot a strange
+  phrase? Send feedback from that screen. In the Mac/iPad simulator you can also
+  pick a language in Xcode: **Product → Scheme → Edit Scheme… → Run → Options →
+  App Language**.
 - **Translated excerpt notes — not before 12 November, on purpose.** The
   history, technique, pitfalls and practice-tips notes have machine
   translations ready in the app (Spanish, Italian, Chinese and more are

@@ -1,0 +1,7 @@
+{
+ "Image of a part": "Image d'une partition",
+ "NSAppleMusicUsageDescription": "Auditioner lit les enregistrements Apple Music à partir du début d'un trait lorsque vous avez un abonnement.",
+ "NSCameraUsageDescription": "Auditioner utilise l'appareil photo pour scanner votre partition afin de reconnaître le trait et de créer l'audio de référence.",
+ "NSMicrophoneUsageDescription": "Auditioner enregistre votre travail pour que vous puissiez le comparer à la référence.",
+ "PDF part": "Partition PDF"
+}

@@ -213,8 +213,10 @@ links (U1): `auditioner://excerpt/<id>` and `auditioner://audition/new?…` pref
 the New audition form, nothing saved until Add; the "Find an orchestra near you" row
 links to https://tutti-orchestra.com (U1b; `docs/TUTTI.md`).
 Localisation (A7): string catalogue, Info.plist strings, Language row and "Beta
-translation" tag are in place; **the 11 translations themselves are not yet
-generated** — the app still ships in English only. Privacy policy v0.3
+translation" tag are in place, and all 850 app strings plus the permission prompts
+are machine-translated into the 10 other languages, each reviewed by a second pass
+(`ios/l10n/README.md`); the 76 approved cello notes are translated too, shown from
+12 Nov 2026 (A7b). A native speaker's check is still to come. Privacy policy v0.3
 (`docs/PRIVACY.md`) and the in-app Privacy page describe accounts and trends. Two
 Supabase migrations (`20261012000000_accounts.sql`, `20261012010000_trends.sql`).
 

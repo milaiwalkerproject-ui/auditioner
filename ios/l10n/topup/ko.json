@@ -1,0 +1,20 @@
+{
+ "All regions": "모든 지역",
+ "Archive audition": "오디션 보관",
+ "Archive audition on an audition's page moves it here. You can restore it any time.": "오디션 페이지에서 오디션 보관을 누르면 여기로 이동해요. 언제든지 복원할 수 있어요.",
+ "Archived (%lld)": "보관됨 (%lld)",
+ "Archived auditions": "보관된 오디션",
+ "Delete for good": "완전히 삭제",
+ "Delete this audition for good?": "이 오디션을 완전히 삭제할까요?",
+ "Deletes this audition and its list for good. This can't be undone.": "이 오디션과 리스트를 완전히 삭제해요. 되돌릴 수 없어요.",
+ "Machine-translated": "기계 번역",
+ "Machine-translated from English — may contain errors. Use Show original to compare.": "영어에서 기계 번역한 글이에요 — 오류가 있을 수 있어요. 원문 보기로 비교해 보세요.",
+ "Nothing archived": "보관된 오디션이 없어요",
+ "Restore": "복원",
+ "Restore puts an audition back into My auditions with its list and readiness; reminders that were on are set again. Delete for good removes it from this device.": "복원하면 오디션이 리스트와 준비 상태 그대로 내 오디션으로 돌아가고, 켜져 있던 알림도 다시 설정돼요. 완전히 삭제하면 이 기기에서 제거돼요.",
+ "Show": "표시",
+ "Show original": "원문 보기",
+ "Show translation": "번역 보기",
+ "This is the short version of our privacy policy (version 0.3, 11 October 2026). The full text will be published before the App Store release.": "개인정보 처리방침의 요약본이에요 (버전 0.3, 2026년 10월 11일). 전문은 App Store 출시 전에 공개할 예정이에요.",
+ "Your region (%@)": "내 지역 (%@)"
+}

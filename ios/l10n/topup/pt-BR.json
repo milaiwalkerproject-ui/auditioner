@@ -1,0 +1,23 @@
+{
+ "All regions": "Todas as regiões",
+ "Archive audition": "Arquivar audição",
+ "Archive audition on an audition's page moves it here. You can restore it any time.": "Arquivar audição, na página de uma audição, move essa audição para cá. Você pode restaurá-la a qualquer momento.",
+ "Archived (%lld)": {
+  "one": "Arquivada (%lld)",
+  "other": "Arquivadas (%lld)"
+ },
+ "Archived auditions": "Audições arquivadas",
+ "Delete for good": "Apagar definitivamente",
+ "Delete this audition for good?": "Apagar esta audição definitivamente?",
+ "Deletes this audition and its list for good. This can't be undone.": "Apaga definitivamente esta audição e sua lista. Isso não pode ser desfeito.",
+ "Machine-translated": "Traduzido por máquina",
+ "Machine-translated from English — may contain errors. Use Show original to compare.": "Traduzido do inglês por máquina — pode conter erros. Use Mostrar original para comparar.",
+ "Nothing archived": "Nada arquivado",
+ "Restore": "Restaurar",
+ "Restore puts an audition back into My auditions with its list and readiness; reminders that were on are set again. Delete for good removes it from this device.": "Restaurar devolve uma audição a Minhas audições com sua lista e seu preparo; os lembretes que estavam ativados são programados de novo. Apagar definitivamente a remove deste dispositivo.",
+ "Show": "Mostrar",
+ "Show original": "Mostrar original",
+ "Show translation": "Mostrar tradução",
+ "This is the short version of our privacy policy (version 0.3, 11 October 2026). The full text will be published before the App Store release.": "Esta é a versão resumida da nossa política de privacidade (versão 0.3, 11 de outubro de 2026). O texto completo será publicado antes do lançamento na App Store.",
+ "Your region (%@)": "Sua região (%@)"
+}

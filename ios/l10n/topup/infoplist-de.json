@@ -1,0 +1,7 @@
+{
+ "Image of a part": "Noten als Bild",
+ "NSAppleMusicUsageDescription": "Auditioner spielt Aufnahmen aus Apple Music ab dem Anfang einer Stelle ab, wenn du ein Abonnement hast.",
+ "NSCameraUsageDescription": "Auditioner verwendet die Kamera, um deine Noten zu scannen, die Stelle zu erkennen und Referenzaudio zu erstellen.",
+ "NSMicrophoneUsageDescription": "Auditioner nimmt dein Üben auf, damit du es mit der Referenz vergleichen kannst.",
+ "PDF part": "Noten als PDF"
+}

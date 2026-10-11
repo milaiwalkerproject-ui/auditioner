@@ -1,0 +1,23 @@
+{
+ "All regions": "Toutes les régions",
+ "Archive audition": "Archiver l'audition",
+ "Archive audition on an audition's page moves it here. You can restore it any time.": "« Archiver l'audition » sur la page d'une audition la déplace ici. Vous pouvez la restaurer à tout moment.",
+ "Archived (%lld)": {
+  "one": "Archivée (%lld)",
+  "other": "Archivées (%lld)"
+ },
+ "Archived auditions": "Auditions archivées",
+ "Delete for good": "Supprimer définitivement",
+ "Delete this audition for good?": "Supprimer définitivement cette audition ?",
+ "Deletes this audition and its list for good. This can't be undone.": "Supprime définitivement cette audition et sa liste. Cette action ne peut pas être annulée.",
+ "Machine-translated": "Traduction automatique",
+ "Machine-translated from English — may contain errors. Use Show original to compare.": "Traduction automatique depuis l'anglais — peut contenir des erreurs. Utilisez « Afficher l'original » pour comparer.",
+ "Nothing archived": "Rien d'archivé",
+ "Restore": "Restaurer",
+ "Restore puts an audition back into My auditions with its list and readiness; reminders that were on are set again. Delete for good removes it from this device.": "« Restaurer » remet une audition dans Mes auditions avec sa liste et sa préparation ; les rappels qui étaient activés sont de nouveau programmés. « Supprimer définitivement » la retire de cet appareil.",
+ "Show": "Afficher",
+ "Show original": "Afficher l'original",
+ "Show translation": "Afficher la traduction",
+ "This is the short version of our privacy policy (version 0.3, 11 October 2026). The full text will be published before the App Store release.": "Ceci est la version courte de notre politique de confidentialité (version 0.3, 11 octobre 2026). Le texte complet sera publié avant la sortie sur l'App Store.",
+ "Your region (%@)": "Votre région (%@)"
+}

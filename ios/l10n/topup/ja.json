@@ -1,0 +1,20 @@
+{
+ "All regions": "すべての地域",
+ "Archive audition": "オーディションをアーカイブ",
+ "Archive audition on an audition's page moves it here. You can restore it any time.": "オーディションのページで「オーディションをアーカイブ」を選ぶと、ここに移動します。いつでも復元できます。",
+ "Archived (%lld)": "アーカイブ済み（%lld）",
+ "Archived auditions": "アーカイブしたオーディション",
+ "Delete for good": "完全に削除",
+ "Delete this audition for good?": "このオーディションを完全に削除しますか？",
+ "Deletes this audition and its list for good. This can't be undone.": "このオーディションとそのリストを完全に削除します。この操作は取り消せません。",
+ "Machine-translated": "機械翻訳",
+ "Machine-translated from English — may contain errors. Use Show original to compare.": "英語からの機械翻訳 — 誤りを含む可能性があります。「原文を表示」で比較できます。",
+ "Nothing archived": "アーカイブはありません",
+ "Restore": "復元",
+ "Restore puts an audition back into My auditions with its list and readiness; reminders that were on are set again. Delete for good removes it from this device.": "「復元」はオーディションをリストと準備状況ごと「自分のオーディション」に戻します。オンになっていた通知は再設定されます。「完全に削除」はこのデバイスから削除します。",
+ "Show": "表示",
+ "Show original": "原文を表示",
+ "Show translation": "翻訳を表示",
+ "This is the short version of our privacy policy (version 0.3, 11 October 2026). The full text will be published before the App Store release.": "これはプライバシーポリシーの要約版です（バージョン0.3、2026年10月11日）。全文はApp Storeでの公開前に公表します。",
+ "Your region (%@)": "あなたの地域（%@）"
+}

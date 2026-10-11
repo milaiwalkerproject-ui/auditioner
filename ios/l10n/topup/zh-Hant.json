@@ -1,0 +1,20 @@
+{
+ "All regions": "所有地區",
+ "Archive audition": "封存甄選",
+ "Archive audition on an audition's page moves it here. You can restore it any time.": "在甄選頁面點選「封存甄選」，就會移到這裡。你可以隨時復原。",
+ "Archived (%lld)": "已封存（%lld）",
+ "Archived auditions": "已封存的甄選",
+ "Delete for good": "永久刪除",
+ "Delete this audition for good?": "要永久刪除這場甄選嗎？",
+ "Deletes this audition and its list for good. This can't be undone.": "會永久刪除這場甄選及其清單。此動作無法還原。",
+ "Machine-translated": "機器翻譯",
+ "Machine-translated from English — may contain errors. Use Show original to compare.": "由英文機器翻譯：可能有錯。請用「顯示原文」比較。",
+ "Nothing archived": "沒有已封存的項目",
+ "Restore": "復原",
+ "Restore puts an audition back into My auditions with its list and readiness; reminders that were on are set again. Delete for good removes it from this device.": "「復原」會將甄選連同清單和準備度放回「我的甄選」；原本開啟的提醒會重新設定。「永久刪除」會將它從這部裝置移除。",
+ "Show": "顯示",
+ "Show original": "顯示原文",
+ "Show translation": "顯示譯文",
+ "This is the short version of our privacy policy (version 0.3, 11 October 2026). The full text will be published before the App Store release.": "這是我們隱私權政策的簡短版本（0.3 版，2026 年 10 月 11 日）。完整版本會在 App Store 上架前發布。",
+ "Your region (%@)": "你的地區（%@）"
+}

@@ -1,0 +1,7 @@
+{
+ "Image of a part": "Imagen de una parte",
+ "NSAppleMusicUsageDescription": "Auditioner reproduce grabaciones de Apple Music desde el inicio de un extracto cuando tienes una suscripción.",
+ "NSCameraUsageDescription": "Auditioner usa la cámara para escanear tu parte y así reconocer el extracto y crear audio de referencia.",
+ "NSMicrophoneUsageDescription": "Auditioner graba tu práctica para que puedas compararla con la referencia.",
+ "PDF part": "Parte en PDF"
+}

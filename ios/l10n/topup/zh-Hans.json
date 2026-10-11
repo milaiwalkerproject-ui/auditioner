@@ -1,0 +1,20 @@
+{
+ "All regions": "所有地区",
+ "Archive audition": "归档试奏",
+ "Archive audition on an audition's page moves it here. You can restore it any time.": "在试奏页面上点按“归档试奏”，它就会移到这里。你可以随时恢复。",
+ "Archived (%lld)": "已归档（%lld）",
+ "Archived auditions": "已归档的试奏",
+ "Delete for good": "永久删除",
+ "Delete this audition for good?": "要永久删除这场试奏吗？",
+ "Deletes this audition and its list for good. This can't be undone.": "将永久删除这场试奏及其曲目单。此操作无法撤销。",
+ "Machine-translated": "机器翻译",
+ "Machine-translated from English — may contain errors. Use Show original to compare.": "由英文机器翻译——可能有错误。可使用“显示原文”进行对比。",
+ "Nothing archived": "没有已归档的内容",
+ "Restore": "恢复",
+ "Restore puts an audition back into My auditions with its list and readiness; reminders that were on are set again. Delete for good removes it from this device.": "“恢复”会把试奏连同其曲目单和准备程度放回“我的试奏”；之前开启的提醒会重新设置。“永久删除”会把它从这台设备上移除。",
+ "Show": "显示",
+ "Show original": "显示原文",
+ "Show translation": "显示译文",
+ "This is the short version of our privacy policy (version 0.3, 11 October 2026). The full text will be published before the App Store release.": "这是我们隐私政策的简版（0.3 版，2026 年 10 月 11 日）。完整文本将在 App Store 发布前公布。",
+ "Your region (%@)": "你的地区（%@）"
+}
