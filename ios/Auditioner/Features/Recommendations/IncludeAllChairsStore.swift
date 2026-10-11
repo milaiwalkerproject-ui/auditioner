@@ -22,7 +22,6 @@ final class IncludeAllChairsStore: ObservableObject {
     }
 
     func setIncludeAllChairs(_ on: Bool, for instrument: Instrument) {
-        guard on != includeAllChairs(for: instrument) || defaults.object(forKey: RecommendationSettings.includeAllChairsKey(for: instrument)) == nil else { return }
         RecommendationSettings.setIncludeAllChairs(on, for: instrument, defaults: defaults)
         changeCount += 1
     }

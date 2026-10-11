@@ -133,7 +133,7 @@ struct ExcerptBrowserView: View {
                          source: recommendations.source,
                          isLoading: recommendations.isLoading,
                          serverNote: recommendations.serverNote,
-                         includeAllChairs: $includeAllChairs,
+                         includeAllChairs: chairScope.binding(for: instrument),
                          onHowItWorks: { showHowItWorks = true })
     }
 

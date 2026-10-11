@@ -1,0 +1,350 @@
+{
+ "language": "de",
+ "origin": "ai",
+ "machineTranslated": true,
+ "generatedAt": "2026-10-11",
+ "notes": {
+  "cello-beethoven-symphony-5-mvt2": {
+   "history": {
+    "text": "Der zweite Satz von Beethovens Fünfter Sinfonie, mit Andante con moto bezeichnet und in As-Dur, ist eine Folge von Variationen über zwei einander abwechselnde Themen; die Celli und Bratschen eröffnen ihn mit dem ersten Thema, weshalb er auf fast jeder Probespielliste für Cello steht.",
+    "sourceSha256": "9853e4efa0f46cb0e50fde98888eb10ff6b13e8cbacf4799fc089f0988828b39"
+   },
+   "pitfalls": {
+    "text": "Die häufigsten Fehler sind das Eilen in den punktierten Figuren, ein Anschwellen der ersten Note jedes Bindebogens und der Verlust des Pulses zwischen den Phrasen. Die Intonation in As-Dur ist exponiert, besonders in den hohen Tönen der Melodie, wo die Hand dazu neigt, nach oben abzudriften. In den schnelleren Variationen werden viele Spieler lauter, sobald die Noten schneller werden; die Dynamik sollte sich nach der Bezeichnung richten, nicht nach den Notenwerten.",
+    "sourceSha256": "b1c59a2cf7ec8047e8e2f0be8d08cec999aba92415bccb1e37c3ead1916c8b07"
+   },
+   "practiceTips": {
+    "text": "Übe die Melodie mit einem Metronom, das den Schlag unterteilt, damit die punktierten Rhythmen jedes Mal genau an derselben Stelle sitzen; nimm dann die Unterteilung weg und prüfe, ob sich nichts verschoben hat. Nimm dich auf und achte beim Anhören nur auf die Gestaltung der langen Töne. Spiele die schnellen Variationen zuerst langsam mit ganzem Bogen, dann im Tempo mit dem Bogen nah an der Saite. Singe die Anfangsphrase, bevor du sie spielst, um zu entscheiden, wo sie atmet.",
+    "sourceSha256": "7b6cdd35813a8c04f40166fcee0b33b257248fad8e029a7e3b2edf8486547808"
+   },
+   "technique": {
+    "text": "Die Anfangsmelodie verlangt ein warmes, gleichmäßiges legato, in dem der punktierte Rhythmus präzise gesetzt ist, ohne steif zu werden. Plane die Bogeneinteilung so, dass die langen Töne ihren Kern behalten und die kurzen Noten bei gleicher Lautstärke deutlich ansprechen. In den späteren Variationen wird die Melodie mit schnelleren Notenwerten verziert; halte die linke Hand ruhig und die Saitenwechsel geschmeidig, damit die Linie immer noch wie dieselbe Melodie klingt. Halte dich genau an die Dynamik im Notentext, denn die Jury achtet auf die Kontrolle im piano ebenso wie auf den Klang im forte.",
+    "sourceSha256": "3d90d1a4179bf30a1a17135e8c00f19167d5a0901bafaaa75a6781b72d586b13"
+   }
+  },
+  "cello-beethoven-symphony-5-mvt3": {
+   "history": {
+    "text": "Der dritte Satz von Beethovens Fünfter ist ein Scherzo in c-Moll mit einem Trio, dessen kontrapunktischer Beginn allein den Celli und Bässen anvertraut ist. Diese exponierte Stelle ist der Grund, warum der Satz neben dem berühmten langsamen Satz auf Probespiellisten für Cello steht.",
+    "sourceSha256": "42e12fe069822d844c579f4061552e5e6976c07a2346bad13bbabad5fc88b749"
+   },
+   "pitfalls": {
+    "text": "Typischerweise beginnen Spieler das Trio in einem Tempo, das sie in den schnellsten Takten nicht durchhalten können, oder lassen den Bogen springen, sodass die Noten verschwimmen. Die Tonrepetitionen neigen zum Eilen, und die unbequemen Saitenwechsel in der tiefen Lage können die Intonation absacken lassen. Die Dynamik wird oft eingeebnet: Der Kontrast zwischen dem kräftigen Trio und der gedämpften Wiederkehr gehört zu dem, was geprüft wird.",
+    "sourceSha256": "9d49beb2c3c5317fc1e6f43106d749b5301b1c03612f0878c272932b7167c2ff"
+   },
+   "practiceTips": {
+    "text": "Wähle dein Tempo nach dem schwersten Takt, nicht nach dem ersten, und steigere es mit dem Metronom in kleinen Schritten. Übe die Läufe mit verschiedenen Rhythmen und mit getrennten Strichen, bevor du die notierten Bögen hinzunimmst. Isoliere die Saitenwechsel und spiele sie als Doppelgriffe, um die Stellung der linken Hand zu prüfen. Spiele die ganze Stelle einmal am Tag von der ersten Note an ohne anzuhalten, so wie im Probespiel.",
+    "sourceSha256": "40b2012d5ea208bd2a1efc69364f1d492277e22d1970a2a8a7d5f3b62a65de4f"
+   },
+   "technique": {
+    "text": "Das Trio braucht einen sauberen, energischen Strich, der genug an der Saite bleibt, um im Saal zu tragen, wobei jede Note der Läufe ebenso von der linken Hand wie vom Bogen artikuliert wird. Halte den Puls durch die Einsätze und Pausen absolut stabil; die Jury hört sofort, wenn sich das Tempo beim Wechsel der Textur verschiebt. Die leise Wiederkehr des Scherzo-Materials verlangt einen völlig anderen, leichteren Kontakt mit der Saite.",
+    "sourceSha256": "29fefec85a121ba81e717e166ee41cf0fcbd80115c1a60835af4956929798705"
+   }
+  },
+  "cello-beethoven-symphony-9-mvt4": {
+   "history": {
+    "text": "Das Finale von Beethovens Neunter Sinfonie, der Satz, der Schillers „Ode an die Freude“ vertont, beginnt mit einem instrumentalen Rezitativ für Celli und Bässe, das Material aus den vorangegangenen Sätzen beantwortet und verwirft, bevor das „Freude“-Thema erscheint.",
+    "sourceSha256": "0997983295f49b4b9b338ccd8fa00795c869afb3d6feac6a25ae6e91ebb0476e"
+   },
+   "pitfalls": {
+    "text": "Die Freiheit des Rezitativs verleitet zu unklarem Rhythmus; Jurys wollen meist einen überzeugenden, sprechenden Vortrag, der trotzdem messbar bleibt. Lange Töne verlieren gegen Ende des Bogens oft ihren Kern, und die plötzlichen dynamischen Wechsel werden geglättet. Die Passagen, die in die hohe Lage führen, sind intonatorisch exponiert.",
+    "sourceSha256": "64e5b1986e7a8be70c19b7e80deca033c244166c5852ab33beae80879346b8a6"
+   },
+   "practiceTips": {
+    "text": "Lege den Charakter jeder Phrase fest (Frage, Weigerung, Zustimmung) und markiere ihn entsprechend im Notentext; spiele sie dann jemandem vor und frage, ob der Unterschied zu hören ist. Übe zuerst streng im Takt mit dem Metronom und füge erst dann die rhetorische Freiheit hinzu, damit der zugrunde liegende Puls hörbar bleibt. Arbeite daran, die langen Töne mit langsamem Bogen bei vollem Klang auszuhalten. Höre dir mehrere Orchesteraufnahmen an und achte darauf, wie die Gruppe das Rezitativ gemeinsam spielt.",
+    "sourceSha256": "f9b4e904b47ca0f112d6d2571cdd62ac28ff0225cb7e3137952e050c81112951"
+   },
+   "technique": {
+    "text": "Das Rezitativ ist so geschrieben, dass es wie Sprache klingen soll; der Spieler muss also jede Phrase mit einem klaren Gefühl dafür gestalten, wo die Betonung liegt, und dabei die notierten Notenwerte so ehrlich halten, dass eine ganze Gruppe sie gemeinsam spielen könnte. Der dynamische Kontrast ist groß: Die kraftvollen deklamatorischen Gesten brauchen einen vollen, fokussierten Klang, und die leiseren Antworten brauchen dieselbe Intensität bei geringerer Lautstärke. Bogengeschwindigkeit und Kontaktstelle leisten hier den größten Teil der Ausdrucksarbeit.",
+    "sourceSha256": "a0f3c5b9bafdf7bbb0d66300dd253619c519106d42b46558f11c922ca1a59fc8"
+   }
+  },
+  "cello-brahms-piano-concerto-2-mvt3-solo": {
+   "history": {
+    "text": "Brahms komponierte sein Zweites Klavierkonzert 1878–81 und war bei der Uraufführung 1881 in Budapest selbst der Solist. Ungewöhnlich für ein Klavierkonzert, beginnt der langsame Satz mit einem langen Cellosolo, das das Thema vorstellt, bevor das Klavier einsetzt; das Solo gehört zu den Standardanforderungen bei Probespielen für Solocello.",
+    "sourceSha256": "07d5f67a03d1cdadab65431ca92d86e3c91be656403b8c6f74d12c519e133189"
+   },
+   "pitfalls": {
+    "text": "Kandidaten spielen oft von Anfang an zu laut und lassen sich keinen Raum zum Steigern, oder sie kosten das Rubato so sehr aus, dass der Puls verschwindet. Die hohe Passage gegen Ende ist intonatorisch exponiert, und nervöses Vibrato macht es noch schlimmer. Bogenwechsel, die die Linie unterbrechen, zerstören den gesanglichen Charakter, auf den die Jury hört.",
+    "sourceSha256": "58fce629678c5ba776c392dc97fdbfc7addc4ed029c8b9c458d3f9106b14b747"
+   },
+   "practiceTips": {
+    "text": "Lege die dynamische Gestaltung des ganzen Solos auf dem Papier fest, bevor du es übst, und spiele es dann jemandem vor, der dir sagen kann, ob der Plan hörbar ist. Übe die Lagenwechsel langsam und immer gleich, damit jeder jedes Mal gleich klingt. Benutze einen Bordunton für die hohe Passage und übe sie einen Halbton höher und tiefer, um das Ohr anspruchsvoller zu machen. Spiele zu einer Aufnahme mit, um zu lernen, wie das Solo mit Klavier und Orchester zusammengeht.",
+    "sourceSha256": "823a2f5ec8706cbfe7841e452ebd0291d99d1d0bb0251fcf6e3bf545399b4294"
+   },
+   "technique": {
+    "text": "Das Solo verlangt einen vollen, singenden Klang, der über ein Orchester trägt und dennoch intim bleibt; Bogengeschwindigkeit und Kontaktstelle müssen daher für jede Phrase geplant werden. Die Lagenwechsel sind Teil des Ausdrucks und sollten in Timing und Gewichtung bewusst gesetzt werden. Die spätere Passage, nachdem das Klavier eingesetzt hat, steigt höher und braucht dieselbe Wärme mit sicherer Intonation und durchgehendem Vibrato.",
+    "sourceSha256": "c278f3163963ca3c08a0fbb31037e3298029842fea7fa07f4fa065bee8e74c8d"
+   }
+  },
+  "cello-brahms-symphony-2-mvt2": {
+   "history": {
+    "text": "Der langsame Satz von Brahms’ Zweiter Sinfonie, in H-Dur, beginnt mit einer langen Cellomelodie über einer Gegenstimme des Fagotts, weshalb die Stelle so oft verlangt wird.",
+    "sourceSha256": "53f3efee9d5a7af4c7f14aa2e27fcdb414c0d1ab6a88c97eb11e1febb30eeccd"
+   },
+   "pitfalls": {
+    "text": "H-Dur ist unbequem für die linke Hand, und bei der Intonation des absteigenden Anfangs verlieren die meisten Kandidaten Punkte. Viele Spieler lassen das Tempo schleppen, weil die Bezeichnung langsam ist, oder lassen die Phrase in der Mitte durchhängen. Bogenwechsel, die knacken oder anschwellen, unterbrechen eine Linie, die ununterbrochen klingen soll.",
+    "sourceSha256": "988fde57097572c892380e18f20d23791dfccff82d4acc0b932595f67723156b"
+   },
+   "practiceTips": {
+    "text": "Spiele die Melodie zuerst mit leeren Saiten als Bordun, um jede Note an der Tonart zu prüfen, dann mit dem Stimmgerät nur für die Töne, bei denen du unsicher bist. Übe die Bogenwechsel für sich auf einem langen Ton, bis sie unhörbar sind. Nimm die Anfangsphrase auf und höre, ob die dynamische Gestaltung dem entspricht, was du beabsichtigt hast. Zähle die Pausen und die Takte, in denen andere Instrumente führen, damit sich deine Wiedereinsätze wie ein Teil des Orchesters anfühlen und nicht wie ein Solo.",
+    "sourceSha256": "6b0ffc49e7501b316a0a45fe2c1e02caae3f6e87bb47ce0309f1a20e507eb5d7"
+   },
+   "technique": {
+    "text": "Dies ist eine Prüfung von getragenem Klang und Linie: Die Melodie steigt langsam ab und wieder auf, und jede Note muss ohne Lücke beim Bogenwechsel mit der nächsten verbunden sein. Das Vibrato sollte durchgehend, aber nicht breit sein, und die Lagenwechsel müssen so gesetzt werden, dass sie entweder unhörbar sind oder absichtlich ausdrucksvoll. Die Dynamik ist zurückhaltend; die Herausforderung besteht also darin, Wärme zu projizieren, ohne zu drücken.",
+    "sourceSha256": "2f07f767aec2053c2502747c9b4e743f2b64042e19de94bcaad9bbdb950d42be"
+   }
+  },
+  "cello-brahms-symphony-3-mvt3": {
+   "history": {
+    "text": "Statt eines schnellen Scherzos ist der dritte Satz von Brahms’ Dritter Sinfonie ein lyrisches Poco allegretto in c-Moll und im 3/8-Takt, in walzerartiger dreiteiliger Form; seine Anfangsmelodie ist den Celli anvertraut.",
+    "sourceSha256": "02d8245de2cdd38467ea9f293e1f7331adf5725a4ab8eaff8912e780ae647105"
+   },
+   "pitfalls": {
+    "text": "Ein überromantisiertes Rubato ist der häufigste Fehler; Jurys wollen, dass die Gestaltung aus Bogenführung und Dynamik kommt, nicht aus einer Verzerrung des Pulses. Die hohen Töne der Phrase sind häufig zu hoch, und die Lagenwechsel können an den falschen Stellen hörbar sein. Spieler neigen außerdem dazu, zu laut anzufangen und keinen Raum für das Anschwellen in der Mitte der Phrase zu lassen.",
+    "sourceSha256": "343147595a99762263c492ed7d8171a407852b684c490ee9ccc4773bf9b4b166"
+   },
+   "practiceTips": {
+    "text": "Stelle das Metronom auf ein bequemes Tempo und spiele die Melodie absolut im Takt, bis die Phrasierung allein aus der Bogengeschwindigkeit kommt; erlaube dir dann kleine, bewusste Freiheiten. Übe die Lagenwechsel als langsame Glissandi, dann ohne das Rutschen, und prüfe den Zielton mit einem Bordunton. Probiere die Stelle mit einem Bogen pro Takt und dann mit den notierten Bindebögen, um den Klang zu vergleichen. Höre dir ein paar Orchesteraufnahmen an, um zu hören, wie sich das Tempo über die Phrase hinweg bewegt.",
+    "sourceSha256": "d769eac1975fe217549ca92ec6d1bbf408a9118ac6c361bc98a160470d0678c7"
+   },
+   "technique": {
+    "text": "Die Melodie braucht eine singende, flexible Linie mit einem sanften Schwung aus dem Dreiermetrum, aber der Rhythmus darunter sollte so ehrlich bleiben, dass eine Gruppe sie unisono spielen könnte. Die Phrase steigt in die hohe Lage; plane die Lagenwechsel also so, dass du intonationssicher ankommst, mit bereits laufendem Vibrato. Die Dynamik ist intim; der Klang sollte eher warm als laut sein, wobei der Bogen langsam und für die Farbe nah am Steg geführt wird.",
+    "sourceSha256": "18242eb292ef694901bcf4f6e57a8f1680eaffb5658e709a80b0cde59bffab10"
+   }
+  },
+  "cello-debussy-la-mer-mvt1": {
+   "history": {
+    "text": "La mer ist Debussys dreisätziges Orchesterporträt des Meeres. Der erste Satz enthält eine berühmte Stelle für die geteilte Cellogruppe, die auf vielen Probespiellisten für Cello steht, manchmal nur als Oberstimme und manchmal mit allen Stimmen.",
+    "sourceSha256": "00599217c78f86e73ee90d4c76358e2bed738a57bf9611ce0a4ba0e25d756346"
+   },
+   "pitfalls": {
+    "text": "Die Oberstimme liegt so hoch, dass die Intonation unter Druck nach oben abdriftet, und die wechselnden Unterteilungen werden oft zu einem ungefähren Rhythmus geglättet. Spieler neigen dazu, den Klang zu forcieren, um gehört zu werden, was Vibrato und Bogen verkrampft. Wer zu früh mit dem crescendo beginnt, hat für den Höhepunkt der Phrase nichts mehr übrig.",
+    "sourceSha256": "6f3d9edac73135e127494e9a4714f6ba84af853ff85b8210bf661b92eca11efa"
+   },
+   "practiceTips": {
+    "text": "Lerne jede Stimme, die verlangt werden könnte, nicht nur die Oberstimme, und übe sie zu einer Aufnahme, um zu spüren, wie sie zusammenpassen. Benutze das Metronom auf der kleinsten Unterteilung, bis die rhythmischen Wechsel automatisch laufen. Übe die hohe Passage zuerst eine Oktave tiefer, um die Phrasierung festzulegen, dann in der Originalhöhe mit einem Bordunton. Markiere den dynamischen Höhepunkt und arbeite von dort rückwärts, damit das crescendo irgendwohin führen kann.",
+    "sourceSha256": "cd5147ce70aa181931f4e31106e1a3c9dcb2d352f5546ba6d44200410531f767"
+   },
+   "technique": {
+    "text": "Die Stelle ist für die in mehrere Stimmen geteilte Gruppe geschrieben, und die Listen erwarten meist die Oberstimme oder alle Stimmen; in jedem Fall muss der Spieler einen warmen, singenden Klang in der hohen Lage mit sicherer Intonation halten. Rhythmische Präzision ist wichtig, weil die Figuren ihre Unterteilung wechseln und die ganze Gruppe sich gemeinsam bewegen muss. Die Lagenwechsel sollten früh vorbereitet werden, und das Vibrato sollte beim Wechsel der Lage durchgehend bleiben.",
+    "sourceSha256": "c42621bdbb83c2fe13954db1106cf2ce156974f33f85e7b3a99c0d80e26f5fcf"
+   }
+  },
+  "cello-mendelssohn-midsummer-nights-dream-scherzo": {
+   "history": {
+    "text": "Mendelssohns Schauspielmusik zu A Midsummer Night's Dream (Ein Sommernachtstraum), op. 61, entstand 1842–43 und wurde im Oktober 1843 in Potsdam uraufgeführt. Das Scherzo, das die Reihe eröffnet, ist ein schneller, leichter Satz, dessen Streichersatz ein Standardtest der Artikulation ist.",
+    "sourceSha256": "c7fcf2149ab6f5eccd92bb99656845e362777bf603fe049337db137e5a489ce3"
+   },
+   "pitfalls": {
+    "text": "Der Strich wird im Verlauf der Stelle häufig schwerer und lauter, und das Tempo wird in den leichten Takten schneller und in den schweren langsamer. Ungleichmäßiges spiccato bei den Saitenwechseln und verwischte chromatische Töne sind das, was Jurys zuerst auffällt. Ein Tempo, das eine Spur zu schnell gewählt ist, kostet mehr, als es bringt.",
+    "sourceSha256": "bbbc695c081cf17d350d7b9fa883f355bbd42192019a51002ee7efd0a9e2da43"
+   },
+   "practiceTips": {
+    "text": "Übe zuerst an der Saite, langsam, mit jeder Note artikuliert, dann in mittlerem Tempo mit kleinem spiccato und erst dann im schnellen Tempo. Wiederhole die zwei schwersten Takte in Schleife mit dem Metronom und stelle den Klick erst eine Stufe höher, wenn sie dreimal hintereinander sauber waren. Spiele mit einem Bordunton, um die chromatischen Töne zu prüfen. Nimm einen Durchlauf auf und höre auf Takte, in denen sich Lautstärke oder Tempo ändern, ohne dass du es beabsichtigt hast.",
+    "sourceSha256": "b24c3ced61997b109836e720c04f7eb1064ddcada5040dfb44ff53e2d326e0b5"
+   },
+   "technique": {
+    "text": "Die Stelle verlangt ein schnelles, sehr gleichmäßiges spiccato, das leise bleibt, mit entspannter Bogenhand und einem Strich, der aus wenig Armgewicht entsteht statt allein aus dem Handgelenk. Die linke Hand muss dem Bogen voraus sein, damit jede Note anspricht, besonders in den chromatischen Wendungen. Die Saitenwechsel sollten so klein wie möglich sein, und die Dynamik muss auf dem notierten Niveau bleiben, auch wenn die Noten schwieriger werden.",
+    "sourceSha256": "885d9161e2d5061b92535976e56649e45e943d622c64fcfe8719002b4951800d"
+   }
+  },
+  "cello-mozart-symphony-35-mvt4": {
+   "history": {
+    "text": "Mozart schrieb die „Haffner“-Sinfonie 1782. Ihr Finale ist mit Presto bezeichnet, steht im 2/2-Takt und in Sonatenrondoform, und Mozart ließ seinen Vater wissen, es solle so schnell wie möglich gehen.",
+    "sourceSha256": "7c3e76ace0f8ef54089823b0963c782bc41ba914e04c786f1359d5e8cdf26e80"
+   },
+   "pitfalls": {
+    "text": "Die üblichen Probleme sind ein spiccato, das zu hoch springt und deshalb ungleichmäßig wird, das Eilen in den Tonrepetitionen und der Verlust des Tempos bei den Saitenwechseln. Kandidaten wählen oft ein Tempo, das in den ersten Takten beeindruckt und dann in den unbequemen Passagen auseinanderfällt. Die Intonation in den schnellen Sprüngen ist exponiert, weil der Satz so dünn ist.",
+    "sourceSha256": "eb3e1326bb9856ec41f74ec6d87c6c34e17fc95cdbdc523870abfbced7745fef"
+   },
+   "practiceTips": {
+    "text": "Baue die Stelle mit dem Metronom von einem Tempo aus auf, in dem jede Note sauber ist, und steigere in kleinen Schritten; übe sie an der Saite, bevor du den Bogen springen lässt. Benutze Rhythmusvarianten (punktiert, umgekehrt punktiert, in Dreiergruppen) für die schnellsten Takte. Übe die Saitenwechsel als langsame Doppelgriffe. Beende jede Übeeinheit mit einem Durchlauf wie im Vortrag, im vollen Tempo und ohne anzuhalten.",
+    "sourceSha256": "cb7111c37ace1ba4a0eb01d04e304dec970de0636d91cd6f74a8a5d5625c4833"
+   },
+   "technique": {
+    "text": "Die Stelle verlangt einen leichten, sauberen springenden Strich in schnellem Tempo, wobei der Bogen aus einem kleinen, kontrollierten Bereich nahe dem Schwerpunkt arbeitet. Jede Note der Tonleiter- und Arpeggiofiguren muss von der linken Hand klar gesetzt werden, damit die Artikulation auch im schnellen Tempo erkennbar ist. Halte die Dynamik durchsichtig: Mozarts piano muss wirklich leise bleiben und dabei rhythmisch exakt sein.",
+    "sourceSha256": "cd468f1288195a79aed0baa3a8a60e5fc9e8324ef3092df8720906e9cdd0a18b"
+   }
+  },
+  "cello-prokofiev-symphony-5-mvt3": {
+   "history": {
+    "text": "Prokofievs Fünfte Sinfonie, op. 100, wurde 1944 komponiert. Ihr dritter Satz ist ein Adagio in F-Dur, und die Cellostelle daraus steht neben dem Finale auf mehreren neueren Listen für Tutti-Probespiele.",
+    "sourceSha256": "2ce2592349c01ce3a3357fe67c3adaa0357470b1ab140f990b90c01a37666ae9"
+   },
+   "pitfalls": {
+    "text": "Die Intonation in den chromatischen Passagen geht als Erstes verloren, besonders nach einem großen Lagenwechsel. Das langsame Tempo verleitet dazu, die Unterteilung zu verlieren und den Rhythmus driften zu lassen. Der Klang kann oben im Tonumfang dünn werden, wenn der Bogen zu weit vom Steg entfernt bleibt.",
+    "sourceSha256": "8f4e05278412e97ba93ac6f665e956cec52ac684a1685cfcffeba035fe400d5c"
+   },
+   "practiceTips": {
+    "text": "Übe mit dem Metronom auf der kleinsten Unterteilung, damit die langen und die bewegten Noten denselben Puls teilen. Benutze einen Bordunton auf dem Grundton, um die chromatischen Passagen zu verankern. Arbeite an der hohen Passage mit langsamem Bogen nah am Steg für einen volleren Klang. Lerne das umgebende Orchestermaterial von einer Aufnahme, damit deine Einsätze sicher gesetzt sind.",
+    "sourceSha256": "085d5dde54ff2db8eb767895956350d2ca991131ca8a665caea30f7f3ba16426"
+   },
+   "technique": {
+    "text": "Die Stelle ist langsam und exponiert; die Herausforderung besteht also darin, eine lange Linie mit warmem Ton durch weite Intervalle und chromatische Wendungen zu halten und dabei den Puls völlig stabil zu lassen. Die hohe Lage verlangt sichere Lagenwechsel und gleichmäßiges Vibrato. Die Dynamik sollte den gedruckten Gabeln genau folgen, da der Satz um die Celli herum dünn ist.",
+    "sourceSha256": "ad347d8d92548ebe979618e9e1fdfbefb3eba5d5e90586364264dc0b507560ec"
+   }
+  },
+  "cello-prokofiev-symphony-5-mvt4": {
+   "history": {
+    "text": "Prokofievs Fünfte Sinfonie, op. 100, stammt aus dem Jahr 1944. Das Finale, Allegro giocoso in B-Dur, beginnt damit, dass die Celli das Thema des ersten Satzes in Erinnerung rufen, und enthält eine schnelle, exponierte Stelle, die manche Orchester als vorzubereitende Stelle verlangen und andere zum Blattspiel verwenden.",
+    "sourceSha256": "81f5d99ef483c320b1f2502d52d4685f07aee7f9567fc907b7324276f4a81a12"
+   },
+   "pitfalls": {
+    "text": "Spieler neigen dazu, die schnellen Gruppen zu eilen und zu früh auf den akzentuierten Noten anzukommen, oder das Tempo in den unbequemen Saitenwechseln zu verlieren. Die Oberstimme einer divisi-Stelle kann unter Tempo nach oben abdriften. Wird die Stelle zum Blattspiel verwendet, ist Zögern bei den rhythmischen Wechseln der teuerste Fehler.",
+    "sourceSha256": "325e305762af3e9da59e120e52874f0640d139ab39a5ca27d7b2340ae297c370"
+   },
+   "practiceTips": {
+    "text": "Arbeite mit dem Metronom von einem langsamen Tempo aus in rhythmischen Gruppen und gehe nur dann in kleinen Schritten höher, wenn jede Note sauber ist. Übe die Einsätze auf den leichten Zählzeiten, indem du beim Spielen den Puls mit dem Fuß klopfst. Isoliere die Saitenwechsel und spiele sie als Doppelgriffe. Übe außerdem das Blattspiel an Passagen ähnlichen Charakters, damit du den Rhythmus auf den ersten Blick lesen kannst, wenn die Jury es verlangt.",
+    "sourceSha256": "592033aece913918acbc643bde6d33989e9f6114f4e634ba97577634f8bb831d"
+   },
+   "technique": {
+    "text": "Dies ist eine Prüfung schneller, klarer Artikulation unter rhythmischem Druck: Die linke Hand muss jede Note der Läufe setzen, während der Bogen einen kurzen, gleichmäßigen Strich beibehält. Akzente und Einsätze auf den leichten Zählzeiten müssen genau im Takt sein, und die Saitenwechsel müssen klein und vorbereitet sein. Halte den Klang hell und tragend, ohne in die Saite zu graben.",
+    "sourceSha256": "7a93109df5af9be040cb1879dbfbb56fc6ce1842fe236c082f5feeaf1a910652"
+   }
+  },
+  "cello-rossini-william-tell-overture-opening": {
+   "history": {
+    "text": "Rossinis Oper Guillaume Tell wurde am 3. August 1829 an der Pariser Opéra uraufgeführt. Ihre Ouvertüre beginnt mit einer langsamen Passage für eine kleine Gruppe von Solocelli, und die Oberstimme dieser Passage ist eines der am häufigsten verlangten Soli für Solocello.",
+    "sourceSha256": "87616eca4151f4a02e33784cb4dc5df7a8a9f1cbfd657b431c8f55f158dd5173"
+   },
+   "pitfalls": {
+    "text": "Der exponierte Anfangston und die hohen Passagen sind die Stellen, an denen die Intonation am häufigsten versagt, und die langen Töne verlieren leicht ihren Kern oder wackeln mit nervösem Vibrato. Manche Spieler eilen durch die notierten Pausen oder Verzierungen. Die begleitenden Cellostimmen werden manchmal ebenfalls verlangt, und Kandidaten, die sie sich nicht angesehen haben, werden auf dem falschen Fuß erwischt.",
+    "sourceSha256": "fcac7ca77ee067cd3160963b75f2e768e90f55a94f8837591342b2d5b7190809"
+   },
+   "practiceTips": {
+    "text": "Übe die Anfangsphrasen mit einem Bordunton und einem langsamen Metronom und achte auf eine stabile Tonhöhe über jeden langen Ton hinweg. Arbeite an Bogenwechseln auf leeren Saiten im pianissimo, bis sie unhörbar sind. Lerne auch die unteren Cellostimmen, nicht nur die Oberstimme, damit du die Harmonie verstehst und auf Verlangen jede davon spielen kannst. Nimm das Solo auf und höre, ob die Phrasen eine klare Richtung haben.",
+    "sourceSha256": "2909e375600a9c6a273ca15fd28745da4013388f2baf346b27e93e3be1891e13"
+   },
+   "technique": {
+    "text": "Das Solo ist langsam, leise und hoch; der Spieler braucht also einen schönen, getragenen Ton in der Daumenlage mit einer Intonation, die auf langen Tönen nicht schwankt. Bogenkontrolle in leiser Dynamik ist entscheidend: langsame, gleichmäßige Bögen mit unmerklichen Wechseln. Die Phrasierung ist opernhaft; jede Linie sollte also wie eine gesungene Phrase gestaltet werden, mit einem klaren Höhepunkt und einem natürlichen Ende.",
+    "sourceSha256": "6205f1f7c6d627952d174426c587189256081ee7f1025c395c6506d48dc6ce09"
+   }
+  },
+  "cello-shostakovich-symphony-1-mvt4-solo": {
+   "history": {
+    "text": "Das Finale von Shostakovichs Erster Sinfonie, op. 10, enthält ein ausgedehntes Solo für das Solocello, das zu den Standardanforderungen bei Probespielen für Solocello und stellvertretendes Solocello gehört.",
+    "sourceSha256": "cbab6dc6ca414e9b9d3af3a83fddeda9d56bd6f60b574877796431aa0d93e200"
+   },
+   "pitfalls": {
+    "text": "Die häufigsten Probleme sind die Intonation in den hohen Passagen, ein Rhythmus, der in den gehaltenen Takten driftet, und ein Ton, der am Höhepunkt forciert wird. Spieler neigen außerdem dazu, die leiseren Dynamiken zu übergehen und damit die Dramatik einzuebnen, von der das Solo lebt. Einsätze, die nicht gegen den mitgedachten Orchesterrhythmus gesetzt sind, klingen unüberzeugend.",
+    "sourceSha256": "6f90a3a0bd77937676117bff16128ae4eb0edc52b5222f06b41038bc443d019b"
+   },
+   "practiceTips": {
+    "text": "Übe das Solo mit dem Metronom auf der Unterteilungsebene, dann mit einer Aufnahme, damit dein Rhythmus genau zum Orchester passt. Benutze einen Bordunton für die hohen Passagen und übe die Lagenwechsel als langsames Rutschen, bevor du das Glissando wegnimmst. Arbeite an den lautesten Takten mit schnellem Bogen und leichter linker Hand, um Forcieren zu vermeiden. Markiere jede Dynamik in der Stimme und prüfe an einer Aufnahme von dir, ob jede hörbar ist.",
+    "sourceSha256": "578db75cb7dbcdc4cd9d7fdc842563389d33430d2b89e0cf447dc6fe3146f8a2"
+   },
+   "technique": {
+    "text": "Das Solo bewegt sich zwischen intensiver, getragener Lyrik und scharfen rhythmischen Gesten; es braucht also einen Klang, der über ein großes Orchester trägt und sich trotzdem schnell zurücknehmen lässt. Die Linie steigt in die hohe Lage und verlangt sichere Lagenwechsel, bei denen das Vibrato durch den Wechsel der Lage hindurch gehalten wird. Die dynamischen Kontraste sind extrem und sollten wörtlich genommen werden.",
+    "sourceSha256": "cfad68a0af850510d807a404cd56f679744115966345cdb338c17f3e42c45b43"
+   }
+  },
+  "cello-strauss-don-juan-opening": {
+   "history": {
+    "text": "Don Juan, op. 20, ist eine Tondichtung für großes Orchester, die Richard Strauss 1889 vollendete und im selben Jahr bei der Uraufführung in Weimar selbst dirigierte; sie ist Ludwig Thuille gewidmet. Ihre ersten Seiten sind ein Standardtest bei Probespielen für Streicher.",
+    "sourceSha256": "ba0c2d2135f4d3478360a66c03f62a3054ed0811018691108df3e49e7481bccc"
+   },
+   "pitfalls": {
+    "text": "Die üblichen Fehler sind das Eilen in der Anfangsgeste, ein Verhaspeln der schnellen Läufe, sodass nur die erste und die letzte Note stimmen, und ein Klang, der unter der Anstrengung hart wird. Kandidaten spielen die Stelle oft lauter, als sie kontrollieren können, und die punktierten und die Triolenrhythmen verschwimmen ineinander. Ermüdung setzt schnell ein, wenn der Bogenarm verspannt ist.",
+    "sourceSha256": "f4217a65ebda276b21f64b266c740569ef99953659ac5972fac4d8b71fb521cd"
+   },
+   "practiceTips": {
+    "text": "Übe die Läufe langsam in rhythmischen Gruppen mit dem Metronom, dann im Tempo in kurzen Abschnitten mit Pausen dazwischen. Spiele die ganze Stelle im halben Tempo mit voller Dynamik, um sicherzustellen, dass der Klang offen bleibt. Isoliere die Sprünge und übe die Lagenwechsel lautlos, bevor du den Bogen hinzunimmst. Schließe mit einem Durchlauf von der ersten Note an im Vortragstempo ab und notiere, wo sich der Rhythmus verschoben hat.",
+    "sourceSha256": "6ae428765a09faa0aed8da2af8581dc61e3375b69af1c58bdb210d10f7f9787c"
+   },
+   "technique": {
+    "text": "Der Anfang braucht einen großen, selbstbewussten Klang mit einem Strich, der im schnellen Tempo kontrolliert bleibt, und die Energie muss aus der Bogengeschwindigkeit kommen, nicht aus Druck. Die schnellen aufsteigenden Läufe und weiten Sprünge erfordern Lagenwechsel, die vor dem Bogen vorbereitet werden, und eine linke Hand, die nah am Griffbrett bleibt. Der Rhythmus ist die eigentliche Prüfung: Die Synkopen und Triolenfiguren müssen exakt gegen einen Puls gesetzt werden, der sich nie verändert, auch nicht in den lautesten Takten.",
+    "sourceSha256": "876c3386c5e0a5f0993d7220f8202e68f517af4b4834dd31dd78e4e3be0f9727"
+   }
+  },
+  "cello-strauss-don-quixote-solo": {
+   "history": {
+    "text": "Don Quixote, op. 35, ist eine Tondichtung von Richard Strauss in Form eines Themas mit Variationen. Das Solocello verkörpert durchgehend den Ritter; die Stimme ist deshalb Solo- und tutti-Stimme zugleich und wird bei Probespielen für Solocello verlangt.",
+    "sourceSha256": "2f3dbf79d6c41f3ec12db92b08e656c34f3e1e8d89db8a0b246cd0fafb7de8e0"
+   },
+   "pitfalls": {
+    "text": "Das Thema wird oft überspielt und verliert seine Klarheit, während das Finale zu wenig getragen wird und die langen Töne zu früh verklingen. Die Intonation in der hohen Lage und in den unbequemen Sprüngen ist unerbittlich. Viele Kandidaten kennen den Orchesterzusammenhang nicht gut genug, um ihre Einsätze überzeugend zu setzen.",
+    "sourceSha256": "a71338abb45b63892ac5a52c61ddf9e70965f805c71d777292daadfea03e1515"
+   },
+   "practiceTips": {
+    "text": "Lerne die Partitur, nicht nur die Solostimme, und übe mit einer Aufnahme, damit du weißt, worauf du antwortest. Arbeite am Thema mit dem Metronom, um den Rhythmus ehrlich zu halten, während du es gestaltest. Übe das Finale mit sehr langsamem Bogen im pianissimo und zähle die Schläge dabei laut. Bereite genau die Passagen vor, die auf der Liste stehen, für die du antrittst, denn die Orchester schneiden die Soli unterschiedlich zu.",
+    "sourceSha256": "77ed68abe8612d9873e5e0c5a419aff4c33149df3f760d9f5866123bfb942b30"
+   },
+   "technique": {
+    "text": "Die Solopassagen reichen von der deklamatorischen Vorstellung des Ritterthemas bis zum langen, leisen Verlöschen des Finales; der Spieler braucht also eine breite Palette: einen großen, tragenden Klang mit rhythmischem Biss und ein zerbrechliches, getragenes pianissimo in der hohen Lage. Lagenwechsel und Passagen in der Daumenlage müssen so sicher sein, dass der Ausdruck mühelos durchkommt. Der Rhythmus muss gegen ein vorgestelltes Orchester exakt sein, da das Solo häufig mit anderen Instrumenten verzahnt ist.",
+    "sourceSha256": "7bff706498d64857888a2bc9842a4499df6c030079a2fd992d731ac55c87c7fb"
+   }
+  },
+  "cello-strauss-ein-heldenleben-opening": {
+   "history": {
+    "text": "Ein Heldenleben, op. 40, ist eine der Tondichtungen für großes Orchester von Richard Strauss. Das Heldenthema, das das Werk eröffnet, liegt bei den Hörnern und den tiefen Streichern, weshalb die erste Seite der Cellostimme zu den anspruchsvollsten Anfangspassagen des Repertoires gehört.",
+    "sourceSha256": "4afebe56ed0bfa7cdcb2cd603f2e5c76dac9b6c84001ff6eb6041dd1dd2fad18"
+   },
+   "pitfalls": {
+    "text": "Die hohen Töne sind das erste Opfer: Aufwärts geraten sie meist zu tief und abwärts zu hoch, und die Sprünge werden oft nur ungefähr getroffen. Das Tempo wird in den schwersten Takten gewöhnlich langsamer, und der Rhythmus der punktierten Figuren wird abgerundet. Verspannung im rechten Arm macht den Klang genau dort eng, wo er am großzügigsten sein sollte.",
+    "sourceSha256": "08750d02c953c4ca82a330f8933ca644f21afdd1987e817160b865a91aee4f2d"
+   },
+   "practiceTips": {
+    "text": "Übe die großen Sprünge als langsame Lagenwechsel mit einem Bordunton und benenne den Zielton, bevor du ihn spielst. Arbeite die Stelle in kurzen Abschnitten in langsamerem Tempo mit voller Dynamik durch und füge die Abschnitte dann zusammen. Benutze ein Metronom, um die punktierten Rhythmen in den lauten Takten ehrlich zu halten. Nimm einen Durchlauf auf und höre gezielt auf die höchsten Töne und auf das Tempo in der zweiten Hälfte.",
+    "sourceSha256": "3fca9f235cab085adc00c494ef2038f64310260e709141209db50d9e960634ee"
+   },
+   "technique": {
+    "text": "Das Anfangsthema zieht sich über den gesamten Tonumfang des Instruments; der Spieler braucht also sichere Lagenwechsel in die hohe Lage, ein getragenes forte, das die Saite nicht erdrückt, und rhythmische Klarheit in den weiten Sprüngen und punktierten Figuren. Der Bogen sollte schnell laufen und nah am Steg bleiben, damit der Klang trägt; die linke Hand muss sich früh bewegen, damit die hohen Töne sauber und mit Vibrato ankommen. Atempunkte gibt es wenige; plane also, wo du Bogen sparen kannst.",
+    "sourceSha256": "fd4c9726539a8178dfbf3bd3c9208628b2e218683ab4d1855dc48516120dbbaf"
+   }
+  },
+  "cello-tchaikovsky-symphony-4-mvt2": {
+   "history": {
+    "text": "Der langsame Satz von Tchaikovskys Vierter Sinfonie, Andantino in modo di canzona in b-Moll, beginnt mit einer melancholischen Oboenmelodie, die dann von den Celli übernommen wird; das ist die Stelle, die üblicherweise verlangt wird.",
+    "sourceSha256": "cb44618fb9ed50513a3c7ed9c8223e6c3ca40ce839a428b842a33fd09e5f003d"
+   },
+   "pitfalls": {
+    "text": "Überspielen ist die Hauptgefahr; die Melodie verliert ihren Charakter, wenn sie zu ausdrucksvoll oder zu laut gemacht wird. Die Tonrepetitionen werden leicht abgehackt oder ungleichmäßig gestrichen, und das Tempo kann schleppen, weil die Musik traurig ist. Die Intonation in der Molltonart ist bei den unteren Nebennoten exponiert.",
+    "sourceSha256": "5946828e16a8ea16be6d01d1c1fbc00fb05f6097ed028dd490b4daf26809f51e"
+   },
+   "practiceTips": {
+    "text": "Höre dir in einer Aufnahme an, wie die Oboe das Thema vorträgt, und versuche, ihre Gestaltung genau zu übernehmen, bevor du etwas Eigenes hinzufügst. Übe mit dem Metronom, damit das Andantino in Bewegung bleibt. Spiele die Melodie, wo möglich, auf einer Saite, um die Linie zu spüren, dann mit dem praktischen Fingersatz. Nimm dich in der notierten Dynamik auf und prüfe, ob der Klang noch einen Kern hat.",
+    "sourceSha256": "8426f09f0d223a81abdbff6ef0a433d77f5b9b60bfb78267ce1983093cdd7e26"
+   },
+   "technique": {
+    "text": "Die Celli übernehmen die Melodie der Oboe; das Ziel ist also, ihrer Schlichtheit zu entsprechen: ein gleichmäßiges, unforciertes legato, ein schlichtes Vibrato und eine Phrasierung, die dem natürlichen Auf und Ab der Melodie folgt. Die Dynamik ist leise und die Begleitung ist leicht, sodass jede Note gehört wird. Die Lagenwechsel sollten sanft sein, und der Bogen sollte mit minimalem Druck nah an der Saite bleiben.",
+    "sourceSha256": "07f6caedd629819ad4ad4458744fc818714bc976a7e3bba84e08b59a3a00edbe"
+   }
+  },
+  "cello-tchaikovsky-symphony-6-mvt2": {
+   "history": {
+    "text": "Tchaikovsky komponierte die „Pathétique“ 1893, und sie wurde am 28. Oktober desselben Jahres in St. Petersburg uraufgeführt. Der zweite Satz, Allegro con grazia in D-Dur, ist ein Tanz im 5/4-Takt, der oft als hinkender Walzer beschrieben wird; die Celli stellen sein Hauptthema vor.",
+    "sourceSha256": "b1b641c37b3dafc3209610a8eb0a20addbcdc08eb590ff1b8e81ccd5d29e1178"
+   },
+   "pitfalls": {
+    "text": "Das Eilen oder Dehnen der fünften Zählzeit ist der klassische Fehler, und die Jury hört ihn sofort. Die Melodie liegt in einer bequemen Lage, aber die Lagenwechsel sind exponiert und können hörbar sein. Kandidaten betonen manchmal die erste Zählzeit zu stark und verlieren den Tanzcharakter.",
+    "sourceSha256": "d5b17f6f24e0affea4984beac72143ec825b0769c9858fe4a8e8d110e52ef5b9"
+   },
+   "practiceTips": {
+    "text": "Zähle den Takt als Gruppe aus zwei plus drei (oder drei plus zwei, je nachdem, was die Phrase nahelegt), mit einem Metronom, das die Viertel klickt, bis sich der lange Takt natürlich anfühlt. Singe die Melodie und dirigiere sie, bevor du spielst. Übe die Lagenwechsel langsam mit Glissando und nimm das Rutschen dann weg. Spiele zu einer Orchesteraufnahme mit, um zu prüfen, ob dein Tempo und deine Phrasierung zur Gruppe passen.",
+    "sourceSha256": "7aaa2f287d47decfd8340063a969daf9188e08d69ad5a547316a63fdb10bd7c3"
+   },
+   "technique": {
+    "text": "Das Thema muss anmutig und selbstverständlich klingen, in einem Metrum, das die meisten Spieler nicht von Natur aus fühlen; der 5/4-Puls muss also als stabile Einheit verinnerlicht und nicht Takt für Takt gezählt werden. Die Melodie braucht ein leichtes, singendes legato mit sauberen Lagenwechseln und einer Phrasierung, die die langen Takte atmen lässt. Halte die Dynamik zurückhaltend und das Vibrato warm, aber schmal.",
+    "sourceSha256": "c02bb2fd2f3cbbe2026a948c78e67d0644eb52d817df4001a188cadfd33f263e"
+   }
+  },
+  "cello-verdi-requiem-offertorio": {
+   "history": {
+    "text": "Verdis Messa da Requiem wurde am 22. Mai 1874 uraufgeführt. Das Offertorio, ihre dritte Nummer, beginnt mit einer exponierten Stelle für die Celli, die zu einem festen Bestandteil von Probespiellisten geworden ist.",
+    "sourceSha256": "d3c8fdba23c87e27eabac5f9d20bd4f275cd2f780ce1da8421880a95f13cd0d5"
+   },
+   "pitfalls": {
+    "text": "Die Intonation in den hohen Einsätzen ist das Hauptrisiko, besonders beim ersten Ton, der ohne jeden Anlauf gesetzt werden muss. Spieler nehmen oft zu viel Bogen, und der Klang verliert seinen weichen Fokus, oder das Vibrato wird nervös und breit. Die geteilten Stimmen können verwechselt werden, wenn der Spieler nicht gelernt hat, welche Stimme verlangt wird.",
+    "sourceSha256": "17e4f5c352a93b0e2071bf8315f8a471122c713053f758c3b5962f16cd9bc610"
+   },
+   "practiceTips": {
+    "text": "Übe, den Anfangston lautlos aus der Ruheposition heraus zu finden, und spiele ihn dann mit bereits bewegtem Bogen, damit er nicht anschwillt. Benutze einen Bordunton auf dem tonalen Zentrum und spiele die Stelle langsam, um die hohe Intonation zu festigen. Arbeite an langen, langsamen Bögen im pianissimo, um Kontrolle aufzubauen. Lerne beide divisi-Stimmen, damit du spielen kannst, welche auch immer die Liste vorgibt.",
+    "sourceSha256": "1395d452ac9320b83c59b2ece35546344f84bcc991cd8d13432ad1ff398d81c2"
+   },
+   "technique": {
+    "text": "Der Anfang ist leise, lyrisch und hoch, mit geteilten Celli; der Spieler braucht also einen reinen, getragenen Klang in der hohen Lage und eine Intonation, die ohne die Stütze des übrigen Orchesters hält. Der Bogen muss sich in leiser Dynamik langsam und gleichmäßig bewegen, und die Lagenwechsel sollten so vorbereitet sein, dass die Linie eher gesanglich als instrumental klingt. Die Dynamik bleibt über den größten Teil der Stelle in einem engen leisen Bereich.",
+    "sourceSha256": "b7a025660097d225ce8a36d2768db9ea43872e99b6b44cd7cafde10222ef4675"
+   }
+  }
+ }
+}

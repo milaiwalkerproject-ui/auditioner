@@ -7,19 +7,18 @@ import Combine
 // markings are never in these files. Nothing here invents a fact: a translation is shown or the
 // English is, and either way the AI label on an AI note stays.
 
-/// The date gate: translated notes are offered only from 12 November 2026 (the I2 date), 00:00 in
-/// the device's time zone. Pure, so it can be unit-tested.
+/// The date gate: translated notes are offered only from 12 November 2026 (the I2 date). The gate is
+/// one fixed moment worldwide — 12:00 UTC on 12 November 2026, when 12 November has begun in every
+/// time zone (UTC-12 midnight) — so no device, wherever it is or whatever its clock zone, shows a
+/// translation while it is still 11 November somewhere. Pure, so it can be unit-tested.
 enum MachineTranslation {
-    /// 12 November 2026 as a Gregorian date, without a time zone.
-    static let showFromComponents: DateComponents = DateComponents(year: 2026, month: 11, day: 12)
+    /// 2026-11-12T12:00:00Z.
+    static let showFromInstant: Date = Date(timeIntervalSince1970: 1_794_484_800)
 
-    /// Midnight at the start of 12 November 2026 in `calendar`'s time zone. The day is a Gregorian
-    /// date whatever calendar the device counts in (a Buddhist or Japanese calendar numbers the
-    /// years differently), so only the time zone is taken from `calendar`.
+    /// The moment the gate opens. The same instant whatever calendar or time zone the device uses;
+    /// `calendar` is accepted so callers and tests can pass the device's calendar unchanged.
     static func showFrom(calendar: Calendar) -> Date? {
-        var gregorian: Calendar = Calendar(identifier: .gregorian)
-        gregorian.timeZone = calendar.timeZone
-        return gregorian.date(from: showFromComponents)
+        return showFromInstant
     }
 
     /// True when translations may be shown: `now` is at or after `showFrom(calendar:)`.

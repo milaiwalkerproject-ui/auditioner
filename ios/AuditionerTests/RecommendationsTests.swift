@@ -454,6 +454,65 @@ final class RecommendationsTests: XCTestCase {
         XCTAssertTrue(blank.includeDrafts)
     }
 
+    // MARK: Include all chairs, per instrument (PLAN F5)
+
+    func testIncludeAllChairsDefaultsOnForBrassOnly() {
+        for instrument in Instrument.allCases {
+            XCTAssertEqual(RecommendationSettings.defaultIncludeAllChairs(for: instrument), instrument.family == .brass, instrument.rawValue)
+        }
+        XCTAssertTrue(RecommendationSettings.defaultIncludeAllChairs(for: .horn))
+        XCTAssertTrue(RecommendationSettings.defaultIncludeAllChairs(for: .trumpet))
+        XCTAssertTrue(RecommendationSettings.defaultIncludeAllChairs(for: .trombone))
+        XCTAssertTrue(RecommendationSettings.defaultIncludeAllChairs(for: .bassTrombone))
+        XCTAssertTrue(RecommendationSettings.defaultIncludeAllChairs(for: .tuba))
+        XCTAssertFalse(RecommendationSettings.defaultIncludeAllChairs(for: .cello))
+        XCTAssertFalse(RecommendationSettings.defaultIncludeAllChairs(for: .flute))
+        XCTAssertFalse(RecommendationSettings.defaultIncludeAllChairs(for: .timpani))
+        XCTAssertFalse(RecommendationSettings.defaultIncludeAllChairs(for: .keyboard))
+        XCTAssertEqual(RecommendationSettings.includeAllChairsKey(for: .bassTrombone), "recommendations.includeAllChairs.bass-trombone")
+        XCTAssertEqual(RecommendationSettings.includeAllChairsKey(for: .cello), "recommendations.includeAllChairs.cello")
+    }
+
+    func testIncludeAllChairsIsRememberedPerInstrument() {
+        let suiteName: String = "RecommendationsTests-\(UUID().uuidString)"
+        guard let defaults = UserDefaults(suiteName: suiteName) else { return XCTFail("no defaults suite") }
+        defaults.removePersistentDomain(forName: suiteName)
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+
+        XCTAssertTrue(RecommendationSettings.includeAllChairs(for: .horn, defaults: defaults), "brass: on until the player says otherwise")
+        XCTAssertFalse(RecommendationSettings.includeAllChairs(for: .cello, defaults: defaults))
+
+        RecommendationSettings.setIncludeAllChairs(true, for: .cello, defaults: defaults)
+        RecommendationSettings.setIncludeAllChairs(false, for: .horn, defaults: defaults)
+        XCTAssertTrue(RecommendationSettings.includeAllChairs(for: .cello, defaults: defaults))
+        XCTAssertFalse(RecommendationSettings.includeAllChairs(for: .horn, defaults: defaults), "the player's choice beats the brass default")
+        XCTAssertTrue(RecommendationSettings.includeAllChairs(for: .trumpet, defaults: defaults), "other brass keep their default")
+        XCTAssertFalse(RecommendationSettings.includeAllChairs(for: .viola, defaults: defaults), "other instruments keep theirs")
+
+        // The old, instrument-less key from before PLAN F5 is not read.
+        defaults.set(true, forKey: "recommendations.includeAllChairs")
+        XCTAssertFalse(RecommendationSettings.includeAllChairs(for: .viola, defaults: defaults))
+    }
+
+    @MainActor
+    func testIncludeAllChairsStoreWritesThroughAndAnnouncesChanges() {
+        let suiteName: String = "RecommendationsTests-\(UUID().uuidString)"
+        guard let defaults = UserDefaults(suiteName: suiteName) else { return XCTFail("no defaults suite") }
+        defaults.removePersistentDomain(forName: suiteName)
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+
+        let store = IncludeAllChairsStore(defaults: defaults)
+        XCTAssertTrue(store.includeAllChairs(for: .tuba))
+        XCTAssertEqual(store.changeCount, 0)
+        let binding = store.binding(for: .tuba)
+        XCTAssertTrue(binding.wrappedValue)
+        binding.wrappedValue = false
+        XCTAssertFalse(store.includeAllChairs(for: .tuba))
+        XCTAssertFalse(RecommendationSettings.includeAllChairs(for: .tuba, defaults: defaults))
+        XCTAssertEqual(store.changeCount, 1)
+        XCTAssertTrue(store.includeAllChairs(for: .horn), "one instrument's choice doesn't touch another's")
+    }
+
     func testInfoSheetCopyNamesTheRules() {
         let paragraphs = RecommendationInfoCopy.paragraphs
         XCTAssertEqual(paragraphs.count, 8)

@@ -24,9 +24,26 @@ struct ExcerptNotesSection: View {
     @ObservedObject private var translations: NoteTranslations = NoteTranslations.shared
 
     private var items: [ExcerptProseItem] {
-        ExcerptNotesSection.proseItems(for: excerpt, reviewerMode: reviewerMode, translations: translations)
+        ExcerptNotesLogic.proseItems(for: excerpt, reviewerMode: reviewerMode, translations: translations)
     }
 
+    var body: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            if !items.isEmpty {
+                ExcerptSectionBox(Text("Notes")) {
+                    ForEach(items) { item in
+                        ExcerptProseBlockView(excerptId: excerpt.id, item: item, reviewerMode: reviewerMode)
+                    }
+                }
+            }
+            ExcerptReportErrorLink(excerptId: excerpt.id)
+        }
+    }
+}
+
+/// The pure part of the notes section, kept off the `View` type so the tests can call it from any
+/// context (`View` is main-actor-isolated in the iOS 18+ SDK; a static on the view would inherit that).
+enum ExcerptNotesLogic {
     /// The notes to show, in page order. The approved-only rule comes first: a block is listed only
     /// when approved (or in reviewer mode), and a translation is attached only to an approved
     /// block — a draft is never shown translated, whatever the mode. Pure, so it can be unit-tested.
@@ -50,19 +67,6 @@ struct ExcerptNotesSection: View {
             result.append(ExcerptProseItem(id: field.id, title: field.title, block: block, translation: translation))
         }
         return result
-    }
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            if !items.isEmpty {
-                ExcerptSectionBox(Text("Notes")) {
-                    ForEach(items) { item in
-                        ExcerptProseBlockView(excerptId: excerpt.id, item: item, reviewerMode: reviewerMode)
-                    }
-                }
-            }
-            ExcerptReportErrorLink(excerptId: excerpt.id)
-        }
     }
 }
 
@@ -113,6 +117,12 @@ struct ExcerptProseBlockView: View {
             Text(displayedText)
                 .font(.body)
                 .foregroundStyle(Theme.ink)
+            if showsMachineTranslatedTag {
+                // Every translation is AI-made, even of a note a person wrote (CLAUDE.md: AI text is labelled).
+                Label("Machine-translated from English — may contain errors. Use Show original to compare.", systemImage: "globe")
+                    .font(.caption)
+                    .foregroundStyle(Theme.garnet)
+            }
             if item.translation != nil {
                 translationToggle
             }

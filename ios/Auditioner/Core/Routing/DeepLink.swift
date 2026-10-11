@@ -154,10 +154,9 @@ enum DeepLinkRouting {
     }
 }
 
-/// Links out to Tutti, the sister app that helps people find an orchestra (PLAN U1).
+/// Links out to Tutti, the sister app that helps people find an orchestra (PLAN U1, U1b).
 enum TuttiLink {
-    /// "Find an orchestra near you" in Settings → About. The row stays hidden while this is `nil`.
-    /// TO SET: once Milai confirms Tutti's web address, replace `nil` with e.g.
-    /// `URL(string: "https://<tutti's address>")` — https only, nothing else to change.
-    static let findOrchestraURL: URL? = nil
+    /// "Find an orchestra near you" in Settings → About opens Tutti's site (PLAN U1b, confirmed by Milai
+    /// on 2026-10-11). https only; the row would be hidden again if this were ever `nil`.
+    static let findOrchestraURL: URL? = URL(string: "https://tutti-orchestra.com")
 }

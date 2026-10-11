@@ -42,12 +42,11 @@ final class OpenAuditionsFeedModel: ObservableObject {
         self.allRegions = OpenAuditionsLogic.showsAllRegions(defaults)
     }
 
-    /// Remembers the choice and reloads the feed for it.
-    func setAllRegions(_ on: Bool, settings: AppSettings) async {
+    /// Remembers the choice; the caller then calls `refresh(settings:)` so the feed follows it.
+    func setAllRegions(_ on: Bool) {
         guard on != allRegions else { return }
         allRegions = on
         OpenAuditionsLogic.setShowsAllRegions(on, defaults)
-        await refresh(settings: settings)
     }
 
     /// Loads when the instrument, region, scope or server changed since the last load; `refreshable`

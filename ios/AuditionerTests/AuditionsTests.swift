@@ -282,6 +282,35 @@ final class AuditionsTests: XCTestCase {
         XCTAssertFalse(OpenAuditionsLogic.isOpen(closed, today: today, calendar: calendar))
     }
 
+    func testFeedRegionFollowsTheAllRegionsSwitch() {
+        // PLAN F5: "All regions" sends no region, so the server answers with every region.
+        XCTAssertEqual(OpenAuditionsLogic.feedRegion(allRegions: false, region: "uk"), "uk")
+        XCTAssertEqual(OpenAuditionsLogic.feedRegion(allRegions: false, region: " europe-other "), "europe-other")
+        XCTAssertNil(OpenAuditionsLogic.feedRegion(allRegions: true, region: "uk"))
+        XCTAssertNil(OpenAuditionsLogic.feedRegion(allRegions: false, region: "   "), "a blank region means every region")
+        XCTAssertEqual(OpenAuditionsLogic.scopeTitle(allRegions: false, regionName: "North America"), "Your region (North America)")
+        XCTAssertEqual(OpenAuditionsLogic.scopeTitle(allRegions: true, regionName: "North America"), "All regions")
+        XCTAssertEqual(OpenAuditionsLogic.allRegionsKey, "auditions.feedAllRegions")
+    }
+
+    @MainActor
+    func testAllRegionsChoiceIsRemembered() {
+        let suiteName: String = "AuditionsTests-\(UUID().uuidString)"
+        guard let defaults = UserDefaults(suiteName: suiteName) else { return XCTFail("no defaults suite") }
+        defaults.removePersistentDomain(forName: suiteName)
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+
+        XCTAssertFalse(OpenAuditionsLogic.showsAllRegions(defaults), "the player's region until they choose otherwise")
+        let model = OpenAuditionsFeedModel(defaults: defaults)
+        XCTAssertFalse(model.allRegions)
+        model.setAllRegions(true)
+        XCTAssertTrue(model.allRegions)
+        XCTAssertTrue(OpenAuditionsLogic.showsAllRegions(defaults))
+        XCTAssertTrue(OpenAuditionsFeedModel(defaults: defaults).allRegions, "a new model starts from the remembered choice")
+        model.setAllRegions(false)
+        XCTAssertFalse(OpenAuditionsLogic.showsAllRegions(defaults))
+    }
+
     func testFeedSourceLineAndInstrument() {
         XCTAssertEqual(OpenAuditionsLogic.sourceLine(orchestra: "Example Philharmonic", lastCheckedAt: nil),
                        "From Example Philharmonic's website")
@@ -675,6 +704,80 @@ final class AuditionsTests: XCTestCase {
         AuditionsStore.delete(audition, context: context)
         XCTAssertTrue(try context.fetch(FetchDescriptor<AuditionItem>()).isEmpty)
         XCTAssertTrue(try context.fetch(FetchDescriptor<Audition>()).isEmpty)
+    }
+
+    // MARK: - Archive (PLAN F5)
+
+    @MainActor
+    func testArchiveKeepsTheListAndRestoreBringsItBack() throws {
+        let container = try makeContainer()
+        let context = ModelContext(container)
+        let pool = try makePool()
+        let keep = Audition(orchestra: "Example Philharmonic", position: "Section cello", instrument: .cello)
+        let gone = Audition(orchestra: "Example Sinfonietta", position: "Principal cello", instrument: .cello)
+        gone.remindersEnabled = true
+        context.insert(keep)
+        context.insert(gone)
+        try context.save()
+        XCTAssertTrue(try AuditionsStore.add(excerpt: pool[0], to: gone, context: context))
+
+        XCTAssertFalse(gone.isArchived)
+        XCTAssertNil(gone.archivedAt, "new auditions are active")
+        try AuditionsStore.archive(gone, context: context, now: day(2026, 10, 11))
+        XCTAssertTrue(gone.isArchived)
+        XCTAssertEqual(gone.archivedAt, day(2026, 10, 11))
+        XCTAssertTrue(gone.remindersEnabled, "the choice is kept so Restore can set the reminders again")
+        XCTAssertEqual(AuditionsStore.activeAuditions(context: context).map { $0.id }, [keep.id])
+        XCTAssertEqual(AuditionsStore.archivedAuditions(context: context).map { $0.id }, [gone.id])
+        XCTAssertEqual(AuditionsStore.items(for: gone.id, context: context).count, 1, "the list stays with the archived audition")
+        XCTAssertEqual(try context.fetch(FetchDescriptor<Audition>()).count, 2, "archiving deletes nothing")
+
+        try AuditionsStore.restore(gone, context: context)
+        XCTAssertFalse(gone.isArchived)
+        XCTAssertNil(gone.archivedAt)
+        XCTAssertEqual(AuditionsStore.activeAuditions(context: context).count, 2)
+        XCTAssertTrue(AuditionsStore.archivedAuditions(context: context).isEmpty)
+        XCTAssertEqual(AuditionsStore.items(for: gone.id, context: context).count, 1)
+
+        // "Delete for good" from the archive removes the audition and its list.
+        try AuditionsStore.archive(gone, context: context)
+        AuditionsStore.delete(gone, context: context)
+        XCTAssertEqual(try context.fetch(FetchDescriptor<Audition>()).map { $0.id }, [keep.id])
+        XCTAssertTrue(try context.fetch(FetchDescriptor<AuditionItem>()).isEmpty)
+    }
+
+    @MainActor
+    func testPrepareRestoresAnArchivedAuditionInsteadOfDuplicating() throws {
+        let container = try makeContainer()
+        let context = ModelContext(container)
+        let vacancy = makeVacancy()
+        let first = try AuditionsStore.prepare(from: vacancy, fallbackInstrument: .horn, context: context, calendar: calendar)
+        first.remindersEnabled = true
+        try AuditionsStore.archive(first, context: context)
+        XCTAssertNil(AuditionsStore.activeAudition(vacancyId: "vac-1", context: context), "the feed button reads Prepare again")
+        XCTAssertEqual(AuditionsStore.audition(vacancyId: "vac-1", context: context)?.id, first.id, "archived ones still count for de-duplication")
+
+        let again = try AuditionsStore.prepare(from: vacancy, fallbackInstrument: .horn, context: context, calendar: calendar)
+        XCTAssertEqual(again.id, first.id)
+        XCTAssertFalse(again.isArchived, "Prepare restores the archived audition")
+        XCTAssertTrue(again.remindersEnabled, "the caller reschedules the reminders")
+        XCTAssertEqual(try context.fetch(FetchDescriptor<Audition>()).count, 1, "no second audition for the same vacancy")
+        XCTAssertEqual(AuditionsStore.items(for: again.id, context: context).count, 3, "the old list is kept, not rebuilt")
+        XCTAssertEqual(AuditionsStore.activeAudition(vacancyId: "vac-1", context: context)?.id, first.id)
+        XCTAssertNil(AuditionsStore.audition(vacancyId: "vac-nobody", context: context))
+    }
+
+    func testArchivedRowAndOrdering() {
+        XCTAssertFalse(AuditionArchive.showsArchivedRow(count: 0), "hidden while nothing is archived")
+        XCTAssertTrue(AuditionArchive.showsArchivedRow(count: 1))
+        XCTAssertEqual(AuditionArchive.archivedRowTitle(count: 3), "Archived (3)")
+
+        let older = Audition(orchestra: "Example Philharmonic", position: "", instrument: .cello)
+        older.archivedAt = day(2026, 10, 1)
+        let newer = Audition(orchestra: "Example Sinfonietta", position: "", instrument: .cello)
+        newer.archivedAt = day(2026, 10, 5)
+        XCTAssertEqual(AuditionArchive.archivedFirst([older, newer]).map { $0.id }, [newer.id, older.id], "most recently archived first")
+        XCTAssertTrue(AuditionArchive.archivedFirst([]).isEmpty)
     }
 
     func testItemTitleAndMockItems() throws {

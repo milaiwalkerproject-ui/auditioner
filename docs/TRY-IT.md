@@ -41,6 +41,10 @@ Pick **one** of the two ways. Both end with a folder called `auditioner` on your
    the branch button still says `claude/funny-noether-si8co1`, click
    **Fetch origin** then **Pull origin**.
 
+   If GitHub Desktop shows a change to `Localizable.xcstrings` or
+   `InfoPlist.xcstrings` that you didn't make, Xcode updated it while building —
+   right-click it → **Discard changes**, then pull.
+
 ### Option B — Terminal (typing, exact commands)
 
 Open **Terminal** (Launchpad → Other → Terminal, or press ⌘-space and type
@@ -226,10 +230,51 @@ of the error list and send it to me.
   aren't yet), so the row may not appear until the translations land. When they
   do, the app will show a "Beta translation" tag in Settings while it runs in
   another language.
+- **Translated excerpt notes — not before 12 November, on purpose.** The
+  history, technique, pitfalls and practice-tips notes have machine
+  translations ready in the app (Spanish, Italian, Chinese and more are
+  bundled), but a date lock keeps them hidden until **12 November 2026** (the
+  date in the plan, row I2, from which AI text may be shown; the lock opens at one
+  moment worldwide, when it is 12 November everywhere — 13:00 in Berlin, 04:00 in
+  Los Angeles). There is no
+  switch to see them earlier, not even in reviewer mode, so until then every
+  note appears in English whatever language the app runs in. From that day
+  on, with the app in one of those languages (on the device: **Settings → scroll
+  down to Auditioner → Language**, then reopen the excerpt page), each approved
+  note shows the translation with a small "Machine-translated" tag, the line
+  "Machine-translated from English — may contain errors", and a "Show
+  original" link under it; "Show translation" brings the translation back. The
+  "AI-generated — may contain errors" line stays on every AI note, translated or
+  not. Draft notes (reviewer mode) are never translated. Work titles, composer
+  names and score markings stay as they are.
 - **Privacy page.** **Settings → About → Privacy** has new blocks for signing in
   with Apple and for "Popular with other players"; the full text is
   `docs/PRIVACY.md` (version 0.3). It is a promise to users — please read both
   once.
+- **Find an orchestra near you.** **Settings → About** now shows this row; it
+  opens Tutti's site (https://tutti-orchestra.com) inside the app.
+
+**Your answers of 11 October, applied (Auditions tab):**
+
+- **Archive instead of delete.** On an audition's page, **⋯ → Archive audition**
+  puts it away at once (no "are you sure?" — it's undoable) and goes back to
+  the Auditions tab. Its reminders are switched off while it's archived. Under
+  **My auditions** a row **Archived (1)** appears (hidden when nothing is
+  archived). Open it: each archived audition has **Restore** (back into My
+  auditions with its list, readiness and reminders if they were on) and
+  **Delete for good** (asks "Delete this audition for good?" — only this
+  really deletes). If you archive an audition you made from the feed and later
+  tap **Prepare for this audition** on the same vacancy, the app restores the
+  archived one instead of making a second copy.
+- **All regions.** Under **Open auditions** the first row is a picker **Show:
+  Your region (North America)** / **All regions**. The choice is remembered,
+  the section's subtitle says which is shown, and the feed reloads. Needs the
+  server, like the feed itself.
+- **Brass counts every chair.** For horn, trumpet, trombone, bass trombone and
+  tuba, **Include all chairs** ("Most asked for your chair" and each excerpt
+  page) starts switched **on**, because the brass lists don't say which chair
+  they were for. The switch is now remembered per instrument: turning it off
+  for horn doesn't change cello.
 
 ## 8. Reviewer mode (to see draft excerpts)
 

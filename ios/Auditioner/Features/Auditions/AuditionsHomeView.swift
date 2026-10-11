@@ -139,12 +139,13 @@ struct AuditionsHomeView: View {
         ProfileOptions.regionName(id: settings.region)
     }
 
-    /// The picker writes through the model so the choice is remembered and the feed reloads.
+    /// The picker writes through the model so the choice is remembered, then the feed reloads for it.
     private var allRegionsBinding: Binding<Bool> {
         Binding(
             get: { feed.allRegions },
             set: { newValue in
-                Task { await feed.setAllRegions(newValue, settings: settings) }
+                feed.setAllRegions(newValue)
+                Task { await feed.refresh(settings: settings) }
             }
         )
     }

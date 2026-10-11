@@ -41,7 +41,7 @@ orchestra and its auditions; Auditioner helps them *win the seat*.
 | A5 | Ages **13+** in the terms for now; lower later after a COPPA check. Everything works signed out. |
 | A6 | Storefronts: **exclude mainland China, Russia, Belarus** (Claude unsupported, YouTube blocked, China ICP filing). **Hong Kong & Macau included with AI notes hidden.** |
 | A7 | Languages (all in v1): English, Spanish, Simplified Chinese, Traditional Chinese, Italian, Russian, Japanese, Korean, German, French, Portuguese (BR). UI AI-translated and marked "beta translation" until a native speaker checks it; excerpt content translated by Claude on first open, cached, labelled "machine-translated"; **score markings stay in the original language** (tap for a translation). |
-| A7b | (2026-10-11) The app's language follows the device's language setting (iOS picks it; Settings → Auditioner → Language can override it). Scans and parts are never translated or changed. Excerpt notes follow the device language too: their machine translations are prepared now, checked by code that every number, bar and marking survived unchanged, and are shown **from 12 Nov 2026** (the I2 date), labelled "Machine-translated"; until then notes appear in English. Work titles and score markings stay in the original language. |
+| A7b | (2026-10-11) The app's language follows the device's language setting (iOS picks it; Settings → Auditioner → Language can override it). Scans and parts are never translated or changed. Excerpt notes follow the device language too: their machine translations are prepared now, checked by code that every number, bar and marking survived unchanged, and are shown **from 12 Nov 2026** (the I2 date; one moment worldwide, 12:00 UTC, when it is 12 November everywhere), labelled "Machine-translated — may contain errors" with a "Show original" switch; until then notes appear in English. Work titles and score markings stay in the original language. |
 
 ### Platform & build
 | # | Decision |
@@ -211,7 +211,7 @@ Community trends (D6): off by default, 18+ question, uploads only instrument + w
 players as two tiers, never counts, kept apart from "what orchestras ask". Tutti
 links (U1): `auditioner://excerpt/<id>` and `auditioner://audition/new?…` prefill
 the New audition form, nothing saved until Add; the "Find an orchestra near you" row
-exists but stays hidden until Tutti's address is known (`docs/TUTTI.md`).
+links to https://tutti-orchestra.com (U1b; `docs/TUTTI.md`).
 Localisation (A7): string catalogue, Info.plist strings, Language row and "Beta
 translation" tag are in place; **the 11 translations themselves are not yet
 generated** — the app still ships in English only. Privacy policy v0.3

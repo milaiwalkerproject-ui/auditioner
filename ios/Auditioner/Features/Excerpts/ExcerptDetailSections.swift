@@ -360,7 +360,12 @@ struct ExcerptFrequencySection: View {
     @AppStorage(SettingsKey.position) private var positionRaw: String = Position.section.rawValue
     @AppStorage(SettingsKey.region) private var region: String = ProfileOptions.defaultRegionId
     @AppStorage(SettingsKey.reviewerMode) private var reviewerMode: Bool = false
-    @AppStorage(RecommendationSettings.includeAllChairsKey) private var includeAllChairs: Bool = false
+    /// "Include all chairs", per instrument (brass defaults to on, PLAN F5); shared with the browser.
+    @ObservedObject private var chairScope: IncludeAllChairsStore = IncludeAllChairsStore.shared
+
+    private var includeAllChairs: Bool {
+        chairScope.includeAllChairs(for: excerpt.instrument)
+    }
 
     private var evidence: [FrequencyEvidence] {
         excerpt.frequency?.evidence ?? []
@@ -382,7 +387,7 @@ struct ExcerptFrequencySection: View {
     var body: some View {
         ExcerptSectionBox(Text("How often it's asked")) {
             ExcerptAskSummaryView(summary: summary)
-            Toggle(isOn: $includeAllChairs) {
+            Toggle(isOn: chairScope.binding(for: excerpt.instrument)) {
                 Text("Include all chairs")
                     .font(.subheadline)
                     .foregroundStyle(Theme.ink)

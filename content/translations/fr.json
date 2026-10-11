@@ -1,0 +1,350 @@
+{
+ "language": "fr",
+ "origin": "ai",
+ "machineTranslated": true,
+ "generatedAt": "2026-10-11",
+ "notes": {
+  "cello-beethoven-symphony-5-mvt2": {
+   "history": {
+    "text": "Le deuxième mouvement de la Cinquième Symphonie de Beethoven, marqué Andante con moto et en la bémol majeur, est une série de variations sur deux thèmes alternés ; les violoncelles et les altos l'ouvrent avec le premier thème, ce qui explique sa présence sur presque toutes les listes de traits pour violoncelle.",
+    "sourceSha256": "9853e4efa0f46cb0e50fde98888eb10ff6b13e8cbacf4799fc089f0988828b39"
+   },
+   "pitfalls": {
+    "text": "Les défauts les plus courants sont de précipiter les figures pointées, de laisser enfler la première note de chaque liaison et de perdre la pulsation entre les phrases. La justesse en la bémol majeur est exposée, surtout dans les notes aiguës de la mélodie, où la main a tendance à monter. Dans les variations plus rapides, on joue souvent plus fort à mesure que les notes s'accélèrent ; la nuance doit être dictée par l'indication écrite, pas par les valeurs de notes.",
+    "sourceSha256": "b1c59a2cf7ec8047e8e2f0be8d08cec999aba92415bccb1e37c3ead1916c8b07"
+   },
+   "practiceTips": {
+    "text": "Travaillez la mélodie avec un métronome qui subdivise le temps, pour que les rythmes pointés tombent exactement au même endroit à chaque fois, puis retirez la subdivision et vérifiez que rien n'a bougé. Enregistrez-vous et n'écoutez que la forme des notes longues. Jouez d'abord les variations rapides lentement, avec tout l'archet, puis au tempo en gardant l'archet près de la corde. Chantez la phrase initiale avant de la jouer pour décider où elle respire.",
+    "sourceSha256": "7b6cdd35813a8c04f40166fcee0b33b257248fad8e029a7e3b2edf8486547808"
+   },
+   "technique": {
+    "text": "La mélodie initiale demande un legato chaud et égal, dans lequel le rythme pointé est placé avec précision sans devenir raide. Planifiez la répartition de l'archet pour que les notes longues gardent leur corps et que les notes courtes parlent clairement au même volume. Dans les variations suivantes, la mélodie est ornée de valeurs plus rapides ; gardez la main gauche calme et les changements de corde souples, pour que la ligne sonne toujours comme le même air. Respectez exactement les nuances écrites, car le jury écoute le contrôle dans le piano autant que la sonorité dans le forte.",
+    "sourceSha256": "3d90d1a4179bf30a1a17135e8c00f19167d5a0901bafaaa75a6781b72d586b13"
+   }
+  },
+  "cello-beethoven-symphony-5-mvt3": {
+   "history": {
+    "text": "Le troisième mouvement de la Cinquième de Beethoven est un scherzo en ut mineur avec un trio dont le début contrapuntique est confié aux seuls violoncelles et contrebasses. C'est ce passage exposé qui vaut au mouvement de figurer sur les listes de traits pour violoncelle, à côté du célèbre mouvement lent.",
+    "sourceSha256": "42e12fe069822d844c579f4061552e5e6976c07a2346bad13bbabad5fc88b749"
+   },
+   "pitfalls": {
+    "text": "Les candidats commencent souvent le trio à un tempo qu'ils ne peuvent pas tenir dans les mesures les plus rapides, ou laissent l'archet rebondir au point que les notes se brouillent. Les figures en notes répétées ont tendance à précipiter, et les changements de corde malaisés dans le registre grave peuvent faire baisser la justesse. Les nuances sont souvent aplaties : le contraste entre le trio vigoureux et le retour feutré fait partie de ce qui est évalué.",
+    "sourceSha256": "9d49beb2c3c5317fc1e6f43106d749b5301b1c03612f0878c272932b7167c2ff"
+   },
+   "practiceTips": {
+    "text": "Choisissez votre tempo d'après la mesure la plus difficile, pas d'après la première, et progressez au métronome par petites étapes. Travaillez les passages rapides avec des rythmes variés et en détaché avant d'ajouter les coups d'archet écrits. Isolez les changements de corde et jouez-les en doubles cordes pour vérifier le cadre de la main gauche. Jouez tout l'extrait une fois par jour, depuis la première note et sans vous arrêter, comme vous le feriez à l'audition.",
+    "sourceSha256": "40b2012d5ea208bd2a1efc69364f1d492277e22d1970a2a8a7d5f3b62a65de4f"
+   },
+   "technique": {
+    "text": "Le trio demande un coup d'archet net et énergique, qui reste suffisamment à la corde pour projeter dans une salle, chaque note des passages rapides étant articulée par la main gauche autant que par l'archet. Gardez la pulsation absolument stable à travers les entrées et les silences ; le jury entend immédiatement si le tempo bouge quand la texture change. La reprise en douceur du matériau du scherzo demande un contact avec la corde complètement différent, plus léger.",
+    "sourceSha256": "29fefec85a121ba81e717e166ee41cf0fcbd80115c1a60835af4956929798705"
+   }
+  },
+  "cello-beethoven-symphony-9-mvt4": {
+   "history": {
+    "text": "Le finale de la Neuvième Symphonie de Beethoven, le mouvement qui met en musique l'« Ode à la joie » de Schiller, s'ouvre par un récitatif instrumental pour violoncelles et contrebasses qui répond au matériau des mouvements précédents et le rejette, avant l'arrivée du thème de la « Joie ».",
+    "sourceSha256": "0997983295f49b4b9b338ccd8fa00795c869afb3d6feac6a25ae6e91ebb0476e"
+   },
+   "pitfalls": {
+    "text": "La liberté du récitatif pousse à un rythme vague ; les jurys veulent en général une déclamation convaincante, proche de la parole, mais qui reste mesurable. Les notes longues perdent souvent leur corps vers la fin de l'archet, et les changements soudains de nuance se trouvent lissés. Les passages qui montent dans le registre aigu sont exposés sur le plan de la justesse.",
+    "sourceSha256": "64e5b1986e7a8be70c19b7e80deca033c244166c5852ab33beae80879346b8a6"
+   },
+   "practiceTips": {
+    "text": "Décidez du caractère de chaque phrase (question, refus, assentiment) et annotez le texte musical en conséquence, puis jouez-le à quelqu'un et demandez-lui s'il entend la différence. Travaillez d'abord strictement en mesure avec un métronome et n'ajoutez qu'ensuite la liberté rhétorique, pour que la pulsation sous-jacente reste audible. Travaillez la tenue des notes longues avec des archets lents et un son plein. Écoutez plusieurs enregistrements d'orchestre et observez comment le pupitre joue le récitatif ensemble.",
+    "sourceSha256": "f9b4e904b47ca0f112d6d2571cdd62ac28ff0225cb7e3137952e050c81112951"
+   },
+   "technique": {
+    "text": "Le récitatif est écrit pour sonner comme une parole ; l'instrumentiste doit donc façonner chaque phrase en sachant clairement où tombe l'accent, tout en respectant assez fidèlement les valeurs écrites pour qu'un pupitre entier puisse le jouer ensemble. Le contraste de nuances est large : les gestes déclamatoires vigoureux demandent un son plein et centré, et les réponses plus douces demandent la même intensité à un volume plus faible. La vitesse d'archet et le point de contact font ici l'essentiel du travail expressif.",
+    "sourceSha256": "a0f3c5b9bafdf7bbb0d66300dd253619c519106d42b46558f11c922ca1a59fc8"
+   }
+  },
+  "cello-brahms-piano-concerto-2-mvt3-solo": {
+   "history": {
+    "text": "Brahms a composé son Deuxième Concerto pour piano en 1878–81 et en a été le soliste lors de la création à Budapest en 1881. Fait inhabituel pour un concerto pour piano, le mouvement lent s'ouvre par un long solo de violoncelle qui expose le thème avant l'entrée du piano, et ce solo est une exigence classique des auditions de violoncelle solo.",
+    "sourceSha256": "07d5f67a03d1cdadab65431ca92d86e3c91be656403b8c6f74d12c519e133189"
+   },
+   "pitfalls": {
+    "text": "Les candidats jouent souvent trop fort dès le début et ne se laissent aucune marge pour grandir, ou s'abandonnent au rubato au point que la pulsation disparaît. Le passage aigu vers la fin est exposé sur le plan de la justesse, et un vibrato nerveux aggrave les choses. Des changements d'archet qui brisent la ligne détruisent le caractère vocal que le jury attend.",
+    "sourceSha256": "58fce629678c5ba776c392dc97fdbfc7addc4ed029c8b9c458d3f9106b14b747"
+   },
+   "practiceTips": {
+    "text": "Décidez sur le papier de la forme dynamique de tout le solo avant de le travailler, puis jouez-le à quelqu'un qui pourra vous dire si le plan s'entend. Travaillez les démanchés lentement et de façon régulière, pour que chacun ait le même son à chaque fois. Utilisez un bourdon pour le passage aigu et travaillez-le un demi-ton plus haut et plus bas pour rendre l'oreille plus exigeante. Jouez avec un enregistrement pour apprendre comment le solo s'inscrit avec le piano et l'orchestre.",
+    "sourceSha256": "823a2f5ec8706cbfe7841e452ebd0291d99d1d0bb0251fcf6e3bf545399b4294"
+   },
+   "technique": {
+    "text": "Le solo demande un son plein et chantant, qui porte par-dessus l'orchestre tout en restant intime ; la vitesse d'archet et le point de contact doivent donc être planifiés pour chaque phrase. Les démanchés font partie de l'expression et doivent être placés et dosés délibérément. Le passage suivant, après l'entrée du piano, monte plus haut et demande la même chaleur, avec une justesse sûre et un vibrato continu.",
+    "sourceSha256": "c278f3163963ca3c08a0fbb31037e3298029842fea7fa07f4fa065bee8e74c8d"
+   }
+  },
+  "cello-brahms-symphony-2-mvt2": {
+   "history": {
+    "text": "Le mouvement lent de la Deuxième Symphonie de Brahms, en si majeur, s'ouvre par une longue mélodie des violoncelles sur un contre-chant du basson, ce qui explique que le passage soit si souvent demandé.",
+    "sourceSha256": "53f3efee9d5a7af4c7f14aa2e27fcdb414c0d1ab6a88c97eb11e1febb30eeccd"
+   },
+   "pitfalls": {
+    "text": "Si majeur est inconfortable pour la main gauche, et c'est sur la justesse de la descente initiale que la plupart des candidats perdent des points. On laisse souvent le tempo traîner parce que l'indication est lente, ou la phrase s'affaisser au milieu. Des changements d'archet qui claquent ou qui enflent interrompent une ligne censée sonner d'un seul tenant.",
+    "sourceSha256": "988fde57097572c892380e18f20d23791dfccff82d4acc0b932595f67723156b"
+   },
+   "practiceTips": {
+    "text": "Jouez d'abord la mélodie sur des bourdons de cordes à vide pour vérifier chaque note par rapport à la tonalité, puis avec un accordeur seulement pour les notes dont vous doutez. Travaillez les changements d'archet seuls, sur une note longue, jusqu'à ce qu'ils soient inaudibles. Enregistrez la phrase initiale et écoutez si la forme dynamique correspond à ce que vous vouliez. Comptez les silences et les mesures où d'autres instruments mènent, pour que vos rentrées donnent l'impression de faire partie de l'orchestre, et non d'un solo.",
+    "sourceSha256": "6b0ffc49e7501b316a0a45fe2c1e02caae3f6e87bb47ce0309f1a20e507eb5d7"
+   },
+   "technique": {
+    "text": "C'est une épreuve de son soutenu et de ligne : la mélodie descend et remonte lentement, et chaque note doit être reliée à la suivante sans aucun trou au changement d'archet. Le vibrato doit être continu mais pas large, et les démanchés doivent être placés de façon à être inaudibles, ou expressifs à dessein. Le niveau de nuance est modeste ; le défi est donc de projeter de la chaleur sans forcer.",
+    "sourceSha256": "2f07f767aec2053c2502747c9b4e743f2b64042e19de94bcaad9bbdb950d42be"
+   }
+  },
+  "cello-brahms-symphony-3-mvt3": {
+   "history": {
+    "text": "Au lieu d'un scherzo rapide, le troisième mouvement de la Troisième Symphonie de Brahms est un Poco allegretto lyrique en ut mineur et à 3/8, de forme ternaire proche de la valse ; sa mélodie initiale est confiée aux violoncelles.",
+    "sourceSha256": "02d8245de2cdd38467ea9f293e1f7331adf5725a4ab8eaff8912e780ae647105"
+   },
+   "pitfalls": {
+    "text": "Le défaut le plus courant est de trop romantiser le rubato ; les jurys veulent que la forme vienne des coups d'archet et des nuances, pas d'une déformation de la pulsation. Les notes aiguës de la phrase sont fréquemment trop hautes, et les démanchés peuvent s'entendre aux mauvais endroits. On a aussi tendance à commencer trop fort et à ne laisser aucune place à l'enflement au milieu de la phrase.",
+    "sourceSha256": "343147595a99762263c492ed7d8171a407852b684c490ee9ccc4773bf9b4b166"
+   },
+   "practiceTips": {
+    "text": "Réglez un métronome à un tempo confortable et jouez la mélodie absolument en mesure jusqu'à ce que le phrasé vienne de la seule vitesse d'archet ; autorisez-vous ensuite de petites libertés délibérées. Travaillez les démanchés en glissandi lents, puis sans le glissé, en vérifiant la note d'arrivée avec un bourdon. Essayez le passage à un archet par mesure, puis avec les liaisons écrites, pour comparer le son. Écoutez quelques enregistrements d'orchestre pour entendre comment le tempo évolue au fil de la phrase.",
+    "sourceSha256": "d769eac1975fe217549ca92ec6d1bbf408a9118ac6c361bc98a160470d0678c7"
+   },
+   "technique": {
+    "text": "La mélodie demande une ligne chantante et souple, avec le léger balancement de la mesure ternaire, mais le rythme sous-jacent doit rester assez fidèle pour qu'un pupitre puisse la jouer à l'unisson. La phrase monte dans le registre aigu ; planifiez donc les démanchés pour arriver juste, avec le vibrato déjà en route. Les nuances sont intimes ; le son doit être chaud plutôt que fort, l'archet continuant d'avancer lentement et près du chevalet pour la couleur.",
+    "sourceSha256": "18242eb292ef694901bcf4f6e57a8f1680eaffb5658e709a80b0cde59bffab10"
+   }
+  },
+  "cello-debussy-la-mer-mvt1": {
+   "history": {
+    "text": "La mer est le portrait orchestral de la mer par Debussy, en trois mouvements. Le premier mouvement contient un passage célèbre pour le pupitre de violoncelles divisé, qui figure sur de nombreuses listes d'audition pour violoncelle, tantôt avec la voix supérieure seulement, tantôt avec toutes les voix exigées.",
+    "sourceSha256": "00599217c78f86e73ee90d4c76358e2bed738a57bf9611ce0a4ba0e25d756346"
+   },
+   "pitfalls": {
+    "text": "La voix supérieure est assez haute pour que la justesse monte sous la pression, et les subdivisions changeantes sont souvent lissées en un rythme approximatif. On a tendance à forcer le son pour être entendu, ce qui crispe le vibrato et l'archet. Commencer le crescendo trop tôt ne laisse rien pour le sommet de la phrase.",
+    "sourceSha256": "6f3d9edac73135e127494e9a4714f6ba84af853ff85b8210bf661b92eca11efa"
+   },
+   "practiceTips": {
+    "text": "Apprenez toutes les voix qu'on pourrait vous demander, pas seulement la supérieure, et travaillez-les avec un enregistrement pour sentir comment elles s'emboîtent. Utilisez un métronome sur la plus petite subdivision jusqu'à ce que les changements rythmiques soient automatiques. Travaillez d'abord le passage aigu une octave plus bas pour fixer le phrasé, puis à la hauteur réelle avec un bourdon. Marquez le sommet dynamique et remontez à partir de lui, pour que le crescendo ait quelque part où aller.",
+    "sourceSha256": "cd5147ce70aa181931f4e31106e1a3c9dcb2d352f5546ba6d44200410531f767"
+   },
+   "technique": {
+    "text": "Le passage est écrit pour le pupitre divisé en plusieurs parties, et les listes attendent généralement la voix supérieure ou toutes les voix ; dans les deux cas, il faut soutenir un son chaud et chantant dans le registre aigu, avec une justesse sûre. La précision rythmique compte parce que les figures changent de subdivision et que tout le pupitre doit bouger ensemble. Les démanchés doivent être préparés tôt et le vibrato maintenu à travers les changements de position.",
+    "sourceSha256": "c42621bdbb83c2fe13954db1106cf2ce156974f33f85e7b3a99c0d80e26f5fcf"
+   }
+  },
+  "cello-mendelssohn-midsummer-nights-dream-scherzo": {
+   "history": {
+    "text": "La musique de scène de Mendelssohn pour A Midsummer Night's Dream (Le Songe d'une nuit d'été), op. 61, a été écrite en 1842–43 et créée à Potsdam en octobre 1843. Le Scherzo, qui ouvre le recueil, est un mouvement rapide et léger dont l'écriture pour cordes est une épreuve classique d'articulation.",
+    "sourceSha256": "c7fcf2149ab6f5eccd92bb99656845e362777bf603fe049337db137e5a489ce3"
+   },
+   "pitfalls": {
+    "text": "Le coup d'archet a souvent tendance à s'alourdir et à devenir plus fort au fil du passage, et le tempo dérive vers l'avant dans les mesures faciles et ralentit dans les difficiles. Un spiccato inégal sur les changements de corde et des notes chromatiques brouillées sont ce que les jurys remarquent en premier. Choisir un tempo un rien trop rapide coûte plus qu'il ne rapporte.",
+    "sourceSha256": "bbbc695c081cf17d350d7b9fa883f355bbd42192019a51002ee7efd0a9e2da43"
+   },
+   "practiceTips": {
+    "text": "Travaillez d'abord à la corde, lentement, en articulant chaque note, puis à un tempo moyen avec un petit spiccato, et seulement ensuite à vitesse réelle. Répétez en boucle les deux mesures les plus difficiles avec un métronome et n'augmentez le clic d'un cran que lorsqu'elles sont propres trois fois de suite. Jouez avec un bourdon pour vérifier les notes chromatiques. Enregistrez une exécution complète et repérez les mesures où le volume ou le tempo change sans que vous l'ayez voulu.",
+    "sourceSha256": "b24c3ced61997b109836e720c04f7eb1064ddcada5040dfb44ff53e2d326e0b5"
+   },
+   "technique": {
+    "text": "Le passage exige un spiccato rapide et très égal, qui reste doux, avec la main d'archet détendue et un coup d'archet produit par un peu de poids du bras plutôt que par le seul poignet. La main gauche doit être en avance sur l'archet pour que chaque note parle, surtout dans les tournures chromatiques. Les changements de corde doivent être aussi petits que possible, et la nuance doit rester au niveau écrit même quand les notes deviennent plus difficiles.",
+    "sourceSha256": "885d9161e2d5061b92535976e56649e45e943d622c64fcfe8719002b4951800d"
+   }
+  },
+  "cello-mozart-symphony-35-mvt4": {
+   "history": {
+    "text": "Mozart a écrit la Symphonie « Haffner » en 1782. Son finale est marqué Presto, à 2/2 et de forme rondo-sonate, et Mozart a dit à son père qu'il devait aller aussi vite que possible.",
+    "sourceSha256": "7c3e76ace0f8ef54089823b0963c782bc41ba914e04c786f1359d5e8cdf26e80"
+   },
+   "pitfalls": {
+    "text": "Les problèmes habituels sont un spiccato trop haut et donc inégal, une précipitation dans les figures en notes répétées et une perte du tempo sur les changements de corde. Les candidats choisissent souvent un tempo impressionnant dans les premières mesures, qui s'écroule ensuite dans les passages malaisés. La justesse dans les sauts rapides est exposée, car la texture est très mince.",
+    "sourceSha256": "eb3e1326bb9856ec41f74ec6d87c6c34e17fc95cdbdc523870abfbced7745fef"
+   },
+   "practiceTips": {
+    "text": "Construisez le passage au métronome à partir d'un tempo où chaque note est propre, en augmentant par petites étapes, et travaillez-le à la corde avant de laisser l'archet quitter la corde. Utilisez des variantes rythmiques (pointé, pointé inversé, groupé par trois) sur les mesures les plus rapides. Travaillez les changements de corde en doubles cordes lentes. Terminez chaque séance par une exécution au tempo réel, sans vous arrêter.",
+    "sourceSha256": "cb7111c37ace1ba4a0eb01d04e304dec970de0636d91cd6f74a8a5d5625c4833"
+   },
+   "technique": {
+    "text": "Le passage demande un coup d'archet sauté, léger et net, à un tempo rapide, l'archet travaillant sur une zone petite et contrôlée près du point d'équilibre. Chaque note des figures en gammes et en arpèges doit être clairement placée par la main gauche pour que l'articulation se lise à vitesse réelle. Gardez des nuances transparentes : le piano de Mozart doit rester vraiment doux tout en restant rythmiquement exact.",
+    "sourceSha256": "cd468f1288195a79aed0baa3a8a60e5fc9e8324ef3092df8720906e9cdd0a18b"
+   }
+  },
+  "cello-prokofiev-symphony-5-mvt3": {
+   "history": {
+    "text": "La Cinquième Symphonie de Prokofiev, op. 100, a été composée en 1944. Son troisième mouvement est un Adagio en fa majeur, et le passage de violoncelle qui en est tiré figure, à côté du finale, sur plusieurs listes récentes pour postes de tuttiste.",
+    "sourceSha256": "2ce2592349c01ce3a3357fe67c3adaa0357470b1ab140f990b90c01a37666ae9"
+   },
+   "pitfalls": {
+    "text": "La justesse dans l'écriture chromatique est la première chose à lâcher, surtout après un grand démanché. Le tempo lent incite à perdre la subdivision et à laisser dériver le rythme. Le son peut devenir mince dans le haut de la tessiture si l'archet reste trop loin du chevalet.",
+    "sourceSha256": "8f4e05278412e97ba93ac6f665e956cec52ac684a1685cfcffeba035fe400d5c"
+   },
+   "practiceTips": {
+    "text": "Travaillez avec un métronome sur la plus petite subdivision, pour que les notes longues et les notes en mouvement partagent une seule pulsation. Utilisez un bourdon sur la tonique pour ancrer les passages chromatiques. Travaillez le passage aigu avec des archets lents près du chevalet, pour un son plus plein. Apprenez le matériau orchestral environnant à partir d'un enregistrement, pour placer vos entrées avec assurance.",
+    "sourceSha256": "085d5dde54ff2db8eb767895956350d2ca991131ca8a665caea30f7f3ba16426"
+   },
+   "technique": {
+    "text": "Le passage est lent et exposé ; le défi est donc de soutenir une longue ligne avec une sonorité chaude à travers de larges intervalles et des tournures chromatiques, tout en gardant la pulsation parfaitement stable. Le registre aigu demande des démanchés sûrs et un vibrato constant. Les nuances doivent suivre de près les soufflets imprimés, car la texture autour des violoncelles est mince.",
+    "sourceSha256": "ad347d8d92548ebe979618e9e1fdfbefb3eba5d5e90586364264dc0b507560ec"
+   }
+  },
+  "cello-prokofiev-symphony-5-mvt4": {
+   "history": {
+    "text": "La Cinquième Symphonie de Prokofiev, op. 100, date de 1944. Le finale, Allegro giocoso en si bémol majeur, s'ouvre avec les violoncelles qui rappellent le thème du premier mouvement, et contient un passage rapide et exposé que certains orchestres imposent comme trait préparé et que d'autres utilisent en déchiffrage.",
+    "sourceSha256": "81f5d99ef483c320b1f2502d52d4685f07aee7f9567fc907b7324276f4a81a12"
+   },
+   "pitfalls": {
+    "text": "On a tendance à précipiter les groupes rapides et à arriver en avance sur les notes accentuées, ou à perdre le tempo dans les changements de corde malaisés. La voix supérieure d'un passage divisi peut monter sous l'effet de la vitesse. Si l'extrait sert au déchiffrage, l'hésitation aux changements rythmiques est le défaut le plus coûteux.",
+    "sourceSha256": "325e305762af3e9da59e120e52874f0640d139ab39a5ca27d7b2340ae297c370"
+   },
+   "practiceTips": {
+    "text": "Travaillez au métronome à partir d'un tempo lent, par groupes rythmiques, en n'augmentant par petites étapes que lorsque chaque note est propre. Travaillez les entrées à contretemps en battant la pulsation du pied tout en jouant. Isolez les changements de corde et jouez-les en doubles cordes. Entraînez-vous aussi à déchiffrer des passages de caractère semblable, pour pouvoir lire le rythme à vue si le jury le demande.",
+    "sourceSha256": "592033aece913918acbc643bde6d33989e9f6114f4e634ba97577634f8bb831d"
+   },
+   "technique": {
+    "text": "C'est une épreuve d'articulation rapide et claire sous pression rythmique : la main gauche doit placer chaque note des figures rapides pendant que l'archet garde un coup court et égal. Les accents et les entrées à contretemps doivent être exactement en place, et les changements de corde doivent être petits et préparés. Gardez un son brillant et qui projette, sans creuser la corde.",
+    "sourceSha256": "7a93109df5af9be040cb1879dbfbb56fc6ce1842fe236c082f5feeaf1a910652"
+   }
+  },
+  "cello-rossini-william-tell-overture-opening": {
+   "history": {
+    "text": "L'opéra Guillaume Tell de Rossini a été créé à l'Opéra de Paris le 3 août 1829. Son ouverture s'ouvre par un passage lent pour un petit groupe de violoncelles solistes, et la voix supérieure de ce passage est l'un des solos de violoncelle solo les plus fréquemment demandés.",
+    "sourceSha256": "87616eca4151f4a02e33784cb4dc5df7a8a9f1cbfd657b431c8f55f158dd5173"
+   },
+   "pitfalls": {
+    "text": "C'est sur la note initiale exposée et dans les passages aigus que la justesse flanche le plus souvent, et les notes longues ont tendance à perdre leur corps ou à vaciller sous un vibrato nerveux. Certains précipitent les silences ou les ornements écrits. Les lignes d'accompagnement des autres violoncelles sont parfois demandées aussi, et les candidats qui ne les ont pas regardées sont pris au dépourvu.",
+    "sourceSha256": "fcac7ca77ee067cd3160963b75f2e768e90f55a94f8837591342b2d5b7190809"
+   },
+   "practiceTips": {
+    "text": "Travaillez les phrases initiales avec un bourdon et un métronome lent, en écoutant si la hauteur reste stable sur chaque note longue. Travaillez les changements d'archet sur cordes à vide, pianissimo, jusqu'à ce qu'ils soient inaudibles. Apprenez les voix inférieures de violoncelle aussi bien que la supérieure, pour comprendre l'harmonie et pouvoir jouer l'une ou l'autre si on vous le demande. Enregistrez le solo et écoutez si les phrases ont une direction claire.",
+    "sourceSha256": "2909e375600a9c6a273ca15fd28745da4013388f2baf346b27e93e3be1891e13"
+   },
+   "technique": {
+    "text": "Le solo est lent, doux et aigu ; il faut donc une belle sonorité soutenue en position du pouce, avec une justesse qui ne vacille pas sur les notes longues. Le contrôle de l'archet dans la nuance douce est essentiel : des archets lents et égaux, avec des changements imperceptibles. Le phrasé est celui de l'opéra ; chaque ligne doit donc être façonnée comme une phrase chantée, avec un sommet clair et une fin naturelle.",
+    "sourceSha256": "6205f1f7c6d627952d174426c587189256081ee7f1025c395c6506d48dc6ce09"
+   }
+  },
+  "cello-shostakovich-symphony-1-mvt4-solo": {
+   "history": {
+    "text": "Le finale de la Première Symphonie de Shostakovich, op. 10, contient un long solo pour le violoncelle solo, qui est une exigence classique des auditions de violoncelle solo et de co-soliste.",
+    "sourceSha256": "cbab6dc6ca414e9b9d3af3a83fddeda9d56bd6f60b574877796431aa0d93e200"
+   },
+   "pitfalls": {
+    "text": "Les problèmes les plus fréquents sont la justesse dans les passages aigus, un rythme qui dérive dans les mesures tenues et une sonorité qui devient forcée au point culminant. On a aussi tendance à négliger les nuances plus douces, ce qui aplatit le drame dont dépend le solo. Des entrées qui ne sont pas placées par rapport au rythme orchestral sous-entendu sonnent peu convaincantes.",
+    "sourceSha256": "6f90a3a0bd77937676117bff16128ae4eb0edc52b5222f06b41038bc443d019b"
+   },
+   "practiceTips": {
+    "text": "Travaillez le solo avec un métronome au niveau de la subdivision, puis avec un enregistrement, pour que votre rythme s'ajuste exactement à l'orchestre. Utilisez un bourdon pour les passages aigus et travaillez les démanchés en glissés lents avant de retirer le glissando. Travaillez les mesures les plus fortes avec un archet rapide et une main gauche légère pour éviter de forcer. Marquez chaque nuance dans la partie et vérifiez, sur un enregistrement de vous-même, que chacune s'entend.",
+    "sourceSha256": "578db75cb7dbcdc4cd9d7fdc842563389d33430d2b89e0cf447dc6fe3146f8a2"
+   },
+   "technique": {
+    "text": "Le solo passe d'un lyrisme intense et soutenu à des gestes rythmiques tranchants ; il lui faut donc un son capable de projeter par-dessus un grand orchestre tout en pouvant s'adoucir rapidement. La ligne monte dans le registre aigu et exige des démanchés assurés, avec un vibrato maintenu à travers les changements de position. Les contrastes de nuances sont extrêmes et doivent être pris au pied de la lettre.",
+    "sourceSha256": "cfad68a0af850510d807a404cd56f679744115966345cdb338c17f3e42c45b43"
+   }
+  },
+  "cello-strauss-don-juan-opening": {
+   "history": {
+    "text": "Don Juan, op. 20, est un poème symphonique pour grand orchestre que Richard Strauss a achevé en 1889 et dirigé lors de sa création à Weimar la même année ; il est dédié à Ludwig Thuille. Ses premières pages sont une épreuve d'audition classique pour les cordes.",
+    "sourceSha256": "ba0c2d2135f4d3478360a66c03f62a3054ed0811018691108df3e49e7481bccc"
+   },
+   "pitfalls": {
+    "text": "Les défauts habituels sont de précipiter le geste initial, de bâcler les traits rapides au point que seules la première et la dernière note sont justes, et de laisser le son devenir dur sous l'effort. Les candidats jouent souvent le passage plus fort qu'ils ne peuvent le contrôler, et les rythmes pointés et les triolets se confondent. La fatigue s'installe vite si le bras droit est tendu.",
+    "sourceSha256": "f4217a65ebda276b21f64b266c740569ef99953659ac5972fac4d8b71fb521cd"
+   },
+   "practiceTips": {
+    "text": "Travaillez les traits rapides lentement, par groupes rythmiques, avec le métronome, puis au tempo par courtes rafales entrecoupées de pauses. Jouez tout l'extrait à mi-vitesse avec les nuances réelles pour vous assurer que le son reste ouvert. Isolez les sauts et travaillez les démanchés en silence avant d'ajouter l'archet. Terminez par une exécution complète depuis la première note, au tempo de concert, et notez où le rythme a bougé.",
+    "sourceSha256": "6ae428765a09faa0aed8da2af8581dc61e3375b69af1c58bdb210d10f7f9787c"
+   },
+   "technique": {
+    "text": "Le début demande un grand son assuré, avec un coup d'archet qui reste contrôlé à un tempo rapide, et l'énergie doit venir de la vitesse d'archet plutôt que de la pression. Les traits ascendants rapides et les grands sauts exigent des démanchés préparés avant l'archet et une main gauche qui reste près de la touche. Le rythme est la vraie épreuve : les syncopes et les figures en triolets doivent être placées exactement sur une pulsation qui ne change jamais, même dans les mesures les plus fortes.",
+    "sourceSha256": "876c3386c5e0a5f0993d7220f8202e68f517af4b4834dd31dd78e4e3be0f9727"
+   }
+  },
+  "cello-strauss-don-quixote-solo": {
+   "history": {
+    "text": "Don Quixote, op. 35, est un poème symphonique de Richard Strauss en forme de thème et variations. Le violoncelle solo représente le chevalier d'un bout à l'autre ; la partie est donc à la fois une partie de soliste et une partie de tutti, et elle est exigée aux auditions de violoncelle solo.",
+    "sourceSha256": "2f3dbf79d6c41f3ec12db92b08e656c34f3e1e8d89db8a0b246cd0fafb7de8e0"
+   },
+   "pitfalls": {
+    "text": "Le thème est souvent surjoué et perd sa clarté, tandis que le finale manque de soutien et que les notes longues s'éteignent trop tôt. La justesse dans le registre aigu et dans les sauts malaisés ne pardonne pas. Beaucoup de candidats ne connaissent pas assez le contexte orchestral pour placer leurs entrées de façon convaincante.",
+    "sourceSha256": "a71338abb45b63892ac5a52c61ddf9e70965f805c71d777292daadfea03e1515"
+   },
+   "practiceTips": {
+    "text": "Apprenez la partition, pas seulement la partie solo, et travaillez avec un enregistrement pour savoir à quoi vous répondez. Travaillez le thème au métronome pour garder un rythme fidèle tout en le façonnant. Travaillez le finale avec des archets très lents, pianissimo, en comptant les temps à voix haute. Préparez exactement les passages de la liste que vous présentez, car les orchestres découpent les solos différemment.",
+    "sourceSha256": "77ed68abe8612d9873e5e0c5a419aff4c33149df3f760d9f5866123bfb942b30"
+   },
+   "technique": {
+    "text": "Les passages solistes vont de l'énoncé déclamatoire du thème du chevalier à la longue extinction en douceur du finale ; il faut donc une large palette : un grand son qui projette, avec du mordant rythmique, et un pianissimo fragile et soutenu dans le registre aigu. Les démanchés et les passages en position du pouce doivent être assez sûrs pour que l'expression passe sans effort. Le rythme doit être exact par rapport à un orchestre imaginé, car le solo s'imbrique fréquemment avec d'autres instruments.",
+    "sourceSha256": "7bff706498d64857888a2bc9842a4499df6c030079a2fd992d731ac55c87c7fb"
+   }
+  },
+  "cello-strauss-ein-heldenleben-opening": {
+   "history": {
+    "text": "Ein Heldenleben, op. 40, est l'un des poèmes symphoniques pour grand orchestre de Richard Strauss. Le thème du héros qui ouvre l'œuvre est confié aux cors et aux cordes graves ; la première page de la partie de violoncelle est ainsi l'un des débuts les plus exigeants du répertoire.",
+    "sourceSha256": "4afebe56ed0bfa7cdcb2cd603f2e5c76dac9b6c84001ff6eb6041dd1dd2fad18"
+   },
+   "pitfalls": {
+    "text": "Les notes aiguës sont les premières victimes : elles ont tendance à être trop basses en montant et trop hautes en descendant, et les sauts sont souvent approximatifs. Le tempo ralentit généralement dans les mesures les plus difficiles et le rythme des figures pointées s'arrondit. La tension dans le bras droit rend le son serré exactement là où il devrait être le plus généreux.",
+    "sourceSha256": "08750d02c953c4ca82a330f8933ca644f21afdd1987e817160b865a91aee4f2d"
+   },
+   "practiceTips": {
+    "text": "Travaillez les grands sauts en démanchés lents avec un bourdon, en nommant la note d'arrivée avant de la jouer. Travaillez le passage par courtes sections à un tempo plus lent avec la nuance réelle, puis reliez les sections. Utilisez un métronome pour garder les rythmes pointés fidèles dans les mesures fortes. Enregistrez une exécution et écoutez en particulier les notes les plus hautes et le tempo dans la seconde moitié.",
+    "sourceSha256": "3fca9f235cab085adc00c494ef2038f64310260e709141209db50d9e960634ee"
+   },
+   "technique": {
+    "text": "Le thème initial balaie toute l'étendue de l'instrument ; il faut donc des démanchés sûrs vers le registre aigu, un forte soutenu qui n'écrase pas la corde, et de la clarté rythmique dans les grands sauts et les figures pointées. L'archet doit aller vite et rester près du chevalet pour la projection ; la main gauche doit bouger tôt pour que les notes les plus hautes arrivent justes et avec vibrato. Les points de respiration sont rares ; planifiez donc où l'archet peut être économisé.",
+    "sourceSha256": "fd4c9726539a8178dfbf3bd3c9208628b2e218683ab4d1855dc48516120dbbaf"
+   }
+  },
+  "cello-tchaikovsky-symphony-4-mvt2": {
+   "history": {
+    "text": "Le mouvement lent de la Quatrième Symphonie de Tchaikovsky, Andantino in modo di canzona en si bémol mineur, s'ouvre par une mélancolique mélodie de hautbois que les violoncelles reprennent ensuite ; c'est ce passage qui est habituellement imposé.",
+    "sourceSha256": "cb44618fb9ed50513a3c7ed9c8223e6c3ca40ce839a428b842a33fd09e5f003d"
+   },
+   "pitfalls": {
+    "text": "Le principal danger est de surjouer ; la mélodie perd son caractère si on la rend trop expressive ou trop forte. Les figures en notes répétées ont tendance à être écourtées ou jouées avec un archet inégal, et le tempo peut traîner parce que la musique est triste. La justesse dans la tonalité mineure est exposée sur les broderies inférieures.",
+    "sourceSha256": "5946828e16a8ea16be6d01d1c1fbc00fb05f6097ed028dd490b4daf26809f51e"
+   },
+   "practiceTips": {
+    "text": "Écoutez l'énoncé du hautbois dans un enregistrement et essayez d'en copier exactement le phrasé avant d'ajouter quoi que ce soit de personnel. Travaillez avec un métronome pour que l'Andantino garde son allant. Jouez la mélodie sur une seule corde là où c'est possible pour sentir la ligne, puis avec le doigté pratique. Enregistrez-vous à la nuance écrite et vérifiez que le son a encore du corps.",
+    "sourceSha256": "8426f09f0d223a81abdbff6ef0a433d77f5b9b60bfb78267ce1983093cdd7e26"
+   },
+   "technique": {
+    "text": "Les violoncelles héritent de l'air du hautbois ; le but est donc d'en égaler la simplicité : un legato égal et sans effort, un vibrato sobre et un phrasé qui suit les montées et descentes naturelles de la mélodie. La nuance est douce et l'accompagnement léger, si bien que chaque note s'entend. Les démanchés doivent être doux et l'archet doit rester près de la corde avec un minimum de pression.",
+    "sourceSha256": "07f6caedd629819ad4ad4458744fc818714bc976a7e3bba84e08b59a3a00edbe"
+   }
+  },
+  "cello-tchaikovsky-symphony-6-mvt2": {
+   "history": {
+    "text": "Tchaikovsky a composé la « Pathétique » en 1893, et elle a été créée à Saint-Pétersbourg le 28 octobre de la même année. Le deuxième mouvement, Allegro con grazia en ré majeur, est une danse à 5/4 souvent décrite comme une valse boiteuse ; les violoncelles en présentent le thème principal.",
+    "sourceSha256": "b1b641c37b3dafc3209610a8eb0a20addbcdc08eb590ff1b8e81ccd5d29e1178"
+   },
+   "pitfalls": {
+    "text": "Précipiter ou étirer le cinquième temps est l'erreur classique, et le jury l'entendra immédiatement. La mélodie se situe dans un registre confortable, mais les démanchés sont exposés et peuvent s'entendre. Les candidats accentuent parfois trop le premier temps et perdent le caractère de danse.",
+    "sourceSha256": "d5b17f6f24e0affea4984beac72143ec825b0769c9858fe4a8e8d110e52ef5b9"
+   },
+   "practiceTips": {
+    "text": "Comptez la mesure comme un groupe de deux plus trois (ou trois plus deux, selon ce que suggère la phrase) avec un métronome battant la noire, jusqu'à ce que la longue mesure paraisse naturelle. Chantez la mélodie et dirigez-la avant de jouer. Travaillez les démanchés lentement avec un glissando, puis retirez le glissé. Jouez avec un enregistrement d'orchestre pour vérifier que votre tempo et votre phrasé correspondent à ceux du pupitre.",
+    "sourceSha256": "7aaa2f287d47decfd8340063a969daf9188e08d69ad5a547316a63fdb10bd7c3"
+   },
+   "technique": {
+    "text": "Le thème doit sonner gracieux et évident dans une mesure que la plupart des musiciens ne ressentent pas naturellement ; la pulsation à 5/4 doit donc être intériorisée comme une unité stable plutôt que comptée mesure par mesure. La mélodie demande un legato léger et chantant, avec des démanchés propres et un phrasé qui fait respirer les longues mesures. Gardez une nuance modeste et un vibrato chaud mais étroit.",
+    "sourceSha256": "c02bb2fd2f3cbbe2026a948c78e67d0644eb52d817df4001a188cadfd33f263e"
+   }
+  },
+  "cello-verdi-requiem-offertorio": {
+   "history": {
+    "text": "La Messa da Requiem de Verdi a été créée le 22 mai 1874. L'Offertorio, son troisième numéro, s'ouvre par un passage exposé pour les violoncelles qui est devenu un incontournable des listes d'audition.",
+    "sourceSha256": "d3c8fdba23c87e27eabac5f9d20bd4f275cd2f780ce1da8421880a95f13cd0d5"
+   },
+   "pitfalls": {
+    "text": "La justesse des entrées aiguës est le principal risque, surtout sur la première note, qui doit être placée sans aucun élan. On utilise souvent trop d'archet et le son perd son centre dans la nuance douce, ou le vibrato devient nerveux et large. Les voix divisées peuvent être confondues si l'on n'a pas appris quelle partie est demandée.",
+    "sourceSha256": "17e4f5c352a93b0e2071bf8315f8a471122c713053f758c3b5962f16cd9bc610"
+   },
+   "practiceTips": {
+    "text": "Entraînez-vous à trouver la note initiale en silence, à partir d'une position de repos, puis jouez-la avec l'archet déjà en mouvement pour qu'elle n'enfle pas. Utilisez un bourdon sur la tonique et jouez le passage lentement pour stabiliser la justesse dans l'aigu. Travaillez de longs archets lents, pianissimo, pour développer le contrôle. Apprenez les deux voix divisi pour pouvoir jouer celle que la liste précise.",
+    "sourceSha256": "1395d452ac9320b83c59b2ece35546344f84bcc991cd8d13432ad1ff398d81c2"
+   },
+   "technique": {
+    "text": "Le début est doux, lyrique et aigu, avec les violoncelles divisés ; il faut donc un son pur et soutenu dans le registre aigu, et une justesse qui tient sans le soutien du reste de l'orchestre. L'archet doit avancer lentement et régulièrement dans une nuance douce, et les démanchés entre les positions doivent être préparés pour que la ligne sonne vocale plutôt qu'instrumentale. Les nuances restent dans une plage douce et étroite pendant la majeure partie du passage.",
+    "sourceSha256": "b7a025660097d225ce8a36d2768db9ea43872e99b6b44cd7cafde10222ef4675"
+   }
+  }
+ }
+}

@@ -10,9 +10,9 @@ Two directions:
    button. Tapping it opens Auditioner on the right screen with the details
    already typed in. Auditioner **saves nothing** on its own: the player sees
    the "New audition" form filled in and decides with **Add**.
-2. **Auditioner → Tutti.** Settings → About gets a row "Find an orchestra near
-   you" that opens Tutti's website inside Auditioner. The row is hidden until
-   Tutti's web address is confirmed (see "Turning on the Tutti row" below).
+2. **Auditioner → Tutti.** Settings → About has a row "Find an orchestra near
+   you" that opens Tutti's website, **https://tutti-orchestra.com** (PLAN U1b),
+   inside Auditioner. The row is live (see "The Tutti row in Settings" below).
 
 ---
 
@@ -112,20 +112,21 @@ audition. Those stay with the player.
 
 ---
 
-## 3. Turning on the Tutti row in Settings
+## 3. The Tutti row in Settings
 
-The row "Find an orchestra near you" (Settings → About) is **hidden** until we
-have Tutti's web address. To switch it on, set the constant in
-`ios/Auditioner/Core/Routing/DeepLink.swift`:
+The row "Find an orchestra near you" (Settings → About) opens Tutti's site,
+https://tutti-orchestra.com (confirmed by Milai on 2026-10-11, PLAN U1b). The
+address is one constant in `ios/Auditioner/Core/Routing/DeepLink.swift`:
 
 ```swift
 enum TuttiLink {
-    static let findOrchestraURL: URL? = URL(string: "https://<tutti's address>")
+    static let findOrchestraURL: URL? = URL(string: "https://tutti-orchestra.com")
 }
 ```
 
-Only an https address works; the page opens in the in-app Safari view, the
-same one used for IMSLP links. Nothing else needs to change.
+If the address ever changes, change it there — only an https address works; the
+page opens in the in-app Safari view, the same one used for IMSLP links. Setting
+it to `nil` hides the row again. Nothing else needs to change.
 
 ---
 

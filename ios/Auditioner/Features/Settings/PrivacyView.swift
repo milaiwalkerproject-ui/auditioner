@@ -43,7 +43,7 @@ struct PrivacyView: View {
                 }
                 .font(.subheadline)
                 .padding(.leading, 42)
-                Text("This is the short version of our privacy policy (version 0.3, 12 October 2026). The full text will be published before the App Store release.")
+                Text("This is the short version of our privacy policy (version 0.3, 11 October 2026). The full text will be published before the App Store release.")
                     .font(.footnote)
                     .foregroundStyle(Theme.inkSoft)
             }
