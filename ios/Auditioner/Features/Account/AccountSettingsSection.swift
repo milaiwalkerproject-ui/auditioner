@@ -5,17 +5,15 @@ import AuthenticationServices
 /// Dropped into `SettingsView`'s Form right after the profile section.
 struct AccountSettingsSection: View {
     @EnvironmentObject private var settings: AppSettings
-    @ObservedObject private var store: AccountStore
+    // Same pattern as PopularSection / ExcerptBrowserView: a default argument would be
+    // evaluated outside the main actor ("main actor-isolated static property 'shared'").
+    @ObservedObject private var store: AccountStore = AccountStore.shared
     @Environment(\.colorScheme) private var colorScheme
 
     @State private var rawNonce: String = ""
     @State private var errorMessage: String? = nil
     @State private var showsDeletedNote: Bool = false
     @State private var isConfirmingDelete: Bool = false
-
-    init(store: AccountStore = AccountStore.shared) {
-        self._store = ObservedObject(wrappedValue: store)
-    }
 
     private var serverIsSet: Bool {
         settings.serverBaseURL != nil

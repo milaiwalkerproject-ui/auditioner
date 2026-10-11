@@ -46,6 +46,8 @@ jobs:
           echo "Simulator: $UDID"
 
       - name: Build and test
+        # Ad-hoc signing ("-", no team, no profile) for the simulator: unsigned apps get
+        # errSecMissingEntitlement (-34018) from the keychain, which the account tests use.
         run: |
           mkdir -p build
           set +e
@@ -54,7 +56,12 @@ jobs:
             -scheme Auditioner \
             -destination "id=${{ steps.sim.outputs.udid }}" \
             -derivedDataPath build/DerivedData \
-            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGN_STYLE=Manual \
+            CODE_SIGN_IDENTITY=- \
+            DEVELOPMENT_TEAM= \
+            PROVISIONING_PROFILE_SPECIFIER= \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=YES \
             -parallel-testing-enabled NO \
             test > build/xcodebuild.log 2>&1
           STATUS=$?
