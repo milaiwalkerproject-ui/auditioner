@@ -1,0 +1,22 @@
+{
+ "Image of a part": {
+  "comment": "Document type name (CFBundleTypeName) shown in the iOS Open in / Share sheets for a photo or image of a part.",
+  "english": "Image of a part"
+ },
+ "NSAppleMusicUsageDescription": {
+  "comment": "Permission prompt (Apple Music). Keep the exact meaning: the app only plays recordings from the start of an excerpt when the player has a subscription.",
+  "english": "Auditioner plays Apple Music recordings from the start of an excerpt when you have a subscription."
+ },
+ "NSCameraUsageDescription": {
+  "comment": "Permission prompt (camera). Shown the first time the player scans a part.",
+  "english": "Auditioner uses the camera to scan your part so it can recognise the excerpt and make reference audio."
+ },
+ "NSMicrophoneUsageDescription": {
+  "comment": "Permission prompt (microphone). Shown the first time the player records a take.",
+  "english": "Auditioner records your practice so you can compare it with the reference."
+ },
+ "PDF part": {
+  "comment": "Document type name (CFBundleTypeName) shown in the iOS Open in / Share sheets for a PDF part.",
+  "english": "PDF part"
+ }
+}

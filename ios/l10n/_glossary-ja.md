@@ -22,7 +22,8 @@ Japanese has one plural category, so every value is a plain string.
 | catalogue (the app's excerpt catalogue) | カタログ | match to catalogue = カタログと照合; link = リンク |
 | chair / position | ポジション | Which chair? = ポジションは？; Include all chairs = すべてのポジションを含める; ", all chairs" = 、全ポジション |
 | principal / assistant principal | 首席 / 副首席 | |
-| section (player) | セクション | "section cello lists" = セクションチェロのリスト |
+| section (player) | セクション | |
+| lists phrase (`lists.phrase.allChairs` / `lists.phrase.chair`) | この楽器のリスト / このポジションのリスト | the key text carries no `%@`, so `merge_translations.py` rejects a value with placeholders; these fixed labels pass and the evidence lines are built as 「label：収集した9件中7件に掲載、全ポジション（2022–2026）」. If the checker is taught to compare against the Swift `defaultValue`, prefer `%@の%@` / `%@%@の%@` (チェロのリスト, セクションチェロのリスト) |
 | second (chair) | 2番 | |
 | utility | ユーティリティ | |
 | high / low (horn) | 上吹き / 下吹き | |
@@ -31,7 +32,7 @@ Japanese has one plural category, so every value is a plain string.
 | round | 審査段階 | preliminary = 一次審査, semi-final = 二次審査, final = 最終審査 |
 | readiness | 準備状況 | not started = 未着手, learning the notes = 譜読み中, under tempo = テンポ未達, nearly there = もう少し, audition-ready = 本番OK |
 | reference audio | 参考音源 | "Reference" (segment) = 参考音源 |
-| recording / take | 録音 / テイク | "Record" (button) = 録音; my recordings = 自分の録音 |
+| recording / take | 録音 / テイク | "Record" (button) = 録音; my recordings = 自分の録音; a take is always テイク (このテイクについて, 無題のテイク) |
 | mock audition | 模擬オーディション | behind the screen = ブラインド審査; run = 回 |
 | count-in | カウントイン | |
 | drone | ドローン | |
@@ -50,7 +51,8 @@ Japanese has one plural category, so every value is a plain string.
 | mark start / mark end | 開始をマーク / 終了をマーク | |
 | mark the excerpt (crop) | オケスタの範囲を指定 | |
 | loop | ループ | |
-| checked / verified | 確認済み | |
+| checked / verified | 確認済み | "Check the official list" (unverified value) = 公式リストを確認 |
+| remind me (toggle) | 通知を受け取る | reminders = 通知 |
 | draft | 下書き | |
 | curated (prose) | 人が執筆 | AI-generated = AI生成 |
 | notes (free text, all senses) | ノート | the excerpt commentary as feedback topic = オケスタの解説 |
@@ -58,7 +60,7 @@ Japanese has one plural category, so every value is a plain string.
 | popular / very popular | 人気 / 大人気 |
 | server | サーバ | Settings → Server = 「設定」→「サーバ」 |
 | account / sign in / sign out | アカウント / サインイン / サインアウト | Sign in with Apple = Appleでサインイン |
-| scrambled (code) | 元に戻せない形に変換した | plain words for hashed |
+| scrambled (code) | 判読できない形に変換した | plain words for hashed; says no more than the English. Only where the English itself adds "can't be turned back into the number" (trends privacy text) write 元の番号に戻せない形に変換した |
 | region | 地域 | |
 | instrument | 楽器 | ヴァイオリン, ヴィオラ, チェロ, コントラバス, ファゴット, テューバ… |
 | player (musician) | 奏者 | |

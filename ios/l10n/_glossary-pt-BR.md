@@ -77,11 +77,18 @@ com a Apple, Sair. Sentence case throughout.
 | video | vídeo | |
 
 Keys `lists.phrase.chair` and `lists.phrase.allChairs` are translated without the instrument
-and chair words ("listas da sua posição", "listas do seu instrumento") because `_keys.json`
-records them without format arguments and `merge_translations.py` rejects any `%@` in them.
+and chair words because `_keys.json` records them without format arguments and
+`merge_translations.py` rejects any `%@` in them. The phrase is only the qualifier — "da sua
+posição" / "do seu instrumento" — and the sentences around it carry "lista"/"listas", so the
+singular case reads naturally: "Em 7 das 9 listas da sua posição que coletamos (2022–2026)",
+"Na única lista da sua posição que coletamos (2025)", "Em 3 das 4 listas do seu instrumento que
+coletamos, todas as posições (2024–2026)", "Ainda não coletamos listas da sua posição.".
 The wording that keeps the words, for when the script accepts positional arguments:
 `lists.phrase.chair` → `%3$@ de %2$@ %1$@` (e.g. "listas de violoncelo tutti"),
-`lists.phrase.allChairs` → `%2$@ de %1$@` (e.g. "listas de violoncelo").
-The sentences built around them read, for example, "Em 7 das 9 listas da sua posição que
-coletamos (2022–2026)" and "Em 3 das 4 listas do seu instrumento que coletamos, todas as
-posições (2024–2026)".
+`lists.phrase.allChairs` → `%2$@ de %1$@` (e.g. "listas de violoncelo") — the sentences would
+then drop their own "listas".
+
+Other choices worth knowing: "Other" → "Outros" (one key for the region list and the line-kind
+list, so neither "Outro" nor "Outra" fits both); the mock-audition review screen is "Revisão"
+("Terminar e revisar"); the tempo row summary "At 72, aiming for 96" is "Atual 72, meta 96"
+(the form fields are "Alcançado" and "Meta"); "Time to prepare" is "Tempo de preparação".

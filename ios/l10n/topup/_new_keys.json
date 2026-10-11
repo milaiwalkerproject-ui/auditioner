@@ -1,0 +1,110 @@
+{
+ "All regions": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "Archive audition": {
+  "comment": "",
+  "files": [
+   "AuditionDetailView.swift"
+  ]
+ },
+ "Archive audition on an audition's page moves it here. You can restore it any time.": {
+  "comment": "",
+  "files": [
+   "ArchivedAuditionsView.swift"
+  ]
+ },
+ "Archived (%lld)": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ },
+ "Archived auditions": {
+  "comment": "",
+  "files": [
+   "ArchivedAuditionsView.swift"
+  ]
+ },
+ "Delete for good": {
+  "comment": "",
+  "files": [
+   "ArchivedAuditionsView.swift"
+  ]
+ },
+ "Delete this audition for good?": {
+  "comment": "",
+  "files": [
+   "ArchivedAuditionsView.swift"
+  ]
+ },
+ "Deletes this audition and its list for good. This can't be undone.": {
+  "comment": "",
+  "files": [
+   "ArchivedAuditionsView.swift"
+  ]
+ },
+ "Machine-translated": {
+  "comment": "",
+  "files": [
+   "ExcerptNotesSection.swift"
+  ]
+ },
+ "Machine-translated from English — may contain errors. Use Show original to compare.": {
+  "comment": "",
+  "files": [
+   "ExcerptNotesSection.swift"
+  ]
+ },
+ "Nothing archived": {
+  "comment": "",
+  "files": [
+   "ArchivedAuditionsView.swift"
+  ]
+ },
+ "Restore": {
+  "comment": "",
+  "files": [
+   "ArchivedAuditionsView.swift"
+  ]
+ },
+ "Restore puts an audition back into My auditions with its list and readiness; reminders that were on are set again. Delete for good removes it from this device.": {
+  "comment": "",
+  "files": [
+   "ArchivedAuditionsView.swift"
+  ]
+ },
+ "Show": {
+  "comment": "",
+  "files": [
+   "AuditionsHomeView.swift"
+  ]
+ },
+ "Show original": {
+  "comment": "",
+  "files": [
+   "ExcerptNotesSection.swift"
+  ]
+ },
+ "Show translation": {
+  "comment": "",
+  "files": [
+   "ExcerptNotesSection.swift"
+  ]
+ },
+ "This is the short version of our privacy policy (version 0.3, 11 October 2026). The full text will be published before the App Store release.": {
+  "comment": "",
+  "files": [
+   "PrivacyView.swift"
+  ]
+ },
+ "Your region (%@)": {
+  "comment": "",
+  "files": [
+   "AuditionsLogic.swift"
+  ]
+ }
+}

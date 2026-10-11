@@ -17,32 +17,33 @@ Condividi, Accedi con Apple, File (Files app), Foto (Photos app).
 | chair / position | ruolo | "Which chair?" → Quale ruolo?; "Include all chairs" → Includi tutti i ruoli |
 | principal | prima parte | |
 | assistant principal | concertino | Italian string-section usage; unsure for winds |
-| section | di fila | "section cello" → violoncello di fila |
+| section | fila / di fila | standalone chair label "Section" → Fila; "section cello" → violoncello di fila |
 | second | secondo | |
 | utility | utility | no Italian equivalent; kept |
 | concertmaster | spalla | |
 | high / low (horn) | acuto / grave | |
-| (excerpt) list | lista | "lists" → liste; "official list" → lista ufficiale |
+| (excerpt) list | lista | "lists" → liste; "official list" → lista ufficiale. The two `lists.phrase.*` keys have no format arguments, so they are plain complements — "per il tuo strumento" / "per il tuo ruolo" — and the noun "lista/liste" sits in the surrounding sentences ("In 7 delle 9 liste per il tuo ruolo che abbiamo raccolto") |
 | repertoire | repertorio | |
 | catalogue | catalogo | |
 | match (to catalogue) | corrispondenza / abbinare | "Match to catalogue" → Abbina al catalogo; "Link"/"Unlink" → Collega/Scollega |
 | line (of a list) | riga | |
 | item (list entry) | voce | |
-| readiness | preparazione | Not started → Non iniziato, Under tempo → Sotto tempo, Nearly there → Quasi pronto, Audition-ready → Pronto per l'audizione |
+| readiness | preparazione | Not started → Non iniziato, Learning the notes → Sto imparando le note, Under tempo → Sotto tempo, Nearly there → Quasi pronto, Audition-ready → Pronto per l'audizione |
 | practice / practise | studio / studiare | "Practice" tab → Studio; "Practised today" → Studiato oggi |
 | practice tools | strumenti per lo studio | "Tools" → Strumenti; "Instrument" → Strumento |
 | reference audio | audio di riferimento | "Reference" → Riferimento |
 | take | take | feminine, as used by Italian musicians |
+| rating (self-rating, stars) | valutazione | "Your rating" → La tua valutazione; "Overall" → Nel complesso; "Your verdict" → Il tuo giudizio |
 | recording | registrazione | |
 | record (button) | Registra | |
 | record & compare | registra e confronta | |
 | count-in | conteggio | |
-| drone | bordone | |
+| drone | bordone | "Pure tone" → Suono puro; "Instrument sound" → Suono strumentale |
 | metronome | metronomo | |
 | beat | battito | "beats per minute" → battiti al minuto; beats inside a bar → tempi |
 | beat unit | figura di riferimento | |
 | subdivision | suddivisione | |
-| tap tempo | tap tempo | |
+| tap tempo | tap tempo | "Tap four times…" → Batti quattro volte a ritmo… |
 | tempo marking | indicazione di tempo | |
 | typical tempo | tempo abituale | |
 | meter (time signature) | metro | |
@@ -71,7 +72,9 @@ Condividi, Accedi con Apple, File (Files app), Foto (Photos app).
 | frequency tiers | Fondamentale / Frequente / Occasionale | Core / Common / Occasional |
 | share (of lists) | quota | "tiers" → fasce |
 | scrambled (install code) | mascherato | hashed, not reversible |
-| deadline / application deadline | scadenza / scadenza iscrizione | |
-| player (musician) | musicista | "Popular with other players" → Popolari tra gli altri musicisti |
-| region | regione | UK → Regno Unito, North America → Nord America, Asia-Pacific → Asia-Pacifico |
+| deadline / application deadline | scadenza / scadenza iscrizione | "applications close" → le iscrizioni chiudono; "before applying" → prima di iscriverti |
+| player (musician) | musicista | "Popular with other players" → Popolari tra gli altri musicisti; "what other players practise" → cosa studiano gli altri musicisti |
+| region | regione | UK → Regno Unito, North America → Nord America, Asia-Pacific → Asia-Pacifico, Europe (German-speaking) → Europa (di lingua tedesca) |
 | instrument families | Archi / Legni / Ottoni / Tastiere / Timpani e percussioni | |
+
+Reviewed 2026-10-11: 36 entries corrected (see git history).
