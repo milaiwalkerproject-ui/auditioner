@@ -15,6 +15,9 @@
  "Show": "표시",
  "Show original": "원문 보기",
  "Show translation": "번역 보기",
+ "Some notes aren't available in your region.": "일부 노트는 내 지역에서 이용할 수 없어요.",
  "This is the short version of our privacy policy (version 0.3, 11 October 2026). The full text will be published before the App Store release.": "개인정보 처리방침의 요약본이에요 (버전 0.3, 2026년 10월 11일). 전문은 App Store 출시 전에 공개할 예정이에요.",
- "Your region (%@)": "내 지역 (%@)"
+ "We couldn't read your sign-in on this device, so the account wasn't deleted. Sign in again, then delete it.": "이 기기의 로그인 정보를 읽지 못해서 계정이 삭제되지 않았어요. 다시 로그인한 뒤 삭제해 주세요.",
+ "Your region (%@)": "내 지역 (%@)",
+ "Your sign-in has expired, so the account wasn't deleted. Sign in again, then delete it.": "로그인이 만료되어 계정이 삭제되지 않았어요. 다시 로그인한 뒤 삭제해 주세요."
 }

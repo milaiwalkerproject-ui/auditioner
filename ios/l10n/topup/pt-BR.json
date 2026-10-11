@@ -18,6 +18,9 @@
  "Show": "Mostrar",
  "Show original": "Mostrar original",
  "Show translation": "Mostrar tradução",
+ "Some notes aren't available in your region.": "Algumas anotações não estão disponíveis na sua região.",
  "This is the short version of our privacy policy (version 0.3, 11 October 2026). The full text will be published before the App Store release.": "Esta é a versão resumida da nossa política de privacidade (versão 0.3, 11 de outubro de 2026). O texto completo será publicado antes do lançamento na App Store.",
- "Your region (%@)": "Sua região (%@)"
+ "We couldn't read your sign-in on this device, so the account wasn't deleted. Sign in again, then delete it.": "Não foi possível ler sua sessão neste dispositivo, então a conta não foi apagada. Inicie sessão novamente e depois apague a conta.",
+ "Your region (%@)": "Sua região (%@)",
+ "Your sign-in has expired, so the account wasn't deleted. Sign in again, then delete it.": "Sua sessão expirou, então a conta não foi apagada. Inicie sessão novamente e depois apague a conta."
 }

@@ -40201,7 +40201,70 @@
         }
       }
     },
-    "Some notes aren't available in your region." : {},
+    "Some notes aren't available in your region." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einige Notizen sind in deiner Region nicht verfügbar."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Algunas notas no están disponibles en tu región."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Certaines notes ne sont pas disponibles dans votre région."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alcune note non sono disponibili nella tua regione."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "一部のノートはあなたの地域では利用できません。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "일부 노트는 내 지역에서 이용할 수 없어요."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Algumas anotações não estão disponíveis na sua região."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Некоторые заметки недоступны в вашем регионе."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "部分笔记在你所在的地区不可用。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "部分筆記在你所在的地區無法使用。"
+          }
+        }
+      }
+    },
     "Something went wrong" : {
       "localizations" : {
         "de" : {
@@ -51382,7 +51445,70 @@
         }
       }
     },
-    "We couldn't read your sign-in on this device, so the account wasn't deleted. Sign in again, then delete it." : {},
+    "We couldn't read your sign-in on this device, so the account wasn't deleted. Sign in again, then delete it." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deine Anmeldung konnte auf diesem Gerät nicht gelesen werden, deshalb wurde der Account nicht gelöscht. Melde dich neu an und lösche ihn dann."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudo leer tu inicio de sesión en este dispositivo, así que la cuenta no se ha eliminado. Inicia sesión de nuevo y luego elimínala."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de lire votre connexion sur cet appareil, le compte n'a donc pas été supprimé. Reconnectez-vous, puis supprimez-le."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile leggere il tuo accesso su questo dispositivo, quindi l'account non è stato eliminato. Accedi di nuovo, poi eliminalo."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "このデバイスのサインイン情報を読み取れなかったため、アカウントは削除されませんでした。もう一度サインインしてから、削除してください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 기기의 로그인 정보를 읽지 못해서 계정이 삭제되지 않았어요. 다시 로그인한 뒤 삭제해 주세요."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível ler sua sessão neste dispositivo, então a conta não foi apagada. Inicie sessão novamente e depois apague a conta."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не удалось прочитать данные входа на этом устройстве, поэтому аккаунт не удалён. Войдите снова, а затем удалите его."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法在这台设备上读取你的登录状态，因此账户未被删除。请重新登录，然后再删除。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無法在這部裝置上讀取你的登入狀態，因此帳號未被刪除。請重新登入，然後再刪除。"
+          }
+        }
+      }
+    },
     "We haven't collected any %@ yet." : {
       "localizations" : {
         "de" : {
@@ -54399,7 +54525,70 @@
         }
       }
     },
-    "Your sign-in has expired, so the account wasn't deleted. Sign in again, then delete it." : {},
+    "Your sign-in has expired, so the account wasn't deleted. Sign in again, then delete it." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deine Anmeldung ist abgelaufen, deshalb wurde der Account nicht gelöscht. Melde dich neu an und lösche ihn dann."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu inicio de sesión ha expirado, así que la cuenta no se ha eliminado. Inicia sesión de nuevo y luego elimínala."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre connexion a expiré, le compte n'a donc pas été supprimé. Reconnectez-vous, puis supprimez-le."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il tuo accesso è scaduto, quindi l'account non è stato eliminato. Accedi di nuovo, poi eliminalo."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "サインインの有効期限が切れたため、アカウントは削除されませんでした。もう一度サインインしてから、削除してください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "로그인이 만료되어 계정이 삭제되지 않았어요. 다시 로그인한 뒤 삭제해 주세요."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sua sessão expirou, então a conta não foi apagada. Inicie sessão novamente e depois apague a conta."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Срок действия вашего входа истёк, поэтому аккаунт не удалён. Войдите снова, а затем удалите его."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "你的登录已过期，因此账户未被删除。请重新登录，然后再删除。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "你的登入已過期，因此帳號未被刪除。請重新登入，然後再刪除。"
+          }
+        }
+      }
+    },
     "Your verdict" : {
       "localizations" : {
         "de" : {

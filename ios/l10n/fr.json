@@ -635,6 +635,7 @@
  "Slow down by 5": "Ralentir de 5",
  "Slower by %lld": "Plus lent de %lld",
  "Solo": "Solo",
+ "Some notes aren't available in your region.": "Certaines notes ne sont pas disponibles dans votre région.",
  "Something went wrong": "Un problème est survenu",
  "Something went wrong. Try again.": "Un problème est survenu. Réessayez.",
  "Sound": "Son",
@@ -811,6 +812,7 @@
  "Viola": "Alto",
  "Violin": "Violon",
  "Volume": "Volume",
+ "We couldn't read your sign-in on this device, so the account wasn't deleted. Sign in again, then delete it.": "Impossible de lire votre connexion sur cet appareil, le compte n'a donc pas été supprimé. Reconnectez-vous, puis supprimez-le.",
  "We haven't collected any %@ yet.": "Nous n'avons encore collecté aucune liste %@.",
  "We haven't collected any lists for your chair yet.": "Nous n'avons encore collecté aucune liste pour votre poste.",
  "We list only auditions published on orchestras' own websites and checked by a person. Pull down to look again.": "Nous ne répertorions que les auditions publiées sur les sites des orchestres eux-mêmes et vérifiées par une personne. Tirez vers le bas pour actualiser.",
@@ -860,6 +862,7 @@
  "Your region (%@)": "Votre région (%@)",
  "Your scan": "Votre scan",
  "Your scans, parts and recordings are never sent to any AI service.": "Vos scans, partitions et enregistrements ne sont jamais envoyés à un service d'IA.",
+ "Your sign-in has expired, so the account wasn't deleted. Sign in again, then delete it.": "Votre connexion a expiré, le compte n'a donc pas été supprimé. Reconnectez-vous, puis supprimez-le.",
  "Your verdict": "Votre verdict",
  "https://…": "https://…",
  "in %lld days": {

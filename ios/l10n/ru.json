@@ -731,6 +731,7 @@
   "other": "Медленнее на %lld"
  },
  "Solo": "Соло",
+ "Some notes aren't available in your region.": "Некоторые заметки недоступны в вашем регионе.",
  "Something went wrong": "Что-то пошло не так",
  "Something went wrong. Try again.": "Что-то пошло не так. Попробуйте ещё раз.",
  "Sound": "Звук",
@@ -914,6 +915,7 @@
  "Viola": "Альт",
  "Violin": "Скрипка",
  "Volume": "Громкость",
+ "We couldn't read your sign-in on this device, so the account wasn't deleted. Sign in again, then delete it.": "Не удалось прочитать данные входа на этом устройстве, поэтому аккаунт не удалён. Войдите снова, а затем удалите его.",
  "We haven't collected any %@ yet.": "У нас пока нет %@.",
  "We haven't collected any lists for your chair yet.": "Для вашей позиции у нас пока нет списков.",
  "We list only auditions published on orchestras' own websites and checked by a person. Pull down to look again.": "Мы показываем только прослушивания, опубликованные на сайтах самих оркестров и проверенные человеком. Потяните вниз, чтобы обновить.",
@@ -970,6 +972,7 @@
  "Your region (%@)": "Ваш регион (%@)",
  "Your scan": "Ваш скан",
  "Your scans, parts and recordings are never sent to any AI service.": "Ваши сканы, партии и записи никогда не отправляются ИИ-сервисам.",
+ "Your sign-in has expired, so the account wasn't deleted. Sign in again, then delete it.": "Срок действия вашего входа истёк, поэтому аккаунт не удалён. Войдите снова, а затем удалите его.",
  "Your verdict": "Ваш вердикт",
  "https://…": "https://…",
  "in %lld days": {

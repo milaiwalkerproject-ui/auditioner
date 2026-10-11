@@ -15,6 +15,9 @@
  "Show": "表示",
  "Show original": "原文を表示",
  "Show translation": "翻訳を表示",
+ "Some notes aren't available in your region.": "一部のノートはあなたの地域では利用できません。",
  "This is the short version of our privacy policy (version 0.3, 11 October 2026). The full text will be published before the App Store release.": "これはプライバシーポリシーの要約版です（バージョン0.3、2026年10月11日）。全文はApp Storeでの公開前に公表します。",
- "Your region (%@)": "あなたの地域（%@）"
+ "We couldn't read your sign-in on this device, so the account wasn't deleted. Sign in again, then delete it.": "このデバイスのサインイン情報を読み取れなかったため、アカウントは削除されませんでした。もう一度サインインしてから、削除してください。",
+ "Your region (%@)": "あなたの地域（%@）",
+ "Your sign-in has expired, so the account wasn't deleted. Sign in again, then delete it.": "サインインの有効期限が切れたため、アカウントは削除されませんでした。もう一度サインインしてから、削除してください。"
 }

@@ -15,6 +15,9 @@
  "Show": "显示",
  "Show original": "显示原文",
  "Show translation": "显示译文",
+ "Some notes aren't available in your region.": "部分笔记在你所在的地区不可用。",
  "This is the short version of our privacy policy (version 0.3, 11 October 2026). The full text will be published before the App Store release.": "这是我们隐私政策的简版（0.3 版，2026 年 10 月 11 日）。完整文本将在 App Store 发布前公布。",
- "Your region (%@)": "你的地区（%@）"
+ "We couldn't read your sign-in on this device, so the account wasn't deleted. Sign in again, then delete it.": "无法在这台设备上读取你的登录状态，因此账户未被删除。请重新登录，然后再删除。",
+ "Your region (%@)": "你的地区（%@）",
+ "Your sign-in has expired, so the account wasn't deleted. Sign in again, then delete it.": "你的登录已过期，因此账户未被删除。请重新登录，然后再删除。"
 }

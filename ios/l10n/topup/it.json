@@ -18,6 +18,9 @@
  "Show": "Mostra",
  "Show original": "Mostra originale",
  "Show translation": "Mostra traduzione",
+ "Some notes aren't available in your region.": "Alcune note non sono disponibili nella tua regione.",
  "This is the short version of our privacy policy (version 0.3, 11 October 2026). The full text will be published before the App Store release.": "Questa è la versione breve della nostra informativa sulla privacy (versione 0.3, 11 ottobre 2026). Il testo completo sarà pubblicato prima dell'uscita sull'App Store.",
- "Your region (%@)": "La tua regione (%@)"
+ "We couldn't read your sign-in on this device, so the account wasn't deleted. Sign in again, then delete it.": "Impossibile leggere il tuo accesso su questo dispositivo, quindi l'account non è stato eliminato. Accedi di nuovo, poi eliminalo.",
+ "Your region (%@)": "La tua regione (%@)",
+ "Your sign-in has expired, so the account wasn't deleted. Sign in again, then delete it.": "Il tuo accesso è scaduto, quindi l'account non è stato eliminato. Accedi di nuovo, poi eliminalo."
 }

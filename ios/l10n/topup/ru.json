@@ -15,6 +15,9 @@
  "Show": "Показывать",
  "Show original": "Показать оригинал",
  "Show translation": "Показать перевод",
+ "Some notes aren't available in your region.": "Некоторые заметки недоступны в вашем регионе.",
  "This is the short version of our privacy policy (version 0.3, 11 October 2026). The full text will be published before the App Store release.": "Это краткая версия нашей политики конфиденциальности (версия 0.3, 11 октября 2026 г.). Полный текст будет опубликован до выхода в App Store.",
- "Your region (%@)": "Ваш регион (%@)"
+ "We couldn't read your sign-in on this device, so the account wasn't deleted. Sign in again, then delete it.": "Не удалось прочитать данные входа на этом устройстве, поэтому аккаунт не удалён. Войдите снова, а затем удалите его.",
+ "Your region (%@)": "Ваш регион (%@)",
+ "Your sign-in has expired, so the account wasn't deleted. Sign in again, then delete it.": "Срок действия вашего входа истёк, поэтому аккаунт не удалён. Войдите снова, а затем удалите его."
 }

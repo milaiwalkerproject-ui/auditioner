@@ -632,6 +632,7 @@
  "Slow down by 5": "Rallenta di 5",
  "Slower by %lld": "Più lento di %lld",
  "Solo": "Solo",
+ "Some notes aren't available in your region.": "Alcune note non sono disponibili nella tua regione.",
  "Something went wrong": "Qualcosa è andato storto",
  "Something went wrong. Try again.": "Qualcosa è andato storto. Riprova.",
  "Sound": "Suono",
@@ -808,6 +809,7 @@
  "Viola": "Viola",
  "Violin": "Violino",
  "Volume": "Volume",
+ "We couldn't read your sign-in on this device, so the account wasn't deleted. Sign in again, then delete it.": "Impossibile leggere il tuo accesso su questo dispositivo, quindi l'account non è stato eliminato. Accedi di nuovo, poi eliminalo.",
  "We haven't collected any %@ yet.": "Non abbiamo ancora raccolto liste %@.",
  "We haven't collected any lists for your chair yet.": "Non abbiamo ancora raccolto liste per il tuo ruolo.",
  "We list only auditions published on orchestras' own websites and checked by a person. Pull down to look again.": "Elenchiamo solo audizioni pubblicate sui siti delle orchestre e controllate da una persona. Trascina verso il basso per cercare di nuovo.",
@@ -854,6 +856,7 @@
  "Your region (%@)": "La tua regione (%@)",
  "Your scan": "La tua scansione",
  "Your scans, parts and recordings are never sent to any AI service.": "Le tue scansioni, parti e registrazioni non vengono mai inviate a nessun servizio di IA.",
+ "Your sign-in has expired, so the account wasn't deleted. Sign in again, then delete it.": "Il tuo accesso è scaduto, quindi l'account non è stato eliminato. Accedi di nuovo, poi eliminalo.",
  "Your verdict": "Il tuo giudizio",
  "https://…": "https://…",
  "in %lld days": {
