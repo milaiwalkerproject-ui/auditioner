@@ -149,8 +149,8 @@ of the error list and send it to me.
   your settings for that excerpt.
 - **Practice → Drone** — any note, with or without the fifth, cello sound or a
   pure tone, at your A = 440/442 tuning.
-- **Record & compare** — in the practice player, tap **Record**: one bar of
-  count-in, the reference plays while the app records you (use headphones), then
+- **Record & compare** — in the practice player, tap **Record**: a bar of
+  count-in (if Count-in is switched on), then the reference plays while the app records you (use headphones), then
   **Compare** lets you hear You / Reference / Both, also slowed down.
 - **Practice → Mock audition** — pick excerpts, random order, "behind the
   screen" hides the titles, preparation time between excerpts, one continuous

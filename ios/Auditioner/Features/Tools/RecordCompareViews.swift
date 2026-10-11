@@ -39,7 +39,7 @@ struct RecordCompareBar: View {
                 .buttonStyle(.bordered)
                 .tint(Theme.garnet)
                 .disabled(!engine.isReady || engine.isExporting)
-                .accessibilityHint(Text("Records you with a one-bar count-in while the reference plays"))
+                .accessibilityHint(Text("Records you while the reference plays, after a count-in when Count-in is on"))
                 if hasLastTake {
                     Button(action: onCompare) {
                         Label("Compare", systemImage: "arrow.left.arrow.right")

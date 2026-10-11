@@ -178,7 +178,8 @@ struct PracticePlayerContent: View {
     // MARK: Record & compare
 
     /// Record: pause the player, get the microphone, render the reference at the current tempo, then start
-    /// the session (one-bar count-in, reference from the current position, microphone recorded alongside).
+    /// the session (a one-bar count-in when the player's Count-in switch is on — Milai's decision, 2026-10-11 —
+    /// then the reference from the current position, microphone recorded alongside).
     private func startRecording() {
         guard engine.isReady, let timeline = engine.timeline, !compare.isBusy else { return }
         engine.pause()
@@ -198,6 +199,7 @@ struct PracticePlayerContent: View {
             : engine.currentBeat
         let tempo: Double = engine.tempoBPM
         let countIn = timeline.countIn(bars: 1)
+        let useCountIn: Bool = engine.countInEnabled
         let clickSeconds: Double = countIn.clickSpacingBeats * 60.0 / max(1, tempo)
         let url = FileManager.default.temporaryDirectory
             .appendingPathComponent("compare-reference-\(UUID().uuidString).m4a")
@@ -215,7 +217,7 @@ struct PracticePlayerContent: View {
                 let plan = RecordComparePlan(referenceURL: url,
                                              referenceOffsetSeconds: timeline.seconds(atBeat: startBeat, targetBPM: tempo),
                                              referenceDurationSeconds: duration,
-                                             countInClicks: countIn.clickCount,
+                                             countInClicks: useCountIn ? countIn.clickCount : 0,
                                              clicksPerBar: countIn.clicksPerBar,
                                              countInClickSeconds: clickSeconds,
                                              tempoBPM: tempo,

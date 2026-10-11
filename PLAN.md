@@ -107,6 +107,7 @@ orchestra and its auditions; Auditioner helps them *win the seat*.
 | # | Decision |
 |---|---|
 | T1 | v1: metronome (subdivisions, accents, saved per excerpt), drone, record & compare vs reference at the same tempo, **mock audition** (random order, hidden titles, timer, one continuous recording, self-rating). v1.x: tuner, practice log charts. |
+| T2 | (2026-10-11) Record & compare plays a count-in only when the player's Count-in switch is on. Metronome keeps its tempo-marking hints, labelled "rough guide". The note editor marks a short first bar red unless the file marks it as a pickup. Saving a correction keeps both the original reading and the corrected copy. Once the server is deployed, its address is built into the app so testers don't paste it. |
 
 ### Tutti
 | # | Decision |
