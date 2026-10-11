@@ -185,9 +185,68 @@ final class FeedbackReport {
     }
 }
 
+/// An audition the player is preparing for ("My upcoming audition").
+@Model
+final class Audition {
+    var id: UUID = UUID()
+    var createdAt: Date = Date()
+    var orchestra: String = ""
+    var position: String = ""
+    var instrumentRaw: String = Instrument.cello.rawValue
+    var applicationDeadline: Date?
+    var auditionDate: Date?
+    /// Feed vacancy this was created from (server id), if any.
+    var vacancyId: String?
+    /// Official list page (link only; we never store the orchestra's file).
+    var sourceURL: String?
+    /// full | partial_public | works_only | revealed_on_invitation | unknown
+    var listCompleteness: String = "unknown"
+    var notes: String = ""
+    var remindersEnabled: Bool = false
+
+    init(orchestra: String, position: String, instrument: Instrument) {
+        self.id = UUID()
+        self.createdAt = Date()
+        self.orchestra = orchestra
+        self.position = position
+        self.instrumentRaw = instrument.rawValue
+    }
+
+    var instrument: Instrument { Instrument(rawValue: instrumentRaw) ?? .cello }
+}
+
+/// One line of an audition's repertoire list, with the player's readiness.
+@Model
+final class AuditionItem {
+    var id: UUID = UUID()
+    var auditionId: UUID = UUID()
+    var order: Int = 0
+    /// Text exactly as on the list (e.g. "Brahms Sym. 2, mvt. II, mm. 1–15").
+    var rawText: String = ""
+    /// Matched catalogue excerpt, once the player confirms it.
+    var excerptId: String?
+    /// solo | excerpt | sight_reading | chamber | other
+    var category: String = "excerpt"
+    /// "Preliminary", "Semi-final", "Final", or "" when the list doesn't say.
+    var round: String = ""
+    /// 1 (not started) … 5 (audition-ready); nil = not rated yet.
+    var readiness: Int?
+    var targetBPM: Double?
+    var achievedBPM: Double?
+    var lastPractisedAt: Date?
+
+    init(auditionId: UUID, order: Int, rawText: String) {
+        self.id = UUID()
+        self.auditionId = auditionId
+        self.order = order
+        self.rawText = rawText
+    }
+}
+
 enum PersistenceSchema {
     static let models: [any PersistentModel.Type] = [
         LibraryItem.self, PageAnnotation.self, ScoreRecord.self, TimestampMark.self,
         PracticeTake.self, MockAuditionRun.self, FeedbackReport.self,
+        Audition.self, AuditionItem.self,
     ]
 }
