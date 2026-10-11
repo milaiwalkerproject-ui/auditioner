@@ -136,7 +136,7 @@ struct MatchCandidateRow: View {
                 Spacer(minLength: 8)
                 Text(AuditionListMatcher.percentText(score))
                     .font(.caption.weight(.semibold))
-                    .foregroundStyle(score >= AuditionListMatcher.strongThreshold ? Theme.teal : Theme.inkSoft)
+                    .foregroundStyle(AuditionListMatcher.isStrong(score) ? Theme.teal : Theme.inkSoft)
             }
             .contentShape(Rectangle())
         }

@@ -100,7 +100,7 @@ enum ExcerptBrowserLogic {
             byId[excerpt.id] = excerpt
         }
         let known: [RecommendationItem] = items.filter { byId[$0.excerptId] != nil }
-        return RecommendationMerge.top(known, limit: limit).compactMap { item in
+        return RecommendationMerge.top(known, limit: limit).compactMap { (item: RecommendationItem) -> MostAskedEntry? in
             guard let excerpt = byId[item.excerptId] else { return nil }
             return MostAskedEntry(excerpt: excerpt, item: item)
         }

@@ -163,7 +163,7 @@ struct AuditionReviewLineRow: View {
                             Spacer(minLength: 4)
                             Text(AuditionListMatcher.percentText(candidate.score))
                                 .font(.caption.weight(.semibold))
-                                .foregroundStyle(candidate.score >= AuditionListMatcher.strongThreshold ? Theme.teal : Theme.inkSoft)
+                                .foregroundStyle(AuditionListMatcher.isStrong(candidate.score) ? Theme.teal : Theme.inkSoft)
                         }
                         .contentShape(Rectangle())
                     }

@@ -226,7 +226,7 @@ enum LocalRecommendationEngine {
             guard let low = years.min(), let high = years.max() else { return nil }
             return low...high
         }()
-        var items: [ExcerptAsk] = keysByExcerpt.map { excerptId, keys in
+        var items: [ExcerptAsk] = keysByExcerpt.map { (excerptId: String, keys: Set<String>) -> ExcerptAsk in
             let hits: Double = keys.reduce(0) { $0 + (weightByKey[$1] ?? 0) }
             let share: Double = totalWeight > 0 ? min(1, hits / totalWeight) : 0
             return ExcerptAsk(excerptId: excerptId,

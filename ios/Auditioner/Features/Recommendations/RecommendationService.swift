@@ -76,9 +76,9 @@ enum RecommendationMerge {
         var seen: Set<String> = []
         var result: [RecommendationItem] = []
         for recommendation in recommendations {
-            guard let item = item(fromServer: recommendation), !seen.contains(item.excerptId) else { continue }
-            seen.insert(item.excerptId)
-            result.append(item)
+            guard let mapped = RecommendationMerge.item(fromServer: recommendation), !seen.contains(mapped.excerptId) else { continue }
+            seen.insert(mapped.excerptId)
+            result.append(mapped)
         }
         result.sort(by: order)
         return result

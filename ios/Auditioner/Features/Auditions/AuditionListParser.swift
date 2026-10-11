@@ -67,19 +67,13 @@ enum AuditionListParser {
                 continue
             }
 
-            var item = ParsedListItem(rawText: stripped, round: round, category: category.rawValue)
-            if isSightReading(stripped) {
-                item.category = AuditionItemCategory.sightReading.rawValue
-            } else if isOwnChoice(stripped) {
-                item.category = AuditionItemCategory.solo.rawValue
-            }
-            items.append(analyzed(item))
+            items.append(analyzed(ParsedListItem(rawText: stripped, round: round, category: category.rawValue)))
             lastWasHeading = false
         }
         return items
     }
 
-    /// Fills composer / work / movement / bars from the item's text.
+    /// Fills round / category from prefixes and wording, and composer / work / movement / bars from the item's text.
     static func analyzed(_ item: ParsedListItem) -> ParsedListItem {
         var result = item
         var text: String = item.rawText
@@ -90,10 +84,23 @@ enum AuditionListParser {
             text = prefixed.rest
         }
         if let prefixed = categoryPrefix(text) {
-            if item.category == AuditionItemCategory.excerpt.rawValue {
+            if result.category == AuditionItemCategory.excerpt.rawValue {
                 result.category = prefixed.category.rawValue
             }
             text = prefixed.rest
+        }
+        if isSightReading(text) {
+            result.category = AuditionItemCategory.sightReading.rawValue
+        } else if result.category == AuditionItemCategory.excerpt.rawValue, isOwnChoice(text) {
+            result.category = AuditionItemCategory.solo.rawValue
+        }
+        if result.category == AuditionItemCategory.sightReading.rawValue {
+            // "Sight-reading may be requested" names no work.
+            result.composer = nil
+            result.work = nil
+            result.movementNumber = nil
+            result.bars = nil
+            return result
         }
         let split = splitComposerWork(text)
         result.composer = split.composer
@@ -305,6 +312,7 @@ enum AuditionListParser {
         guard !words.isEmpty, words.count <= 4, !containsDigit(text) else { return false }
         guard text.rangeOfCharacter(from: CharacterSet.letters) != nil else { return false }
         for word in words {
+            if isInitial(word) { continue }
             let key: String = cleanWord(word)
             if workWords.contains(key) { return false }
         }
@@ -332,6 +340,7 @@ enum AuditionListParser {
         let patterns: [String] = [
             "(?:\\bmvts?\\.?|\\bmvmt\\.?|\\bmov\\.?|\\bmovt\\.?|\\bmovements?|\\bsatz|\\bteil)\\s*(?:no\\.?\\s*)?([0-9]{1,2}|[ivxIVX]{1,4})\\b",
             "\\b([0-9]{1,2})(?:st|nd|rd|th)\\s+(?:mvt\\.?|mov\\.?|movt\\.?|movement)",
+            "\\b([0-9]{1,2})\\.\\s*(?:satz|teil)\\b",
             "\\b([ivxIVX]{1,4})\\.?\\s*(?:satz|movement|mvt\\.?|mov\\.?)\\b",
             "/\\s*([ivxIVX]{1,4}|[0-9]{1,2})\\b",
             "[,;:]\\s*([ivxIVX]{1,4})\\b(?=\\s*(?:[,;:(]|$|mm?\\b|bars?\\b|meas))",
@@ -443,6 +452,7 @@ enum AuditionListParser {
         result = replacing(result, pattern: barWord + "\\s*[0-9]{1,4}\\b", with: " ")
         result = replacing(result, pattern: "(?:\\bmvts?\\.?|\\bmvmt\\.?|\\bmov\\.?|\\bmovt\\.?|\\bmovements?|\\bsatz|\\bteil)\\s*(?:no\\.?\\s*)?(?:[0-9]{1,2}|[ivxIVX]{1,4})\\b", with: " ")
         result = replacing(result, pattern: "\\b[0-9]{1,2}(?:st|nd|rd|th)\\s+(?:mvt\\.?|mov\\.?|movt\\.?|movement)", with: " ")
+        result = replacing(result, pattern: "\\b[0-9]{1,2}\\.\\s*(?:satz|teil)\\b", with: " ")
         result = replacing(result, pattern: "/\\s*(?:[ivxIVX]{1,4}|[0-9]{1,2})\\b", with: " ")
         result = replacing(result, pattern: "[,;:]\\s*[ivxIVX]{1,4}\\b(?=\\s*(?:[,;:(]|$|mm?\\b|bars?\\b|meas))", with: " ")
         return result.split(separator: " ").joined(separator: " ")

@@ -58,8 +58,13 @@ enum AuditionListMatcher {
 
     /// The candidate the review screen pre-ticks, if any: a lone strong match.
     static func preselected(_ candidates: [AuditionMatchCandidate]) -> String? {
-        guard let best = candidates.first, best.score >= strongThreshold else { return nil }
+        guard let best = candidates.first, isStrong(best.score) else { return nil }
         return best.excerptId
+    }
+
+    /// Compared with a hair of tolerance so 0.45 + 0.35 + 0.1 counts as 0.9.
+    static func isStrong(_ score: Double) -> Bool {
+        score >= strongThreshold - 1e-9
     }
 
     // MARK: Score
