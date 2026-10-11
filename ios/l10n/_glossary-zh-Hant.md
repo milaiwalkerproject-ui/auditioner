@@ -72,9 +72,17 @@ IMSLP, AirTurn, Apple Pencil, Supabase, homr, PDF, MusicXML, A = 440/442.
 | instruments | 小提琴, 中提琴, 大提琴, 低音提琴, 豎琴, 長笛, 短笛, 雙簧管, 英國管, 單簧管, E♭ 單簧管, 低音單簧管, 低音管, 倍低音管, 法國號, 小號, 長號, 低音長號, 低音號, 定音鼓, 打擊樂, 鋼琴／鋼片琴 | Taiwan names (低音管 not 巴松管, 單簧管 not 豎笛) |
 | families | 弦樂 / 木管 / 銅管 / 定音鼓與打擊樂 / 鍵盤 | |
 
-## Word-order keys
+## Word-order keys (evidence lines)
 
-- `lists.phrase.allChairs` → `%1$@%2$@` (instrument + 清單, e.g. 大提琴清單).
-- `lists.phrase.chair` → `%2$@%1$@%3$@` (instrument + position + 清單, e.g. 大提琴聲部團員清單).
+- `lists.phrase.allChairs` → 「符合你樂器的清單」 and `lists.phrase.chair` → 「符合你職位的清單」.
+  The two keys are recorded without their format arguments (`collect_strings.py` keeps only the
+  key, not the `defaultValue` "%@ %@"), so `merge_translations.py` rejects any translation that
+  carries `%@`. Like es/fr/ko/pt-BR/zh-Hans, the phrase therefore names "your instrument / your
+  chair" instead of the instrument word itself; the query is always the player's own profile, so
+  this stays true. If the tooling later records the real format strings, switch to
+  `%1$@%2$@` (大提琴清單) and `%2$@%1$@%3$@` (大提琴聲部團員清單).
 - `, all chairs` → `，含所有職位`; years suffix ` (%@)` → `（%@）`, so an evidence line reads
-  「我們收集到的 9 份大提琴聲部團員清單中，有 7 份列出此片段，含所有職位（2022–2026）」.
+  「我們收集到的 9 份符合你職位的清單中，有 7 份列出此片段（2022–2026）」 or, with all chairs,
+  「我們收集到的 4 份符合你樂器的清單中，有 3 份列出此片段，含所有職位（2024–2026）」.
+- "How often it's asked" → 被列入清單的頻率; "Most asked for your chair" → 你的職位最常被列入的片段;
+  "Where we saw it" → 出現在哪些清單; "Tap tempo" → 點按設定速度; "Open Settings" → 打開「設定」.
