@@ -40,6 +40,7 @@ orchestra and its auditions; Auditioner helps them *win the seat*.
 | A4 | **Cello first** for content depth and review. Every other instrument gets a top-~10 draft set. Brass seeded from the MIT-licensed BrassXcerpts dataset (~800 records), every range re-checked. |
 | A5 | Ages **13+** in the terms for now; lower later after a COPPA check. Everything works signed out. |
 | A6 | Storefronts: **exclude mainland China, Russia, Belarus** (Claude unsupported, YouTube blocked, China ICP filing). **Hong Kong & Macau included with AI notes hidden.** (2026-10-11, in the app: the App Store storefront decides — HKG / MAC, read once at launch with StoreKit; when it is unknown, as in the simulator, the device region HK / MO decides. There, notes with origin `ai` and every machine translation are left out, curated notes show in English, and the Notes box says once "Some notes aren't available in your region.") |
+| A6b | (2026-10-11) **Hong Kong and Macau are left out of the App Store too** (Milai's call: one rule everywhere is simpler than hiding AI notes in two regions). The app has no region-specific code; App Store Connect availability excludes mainland China, Russia, Belarus, Hong Kong and Macau, and TestFlight invitations go only to people outside them. |
 | A7 | Languages (all in v1): English, Spanish, Simplified Chinese, Traditional Chinese, Italian, Russian, Japanese, Korean, German, French, Portuguese (BR). UI AI-translated and marked "beta translation" until a native speaker checks it; excerpt content translated by Claude on first open, cached, labelled "machine-translated"; **score markings stay in the original language** (tap for a translation). |
 | A7b | (2026-10-11) The app's language follows the device's language setting (iOS picks it; Settings → Auditioner → Language can override it). Scans and parts are never translated or changed. Excerpt notes follow the device language too: their machine translations are prepared now, checked by code that every number, bar and marking survived unchanged, and are shown **from 12 Nov 2026** (the I2 date; one moment worldwide, 12:00 UTC, when it is 12 November everywhere), labelled "Machine-translated" with the AI label ("AI-generated — may contain errors, check against your part" — a translation is AI text, also of a curated note) and a "Show original" switch; until then notes appear in English. Work titles and score markings stay in the original language. |
 
@@ -58,6 +59,7 @@ orchestra and its auditions; Auditioner helps them *win the seat*.
 | B1 | Small backend: **Supabase** (database + Sign in with Apple, same as Tutti) + **Google Cloud Run** for heavy jobs (note reading, crawler, Claude). One US region. |
 | B2 | Login: **Sign in with Apple only**, optional, with a Skip button; **in-app account deletion** (revoke Apple token). Signed in = higher daily scan limit, credit for corrections, future purchases. |
 | B3 | Server protected by **App Attest** + per-device daily limits (e.g. 30 scans/day). |
+| B3b | (2026-10-11) "Popular with other players" may stay available in TestFlight with only the per-network limits; **App Attest must be built before the App Store release**. |
 | B4 | Keys (Anthropic, YouTube, Google Cloud) live only in server secrets — never in the app or the repo. |
 | B5 | Free during TestFlight, **no ads ever**. One-time vs subscription decided before the App Store. YouTube/Apple Music playback can never sit behind a paywall. |
 | B6 | EU trader status: **non-trader** while free; switch before charging. |
@@ -117,6 +119,7 @@ orchestra and its auditions; Auditioner helps them *win the seat*.
 |---|---|
 | U1 | **v1:** links both ways ("Prepare in Auditioner" on Tutti audition cards; "Find an orchestra near you" → Tutti) and the shared honesty contract. |
 | U1b | (2026-10-11) Tutti's site **https://tutti-orchestra.com** is live: "Find an orchestra near you" links there. Auditioner has no website of its own for now, so Tutti links into the app with `auditioner://` links (`docs/TUTTI.md`). |
+| U1c | (2026-10-11) A Tutti link that arrives while a form is open waits until the player closes that form, then opens the new-audition form with the link's details; nothing typed is lost. Auditioner's public pages live on Tutti's site: privacy policy **https://tutti-orchestra.com/auditioner/privacy**, support **https://tutti-orchestra.com/auditioner/support** (App Store Connect and the app's Settings link to them). Privacy policy v0.3 approved by Milai. |
 | U2 | **v1.x:** Auditioner's crawler proposes Tutti audition-window updates as `provenanceType: scraped`, `listingStatus: in_review` drafts **for Milai to approve**; Tutti's orgs join the crawl registry. |
 | U3 | Later: brand family, shared accounts, Tutti map inside the app. |
 
