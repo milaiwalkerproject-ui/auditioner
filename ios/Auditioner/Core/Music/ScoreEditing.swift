@@ -745,16 +745,34 @@ enum ScoreEditing {
 
     // MARK: Bar check
 
-    /// Bars whose voice-1 notes do not add up to the time signature in force. The first bar may be
-    /// a short pickup; a short last bar that completes a pickup is accepted too.
+    /// One measure's length against its time signature (quarter notes), before the pickup rules.
+    private struct MeasureLength {
+        var index: Int
+        var number: String
+        var beats: Int
+        var beatType: Int
+        var expectedQuarters: Double
+        var actualQuarters: Double
+        /// `implicit="yes"` or numbered "0": the file itself says this is a pickup bar.
+        var isMarkedPickup: Bool
+
+        var isShort: Bool { actualQuarters < expectedQuarters - 1e-6 }
+        var shortfall: Double { expectedQuarters - actualQuarters }
+    }
+
+    /// Bars whose voice-1 notes do not add up to the time signature in force.
+    ///
+    /// Pickup rule: a short FIRST bar is accepted when the file marks it as a pickup (`implicit="yes"`
+    /// or number "0"), or when the LAST bar is short by exactly the missing amount (the classic
+    /// pickup + completing bar). A short last bar that completes an accepted pickup is accepted too.
+    /// Any other short or long bar is reported — including an unmarked short first bar, which in a
+    /// scan is far more often a misread note than a pickup.
     static func barCheck(in tree: MusicXMLTree) -> [BarCheckIssue] {
         let all = measures(in: tree)
         var divisions = 1
         var beats: Int? = nil
         var beatType: Int? = nil
-        var issues: [BarCheckIssue] = []
-        var firstShortfall: Double? = nil
-        let epsilon = 1e-6
+        var lengths: [MeasureLength] = []
 
         for (index, measure) in all.enumerated() {
             var actualQuarters: Double = 0
@@ -778,21 +796,46 @@ enum ScoreEditing {
                 }
             }
             guard let b = beats, let t = beatType else { continue }
-            let expectedQuarters = Double(b) * 4.0 / Double(t)
-            let number = measure.attribute("number") ?? String(index + 1)
-            let unit = Double(t) / 4.0
-            let actualBeats = actualQuarters * unit
-            if abs(actualQuarters - expectedQuarters) <= epsilon { continue }
-            if index == 0 && actualQuarters < expectedQuarters {
-                firstShortfall = expectedQuarters - actualQuarters
+            let number: String = measure.attribute("number") ?? String(index + 1)
+            let marked: Bool = (measure.attribute("implicit") == "yes") || number == "0"
+            lengths.append(MeasureLength(index: index,
+                                         number: number,
+                                         beats: b,
+                                         beatType: t,
+                                         expectedQuarters: Double(b) * 4.0 / Double(t),
+                                         actualQuarters: actualQuarters,
+                                         isMarkedPickup: marked))
+        }
+
+        let epsilon = 1e-6
+        let lastIndex = all.count - 1
+
+        // Is the first bar an acceptable pickup? If so, how much is it short by?
+        var pickupShortfall: Double? = nil
+        if let first = lengths.first, first.index == 0, first.isShort {
+            if first.isMarkedPickup {
+                pickupShortfall = first.shortfall
+            } else if lengths.count > 1, let last = lengths.last, last.index == lastIndex, last.isShort,
+                      abs(last.actualQuarters - first.shortfall) <= epsilon {
+                pickupShortfall = first.shortfall
+            }
+        }
+
+        var issues: [BarCheckIssue] = []
+        for item in lengths {
+            if abs(item.actualQuarters - item.expectedQuarters) <= epsilon { continue }
+            if item.index == 0, item.isShort, pickupShortfall != nil { continue }
+            if item.index == lastIndex, item.index > 0, item.isShort, let shortfall = pickupShortfall,
+               abs(item.actualQuarters - shortfall) <= epsilon {
                 continue
             }
-            if index == all.count - 1, index > 0, let shortfall = firstShortfall,
-               actualQuarters < expectedQuarters, abs(actualQuarters - shortfall) <= epsilon {
-                continue
-            }
-            issues.append(BarCheckIssue(measureIndex: index, measureNumber: number, beats: b, beatType: t,
-                                        expectedBeats: Double(b), actualBeats: actualBeats))
+            let unit = Double(item.beatType) / 4.0
+            issues.append(BarCheckIssue(measureIndex: item.index,
+                                        measureNumber: item.number,
+                                        beats: item.beats,
+                                        beatType: item.beatType,
+                                        expectedBeats: Double(item.beats),
+                                        actualBeats: item.actualQuarters * unit))
         }
         return issues
     }

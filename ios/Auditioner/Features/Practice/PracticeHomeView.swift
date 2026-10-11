@@ -122,9 +122,19 @@ struct PracticeHomeView: View {
         router.openPractice(demo)
     }
 
+    /// Deletes the records and their scan pictures — unless a record that stays still uses the same
+    /// picture (a corrected copy shares the original scan's picture).
     private func deleteRecords(at offsets: IndexSet) {
-        for index in offsets where index >= 0 && index < records.count {
-            modelContext.delete(records[index])
+        let doomed: [ScoreRecord] = offsets.compactMap { index in
+            (index >= 0 && index < records.count) ? records[index] : nil
+        }
+        let doomedIds: Set<UUID> = Set(doomed.map { $0.id })
+        let stillUsed: Set<String> = Set(records.filter { !doomedIds.contains($0.id) }.compactMap { $0.scanImageFileName })
+        for record in doomed {
+            if let fileName = record.scanImageFileName, !fileName.isEmpty, !stillUsed.contains(fileName) {
+                ScanImageStore.delete(named: fileName)
+            }
+            modelContext.delete(record)
         }
         try? modelContext.save()
     }

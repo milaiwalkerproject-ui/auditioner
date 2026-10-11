@@ -179,8 +179,17 @@ Pencil + AirTurn; onboarding and settings. Apple Pencil markup and AirTurn (plan
 for M2) shipped early in M1. Server (note reading, identify, catalogue, limits,
 Cloud Run deploy) built with 167 tests; not yet deployed. Catalogue: 19 cello
 excerpts reviewed and published by Milai; 806 BrassXcerpts excerpts published with
-the "Imported — bars not yet checked" label (Milai's decision). Draft privacy policy
-in `docs/PRIVACY.md` (contact email to add).
+the "Imported — bars not yet checked" label (Milai's decision). Privacy policy in
+`docs/PRIVACY.md`; there is no public contact email — users reach us through the
+in-app "Send feedback" / "Report an error" (Milai's decision, 2026-10-11).
+
+**Status (2026-10-11):** M3 practice tools built (metronome, drone, record & compare,
+mock audition, My recordings); the M2 note-correction editor built (scan beside the
+notes, pitch/accidental/duration/rest/tie/insert/delete, bar check, undo); in-app
+feedback built end to end (queued on the device, stored in a separate Auditioner
+Supabase project via the server). M4 backend built: polite crawler, Claude list
+extraction with code verification, Supabase schema with RLS, 128-orchestra registry
+(80 confirmed audition pages). Next: M4 app screens, then M5.
 
 Milai wants testers (orchestra/tour colleagues) as early as possible, so M1 aims at an
 **internal TestFlight** build: the app works offline for catalogue, excerpt pages,

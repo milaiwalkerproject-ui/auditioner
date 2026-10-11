@@ -79,6 +79,15 @@ struct ExcerptActionsSection: View {
     let onReferenceMissing: () -> Void
 
     @EnvironmentObject private var router: AppRouter
+    @State private var showMetronome = false
+
+    /// Start the metronome at the verified typical tempo, but only the first time:
+    /// once the player has saved settings for this excerpt, those win.
+    private var metronomeStartBPM: Double? {
+        let key = MetronomeMath.presetKey(excerptId: excerpt.id)
+        guard UserDefaults.standard.data(forKey: key) == nil else { return nil }
+        return excerpt.typicalTempo?.verifiedValue?.bpmMin
+    }
 
     var body: some View {
         ExcerptSectionBox(nil) {
@@ -117,6 +126,14 @@ struct ExcerptActionsSection: View {
                     .buttonStyle(.bordered)
                 }
 
+                Button {
+                    showMetronome = true
+                } label: {
+                    Label("Metronome for this excerpt", systemImage: "metronome")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.bordered)
+
                 if let file = excerpt.referenceMusicXML, !file.isEmpty {
                     Button {
                         playReference(file)
@@ -128,10 +145,20 @@ struct ExcerptActionsSection: View {
                 }
             }
         }
+        .sheet(isPresented: $showMetronome) {
+            NavigationStack {
+                MetronomeView(excerptId: excerpt.id, startBPM: metronomeStartBPM)
+                    .toolbar {
+                        ToolbarItem(placement: .confirmationAction) {
+                            Button("Done") { showMetronome = false }
+                        }
+                    }
+            }
+        }
     }
 
     private func playReference(_ fileName: String) {
-        let document = ScoreDocument.bundled(named: fileName, title: excerpt.workHeading, origin: .curated,
+        let document: ScoreDocument? = ScoreDocument.bundled(named: fileName, title: excerpt.workHeading, origin: .curated,
                                              instrument: excerpt.instrument, excerptId: excerpt.id)
         if let document = document {
             router.openPractice(document)

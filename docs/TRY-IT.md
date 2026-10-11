@@ -142,6 +142,29 @@ of the error list and send it to me.
   excerpt from the text on the page. If the catalogue already has checked
   notation for that excerpt, it plays straight away.
 
+**Practice tools (new — all offline):**
+
+- **Practice → Metronome** — tempo dial, tap tempo, beats per bar, subdivisions,
+  accent. Opened from an excerpt page ("Metronome for this excerpt") it remembers
+  your settings for that excerpt.
+- **Practice → Drone** — any note, with or without the fifth, cello sound or a
+  pure tone, at your A = 440/442 tuning.
+- **Record & compare** — in the practice player, tap **Record**: one bar of
+  count-in, the reference plays while the app records you (use headphones), then
+  **Compare** lets you hear You / Reference / Both, also slowed down.
+- **Practice → Mock audition** — pick excerpts, random order, "behind the
+  screen" hides the titles, preparation time between excerpts, one continuous
+  recording; afterwards rate each excerpt and listen back.
+- **Practice → My recordings** — every take and mock audition, with ratings and
+  notes; share or delete.
+- **Fix notes** — when the server read your scan, the practice player shows
+  **Fix notes**: your scan above, the notes below; tap a note to change pitch,
+  accidental, length, rest, tie, insert or delete; bars that don't add up are
+  marked red; save keeps a corrected copy.
+- **Report an error / Send feedback** — on excerpt pages and in Settings. Your
+  message waits on the device until the server (with feedback turned on, see
+  `docs/SETUP.md`) can receive it.
+
 **Needs the server (see `docs/SETUP.md`):**
 
 - Reading the notes from a scan when the catalogue has no checked notation for
