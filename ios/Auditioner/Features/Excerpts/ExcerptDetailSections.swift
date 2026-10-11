@@ -348,24 +348,50 @@ struct ExcerptCopyrightSection: View {
 
 // MARK: - How often it's asked
 
+/// PLAN D5: the count is worked out on the device from the catalogue's evidence rows for the
+/// player's chair and region (`LocalRecommendationEngine`), never from the catalogue's own tier,
+/// so the number can be checked against the sources listed right under it. "On N open auditions
+/// now" comes from the server when it has answered, and is kept apart from the frequency.
 struct ExcerptFrequencySection: View {
     let excerpt: Excerpt
+
+    @EnvironmentObject private var catalog: CatalogStore
+    @ObservedObject private var recommendations: RecommendationService = RecommendationService.shared
+    @AppStorage(SettingsKey.position) private var positionRaw: String = Position.section.rawValue
+    @AppStorage(SettingsKey.region) private var region: String = ProfileOptions.defaultRegionId
+    @AppStorage(SettingsKey.reviewerMode) private var reviewerMode: Bool = false
+    @AppStorage(RecommendationSettings.includeAllChairsKey) private var includeAllChairs: Bool = false
 
     private var evidence: [FrequencyEvidence] {
         excerpt.frequency?.evidence ?? []
     }
 
+    /// Counted from the evidence rows of this instrument (a few thousand at most), so cheap enough to do here.
+    private var summary: ExcerptAskSummary {
+        let query: RecommendationQuery = RecommendationSettings.query(instrument: excerpt.instrument,
+                                                                      positionRaw: positionRaw,
+                                                                      region: region,
+                                                                      includeAllChairs: includeAllChairs,
+                                                                      includeDrafts: reviewerMode)
+        return ExcerptAskSummary.make(excerptId: excerpt.id,
+                                      catalogExcerpts: catalog.excerpts,
+                                      query: query,
+                                      openNow: recommendations.openNowCount(for: excerpt.id, instrument: excerpt.instrument))
+    }
+
     var body: some View {
         ExcerptSectionBox(Text("How often it's asked")) {
-            if let tier = excerpt.frequency?.verifiedTier {
-                TagPill(text: tier.displayName, color: Theme.brass)
+            ExcerptAskSummaryView(summary: summary)
+            Toggle(isOn: $includeAllChairs) {
+                Text("Include all chairs")
+                    .font(.subheadline)
+                    .foregroundStyle(Theme.ink)
+            }
+            if !evidence.isEmpty {
+                FactLabel(text: String(localized: "Where we saw it"))
                 ForEach(0..<evidence.count, id: \.self) { index in
                     evidenceLine(evidence[index])
                 }
-            } else {
-                Text("We're still collecting audition lists for this excerpt.")
-                    .font(.subheadline)
-                    .foregroundStyle(Theme.inkSoft)
             }
         }
     }
@@ -377,6 +403,48 @@ struct ExcerptFrequencySection: View {
                 .foregroundStyle(Theme.ink)
             Spacer(minLength: 0)
             SourceLink(url: URL(string: item.source))
+        }
+    }
+}
+
+/// The computed count for one excerpt: tier pill (only with enough lists), open-now badge,
+/// the evidence line, the caveats and where the count comes from.
+struct ExcerptAskSummaryView: View {
+    let summary: ExcerptAskSummary
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            pills
+            Text(summary.ask.evidence)
+                .font(.body)
+                .foregroundStyle(Theme.ink)
+            ForEach(0..<summary.notes.count, id: \.self) { index in
+                Text(summary.notes[index])
+                    .font(.caption)
+                    .foregroundStyle(Theme.inkSoft)
+            }
+            if let note = summary.notEnoughListsNote {
+                Text(note)
+                    .font(.caption)
+                    .foregroundStyle(Theme.inkSoft)
+            }
+            Text(summary.sourceLabel)
+                .font(.caption)
+                .foregroundStyle(Theme.inkFaint)
+        }
+    }
+
+    @ViewBuilder
+    private var pills: some View {
+        if summary.tier != nil || (summary.openNow ?? 0) > 0 {
+            HStack(spacing: 6) {
+                if let tier = summary.tier {
+                    TagPill(text: tier.displayName, color: Theme.brass)
+                }
+                if let openNow = summary.openNow, openNow > 0 {
+                    OpenNowBadge(count: openNow)
+                }
+            }
         }
     }
 }

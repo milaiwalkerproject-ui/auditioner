@@ -2,7 +2,8 @@
 
 The small server behind **Scan my part**: it reads a photo of a page with
 [homr](https://github.com/liebharc/homr), tidies the MusicXML for the app, matches
-printed text against the excerpt catalogue, and serves the catalogue files.
+printed text against the excerpt catalogue, serves the catalogue files, and passes
+the reviewed open-auditions feed and "What orchestras ask" on to the app.
 Python 3.12 · FastAPI · uvicorn · runs on Google Cloud Run (one US region).
 
 The iOS client contract is `ios/Auditioner/Core/Networking/APIClient.swift`; keep
@@ -18,20 +19,22 @@ the two in step.
 | `POST /v1/feedback` | JSON `{"context": "excerpt-note:pitfalls", "excerptId": "…"?, "message": "…", "appVersion": "0.1"?}` — `context` 1–64 chars of `a-z 0-9 : -`, `excerptId` ≤ 128, `message` 1–2000 chars after trimming, `appVersion` ≤ 32. Header `X-Device-Id` required. | `201 {"status": "received"}` — the row is in the Supabase table `feedback` (see below) |
 | `GET /v1/catalog/{instrument}` | optional `If-None-Match` | the `content/catalog/<instrument>.json` file with an `ETag` (304 when unchanged); 404 if there is no file |
 | `GET /v1/instruments` | — | `{"instruments": ["violin", …]}` (handy for checks) |
+| `GET /v1/auditions?instrument=cello&region=uk` | `instrument` (catalogue id, required), `region` (optional; absent = every region) | `{"auditions": [FeedVacancy]}` — open, published auditions only (see below) |
+| `GET /v1/recommendations?instrument=cello&position=section&region=uk` | `instrument`, `position` (the app's position id), `region` (optional; absent = every region) | `{"recommendations": [Recommendation]}` — most asked first, from published lists only (see below) |
 
 Errors are always JSON `{"detail": "plain words for a musician"}` and nothing else
 in the body — the app decodes it as a flat `[String: String]` dictionary:
 
 | Status | When |
 |---|---|
-| 400 | missing `X-Device-Id`, unknown instrument, bad meter / transposition / hints, or a picture claiming over 50 megapixels; for `/v1/feedback` also a blank message or one over 2000 characters after trimming |
+| 400 | missing `X-Device-Id`, unknown instrument, bad meter / transposition / hints, or a picture claiming over 50 megapixels; for `/v1/feedback` also a blank message or one over 2000 characters after trimming; for `/v1/auditions` and `/v1/recommendations` a missing or unknown instrument, position or region |
 | 413 | upload over 15 MB (refused by Content-Length before reading, or cut off while a chunked body streams in) |
 | 415 | the file isn't a JPEG/PNG (or another picture Pillow can read) |
 | 422 | a field is missing or has the wrong type (for `/v1/feedback`: `context` outside `[a-z0-9:-]{1,64}`, over-long fields) |
 | 429 | daily scan limit reached for this device (`/v1/omr`), or daily feedback limit (`/v1/feedback`, `DAILY_FEEDBACK_LIMIT`) |
 | 500 | homr failed or produced nothing readable (or any unexpected server error) |
-| 502 | `/v1/feedback`: Supabase did not take the row (unreachable, refused, table missing) — not charged |
-| 503 | the instance is busy: the short queue is full, or the scan could not start within `OMR_QUEUE_WAIT_SECONDS` — `Retry-After: 60`, not charged. For `/v1/feedback`: `"Feedback isn't set up on the server yet."` while `SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY` are not set (the app keeps the report queued) |
+| 502 | `/v1/feedback`: Supabase did not take the row (unreachable, refused, table missing) — not charged. `/v1/auditions`, `/v1/recommendations`: `"The auditions feed didn't answer. Try again in a few minutes."` — Supabase unreachable, refused (e.g. the auditions migration isn't applied) or sent something unexpected |
+| 503 | the instance is busy: the short queue is full, or the scan could not start within `OMR_QUEUE_WAIT_SECONDS` — `Retry-After: 60`, not charged. For `/v1/feedback`: `"Feedback isn't set up on the server yet."` while `SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY` are not set (the app keeps the report queued). For `/v1/auditions` and `/v1/recommendations`: `"The auditions feed isn't set up on the server yet."`, same condition (parameters are checked first, so a bad one is still a 400) |
 | 504 | homr ran past `OMR_TIMEOUT_SECONDS` |
 
 ### What `/v1/feedback` does with a message
@@ -55,6 +58,84 @@ so only the service role can read or write it. Privacy rules the code keeps:
   at start-up while the fallback is in use;
 - a failed insert (502) refunds the device's daily allowance; an unconfigured server
   (503) never charges it.
+
+### What `/v1/auditions` and `/v1/recommendations` read
+
+`app/feed.py`. Read-only, from the Auditioner Supabase project — the same
+`SUPABASE_URL` + service-role key as feedback; the schema is
+`supabase/migrations/20261011010000_auditions.sql` and the pipeline that fills it is
+`docs/FEED.md`. The service role bypasses row level security, so **every query asks
+for published data itself**. Shapes are the fixed `FeedVacancy` / `FeedVacancyItem` /
+`Recommendation` in `ios/Auditioner/Core/Networking/APIClient.swift`; every
+non-optional Swift field is always present with the right JSON type (a row that
+cannot fill one is left out and logged, rather than breaking the whole answer).
+
+**Parameters.** `instrument`: one of the 22 catalogue ids (`/v1/instruments`).
+`position`: one of the app's `principal`, `assistant-principal`, `section`, `utility`,
+`second`, `high`, `low`, `concertmaster`, `any`. `region`: `north-america`,
+`europe-german`, `europe-other`, `uk`, `asia-pacific`, `other`, or absent/empty for
+every region. Anything else is a 400 in plain words. No `X-Device-Id` is needed (read
+only, cached); nothing about the device or the person is sent to Supabase.
+
+**`/v1/auditions`** — one GET on the `open_auditions` view (published vacancies with
+their orchestra's registry facts) for the instrument (and region), narrowed to
+auditions **still open**: a deadline from yesterday (UTC) on — so a deadline that is
+still today somewhere in the world stays listed — or no deadline and seen on the
+orchestra's page in the last 60 days (the window of the `excerpt_open_now` view).
+Soonest deadline first (no deadline last), at most 500. Then `vacancy_items` with
+`review_status=eq.published` for exactly those vacancies (20 ids per request, paged
+at 1,000 rows — Supabase's default maximum), in list order.
+
+| field | from |
+|---|---|
+| `id` | the vacancy's uuid |
+| `orchestra`, `orchestraId`, `region` | the registry entry (the name falls back to the id) |
+| `position` | as printed; the chair is added in brackets when it says more ("Horn (Third horn)") |
+| `instrument` | catalogue id |
+| `applicationDeadline` | `YYYY-MM-DD`, or null when the source gives none we could verify |
+| `auditionDates` | the verified dates, `YYYY-MM-DD`, sorted, duplicates removed; anything that is not a real calendar date is dropped, never guessed |
+| `listCompleteness` | `full` · `partial_public` · `works_only` · `revealed_on_invitation` · `unknown` |
+| `sourceURL` | the orchestra's own page or document (always http/https; uploaded lists never reach the feed) |
+| `lastCheckedAt` | `YYYY-MM-DD` of `last_seen_at`: the last time the crawler read this vacancy from the source |
+| `items` | published items only: `rawText` (the source line, verbatim), `category` (`solo` · `excerpt` · `sight_reading` · `chamber` · `other`), `round` (`""` when the list doesn't say), `excerptId` (null when not matched to the catalogue) |
+
+**`/v1/recommendations`** — the app's position is mapped to the database's coarse
+position class (below), then `POST rpc/excerpt_recommendations` (recency-weighted
+frequency, 3-year half-life, blended with the all-regions share as a prior, k = 10 —
+PLAN D5) and one GET on `excerpt_open_now` for the "On N open auditions now" badge.
+Without a region the function has nothing to answer with, so the server sums the
+`excerpt_frequency` view over every region instead; there the blend changes nothing
+(the prior *is* the all-region share), and the tier uses the same thresholds.
+
+| field | meaning |
+|---|---|
+| `excerptId` | catalogue id, most asked first |
+| `tier` | `core` (≥ 50 %) · `common` (20–50 %) · `occasional` |
+| `share` | 0–1, 4 decimals: the recency-weighted, blended share the tier comes from (the function's `score`) |
+| `listCount` / `totalLists` | published lists in that region and position class that include the excerpt / all of them (plain counts) |
+| `openNow` | open auditions for this instrument that list it now — any region, any position (`excerpt_open_now`) |
+| `evidence` | a plain line written from those counts only: "On 7 of 12 section cello lists in North America, 2024–2026" · "Not on any of the 4 principal horn lists we have in the UK — the tier comes from other regions" · "No section cello lists in Asia-Pacific yet — the tier comes from other regions" · without a region "… across all regions, …". The function's own `evidence` column (ids such as `north-america`) is not used. |
+
+| app position | database class | why |
+|---|---|---|
+| `principal`, `concertmaster` | `principal` | `position_class()` files "Concertmaster" under principal |
+| `high` (horn) | `principal` | "Principal Horn" lists; "Third Horn" lists are classed `other` |
+| `assistant-principal` | `assistant-principal` | |
+| `section`, `utility` | `section` | `position_class()` files "Utility" under section |
+| `second` on violin, viola, cello, double bass | `section` | "Section Second Violin" |
+| `second` on any other instrument | `other` | "Second Oboe", "2nd Trumpet" |
+| `low` (horn) | `other` | "Second Horn", "Fourth Horn" |
+| `any` | `section` | not offered in onboarding; section lists are the broadest set |
+
+Each evidence line names the class it counted ("principal horn lists", "oboe lists for
+second and other chairs"), so the mapping never claims more than the lists show.
+
+**Cache and errors.** Answers are kept in memory for **10 minutes per query** (per
+Cloud Run instance; a failed answer is never kept), so something Milai publishes or
+unpublishes reaches the app within ten minutes. 503 while Supabase isn't configured;
+502 when it is unreachable, answers with an error, or sends something that isn't a
+list of rows — only the status code or the exception class is logged, never
+PostgREST's error body.
 
 ### What `/v1/omr` does with the picture
 
@@ -137,7 +218,7 @@ header-based limiter stays as the fallback.
 | `CATALOG_DIR` | `content/catalog` (checkout) or `/srv/content/catalog` (image) | catalogue files |
 | `INCLUDE_DRAFTS` | unset | `1` makes `/v1/identify` also match `draft` / `in_review` excerpts |
 | `OMR_WORK_DIR` | system temp dir | where the per-request directories are created |
-| `SUPABASE_URL` | unset | Supabase project URL (`https://xxxx.supabase.co`); with the key below it turns `/v1/feedback` on |
+| `SUPABASE_URL` | unset | Supabase project URL (`https://xxxx.supabase.co`); with the key below it turns `/v1/feedback`, `/v1/auditions` and `/v1/recommendations` on |
 | `SUPABASE_SERVICE_ROLE_KEY` | unset | Supabase service-role key — **a secret**: on Cloud Run it comes from Secret Manager (`backend/deploy.sh`, secret `auditioner-supabase-service-key`), never from the repo |
 | `FEEDBACK_HASH_SALT` | unset | salt for hashing device ids in feedback rows; empty → fallback derived from `SUPABASE_URL` (see above) |
 | `DAILY_FEEDBACK_LIMIT` | `20` | feedback messages per device per sliding 24 h |
@@ -179,7 +260,13 @@ paths, the process-group kill and the temp-file clean-up are covered. The real
 engine is never run in CI. `tests/test_feedback.py` drives `/v1/feedback` against an
 `httpx.MockTransport` standing in for Supabase (row shape and hashed device id, 503
 unconfigured, 400/422 validation, 429 after 20, 502 on Supabase errors, and a
-`caplog` check that the message never reaches a log line) — no network either. The fixture catalogue in `tests/fixtures/catalog/`
+`caplog` check that the message never reaches a log line) — no network either.
+`tests/test_feed.py` drives `/v1/auditions` and `/v1/recommendations` against a small
+fake PostgREST on an `httpx.MockTransport`: the exact app contract, published-only and
+still-open filters, item order, chunking and paging, every position mapping, the
+evidence wording, the all-regions sum, the 10-minute cache (fake clock), 400/503/502
+and that PostgREST error bodies are never logged. Its orchestras and works are
+fictional and it contains no bar numbers. The fixture catalogue in `tests/fixtures/catalog/`
 keeps the tests independent of `content/catalog`, which is also exercised when files
 exist there. `.github/workflows/backend.yml` runs the suite on every push that
 touches `backend/**` or `content/**`.
@@ -204,8 +291,9 @@ script also enables Secret Manager, stores the key as `auditioner-supabase-servi
 (a new version only when it changed), grants the service's runtime account
 `roles/secretmanager.secretAccessor`, and deploys with `--update-secrets
 SUPABASE_SERVICE_ROLE_KEY=auditioner-supabase-service-key:latest` plus
-`SUPABASE_URL` in the env vars; without them it deploys as before and leaves feedback
-settings untouched. The non-programmer walkthrough is in `docs/SETUP.md`.
+`SUPABASE_URL` in the env vars (this also turns on the auditions feed endpoints, which
+read with the same key); without them it deploys as before and leaves those settings
+untouched. The non-programmer walkthrough is in `docs/SETUP.md`.
 
 The image has not been built in the cloud coding environment (no Docker daemon,
 GitHub release downloads blocked), so the first `deploy.sh` run is the first real

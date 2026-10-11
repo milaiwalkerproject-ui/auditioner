@@ -9,13 +9,19 @@ struct ExcerptBrowserView: View {
 
     @AppStorage(SettingsKey.instrument) private var instrumentRaw: String = Instrument.cello.rawValue
     @AppStorage(SettingsKey.position) private var positionRaw: String = Position.section.rawValue
+    @AppStorage(SettingsKey.region) private var region: String = ProfileOptions.defaultRegionId
     @AppStorage(SettingsKey.reviewerMode) private var reviewerMode: Bool = false
+    @AppStorage(RecommendationSettings.includeAllChairsKey) private var includeAllChairs: Bool = false
+
+    /// "Most asked for your chair" (PLAN D5); shared with the excerpt pages.
+    @ObservedObject private var recommendations: RecommendationService = RecommendationService.shared
 
     @State private var path = NavigationPath()
     @State private var query: String = ""
     @State private var positionFilter: ExcerptPositionFilter = .all
     @State private var tierFilter: ExcerptTierFilter = .all
     @State private var didSeedFilters: Bool = false
+    @State private var showHowItWorks: Bool = false
 
     private var instrument: Instrument {
         Instrument(rawValue: instrumentRaw) ?? .cello
@@ -38,6 +44,12 @@ struct ExcerptBrowserView: View {
         .onChange(of: router.openedExcerptId) { _, _ in
             consumeOpenedExcerpt()
         }
+        .task(id: recommendationQuery) {
+            await refreshRecommendations()
+        }
+        .sheet(isPresented: $showHowItWorks) {
+            RecommendationInfoSheet()
+        }
     }
 
     // MARK: Data
@@ -57,6 +69,27 @@ struct ExcerptBrowserView: View {
         positionFilter != .all || tierFilter != .all
     }
 
+    // MARK: Most asked for your chair
+
+    /// The player's chair and region as set in Settings (drafts count in reviewer mode).
+    private var recommendationQuery: RecommendationQuery {
+        RecommendationSettings.query(instrument: instrument, positionRaw: positionRaw, region: region,
+                                     includeAllChairs: includeAllChairs, includeDrafts: reviewerMode)
+    }
+
+    private var showsMostAsked: Bool {
+        ExcerptBrowserLogic.showsMostAsked(query: query, isFiltering: isFiltering)
+    }
+
+    private var mostAskedEntries: [MostAskedEntry] {
+        guard recommendations.instrument == instrument else { return [] }
+        return ExcerptBrowserLogic.mostAsked(recommendations.items, in: allForInstrument)
+    }
+
+    private func refreshRecommendations() async {
+        await recommendations.refresh(excerpts: catalog.excerpts, query: recommendationQuery, client: APIClient.fromSettings())
+    }
+
     // MARK: Content
 
     @ViewBuilder
@@ -72,6 +105,9 @@ struct ExcerptBrowserView: View {
 
     private var excerptList: some View {
         List {
+            if showsMostAsked {
+                mostAskedSection
+            }
             ForEach(sections) { section in
                 Section(section.title) {
                     ForEach(section.excerpts) { excerpt in
@@ -83,6 +119,16 @@ struct ExcerptBrowserView: View {
             }
         }
         .listStyle(.insetGrouped)
+    }
+
+    private var mostAskedSection: some View {
+        MostAskedSection(entries: mostAskedEntries,
+                         local: recommendations.instrument == instrument ? recommendations.local : nil,
+                         source: recommendations.source,
+                         isLoading: recommendations.isLoading,
+                         serverNote: recommendations.serverNote,
+                         includeAllChairs: $includeAllChairs,
+                         onHowItWorks: { showHowItWorks = true })
     }
 
     private var preparingState: some View {

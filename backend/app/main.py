@@ -7,6 +7,11 @@
     POST /v1/feedback               {"context", "excerptId"?, "message", "appVersion"?} → 201 {"status": "received"}
                                     (503 while Supabase isn't configured; the app keeps the report queued)
     GET  /v1/catalog/{instrument}   the catalogue file, with an ETag
+    GET  /v1/auditions?instrument=&region=
+                                    → {"auditions": [FeedVacancy]} (open, published only; app/feed.py)
+    GET  /v1/recommendations?instrument=&position=&region=
+                                    → {"recommendations": [Recommendation]} (published lists only)
+                                    (both: 503 while Supabase isn't configured, 502 when it doesn't answer)
 
 Errors are always JSON {"detail": "<plain words for a musician>"} — the app decodes the
 error body as a flat {string: string} dictionary, so nothing else may appear in it.
@@ -29,6 +34,17 @@ from starlette.types import ASGIApp, Message, Receive, Scope, Send
 from . import __version__
 from .catalog import Catalog
 from .config import Settings
+from .feed import (
+    MSG_FEED_OFF,
+    MSG_FEED_UPSTREAM,
+    BadFeedParam,
+    FeedService,
+    FeedUpstreamError,
+    feed_instrument,
+    feed_position,
+    feed_region,
+    position_class,
+)
 from .feedback import FeedbackStore, FeedbackStoreError
 from .imaging import ImageTooLarge, NotAnImage, probe
 from .instruments import INSTRUMENT_IDS, lookup
@@ -166,6 +182,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.state.feedback = FeedbackStore(
         settings.supabase_url, settings.supabase_service_role_key, settings.feedback_hash_salt
     )
+    # Open-auditions feed (GET /v1/auditions, /v1/recommendations): read-only, published rows only.
+    app.state.feed = FeedService(settings.supabase_url, settings.supabase_service_role_key)
     if app.state.feedback.configured and app.state.feedback.salt_is_fallback:
         log.warning("FEEDBACK_HASH_SALT is not set; device ids are hashed with a fallback salt derived from SUPABASE_URL")
     app.add_middleware(UploadSizeLimit, limit=settings.max_upload_bytes + FORM_OVERHEAD_BYTES)
@@ -351,6 +369,39 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @app.get("/v1/instruments")
     async def instruments() -> dict[str, Any]:
         return {"instruments": INSTRUMENT_IDS}
+
+    @app.get("/v1/auditions")
+    async def auditions(instrument: str = "", region: str = "") -> dict[str, Any]:
+        try:
+            instrument_id = feed_instrument(instrument)
+            region_id = feed_region(region)
+        except BadFeedParam as exc:
+            raise HTTPException(400, str(exc)) from None
+        feed: FeedService = app.state.feed
+        if not feed.configured:
+            raise HTTPException(503, MSG_FEED_OFF)
+        try:
+            vacancies = await feed.auditions(instrument_id, region_id)
+        except FeedUpstreamError:
+            raise HTTPException(502, MSG_FEED_UPSTREAM) from None
+        return {"auditions": vacancies}
+
+    @app.get("/v1/recommendations")
+    async def recommendations(instrument: str = "", position: str = "", region: str = "") -> dict[str, Any]:
+        try:
+            instrument_id = feed_instrument(instrument)
+            position_id = feed_position(position)
+            region_id = feed_region(region)
+        except BadFeedParam as exc:
+            raise HTTPException(400, str(exc)) from None
+        feed: FeedService = app.state.feed
+        if not feed.configured:
+            raise HTTPException(503, MSG_FEED_OFF)
+        try:
+            found = await feed.recommendations(instrument_id, position_class(position_id, instrument_id), region_id)
+        except FeedUpstreamError:
+            raise HTTPException(502, MSG_FEED_UPSTREAM) from None
+        return {"recommendations": found}
 
     return app
 

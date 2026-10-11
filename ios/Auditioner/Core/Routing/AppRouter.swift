@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum AppTab: Hashable {
-    case excerpts, library, practice, settings
+    case excerpts, auditions, library, practice, settings
 }
 
 /// Where a scan starts from.

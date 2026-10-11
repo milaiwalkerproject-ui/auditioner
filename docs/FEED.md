@@ -242,7 +242,50 @@ Views and a function for the app:
   line ("On 7 of 12 section cello lists (north-america), 2024–2026").
 - `excerpt_open_now` — "On N open auditions now", kept separate from the frequency.
 
-## 9. Tests
+## 9. App endpoints (what the app reads)
+
+The app never reads Supabase directly for the feed. It asks our server
+(`backend/app/feed.py`), which reads with the service-role key and only ever passes
+on **published** rows — the service role skips row level security, so each query
+asks for `published` itself. Details, field by field: `backend/README.md`.
+
+- `GET /v1/auditions?instrument=cello&region=uk` → `{"auditions": [...]}`: vacancies
+  from `open_auditions` for that instrument (and region; none = every region) that
+  are **still open** — deadline from yesterday (UTC) on, or no deadline and seen on
+  the orchestra's page in the last 60 days — soonest deadline first, each with its
+  published `vacancy_items` in list order (`rawText`, `category`, `round`,
+  `excerptId`).
+- `GET /v1/recommendations?instrument=cello&position=section&region=uk` →
+  `{"recommendations": [...]}`: `excerpt_recommendations(...)` for the position's
+  class, plus `excerpt_open_now` for "On N open auditions now". Without a region the
+  server sums `excerpt_frequency` over every region. Each entry carries the tier, the
+  share it comes from, the plain counts and an evidence line written from those
+  counts ("On 7 of 12 section cello lists in North America, 2024–2026").
+
+The app's positions map to the database's classes like this: principal,
+concertmaster and high horn → `principal`; assistant principal → `assistant-principal`;
+section, utility and "any" → `section`; "second" → `section` on violin, viola, cello
+and double bass, `other` on every other instrument ("Second Oboe"); low horn →
+`other` ("Second Horn", "Fourth Horn"). The evidence line always names the class it
+counted.
+
+What this means for you as the reviewer:
+
+- something you publish (or unpublish) reaches the app **within 10 minutes** — the
+  server keeps each answer that long;
+- an item you leave `in_review` or set to `rejected` is never sent, even when its
+  vacancy is published;
+- a vacancy drops out of the feed the day after its deadline, but its list keeps
+  counting for "What orchestras ask";
+- a vacancy **without a deadline** stays in the feed for 60 days after the crawler
+  last *read* it (`last_seen_at`). The crawler only re-reads a page that changed, so a
+  long-running notice without a deadline on an unchanged page drops out after 60
+  days — give it a deadline in the table editor if you know one from the source;
+- with Supabase not set up on the server the app gets "The auditions feed isn't set
+  up on the server yet."; if Supabase doesn't answer, "The auditions feed didn't
+  answer. Try again in a few minutes."
+
+## 10. Tests
 
 `pytest -q backend/crawler/tests` — 100+ tests, no network (httpx `MockTransport`),
 no real model (a fake Anthropic client with the same call shape). They cover
@@ -253,3 +296,6 @@ document block, effort, no forced tool use), refusal/max_tokens handling, the SD
 error chain, verification rules, mapping confidence on a fictional fixture catalogue,
 the Supabase request shape and the dry-run files, and the whole pipeline end to end.
 CI runs them in `.github/workflows/backend.yml`.
+
+The app endpoints are covered by `pytest -q backend/tests/test_feed.py` (a fake
+PostgREST on `httpx.MockTransport`; fictional orchestras, no bar numbers).

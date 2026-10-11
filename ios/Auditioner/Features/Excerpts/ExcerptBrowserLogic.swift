@@ -81,4 +81,36 @@ enum ExcerptBrowserLogic {
     static var filterablePositions: [Position] {
         Position.allCases.filter { $0 != .any }
     }
+
+    // MARK: Most asked for your chair
+
+    /// How many excerpts the "Most asked for your chair" section shows.
+    static let mostAskedLimit: Int = 5
+
+    /// The section sits on the plain list only: a search or a filter means the player is looking
+    /// for something specific.
+    static func showsMostAsked(query: String, isFiltering: Bool) -> Bool {
+        query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && !isFiltering
+    }
+
+    /// The top excerpts that are in `pool` (the catalogue on this device), most asked first.
+    static func mostAsked(_ items: [RecommendationItem], in pool: [Excerpt], limit: Int = mostAskedLimit) -> [MostAskedEntry] {
+        var byId: [String: Excerpt] = [:]
+        for excerpt in pool where byId[excerpt.id] == nil {
+            byId[excerpt.id] = excerpt
+        }
+        let known: [RecommendationItem] = items.filter { byId[$0.excerptId] != nil }
+        return RecommendationMerge.top(known, limit: limit).compactMap { item in
+            guard let excerpt = byId[item.excerptId] else { return nil }
+            return MostAskedEntry(excerpt: excerpt, item: item)
+        }
+    }
+}
+
+/// One row of "Most asked for your chair".
+struct MostAskedEntry: Identifiable {
+    let excerpt: Excerpt
+    let item: RecommendationItem
+
+    var id: String { excerpt.id }
 }
