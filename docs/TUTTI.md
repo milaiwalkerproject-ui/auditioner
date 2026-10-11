@@ -53,7 +53,7 @@ auditioner://excerpt/cello-quill-symphony-2-mvt2
 What Auditioner does: switches to the **Excerpts** tab and opens that excerpt's
 page. If the id isn't in the catalogue on the device (older app version, or a
 typo) it shows the Excerpts tab with the note "That excerpt isn't in the
-catalogue yet."
+catalogue on this device yet."
 
 ### 1b. Start a new audition, pre-filled
 

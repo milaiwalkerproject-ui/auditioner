@@ -174,15 +174,62 @@ of the error list and send it to me.
 - The first time you read notes the app asks for your consent: the marked part
   of the page goes to our server, is used only to read the notes, and is deleted
   within 24 hours. Nothing is ever sent to an AI service.
-- **Popular with other players** (off by default) — **Settings → Popular with
-  other players → Share what I practise**; the app asks "Are you 18 or older?"
-  first. Then play a reference, record a take or finish a mock audition: the
-  excerpts are remembered for this week and sent when the app comes to the front
-  (at most twice a day). The Excerpts tab gets a "Popular with cello players"
-  section under "Most asked for your chair", and excerpt pages a small
+- **Sign in with Apple** (optional, **Settings → Account**) — needs the server
+  *and* the Apple sign-in key (`docs/SETUP.md`, step 8: Apple Developer
+  capability, the `.p8` key, two secrets, one Supabase migration). Until then
+  the black Apple button is greyed out with no server address, and with a server
+  address but no key it answers "Accounts aren't set up on the server yet."
+  Once set up: tap the button, confirm with Face ID / your Apple ID password —
+  the app asks Apple for **no name and no email**, so Apple shows no sharing
+  choice. The section then shows "Signed in with Apple", "Scans a day · 60",
+  **Sign out** and **Delete account**. Delete account asks "Delete your
+  account?", then says "Your account is deleted." and, on your iPhone, Settings →
+  [your name] → Sign-In & Security → Sign in with Apple no longer lists
+  Auditioner. Everything else in the app works exactly the same signed out.
+- **Popular with other players** (off by default) — needs the server with
+  Supabase turned on (`docs/SETUP.md`, step 7; the same deploy sets up trends and
+  there is one more migration, `20261012010000_trends.sql`). **Settings →
+  Popular with other players → Share what I practise**; the app asks "Are you 18
+  or older?" first. Then play a reference, record a take or finish a mock
+  audition: the excerpts are remembered for this week and sent when the app comes
+  to the front (at most twice a day). The Excerpts tab gets a "Popular with cello
+  players" section under "Most asked for your chair", and excerpt pages a small
   "Very popular" / "Popular" line. With fewer than 20 players sharing you see
   "Not enough players share yet to show this." — expected during TestFlight.
   Turning the switch off deletes what you shared.
+
+**Links from Tutti and the app's language (no server needed):**
+
+- **Open the app from a link.** Auditioner now answers `auditioner://` links
+  (`docs/TUTTI.md` has the full format). On your iPad with the app installed,
+  open **Safari**, paste this made-up example into the address bar and press Go,
+  then tap **Open** when Safari asks:
+
+  ```
+  auditioner://audition/new?orchestra=Example%20Philharmonic&position=Section%20cello&instrument=cello&deadline=2027-01-15&auditionDate=2027-03-02&url=https%3A%2F%2Fexample.org%2Fauditions%2Fcello
+  ```
+
+  The app switches to **Auditions** and opens the **New audition** form with
+  "Example Philharmonic", "Section cello", both dates and the link already
+  filled in. Nothing is saved until you tap **Add**; **Cancel** throws it away.
+  (The orchestra, dates and address are invented for the example.) An excerpt
+  link looks like `auditioner://excerpt/<excerpt id>` and opens that excerpt
+  page; an id the catalogue doesn't have shows "That excerpt isn't in the
+  catalogue on this device yet." The same links also work pasted into Notes and
+  tapped. In the Mac simulator, Terminal:
+  `xcrun simctl openurl booted "auditioner://audition/new?orchestra=Example%20Philharmonic"`.
+- **Language.** iOS lets you pick a language per app: on the device, **Settings
+  (the iOS one) → scroll down to Auditioner → Language**. Inside the app,
+  **Settings → Language → App language** jumps to that page. iOS shows the
+  Language row only once the app contains more than one language, and right now
+  it contains only English (the string catalogue is in place, the translations
+  aren't yet), so the row may not appear until the translations land. When they
+  do, the app will show a "Beta translation" tag in Settings while it runs in
+  another language.
+- **Privacy page.** **Settings → About → Privacy** has new blocks for signing in
+  with Apple and for "Popular with other players"; the full text is
+  `docs/PRIVACY.md` (version 0.3). It is a promise to users — please read both
+  once.
 
 ## 8. Reviewer mode (to see draft excerpts)
 

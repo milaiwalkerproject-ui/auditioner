@@ -1,7 +1,8 @@
 # Auditioner — Privacy policy
 
-*Version 0.2 · 11 October 2026 · applies to the Auditioner app for iPhone and iPad
-(test version 0.1.0).*
+*Version 0.3 · 12 October 2026 · applies to the Auditioner app for iPhone and iPad
+(test version 0.1.0). Changed in this version: the sections "If you sign in with
+Apple" and "Popular with other players".*
 
 Auditioner helps orchestral musicians prepare for auditions. We designed it to
 collect as little as possible. You do not need an account (signing in with Apple
@@ -54,31 +55,38 @@ your daily scan limit (the server allows more scans per signed-in account than
 per device). **Skip** is always available, and you can sign in or out at any
 time in **Settings → Account**.
 
-When you sign in, the app asks Apple for **no name and no email**. Our server
-checks the sign-in with Apple and then stores:
+When you sign in, the app asks Apple for **no name and no email**, and we never
+store either. Our server checks the sign-in with Apple and then stores exactly
+this:
 
-- a one-way scrambled code (HMAC) of the identifier Apple gives us for you —
-  not the identifier itself, so it cannot be turned back into your Apple ID;
-- an encrypted key from Apple whose only use is to disconnect the app from your
-  Apple ID when you delete the account;
+- a one-way scrambled code (an HMAC hash) of the identifier Apple gives us for
+  you — not the identifier itself, so it cannot be turned back into your Apple
+  ID;
+- an encrypted key from Apple (a "refresh token") whose only use is to tell
+  Apple to disconnect the app from your Apple ID when you delete the account;
 - the date the account was created and when it was last used;
-- a scrambled code for the sign-in session on your device, so the server can
-  recognise it. A session not used for a year stops working.
+- a scrambled code (a hash) of the sign-in session on your device, so the server
+  can recognise it, with the dates it was created and last used. A session not
+  used for a year stops working by itself.
 
 On your device the app keeps the session key and Apple's identifier for the app
-in the keychain of that device only; they are not copied to other devices or to
-backups.
+in that device's keychain; they do not move to another device, even from a
+backup.
 
-While signed in, scan requests carry the session so the server can count them
-against your account instead of your device. Nothing else in the app changes:
-your parts, recordings, notes and auditions stay on your device, and the server
-cannot link them to the account.
+While you are signed in, the app's requests to our server carry the session, so
+the server can count your scans against your account instead of your device.
+It uses the session for nothing else: feedback and "Popular with other players"
+are stored without it. Nothing else in the app changes: your parts, recordings,
+notes and auditions stay on your device, and the server never sees them.
 
 **Delete account** (Settings → Account) asks Apple to disconnect the app from
-your Apple ID and then deletes the account and its sessions from our server. If
-Apple cannot be reached, nothing is deleted and the app says so; try again a
-few minutes later. Deleting the account does not remove anything from your
-device. **Sign out** only removes the session from the device.
+your Apple ID and then deletes the account and its sessions from our server
+straight away — there is no waiting period and nothing is kept. If Apple cannot
+be reached, nothing is deleted and the app says so; try again a few minutes
+later. Deleting the account does not remove anything from your device.
+**Sign out** removes the session from your device at once and, when the server
+can be reached, from the server too; otherwise that session ends by itself after
+a year unused.
 
 Account records are kept by our database provider, **Supabase** (hosted in the
 United States), in tables only our server can read.
@@ -110,26 +118,30 @@ later. Deleting the app deletes unsent messages.
 ## Popular with other players (optional, off unless you turn it on)
 
 In **Settings → Popular with other players** you can choose to **share what you
-practise**. It is off until you turn it on, and the app first asks whether you
-are 18 or older; the feature is for players 18 and older only.
+practise**. It is **off until you turn it on**, and the app first asks whether
+you are 18 or older; the feature is for players 18 and older only. Until you
+turn it on, the app keeps no record of what you practised for this purpose.
 
-While it is on, the app sends our server **about once a week** (at most twice a
-day), for each instrument you practised:
+While it is on, the app sends our server — when you open it, at most twice a
+day — exactly this, for each instrument you practised:
 
-- your instrument,
+- your instrument (for example "cello"),
 - the week (for example "2026-W41"),
-- which **catalogue excerpts** you practised that week — the excerpts whose
-  reference you played, recorded against, or put in a mock audition. Nothing you
-  typed, no recordings, notes, scans or parts.
+- the ids of the **catalogue excerpts** you practised that week (up to 50) — the
+  excerpts whose reference you played, recorded against, or put in a mock
+  audition. Nothing you typed, no recordings, notes, scans or parts, and no
+  times or counts.
 
-The server stores this against a one-way scrambled code of the random install
-number (not the number itself), in a table only our server can read, at our
-database provider **Supabase** (United States). Rows older than 26 weeks are
-deleted. From these rows the server works out which excerpts are **popular**
-with players of your instrument over the last eight weeks, and shows that only
-when **at least 20 players** share, as two tiers ("Very popular", "Popular") —
-never as numbers, and never mixed into "what orchestras ask". Only players who
-share see these lists.
+Each send replaces the one before it for that week, so the server holds **one
+row per instrument and week** for you. It stores the row against a one-way
+scrambled code (an HMAC hash) of the random install number — never the number
+itself, and the code cannot be turned back into it — in a table only our
+server can read, at our database provider **Supabase** (United States). Rows
+older than **26 weeks are deleted**. From these rows the server works out which
+excerpts are **popular** with players of your instrument over the last eight
+weeks, and shows that only when **at least 20 players** share, as two tiers
+("Very popular", "Popular") — never as numbers or percentages, and never mixed
+into "what orchestras ask". Only players who share see these lists.
 
 **Turning sharing off deletes everything you shared** from our server (the app
 asks the server straight away and tries again later if it couldn't be reached)
@@ -158,6 +170,9 @@ and the "Popular with other players" lists, are for players 18 and older only.
 - You can use the app without reading notes from scans; then nothing leaves
   your device except when you play a video or music.
 - You can delete everything on the device by deleting the app.
+- You never have to sign in. If you did, you can delete the account at any time
+  in the app (Settings → Account → Delete account); that removes it from our
+  server straight away and disconnects Apple.
 - You can stop sharing what you practise at any time (Settings → Popular with
   other players); that deletes what you shared from our server.
 - Questions or requests about your data — including asking us to delete feedback

@@ -71,6 +71,7 @@ orchestra and its auditions; Auditioner helps them *win the seat*.
 | D4 | Each excerpt has a **standard bar range plus variants** seen on real lists; the user can set the exact bars for *their* audition. |
 | D5 | Recommendations: "What orchestras ask" = recency-weighted frequency (3-year half-life) per instrument + position + region, blended with published studies; always shows its evidence ("asked in 68% of 41 section-cello lists, 2023–2026"). Separate badge: "**On N open auditions now**". Tiers: Core ≥50%, Common 20–50%, Occasional. Region tag, defaulting to the user's region. |
 | D6 | "Popular with cellists" (community trend) is **opt-in, off by default**, uploads only {instrument, excerpt IDs, week}, shown only with **≥20 contributors**, as tiers not counts, hidden for under-18s, and never mixed into "what orchestras ask". |
+| D6b | (2026-10-11) Popularity is shown only to players who share what they practise (they confirmed they are 18 or older). Signed-in players get **60 scans a day**, signed-out 30. |
 
 ### Reference audio, note reading
 | # | Decision |
@@ -102,6 +103,7 @@ orchestra and its auditions; Auditioner helps them *win the seat*.
 | F2 | Registry ≈ **250 sources**: ICSOM, ROPA and other US orchestras, major Canadian, top UK/DE/FR/IT/ES/NL/Nordic, Japan Orchestra Federation, 6 Australian, HK Phil, Singapore SO, and youth orchestras (Tutti's 24 first). Cello lists checked first. |
 | F3 | **Milai reviews every extracted list** for the first ~200, then auto-publish high-confidence with 10% spot checks, via a simple admin page. |
 | F4 | **My upcoming audition**: pick from the feed or add manually; attach the full list (Files incl. Google Drive/iCloud/Dropbox, Photos, camera, Share sheet, pasted link) → checklist matched to excerpts → readiness, countdown, practice plan, deadline reminders. File deleted after reading. Private by default; opt-in to share only which excerpts were listed. |
+| F5 | (2026-10-11) Feed and "My upcoming audition" details, Milai's answers: chair words on lists map concertmaster and high horn → principal, utility/any → section, "second" → section on strings and other elsewhere, low/third horn → other. "On N open auditions now" counts every region and every chair. An audition leaves the open list the day after its deadline (it stays in My upcoming audition). A published audition whose page changes goes back to review. One list = source address + year + chair. Matches ≥ 90 % with no close runner-up are pre-ticked; the rest wait for a tap. Reminders 7 days and 1 day before the deadline and the audition, 9:00. Deleting an audition **archives** it (restorable; delete for good from the archive). The Auditions tab offers **All regions** as well as the player's region. Brass catalogues (no chair on their lists) default to **Include all chairs** on. |
 
 ### Practice tools
 | # | Decision |
@@ -113,6 +115,7 @@ orchestra and its auditions; Auditioner helps them *win the seat*.
 | # | Decision |
 |---|---|
 | U1 | **v1:** links both ways ("Prepare in Auditioner" on Tutti audition cards; "Find an orchestra near you" → Tutti) and the shared honesty contract. |
+| U1b | (2026-10-11) Tutti's site **https://tutti-orchestra.com** is live: "Find an orchestra near you" links there. Auditioner has no website of its own for now, so Tutti links into the app with `auditioner://` links (`docs/TUTTI.md`). |
 | U2 | **v1.x:** Auditioner's crawler proposes Tutti audition-window updates as `provenanceType: scraped`, `listingStatus: in_review` drafts **for Milai to approve**; Tutti's orgs join the crawl registry. |
 | U3 | Later: brand family, shared accounts, Tutti map inside the app. |
 
@@ -196,6 +199,33 @@ a typed line or a list read on the device, readiness per excerpt, practise-next,
 reminders, mock audition from the list); "Most asked for your chair" in the excerpt
 browser, counted on the device from the catalogue's lists or from the server
 (`/v1/auditions`, `/v1/recommendations`). Next: M5.
+
+**Status (2026-10-12):** M5 built, not yet merged. Sign in with Apple (B2): optional,
+Skip always possible, server checks Apple's token itself and stores only a keyed hash
+of Apple's id, an encrypted refresh token (used only to revoke on deletion), dates
+and session hashes — no name, no email; in-app Delete account revokes at Apple and
+deletes everything at once; signed-in scans get a higher daily limit (60 vs 30).
+Community trends (D6): off by default, 18+ question, uploads only instrument + week
++ catalogue excerpt ids under a keyed device hash, kept 26 weeks, shown from 20
+players as two tiers, never counts, kept apart from "what orchestras ask". Tutti
+links (U1): `auditioner://excerpt/<id>` and `auditioner://audition/new?…` prefill
+the New audition form, nothing saved until Add; the "Find an orchestra near you" row
+exists but stays hidden until Tutti's address is known (`docs/TUTTI.md`).
+Localisation (A7): string catalogue, Info.plist strings, Language row and "Beta
+translation" tag are in place; **the 11 translations themselves are not yet
+generated** — the app still ships in English only. Privacy policy v0.3
+(`docs/PRIVACY.md`) and the in-app Privacy page describe accounts and trends. Two
+Supabase migrations (`20261012000000_accounts.sql`, `20261012010000_trends.sql`).
+
+Still needs Milai: (1) read and approve `docs/PRIVACY.md` v0.3 — it is a promise to
+users; (2) Apple Developer: switch on Sign in with Apple for the bundle id, create
+the `.p8` key and run `docs/SETUP.md` step 8; (3) apply the two migrations and
+redeploy with Supabase so trends get their salt (`docs/SETUP.md` step 7); (4) Tutti's
+https address for the Settings row; (5) answers to the builders' open questions
+(who sees the popularity lists; whether "Play" alone counts as practised; whether B1
+"Supabase handles Sign in with Apple" is fine as "our server checks Apple's token"
+instead; TestFlight before App Attest); (6) the translations and the external
+TestFlight build (`docs/TESTFLIGHT.md`).
 
 Milai wants testers (orchestra/tour colleagues) as early as possible, so M1 aims at an
 **internal TestFlight** build: the app works offline for catalogue, excerpt pages,

@@ -40,7 +40,7 @@ struct RootView: View {
                     openDeepLink(url)
                 }
             }
-            .alert("That excerpt isn't in the catalogue yet.", isPresented: $isShowingMissingExcerptNote) {
+            .alert("That excerpt isn't in the catalogue on this device yet.", isPresented: $isShowingMissingExcerptNote) {
                 Button("OK", role: .cancel) { }
             }
     }

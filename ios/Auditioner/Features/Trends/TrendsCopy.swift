@@ -13,7 +13,7 @@ enum TrendsCopy {
     }
 
     static var whatIsSent: String {
-        String(localized: "Once a week: your instrument, the week, and which catalogue excerpts you practised. No name, recordings, notes or scans. Shown only when at least 20 players share, as tiers, never numbers. Turning this off deletes what you've shared.")
+        String(localized: "When you open the app (at most twice a day) it sends your instrument, the week, and which catalogue excerpts you practised that week. No name, recordings, notes or scans. Shown only when at least 20 players share, as tiers, never numbers. Turning this off deletes what you've shared from our server.")
     }
 
     static var whoSees: String {

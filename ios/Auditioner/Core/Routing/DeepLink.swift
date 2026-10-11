@@ -134,7 +134,7 @@ enum DeepLink: Equatable {
 enum DeepLinkRouting {
     enum Outcome: Equatable {
         case followed
-        /// The id isn't in the catalogue on this device; the caller shows "That excerpt isn't in the catalogue yet."
+        /// The id isn't in the catalogue on this device; the caller shows "That excerpt isn't in the catalogue on this device yet."
         case excerptMissing
     }
 

@@ -40,7 +40,7 @@ struct LanguageSettingsSection: View {
         } header: {
             Text("Language")
         } footer: {
-            Text("Translations are machine-made and in beta. Work titles and score markings stay in the original language. Spot a mistake? Use Send feedback.")
+            Text("The app follows your device language when a translation exists. Translations are machine-made and marked beta until a native speaker has checked them. Work titles and score markings stay in the original language. Spot a mistake? Use Send feedback.")
         }
     }
 
