@@ -198,8 +198,14 @@ docker run --rm -p 8080:8080 auditioner-api
 `backend/cloudbuild.yaml`, service `auditioner-api`, us-central1, 2 CPU / 4 GiB,
 concurrency 4 so health checks and `/v1/identify` keep answering while a scan runs,
 300 s timeout, 0–3 instances, env vars merged with `--update-env-vars` so a re-run
-keeps what was set by hand) and prints the URL to paste into the app. The
-non-programmer walkthrough is in `docs/SETUP.md`.
+keeps what was set by hand) and prints the URL to paste into the app. When
+`SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` are exported before running it, the
+script also enables Secret Manager, stores the key as `auditioner-supabase-service-key`
+(a new version only when it changed), grants the service's runtime account
+`roles/secretmanager.secretAccessor`, and deploys with `--update-secrets
+SUPABASE_SERVICE_ROLE_KEY=auditioner-supabase-service-key:latest` plus
+`SUPABASE_URL` in the env vars; without them it deploys as before and leaves feedback
+settings untouched. The non-programmer walkthrough is in `docs/SETUP.md`.
 
 The image has not been built in the cloud coding environment (no Docker daemon,
 GitHub release downloads blocked), so the first `deploy.sh` run is the first real

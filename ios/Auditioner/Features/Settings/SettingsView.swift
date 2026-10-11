@@ -240,7 +240,7 @@ struct SettingsView: View {
             Button {
                 isSendingFeedback = true
             } label: {
-                Label("Send feedback", systemImage: "bubble.left.and.text.bubble.right")
+                Label("Send feedback", systemImage: "bubble.left.and.bubble.right")
             }
         } header: {
             Text("About")

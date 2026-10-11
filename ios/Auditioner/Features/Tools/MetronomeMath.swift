@@ -187,6 +187,12 @@ enum MetronomeMath {
         return markingRanges.last?.name ?? ""
     }
 
+    /// UserDefaults key of the settings saved for an excerpt ("default" when opened from the Practice tab).
+    static func presetKey(excerptId: String?) -> String {
+        let trimmed = (excerptId ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+        return "metronome.preset." + (trimmed.isEmpty ? "default" : trimmed)
+    }
+
     /// "Allegro range (120–168)" style hint.
     static func tempoMarkingHint(bpm: Double) -> String {
         for item in markingRanges where item.range.contains(bpm) {

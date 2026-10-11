@@ -1,22 +1,61 @@
 import SwiftUI
+import SwiftData
 import UIKit
 
-/// Notation + reference playback for a score: tempo, loop, count-in, tuning, "play from here", save audio.
+/// Notation + reference playback for a score: tempo, loop, count-in, tuning, "play from here", save audio,
+/// record & compare, and "Fix notes" for scanned parts.
+///
+/// The document can be replaced by the correction editor; the content view is keyed on it so the
+/// notation and the playback engine reload from scratch.
 struct PracticePlayerView: View {
+    @State private var document: ScoreDocument
+
+    init(document: ScoreDocument) {
+        _document = State(initialValue: document)
+    }
+
+    var body: some View {
+        PracticePlayerContent(document: document, onReplaceDocument: { newDocument in
+            document = newDocument
+        })
+        .id(document)
+    }
+
+    /// Kept for callers that used the old name; the logic lives in `PracticeExport` (plain, testable).
+    static func audioFileName(for title: String) -> String {
+        PracticeExport.audioFileName(for: title)
+    }
+}
+
+struct PracticePlayerContent: View {
     let document: ScoreDocument
+    let onReplaceDocument: (ScoreDocument) -> Void
 
     @EnvironmentObject private var router: AppRouter
+    @Environment(\.modelContext) private var modelContext
+    @Environment(\.openURL) private var openURL
     @StateObject private var engine: PlaybackEngine
+    @StateObject private var compare = RecordCompareSession()
     @AppStorage(SettingsKey.tuningA4) private var tuningA4: Double = 440
 
     @State private var notationReady = false
     @State private var notationError: String?
     @State private var exportedFile: ExportedAudioFile?
     @State private var exportError: String?
+    @State private var compareItem: CompareSheetItem?
+    @State private var lastCompareItem: CompareSheetItem?
+    @State private var showEditor: Bool = false
+    @State private var micDenied: Bool = false
+    @State private var referenceTempURL: URL?
 
-    init(document: ScoreDocument) {
+    init(document: ScoreDocument, onReplaceDocument: @escaping (ScoreDocument) -> Void) {
         self.document = document
+        self.onReplaceDocument = onReplaceDocument
         _engine = StateObject(wrappedValue: PlaybackEngine(document: document))
+    }
+
+    private var canFixNotes: Bool {
+        document.origin == .omr || document.origin == .edited
     }
 
     var body: some View {
@@ -31,15 +70,25 @@ struct PracticePlayerView: View {
                 PracticeNoticeBanner(message: message, color: Theme.garnet)
             }
             notationArea
-            PracticeTransportBar(engine: engine, tuningA4: $tuningA4, onSaveAudio: saveAudio)
+            PracticeTransportBar(engine: engine, tuningA4: $tuningA4, onSaveAudio: saveAudio,
+                                 onFixNotes: canFixNotes ? { showEditor = true } : nil)
+            RecordCompareBar(session: compare, engine: engine, hasLastTake: lastCompareItem != nil,
+                             onRecord: startRecording, onStop: stopRecording,
+                             onCompare: { compareItem = lastCompareItem })
         }
         .background(Theme.paper.ignoresSafeArea())
         .onAppear {
             engine.prepare()
             engine.a4 = tuningA4
+            compare.onAutoStop = { stopRecording() }
+            compare.onInterrupted = { stopRecording() }
         }
         .onDisappear {
+            compare.onAutoStop = nil
+            compare.onInterrupted = nil
+            _ = compare.stop()
             engine.shutdown()
+            removeReferenceTemp()
         }
         .onChange(of: tuningA4) { _, newValue in
             engine.a4 = newValue
@@ -47,10 +96,29 @@ struct PracticePlayerView: View {
         .sheet(item: $exportedFile) { file in
             PracticeExportSheet(file: file)
         }
+        .sheet(item: $compareItem) { item in
+            CompareSheet(item: item)
+        }
+        .sheet(isPresented: $showEditor) {
+            ScoreEditorView(document: document, onSaved: { newDocument in
+                showEditor = false
+                onReplaceDocument(newDocument)
+            })
+        }
         .alert(Text("Couldn't save the audio"), isPresented: exportErrorPresented) {
             Button("OK") { exportError = nil }
         } message: {
             Text(exportError ?? "")
+        }
+        .alert(Text("Microphone is off"), isPresented: $micDenied) {
+            Button("Open Settings") {
+                if let url = AudioSessionCoordinator.settingsURL {
+                    openURL(url)
+                }
+            }
+            Button("Not now", role: .cancel) {}
+        } message: {
+            Text("Recording needs the microphone. Turn it on for Auditioner in Settings, then try again.")
         }
     }
 
@@ -58,13 +126,25 @@ struct PracticePlayerView: View {
         Binding(get: { exportError != nil }, set: { shown in if !shown { exportError = nil } })
     }
 
+    /// The reference's beat while recording against it, otherwise the player's.
+    private var highlightBeat: Double? {
+        if compare.isActive {
+            return compare.referenceBeat
+        }
+        return engine.isReady ? engine.currentBeat : nil
+    }
+
     private var notationArea: some View {
         ZStack {
             NotationWebView(
                 musicXML: document.musicXML,
-                highlightBeat: engine.isReady ? engine.currentBeat : nil,
+                highlightBeat: highlightBeat,
                 onReady: { _, _ in notationReady = true },
-                onTapNote: { qstamp in engine.play(fromBeat: qstamp) },
+                onTapNote: { qstamp in
+                    if !compare.isBusy {
+                        engine.play(fromBeat: qstamp)
+                    }
+                },
                 onError: { message in notationError = message }
             )
             if !notationReady && notationError == nil {
@@ -77,6 +157,7 @@ struct PracticePlayerView: View {
     }
 
     private func close() {
+        _ = compare.stop()
         engine.shutdown()
         router.practiceDocument = nil
     }
@@ -94,9 +175,83 @@ struct PracticePlayerView: View {
         }
     }
 
-    /// Kept for callers that used the old name; the logic lives in `PracticeExport` (plain, testable).
-    static func audioFileName(for title: String) -> String {
-        PracticeExport.audioFileName(for: title)
+    // MARK: Record & compare
+
+    /// Record: pause the player, get the microphone, render the reference at the current tempo, then start
+    /// the session (one-bar count-in, reference from the current position, microphone recorded alongside).
+    private func startRecording() {
+        guard engine.isReady, let timeline = engine.timeline, !compare.isBusy else { return }
+        engine.pause()
+        compare.clearError()
+        AudioSessionCoordinator.shared.requestMicPermission { granted in
+            if granted {
+                prepareAndRecord(timeline: timeline)
+            } else {
+                micDenied = true
+            }
+        }
+    }
+
+    private func prepareAndRecord(timeline: PlaybackTimeline) {
+        let startBeat: Double = engine.loopEnabled
+            ? timeline.startBeat(ofMeasure: engine.loopStartMeasure)
+            : engine.currentBeat
+        let tempo: Double = engine.tempoBPM
+        let countIn = timeline.countIn(bars: 1)
+        let clickSeconds: Double = countIn.clickSpacingBeats * 60.0 / max(1, tempo)
+        let url = FileManager.default.temporaryDirectory
+            .appendingPathComponent("compare-reference-\(UUID().uuidString).m4a")
+        removeReferenceTemp()
+        referenceTempURL = url
+        let fileName = TakeStore.newFileName(title: document.title)
+        let title = document.title
+        compare.markPreparing()
+
+        Task { @MainActor in
+            do {
+                try await engine.exportAudio(to: url)
+                let duration: Double = TakeStore.durationSeconds(of: url)
+                    ?? timeline.seconds(atBeat: timeline.totalBeats, targetBPM: tempo)
+                let plan = RecordComparePlan(referenceURL: url,
+                                             referenceOffsetSeconds: timeline.seconds(atBeat: startBeat, targetBPM: tempo),
+                                             referenceDurationSeconds: duration,
+                                             countInClicks: countIn.clickCount,
+                                             clicksPerBar: countIn.clicksPerBar,
+                                             countInClickSeconds: clickSeconds,
+                                             tempoBPM: tempo,
+                                             startBeat: startBeat,
+                                             timeline: timeline,
+                                             takeFileName: fileName,
+                                             title: title)
+                compare.start(plan)
+            } catch {
+                compare.fail(error.localizedDescription)
+            }
+        }
+    }
+
+    /// Stop: save the take and open the compare sheet.
+    private func stopRecording() {
+        guard let result = compare.stop() else { return }
+        let take = PracticeTake(title: result.plan.title, fileName: result.fileName, durationSeconds: result.durationSeconds)
+        take.excerptId = document.excerptId
+        take.scoreId = (document.origin == .demo) ? nil : document.id
+        take.referenceBPM = result.plan.tempoBPM
+        take.referenceStartBeat = result.plan.startBeat
+        modelContext.insert(take)
+        try? modelContext.save()
+        let item = CompareSheetItem(take: take,
+                                    referenceURL: result.plan.referenceURL,
+                                    referenceOffsetSeconds: result.plan.referenceOffsetSeconds)
+        lastCompareItem = item
+        compareItem = item
+    }
+
+    private func removeReferenceTemp() {
+        if let url = referenceTempURL {
+            try? FileManager.default.removeItem(at: url)
+            referenceTempURL = nil
+        }
     }
 }
 
@@ -225,6 +380,8 @@ struct PracticeTransportBar: View {
     @ObservedObject var engine: PlaybackEngine
     @Binding var tuningA4: Double
     let onSaveAudio: () -> Void
+    /// Shown as a "Fix notes" button when set (scanned or corrected parts).
+    var onFixNotes: (() -> Void)? = nil
 
     static let tunings: [Double] = [440, 441, 442, 443]
     static let tempoRange: ClosedRange<Double> = 40...200
@@ -354,8 +511,17 @@ struct PracticeTransportBar: View {
     }
 
     private var actionsRow: some View {
-        HStack {
+        HStack(spacing: 12) {
             Spacer()
+            if let onFixNotes = onFixNotes {
+                Button {
+                    onFixNotes()
+                } label: {
+                    Label("Fix notes", systemImage: "pencil.and.outline")
+                }
+                .buttonStyle(.bordered)
+                .accessibilityHint(Text("Correct the notes read from your scan"))
+            }
             Button {
                 onSaveAudio()
             } label: {

@@ -1,7 +1,7 @@
 import SwiftUI
 import SwiftData
 
-/// Practice tab home: the demo, saved reference audio, and what's coming in M3.
+/// Practice tab home: the tools, the demo and saved reference audio.
 struct PracticeHomeView: View {
     @EnvironmentObject private var router: AppRouter
     @Environment(\.modelContext) private var modelContext
@@ -10,9 +10,9 @@ struct PracticeHomeView: View {
     var body: some View {
         NavigationStack {
             List {
+                toolsSection
                 demoSection
                 referenceSection
-                comingNextSection
             }
             .listStyle(.insetGrouped)
             .scrollContentBackground(.hidden)
@@ -22,6 +22,45 @@ struct PracticeHomeView: View {
     }
 
     // MARK: Sections
+
+    private var toolsSection: some View {
+        Section {
+            NavigationLink {
+                MetronomeView()
+            } label: {
+                PracticeToolRow(title: String(localized: "Metronome"),
+                                detail: String(localized: "Subdivisions, accents, tap tempo."),
+                                systemImage: "metronome",
+                                color: Theme.garnet)
+            }
+            NavigationLink {
+                DroneView()
+            } label: {
+                PracticeToolRow(title: String(localized: "Drone"),
+                                detail: String(localized: "A sustained note to tune and play against."),
+                                systemImage: "tuningfork",
+                                color: Theme.teal)
+            }
+            NavigationLink {
+                MockAuditionSetupView()
+            } label: {
+                PracticeToolRow(title: String(localized: "Mock audition"),
+                                detail: String(localized: "Random order, hidden titles, one recording, self-rating."),
+                                systemImage: "music.mic",
+                                color: Theme.brass)
+            }
+            NavigationLink {
+                TakesListView()
+            } label: {
+                PracticeToolRow(title: String(localized: "My recordings"),
+                                detail: String(localized: "Takes and mock auditions: listen, rate, share."),
+                                systemImage: "waveform",
+                                color: Theme.slate)
+            }
+        } header: {
+            Text("Tools")
+        }
+    }
 
     private var demoSection: some View {
         Section {
@@ -37,7 +76,7 @@ struct PracticeHomeView: View {
                         Text("Try the demo")
                             .font(.body.weight(.semibold))
                             .foregroundStyle(Theme.ink)
-                        Text("A short scale to try the tempo slider, loop, count-in and tuning.")
+                        Text("A short scale to try the tempo slider, loop, count-in, tuning and record & compare.")
                             .font(.subheadline)
                             .foregroundStyle(Theme.inkSoft)
                     }
@@ -76,16 +115,6 @@ struct PracticeHomeView: View {
         }
     }
 
-    private var comingNextSection: some View {
-        Section {
-            Text("Metronome, drone, record & compare and mock auditions are on the way.")
-                .font(.subheadline)
-                .foregroundStyle(Theme.inkSoft)
-        } header: {
-            Text("Coming next")
-        }
-    }
-
     // MARK: Actions
 
     private func openDemo() {
@@ -101,7 +130,32 @@ struct PracticeHomeView: View {
     }
 }
 
-// MARK: - Row
+// MARK: - Rows
+
+private struct PracticeToolRow: View {
+    let title: String
+    let detail: String
+    let systemImage: String
+    let color: Color
+
+    var body: some View {
+        HStack(spacing: 14) {
+            Image(systemName: systemImage)
+                .font(.title2)
+                .foregroundStyle(color)
+                .frame(width: 36)
+            VStack(alignment: .leading, spacing: 3) {
+                Text(title)
+                    .font(.body.weight(.semibold))
+                    .foregroundStyle(Theme.ink)
+                Text(detail)
+                    .font(.subheadline)
+                    .foregroundStyle(Theme.inkSoft)
+            }
+        }
+        .padding(.vertical, 4)
+    }
+}
 
 private struct PracticeRecordRow: View {
     let record: ScoreRecord

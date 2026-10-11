@@ -369,6 +369,20 @@ final class ScanFlowModel: ObservableObject {
                                                                        meter: meter,
                                                                        hints: hints)
                 if Task.isCancelled || self.isCancelled { return }
+                // Keep the marked picture so the correction editor can show it next to the notes.
+                let scanFileName: String? = await Task.detached(priority: .utility) {
+                    () -> String? in
+                    do {
+                        return try ScanImageStore.save(jpeg: jpeg)
+                    } catch {
+                        scanFlowLog.error("Keeping the scan picture failed: \(error.localizedDescription, privacy: .public)")
+                        return nil
+                    }
+                }.value
+                if Task.isCancelled || self.isCancelled {
+                    if let scanFileName { ScanImageStore.delete(named: scanFileName) }
+                    return
+                }
                 let record = ScoreRecord(title: ScanFlowLogic.scoreTitle(excerpt: excerpt, date: Date()),
                                          musicXML: response.musicxml,
                                          origin: .omr,
@@ -376,6 +390,7 @@ final class ScanFlowModel: ObservableObject {
                                          excerptId: excerpt?.id,
                                          sourceItemId: sourceItemId,
                                          warnings: response.warnings)
+                record.scanImageFileName = scanFileName
                 modelContext.insert(record)
                 do {
                     try modelContext.save()
