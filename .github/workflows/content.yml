@@ -19,4 +19,5 @@ jobs:
           python-version: "3.12"
       - run: pip install jsonschema
       - run: python3 content/validate.py
+      - run: python3 content/translations/notes_tools.py check
       - run: python3 content/sync_to_app.py --check

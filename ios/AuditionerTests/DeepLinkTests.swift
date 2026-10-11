@@ -225,8 +225,13 @@ final class DeepLinkTests: XCTestCase {
 
     // MARK: Tutti
 
-    func testTuttiLinkIsOffUntilTheAddressIsConfirmed() {
-        XCTAssertNil(TuttiLink.findOrchestraURL)
+    /// The row stays hidden while the address is `nil`; once set (PLAN U1b: https://tutti-orchestra.com)
+    /// it must be https with a host, or `SafariLinkItem.make` would refuse it and the row would do nothing.
+    func testTuttiLinkIsHiddenOrAnHTTPSAddress() {
+        guard let url = TuttiLink.findOrchestraURL else { return }
+        XCTAssertEqual(url.scheme?.lowercased(), "https", "Tutti's address must be https")
+        XCTAssertFalse((url.host ?? "").isEmpty, "Tutti's address needs a host")
+        XCTAssertNotNil(SafariLinkItem.make(url), "the in-app Safari view must accept the address")
     }
 
     // MARK: Beta translation pill (PLAN A7)

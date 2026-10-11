@@ -538,6 +538,40 @@ def test_stale_apple_keys_are_used_when_apple_is_down(world: World) -> None:
     assert world.sign_in().status_code == 200
 
 
+def test_key_fetches_are_bounded_while_apple_is_down_with_no_keys(world: World) -> None:
+    """A flood of sign-ins on a cold instance while Apple's keys are unreachable asks
+    Apple once a minute, not once per request (each attempt waits out a timeout)."""
+    world.apple.down.add("keys")
+    for _ in range(10):
+        response = world.sign_in()
+        assert response.status_code == 502
+        assert response.json() == {"detail": MSG_APPLE_UNREACHABLE}
+    assert world.apple.calls["keys"] == 1
+
+    world.clock.now += 61
+    assert world.sign_in().status_code == 502
+    assert world.apple.calls["keys"] == 2
+
+    # Apple is back: the next attempt (after the minute) succeeds and signs the player in.
+    world.apple.down.clear()
+    world.clock.now += 61
+    assert world.sign_in().status_code == 200
+    assert world.apple.calls["keys"] == 3
+
+
+def test_key_fetches_are_bounded_while_apple_is_down_with_stale_keys(world: World) -> None:
+    assert world.sign_in().status_code == 200
+    world.clock.now += 24 * 3600 + 1
+    world.apple.down.add("keys")
+    for _ in range(10):
+        assert world.sign_in().status_code == 200  # yesterday's keys still work
+    assert world.apple.calls["keys"] == 2  # the first fetch, and one failed retry
+
+    # An unknown key id during the outage doesn't add fetches either.
+    assert world.sign_in(kid="kid-z").status_code == 400
+    assert world.apple.calls["keys"] == 2
+
+
 # ---------------------------------------------------------------------- code exchange
 
 
@@ -574,6 +608,40 @@ def test_code_for_another_apple_user_is_refused(world: World) -> None:
     response = world.sign_in()
     assert response.status_code == 400
     assert world.supabase.accounts == {}
+
+
+def test_stolen_identity_token_with_the_attackers_own_code_is_refused(world: World) -> None:
+    """The identity token names one Apple user, the code was issued to another: the
+    code exchange's id_token exposes it and nothing is stored for either."""
+    body = {
+        "identityToken": world.apple.identity_token(sub=APPLE_SUB),
+        "authorizationCode": world.apple.issue_code(OTHER_SUB),
+        "nonce": RAW_NONCE,
+    }
+    response = world.client.post("/v1/account/apple", json=body)
+    assert response.status_code == 400
+    assert response.json() == {"detail": MSG_BAD_APPLE_TOKEN}
+    assert world.supabase.accounts == {} and world.supabase.sessions == {}
+
+
+def test_token_answer_without_id_token_is_502_and_nothing_is_stored(world: World) -> None:
+    """Without Apple's id_token the code can't be tied to the identity token's user,
+    so the sign-in is refused rather than trusted (Apple always sends one)."""
+    real_handle = world.apple.handle
+
+    def handle(request: httpx.Request) -> httpx.Response:
+        response = real_handle(request)
+        if request.url.path == "/auth/token" and response.status_code == 200:
+            data = response.json()
+            data.pop("id_token", None)
+            return httpx.Response(200, json=data)
+        return response
+
+    world.apple.handle = handle  # type: ignore[method-assign]
+    response = world.sign_in()
+    assert response.status_code == 502
+    assert response.json() == {"detail": MSG_APPLE_UNREACHABLE}
+    assert world.supabase.accounts == {} and world.supabase.sessions == {}
 
 
 def test_account_store_down_on_sign_in_is_502(world: World) -> None:

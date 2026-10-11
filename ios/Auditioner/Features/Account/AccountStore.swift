@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 import AuthenticationServices
 
 /// Whether the player has an (optional) account. Everything in the app works signed out.

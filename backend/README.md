@@ -242,9 +242,12 @@ names are missing, never values). Tables: `supabase/migrations/20261012000000_ac
 **Signing in** (`POST /v1/account/apple`):
 
 1. The identity token is checked: RS256 against Apple's keys
-   (`https://appleid.apple.com/auth/keys`, kept 24 h; a token signed with a key id we
-   haven't seen makes the server look again, at most once a minute; if Apple can't be
-   reached the last good set is used), issuer `https://appleid.apple.com`, audience
+   (`https://appleid.apple.com/auth/keys`, kept 24 h and asked for at most once a
+   minute per instance — whether because a token names a key id we haven't seen or
+   because the last fetch failed, so a flood of sign-ins while Apple is unreachable is
+   not a flood of requests to Apple; if Apple can't be reached the last good set is
+   used, and with no good set yet sign-in answers 502 until the next try), issuer
+   `https://appleid.apple.com`, audience
    `APPLE_BUNDLE_ID`, not expired (60 s leeway for clocks), and its `nonce` claim must
    be the sha256 hex of the raw `nonce` in the request (the app sends Apple the hash
    and us the raw value). Anything wrong → 400 `"Apple couldn't confirm this sign-in.
@@ -252,10 +255,12 @@ names are missing, never values). Tables: `supabase/migrations/20261012000000_ac
 2. The one-time `authorizationCode` is swapped at `https://appleid.apple.com/auth/token`
    with a client secret the server signs per call (ES256 with the `.p8` key: `iss` =
    Team ID, `sub` = bundle id, `aud` = `https://appleid.apple.com`, `kid` = Key ID,
-   5 minutes). An expired or used code → 400; the `id_token` Apple returns must name
-   the same user. Apple unreachable, refusing our client secret or answering without
-   a refresh token → 502 `"Couldn't reach Apple to finish signing in. Try again in a
-   few minutes."` — and **nothing is stored**.
+   5 minutes). An expired or used code → 400; Apple's answer must carry an `id_token`
+   naming the same user as the identity token (otherwise a stolen identity token plus
+   the thief's own code would tie the thief's refresh token to the victim's account:
+   another user → 400, no `id_token` at all → 502). Apple unreachable, refusing our
+   client secret or answering without a refresh token → 502 `"Couldn't reach Apple to
+   finish signing in. Try again in a few minutes."` — and **nothing is stored**.
 3. One upsert into `accounts` keyed on `apple_sub_hash = HMAC-SHA256(ACCOUNT_SECRET,
    sub)` (a returning player gets the same account; the newest refresh token replaces
    the old one), then a session: `secrets.token_urlsafe(32)` goes to the app, only its
@@ -491,8 +496,12 @@ read with the same key); without them it deploys as before and leaves those sett
 untouched. On the same runs it makes sure the community-trends salt exists as
 `auditioner-trends-salt` (created once — random, or `TRENDS_SALT` if exported — and
 never replaced; a different exported value stops the script), grants the same
-account access, and mounts it with `--update-secrets TRENDS_SALT=auditioner-trends-salt:latest`.
-The non-programmer walkthrough is in `docs/SETUP.md`.
+account access, and mounts it as `TRENDS_SALT`. With `APPLE_TEAM_ID` and
+`APPLE_KEY_ID` exported it also checks that `auditioner-apple-signin-key` and
+`auditioner-account-secret` exist, grants access, and mounts them as
+`APPLE_PRIVATE_KEY` and `ACCOUNT_SECRET`. Every secret being turned on goes in one
+`--update-secrets VAR=secret:latest,…` flag, so nothing depends on how gcloud treats
+a repeated flag. The non-programmer walkthrough is in `docs/SETUP.md`.
 
 The image has not been built in the cloud coding environment (no Docker daemon,
 GitHub release downloads blocked), so the first `deploy.sh` run is the first real

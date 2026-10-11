@@ -63,7 +63,7 @@ APPLE_REVOKE_URL = APPLE_ISSUER + "/auth/revoke"
 DEFAULT_BUNDLE_ID = "com.milaiwalker.auditioner"
 
 JWKS_CACHE_SECONDS = 24 * 60 * 60     # Apple's public keys are kept a day
-JWKS_MIN_REFRESH_SECONDS = 60.0       # an unknown key id makes us look again at most once a minute
+JWKS_MIN_REFRESH_SECONDS = 60.0       # Apple's keys are asked for at most once a minute (unknown key id, failed fetch)
 TOKEN_LEEWAY_SECONDS = 60             # clock difference between Apple and Cloud Run
 CLIENT_SECRET_SECONDS = 300           # Apple allows up to 180 days; we sign a fresh one per call
 APPLE_TIMEOUT_SECONDS = 10.0
@@ -239,7 +239,8 @@ class AppleClient:
         self.timeout = float(timeout)
         self._monotonic = monotonic
         self._keys: dict[str, jwt.PyJWK] = {}
-        self._keys_fetched_at: float | None = None
+        self._keys_fetched_at: float | None = None    # last successful fetch
+        self._keys_attempted_at: float | None = None  # last attempt, successful or not
 
     def __repr__(self) -> str:  # never show the key
         return f"AppleClient(team={self.team_id!r}, key_id={self.key_id!r}, bundle={self.bundle_id!r})"
@@ -249,7 +250,15 @@ class AppleClient:
 
     # ---- Apple's public keys
 
+    def _may_fetch_keys(self) -> bool:
+        """At most one fetch per JWKS_MIN_REFRESH_SECONDS, counting failed attempts too:
+        a flood of sign-ins while Apple is unreachable (or carrying unknown key ids)
+        must not turn into a flood of requests to Apple, each waiting out a timeout."""
+        attempted_at = self._keys_attempted_at
+        return attempted_at is None or self._monotonic() - attempted_at >= JWKS_MIN_REFRESH_SECONDS
+
     async def _fetch_keys(self) -> None:
+        self._keys_attempted_at = self._monotonic()
         try:
             async with self._http() as client:
                 response = await client.get(APPLE_KEYS_URL, headers={"Accept": "application/json"})
@@ -285,19 +294,22 @@ class AppleClient:
     async def _key_for(self, kid: str) -> jwt.PyJWK:
         fetched_at = self._keys_fetched_at
         if fetched_at is None or self._monotonic() - fetched_at >= JWKS_CACHE_SECONDS:
-            try:
-                await self._fetch_keys()
-            except AppleUnavailable:
-                if not self._keys:
-                    raise
-                # Apple's keys change rarely: yesterday's set is better than no sign-in.
-                log.warning("using Apple keys from the last successful fetch")
+            if self._may_fetch_keys():
+                try:
+                    await self._fetch_keys()
+                except AppleUnavailable:
+                    if not self._keys:
+                        raise
+                    # Apple's keys change rarely: yesterday's set is better than no sign-in.
+                    log.warning("using Apple keys from the last successful fetch")
+            elif not self._keys:
+                # The last attempt (under a minute ago) failed and there is nothing to
+                # fall back on: answer 502 without asking Apple again just yet.
+                raise AppleUnavailable("keys unreachable (recent attempt failed)")
         key = self._keys.get(kid)
-        if key is None:
-            fetched_at = self._keys_fetched_at
-            if fetched_at is None or self._monotonic() - fetched_at >= JWKS_MIN_REFRESH_SECONDS:
-                await self._fetch_keys()  # Apple has rotated its keys since we last looked
-                key = self._keys.get(kid)
+        if key is None and self._may_fetch_keys():
+            await self._fetch_keys()  # Apple has rotated its keys since we last looked
+            key = self._keys.get(kid)
         if key is None:
             log.info("Apple identity token refused: unknown key id")
             raise AppleTokenInvalid("unknown key id")
@@ -392,21 +404,26 @@ class AppleClient:
         if not isinstance(refresh_token, str) or not refresh_token:
             log.warning("Apple token answer had no refresh token")
             raise AppleUnavailable("no refresh token")
-        # The code must belong to the same Apple user as the identity token. This
-        # id_token came straight from Apple over TLS, so only its "sub" is compared.
+        # The code must belong to the same Apple user as the identity token, or a
+        # stolen identity token plus the thief's own code would bind the thief's refresh
+        # token to the victim's account. Apple's answer to an authorization_code grant
+        # always carries an id_token; one without it is not trusted. The id_token came
+        # straight from Apple over TLS, so only its "sub" is compared.
         id_token = data.get("id_token")
-        if isinstance(id_token, str) and id_token:
-            try:
-                claims = jwt.decode(id_token, options={"verify_signature": False})
-            except jwt.PyJWTError:
-                log.warning("Apple token answer had an unreadable id_token")
-                raise AppleUnavailable("bad id_token") from None
-            code_sub = claims.get("sub")
-            if not isinstance(code_sub, str) or not hmac.compare_digest(
-                code_sub.encode("utf-8", "surrogatepass"), expected_sub.encode("utf-8", "surrogatepass")
-            ):
-                log.info("Apple authorization code belongs to a different user")
-                raise AppleTokenInvalid("code for another user")
+        if not isinstance(id_token, str) or not id_token:
+            log.warning("Apple token answer had no id_token")
+            raise AppleUnavailable("no id_token")
+        try:
+            claims = jwt.decode(id_token, options={"verify_signature": False})
+        except jwt.PyJWTError:
+            log.warning("Apple token answer had an unreadable id_token")
+            raise AppleUnavailable("bad id_token") from None
+        code_sub = claims.get("sub")
+        if not isinstance(code_sub, str) or not hmac.compare_digest(
+            code_sub.encode("utf-8", "surrogatepass"), expected_sub.encode("utf-8", "surrogatepass")
+        ):
+            log.info("Apple authorization code belongs to a different user")
+            raise AppleTokenInvalid("code for another user")
         return refresh_token
 
     async def revoke(self, refresh_token: str) -> None:

@@ -234,23 +234,28 @@ gcloud builds submit . \
 #    is full) instead of hitting Cloud Run's 429, which the app would show as
 #    "Daily scan limit reached".
 ENV_VARS="DAILY_SCAN_LIMIT=$DAILY_SCAN_LIMIT,DAILY_FEEDBACK_LIMIT=$DAILY_FEEDBACK_LIMIT"
-# Extra flags only used when feedback storage is being turned on this run. (The
-# ${ARR[@]+"${ARR[@]}"} form below is how an empty array is expanded safely under
-# `set -u` in the bash 3.2 that ships with macOS.)
-FEEDBACK_FLAGS=()
+# Secrets the server reads as environment variables, all in ONE --update-secrets flag
+# ("VAR=secret-name:latest,VAR2=…", the documented form) so nothing depends on how
+# gcloud treats a repeated flag. Only the secrets being turned on this run are named;
+# --update-secrets (not --set-secrets) keeps the ones already on the service.
+SECRETS=""
 if [ "$FEEDBACK_ON" = 1 ]; then
   ENV_VARS="$ENV_VARS,SUPABASE_URL=$SUPABASE_URL"
-  FEEDBACK_FLAGS=(--update-secrets "SUPABASE_SERVICE_ROLE_KEY=$FEEDBACK_SECRET:latest")
-  # Community trends salt (step 3c). gcloud merges repeated --update-secrets flags.
-  FEEDBACK_FLAGS+=(--update-secrets "TRENDS_SALT=$TRENDS_SECRET:latest")
+  # The Supabase key (step 3b) and the community-trends salt (step 3c).
+  SECRETS="SUPABASE_SERVICE_ROLE_KEY=$FEEDBACK_SECRET:latest,TRENDS_SALT=$TRENDS_SECRET:latest"
 fi
 # Sign in with Apple (step 3d): the scan limit for signed-in players always; the two
 # ids and the two secrets only on a run that turns accounts on.
 ENV_VARS="$ENV_VARS,SIGNED_IN_DAILY_SCAN_LIMIT=$SIGNED_IN_DAILY_SCAN_LIMIT"
-ACCOUNT_FLAGS=()
 if [ "$ACCOUNTS_ON" = 1 ]; then
   ENV_VARS="$ENV_VARS,APPLE_TEAM_ID=$APPLE_TEAM_ID,APPLE_KEY_ID=$APPLE_KEY_ID"
-  ACCOUNT_FLAGS=(--update-secrets "APPLE_PRIVATE_KEY=$APPLE_KEY_SECRET:latest,ACCOUNT_SECRET=$ACCOUNT_SECRET_NAME:latest")
+  SECRETS="${SECRETS:+$SECRETS,}APPLE_PRIVATE_KEY=$APPLE_KEY_SECRET:latest,ACCOUNT_SECRET=$ACCOUNT_SECRET_NAME:latest"
+fi
+# (The ${ARR[@]+"${ARR[@]}"} form below is how an empty array is expanded safely
+# under `set -u` in the bash 3.2 that ships with macOS.)
+SECRET_FLAGS=()
+if [ -n "$SECRETS" ]; then
+  SECRET_FLAGS=(--update-secrets "$SECRETS")
 fi
 
 say "Deploying to Cloud Run service '$SERVICE'"
@@ -269,8 +274,7 @@ gcloud run deploy "$SERVICE" \
   --max-instances 3 \
   --port 8080 \
   --update-env-vars "$ENV_VARS" \
-  ${FEEDBACK_FLAGS[@]+"${FEEDBACK_FLAGS[@]}"} \
-  ${ACCOUNT_FLAGS[@]+"${ACCOUNT_FLAGS[@]}"} \
+  ${SECRET_FLAGS[@]+"${SECRET_FLAGS[@]}"} \
   --quiet
 
 # 6. Check it answers and print the address for the app.
