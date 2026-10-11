@@ -10,7 +10,8 @@ struct ExcerptProseItem: Identifiable {
 
 /// History / technique / pitfalls / practice tips. Honesty contract: a block is shown only when
 /// approved, or in reviewer mode (then with a "Draft — not reviewed" banner). AI text always
-/// carries the AI label with thumbs up/down and "Report an error".
+/// carries the AI label with thumbs up/down and "Report an error". Below the notes (or on its
+/// own when there are none) sits a quiet page-level "Report an error" link for the facts.
 struct ExcerptNotesSection: View {
     let excerpt: Excerpt
     let reviewerMode: Bool
@@ -34,12 +35,15 @@ struct ExcerptNotesSection: View {
     }
 
     var body: some View {
-        if !items.isEmpty {
-            ExcerptSectionBox(Text("Notes")) {
-                ForEach(items) { item in
-                    ExcerptProseBlockView(excerptId: excerpt.id, item: item, reviewerMode: reviewerMode)
+        VStack(alignment: .leading, spacing: 14) {
+            if !items.isEmpty {
+                ExcerptSectionBox(Text("Notes")) {
+                    ForEach(items) { item in
+                        ExcerptProseBlockView(excerptId: excerpt.id, item: item, reviewerMode: reviewerMode)
+                    }
                 }
             }
+            ExcerptReportErrorLink(excerptId: excerpt.id)
         }
     }
 }
@@ -51,7 +55,7 @@ struct ExcerptProseBlockView: View {
 
     /// "" (no vote), "up" or "down". Stored only on this device.
     @AppStorage private var vote: String
-    @Environment(\.openURL) private var openURL
+    @State private var isReporting: Bool = false
 
     init(excerptId: String, item: ExcerptProseItem, reviewerMode: Bool) {
         self.excerptId = excerptId
@@ -83,6 +87,9 @@ struct ExcerptProseBlockView: View {
             }
         }
         .padding(.vertical, 4)
+        .sheet(isPresented: $isReporting) {
+            ReportProblemSheet(context: "excerpt-note:\(item.id)", excerptId: excerptId)
+        }
     }
 
     private var draftBannerText: String {
@@ -120,12 +127,10 @@ struct ExcerptProseBlockView: View {
                     Image(systemName: vote == "down" ? "hand.thumbsdown.fill" : "hand.thumbsdown")
                 }
                 .accessibilityLabel(Text("Not helpful"))
-                if let reportURL = FeedbackConfig.reportURL(excerptId: excerptId, section: item.id, origin: block.origin) {
-                    Button("Report an error") {
-                        openURL(reportURL)
-                    }
-                    .font(.caption)
+                Button("Report an error") {
+                    isReporting = true
                 }
+                .font(.caption)
                 Spacer(minLength: 0)
             }
             .buttonStyle(.borderless)

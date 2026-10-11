@@ -15,6 +15,7 @@ the two in step.
 | `GET /healthz` | — | `{"status":"ok","engine":"homr","version":"0.1.0"}` |
 | `POST /v1/omr` | multipart: `image` (JPEG/PNG), `instrument` (catalogue id, e.g. `cello`), `transposition` (int semitones written→sounding, default 0), `meter` (optional, `3/4`), `hints` (JSON array of OCR text lines). Header `X-Device-Id` required. | `{"musicxml": "<?xml …", "warnings": ["…"], "engine": "homr", "measures": 12}` |
 | `POST /v1/identify` | JSON `{"ocrText": "…", "instrument": "cello"}` | `{"candidates": [{"excerptId": "…", "score": 0.63}, …]}` — top 5, score 0‒1 |
+| `POST /v1/feedback` | JSON `{"context": "excerpt-note:pitfalls", "excerptId": "…"?, "message": "…", "appVersion": "0.1"?}` — `context` 1–64 chars of `a-z 0-9 : -`, `excerptId` ≤ 128, `message` 1–2000 chars after trimming, `appVersion` ≤ 32. Header `X-Device-Id` required. | `201 {"status": "received"}` — the row is in the Supabase table `feedback` (see below) |
 | `GET /v1/catalog/{instrument}` | optional `If-None-Match` | the `content/catalog/<instrument>.json` file with an `ETag` (304 when unchanged); 404 if there is no file |
 | `GET /v1/instruments` | — | `{"instruments": ["violin", …]}` (handy for checks) |
 
@@ -23,14 +24,37 @@ in the body — the app decodes it as a flat `[String: String]` dictionary:
 
 | Status | When |
 |---|---|
-| 400 | missing `X-Device-Id`, unknown instrument, bad meter / transposition / hints, or a picture claiming over 50 megapixels |
+| 400 | missing `X-Device-Id`, unknown instrument, bad meter / transposition / hints, or a picture claiming over 50 megapixels; for `/v1/feedback` also a blank message or one over 2000 characters after trimming |
 | 413 | upload over 15 MB (refused by Content-Length before reading, or cut off while a chunked body streams in) |
 | 415 | the file isn't a JPEG/PNG (or another picture Pillow can read) |
-| 422 | a field is missing or has the wrong type |
-| 429 | daily scan limit reached for this device |
+| 422 | a field is missing or has the wrong type (for `/v1/feedback`: `context` outside `[a-z0-9:-]{1,64}`, over-long fields) |
+| 429 | daily scan limit reached for this device (`/v1/omr`), or daily feedback limit (`/v1/feedback`, `DAILY_FEEDBACK_LIMIT`) |
 | 500 | homr failed or produced nothing readable (or any unexpected server error) |
-| 503 | the instance is busy: the short queue is full, or the scan could not start within `OMR_QUEUE_WAIT_SECONDS` — `Retry-After: 60`, not charged |
+| 502 | `/v1/feedback`: Supabase did not take the row (unreachable, refused, table missing) — not charged |
+| 503 | the instance is busy: the short queue is full, or the scan could not start within `OMR_QUEUE_WAIT_SECONDS` — `Retry-After: 60`, not charged. For `/v1/feedback`: `"Feedback isn't set up on the server yet."` while `SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY` are not set (the app keeps the report queued) |
 | 504 | homr ran past `OMR_TIMEOUT_SECONDS` |
+
+### What `/v1/feedback` does with a message
+
+`app/feedback.py`. In-app "Report an error" / "Send feedback" — there is no public
+contact email. After validation and the per-device daily limit (20, a separate
+`DailyLimiter` from the scan one), one PostgREST insert goes to
+`SUPABASE_URL/rest/v1/feedback` with the service-role key (`apikey` +
+`Authorization: Bearer`, `Prefer: return=minimal`, httpx, 10 s timeout). The table
+(`supabase/migrations/20261011000000_feedback.sql`) has RLS on and **no policies**,
+so only the service role can read or write it. Privacy rules the code keeps:
+
+- the **message body is never logged** — the one log line is
+  `feedback stored context=… excerpt=… chars=…`; Supabase failures log only the
+  status code or the exception class (PostgREST error bodies can quote values);
+- the **raw device id is never stored** — the row carries
+  `device_hash = sha256(FEEDBACK_HASH_SALT + X-Device-Id)`. If `FEEDBACK_HASH_SALT`
+  is empty the salt falls back to `"auditioner-feedback:" + SUPABASE_URL` — fixed per
+  deployment (hashes stay stable across restarts, differ per Supabase project) but
+  guessable, so set a real salt before public TestFlight; the server logs one warning
+  at start-up while the fallback is in use;
+- a failed insert (502) refunds the device's daily allowance; an unconfigured server
+  (503) never charges it.
 
 ### What `/v1/omr` does with the picture
 
@@ -113,9 +137,15 @@ header-based limiter stays as the fallback.
 | `CATALOG_DIR` | `content/catalog` (checkout) or `/srv/content/catalog` (image) | catalogue files |
 | `INCLUDE_DRAFTS` | unset | `1` makes `/v1/identify` also match `draft` / `in_review` excerpts |
 | `OMR_WORK_DIR` | system temp dir | where the per-request directories are created |
+| `SUPABASE_URL` | unset | Supabase project URL (`https://xxxx.supabase.co`); with the key below it turns `/v1/feedback` on |
+| `SUPABASE_SERVICE_ROLE_KEY` | unset | Supabase service-role key — **a secret**: on Cloud Run it comes from Secret Manager (`backend/deploy.sh`, secret `auditioner-supabase-service-key`), never from the repo |
+| `FEEDBACK_HASH_SALT` | unset | salt for hashing device ids in feedback rows; empty → fallback derived from `SUPABASE_URL` (see above) |
+| `DAILY_FEEDBACK_LIMIT` | `20` | feedback messages per device per sliding 24 h |
 
-No secrets are needed in M1. Later keys (Anthropic, YouTube, Supabase) go into Cloud
-Run secrets, never into the repo (CLAUDE.md).
+The only secret so far is the Supabase service-role key, and it lives in Google
+Secret Manager (`deploy.sh` stores it from the `SUPABASE_SERVICE_ROLE_KEY` variable
+in Milai's Terminal and mounts it with `--update-secrets`; it is never echoed). Later
+keys (Anthropic, YouTube) follow the same route — never into the repo (CLAUDE.md).
 
 ## Run it locally
 
@@ -146,7 +176,10 @@ pytest -q backend/tests           # from the repo root (backend/pytest.ini sets 
 homr 0.7.0, strict about unknown flags); `FAKE_HOMR_MODE` makes it crash, hang, hang
 with a child process, stay silent, print a title or write garbage so the error
 paths, the process-group kill and the temp-file clean-up are covered. The real
-engine is never run in CI. The fixture catalogue in `tests/fixtures/catalog/`
+engine is never run in CI. `tests/test_feedback.py` drives `/v1/feedback` against an
+`httpx.MockTransport` standing in for Supabase (row shape and hashed device id, 503
+unconfigured, 400/422 validation, 429 after 20, 502 on Supabase errors, and a
+`caplog` check that the message never reaches a log line) — no network either. The fixture catalogue in `tests/fixtures/catalog/`
 keeps the tests independent of `content/catalog`, which is also exercised when files
 exist there. `.github/workflows/backend.yml` runs the suite on every push that
 touches `backend/**` or `content/**`.

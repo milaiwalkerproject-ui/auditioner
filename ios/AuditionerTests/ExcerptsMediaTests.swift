@@ -210,19 +210,6 @@ final class ExcerptsMediaTests: XCTestCase {
         XCTAssertEqual(page.host, "imslp.org")
     }
 
-    // MARK: Feedback address
-
-    func testFeedbackHiddenUntilConfigured() {
-        XCTAssertFalse(FeedbackConfig.isConfigured())
-        XCTAssertFalse(FeedbackConfig.isConfigured("someone@test.example.com"))
-        XCTAssertTrue(FeedbackConfig.isConfigured("team@auditioner.app"))
-        XCTAssertNil(FeedbackConfig.reportURL(excerptId: "e", section: "history", origin: .ai))
-        let url = FeedbackConfig.reportURL(excerptId: "cello-x", section: "history", origin: .ai, address: "team@auditioner.app")
-        XCTAssertEqual(url?.scheme, "mailto")
-        XCTAssertTrue(url?.absoluteString.hasPrefix("mailto:team@auditioner.app?") ?? false)
-        XCTAssertTrue(url?.absoluteString.contains("subject=") ?? false)
-    }
-
     // MARK: Browser filtering and grouping
 
     func testPositionFilter() {

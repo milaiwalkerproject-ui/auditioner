@@ -117,6 +117,73 @@ On the iPhone/iPad, open Auditioner → **Settings → Server** → paste the ad
 The first scan after a quiet period takes longer (up to a minute) while Google
 wakes the server up; the next ones are quicker.
 
+## 7. Turn on feedback (Supabase)
+
+There is no public contact email for Auditioner. Players reach you through the
+**Send feedback** row in Settings and the **Report an error** buttons on excerpt
+pages. Those messages are saved on the player's device and sent to the server,
+which stores them in a database table you can read. Until this step is done the
+server answers "Feedback isn't set up yet" and the app keeps the messages on the
+phone, so nothing is lost — but you won't see them. Budget about 20 minutes.
+
+You already use Supabase for Tutti. Auditioner gets its **own, separate project** so
+the two apps' data and keys never mix.
+
+1. **Create the project.** Go to <https://supabase.com/dashboard> (same account as
+   Tutti is fine) → **New project**:
+   - Name: `auditioner`
+   - Database password: let it generate one and store it in your password manager
+     (you won't need it day to day).
+   - Region: pick a United States region (the server is in the US too).
+   - Plan: **Free** is fine to start. Note: a free project is **paused after about a
+     week without use**; the dashboard shows a "Restore" button when that happens,
+     and until you click it feedback can't be stored (the app keeps messages on the
+     phone and sends them later). Upgrade when real testers arrive.
+   - Click **Create new project** and wait a minute or two.
+2. **Create the table.** Left bar → **SQL Editor** → **New query**. Open the file
+   `supabase/migrations/20261011000000_feedback.sql` from the Auditioner folder
+   (double-click opens TextEdit; or read it on GitHub), copy all of it, paste it
+   into the editor, click **Run**. "Success. No rows returned" is right.
+   `supabase/README.md` explains the folder; any later file in it is applied the
+   same way, oldest first.
+3. **Copy two values.** Left bar → **Project Settings** (the cog) → **API**:
+   - **Project URL**, e.g. `https://abcdefgh.supabase.co`
+   - **service_role** key (under "Project API keys"; click *Reveal*).
+
+   The service_role key is a **secret**: it can read and change everything in the
+   project. Never paste it into the app, GitHub, a chat, an email or a screenshot.
+   The script below puts it straight into Google Secret Manager and never prints it.
+4. **Tell the server.** In Terminal, in the Auditioner folder, one line at a time
+   (replace the values; keep the quotes):
+
+   ```
+   export SUPABASE_URL="https://abcdefgh.supabase.co"
+   export SUPABASE_SERVICE_ROLE_KEY="paste-the-service_role-key-here"
+   ./backend/deploy.sh
+   ```
+
+   The script stores the key in Secret Manager (as `auditioner-supabase-service-key`),
+   lets the server read it, and redeploys. At the end it says **"Feedback storage is
+   ON"**. Close that Terminal window afterwards so the key isn't left in its history
+   (or run `history -c`).
+
+   Later runs of `./backend/deploy.sh` *without* those two lines leave feedback
+   exactly as it is. Run them again only to change the key or the project.
+5. **Try it.** In the app: Settings → **Send feedback** → write "test" → Send. The
+   app says "Thanks". Then in Supabase: left bar → **Table Editor** → `feedback` —
+   your row is there within a few seconds.
+
+**Reading reports.** Table Editor → `feedback`. Each row has `created_at`, `context`
+(where in the app: `excerpt-note:pitfalls`, `excerpt-fact`, `settings`, …),
+`excerpt_id`, `message`, `app_version` and `device_hash` (a scrambled install code;
+it only tells you that two rows came from the same install — not who). When you have
+dealt with a row, double-click its `status` cell and set it to `handled` (or
+`ignored`). Delete handled rows every so often: the privacy policy promises they are
+gone within 12 months.
+
+**Limits.** Each phone can send 20 messages a day (`DAILY_FEEDBACK_LIMIT` in
+`backend/deploy.sh`). Messages are at most 2000 characters.
+
 ## Looking at what the server is doing
 
 - **Logs**: <https://console.cloud.google.com/run> → click `auditioner-api` →
@@ -170,7 +237,9 @@ wakes the server up; the next ones are quicker.
 
 These come in later milestones; don't set them up now:
 
-- **Supabase** (accounts, catalogue updates, audition feed) — M4/M5.
+- **Supabase beyond feedback** (accounts, catalogue updates, audition feed) — M4/M5.
+  The `auditioner` project from step 7 is the one they will use; nothing more to
+  create yet.
 - **Anthropic API key** (AI-written excerpt notes, generated offline) — later, and
   the key lives only in the server's secrets, never in the app or on GitHub.
 - **YouTube Data API key** (finding recordings) — later milestone.

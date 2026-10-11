@@ -15,6 +15,7 @@ struct SettingsView: View {
     @State private var reviewerRevealed: Bool = false
     @State private var isTestingConnection: Bool = false
     @State private var connectionResult: ConnectionResult? = nil
+    @State private var isSendingFeedback: Bool = false
 
     private enum ConnectionResult {
         case connected
@@ -41,6 +42,9 @@ struct SettingsView: View {
             .navigationTitle("Settings")
             .scrollContentBackground(.hidden)
             .background(Theme.paper.ignoresSafeArea())
+            .sheet(isPresented: $isSendingFeedback) {
+                ReportProblemSheet(context: "settings")
+            }
         }
         .onChange(of: instrumentRaw) { _, newValue in
             let instrument = Instrument(rawValue: newValue) ?? .cello
@@ -233,8 +237,15 @@ struct SettingsView: View {
             } label: {
                 Text("Privacy")
             }
+            Button {
+                isSendingFeedback = true
+            } label: {
+                Label("Send feedback", systemImage: "bubble.left.and.text.bubble.right")
+            }
         } header: {
             Text("About")
+        } footer: {
+            Text("Questions, ideas or something wrong? Send feedback reaches us directly — there's no public email. Messages go through the Auditioner server; without one they wait on this device.")
         }
     }
 

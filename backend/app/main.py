@@ -4,6 +4,8 @@
     POST /v1/omr                    multipart image + instrument + transposition + meter? + hints
                                     → {"musicxml", "warnings", "engine", "measures"}
     POST /v1/identify               {"ocrText", "instrument"} → {"candidates": [{excerptId, score}]}
+    POST /v1/feedback               {"context", "excerptId"?, "message", "appVersion"?} → 201 {"status": "received"}
+                                    (503 while Supabase isn't configured; the app keeps the report queued)
     GET  /v1/catalog/{instrument}   the catalogue file, with an ETag
 
 Errors are always JSON {"detail": "<plain words for a musician>"} — the app decodes the
@@ -27,6 +29,7 @@ from starlette.types import ASGIApp, Message, Receive, Scope, Send
 from . import __version__
 from .catalog import Catalog
 from .config import Settings
+from .feedback import FeedbackStore, FeedbackStoreError
 from .imaging import ImageTooLarge, NotAnImage, probe
 from .instruments import INSTRUMENT_IDS, lookup
 from .limits import Busy, ConcurrencyGuard, DailyLimiter, clean_device_id
@@ -59,10 +62,28 @@ MSG_BAD_HINTS = "The text hints weren't in the expected form (a JSON list of tex
 MSG_BAD_METER = "The meter should look like 3/4 or 6/8."
 MSG_BAD_TRANSPOSITION = "Transposition must be a whole number of semitones between -36 and 36."
 
+# Feedback (POST /v1/feedback). Limits match ios/.../Features/Feedback/FeedbackLogic.swift
+# and the CHECK constraints in supabase/migrations/20261011000000_feedback.sql.
+MAX_FEEDBACK_CHARS = 2000
+MAX_FEEDBACK_RAW_CHARS = 4000  # before trimming; the trimmed length is what counts
+FEEDBACK_CONTEXT_PATTERN = r"^[a-z0-9:-]{1,64}$"
+MSG_FEEDBACK_OFF = "Feedback isn't set up on the server yet."
+MSG_FEEDBACK_EMPTY = "Write a few words first."
+MSG_FEEDBACK_TOO_LONG = "Your message is too long (over 2000 characters). Please shorten it."
+MSG_FEEDBACK_LIMIT = "You've sent a lot of feedback today. Try again tomorrow."
+MSG_FEEDBACK_STORE = "Our feedback store didn't answer. Try again later."
+
 
 class IdentifyRequest(BaseModel):
     ocrText: str = Field(default="", max_length=MAX_OCR_TEXT_CHARS)
     instrument: str = Field(min_length=1, max_length=40)
+
+
+class FeedbackRequest(BaseModel):
+    context: str = Field(min_length=1, max_length=64, pattern=FEEDBACK_CONTEXT_PATTERN)
+    excerptId: str | None = Field(default=None, max_length=128)
+    message: str = Field(min_length=1, max_length=MAX_FEEDBACK_RAW_CHARS)
+    appVersion: str | None = Field(default=None, max_length=32)
 
 
 class BodyTooLarge(HTTPException):
@@ -141,6 +162,12 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.state.limiter = DailyLimiter(settings.daily_scan_limit)
     app.state.guard = ConcurrencyGuard(max_running=1, max_waiting=settings.omr_queue_limit)
     app.state.catalog = Catalog(settings.catalog_dir, include_drafts=settings.include_drafts)
+    app.state.feedback_limiter = DailyLimiter(settings.daily_feedback_limit)
+    app.state.feedback = FeedbackStore(
+        settings.supabase_url, settings.supabase_service_role_key, settings.feedback_hash_salt
+    )
+    if app.state.feedback.configured and app.state.feedback.salt_is_fallback:
+        log.warning("FEEDBACK_HASH_SALT is not set; device ids are hashed with a fallback salt derived from SUPABASE_URL")
     app.add_middleware(UploadSizeLimit, limit=settings.max_upload_bytes + FORM_OVERHEAD_BYTES)
 
     # ---------------------------------------------------------------- errors
@@ -270,6 +297,43 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         catalog: Catalog = app.state.catalog
         candidates = catalog.identify(body.ocrText, info.id)
         return {"candidates": [{"excerptId": eid, "score": s} for eid, s in candidates]}
+
+    @app.post("/v1/feedback", status_code=201)
+    async def feedback(body: FeedbackRequest, request: Request) -> dict[str, Any]:
+        device_id = clean_device_id(request.headers.get("x-device-id"))
+        if device_id is None:
+            raise HTTPException(400, MSG_NO_DEVICE)
+        message = body.message.strip()
+        if not message:
+            raise HTTPException(400, MSG_FEEDBACK_EMPTY)
+        if len(message) > MAX_FEEDBACK_CHARS:
+            raise HTTPException(400, MSG_FEEDBACK_TOO_LONG)
+
+        store: FeedbackStore = app.state.feedback
+        if not store.configured:
+            raise HTTPException(503, MSG_FEEDBACK_OFF)
+
+        limiter: DailyLimiter = app.state.feedback_limiter
+        if not limiter.allow(device_id):
+            raise HTTPException(429, MSG_FEEDBACK_LIMIT)
+
+        excerpt_id = (body.excerptId or "").strip() or None
+        app_version = (body.appVersion or "").strip() or None
+        try:
+            await store.store(
+                context=body.context,
+                excerpt_id=excerpt_id,
+                message=message,
+                app_version=app_version,
+                device_id=device_id,
+            )
+        except FeedbackStoreError:
+            limiter.refund(device_id)  # nothing was stored, so the attempt isn't charged
+            raise HTTPException(502, MSG_FEEDBACK_STORE) from None
+
+        # Never the message itself (privacy policy, "Feedback you send").
+        log.info("feedback stored context=%s excerpt=%s chars=%d", body.context, excerpt_id or "-", len(message))
+        return {"status": "received"}
 
     @app.get("/v1/catalog/{instrument}")
     async def catalog_file(instrument: str, request: Request) -> Response:

@@ -43,6 +43,30 @@ and troubleshooting. We do not use them to identify you.
 The first time you read notes, the app asks for your permission and explains
 this. You can use everything else in the app without ever sending a scan.
 
+## Feedback you send
+
+There is no public contact email. You reach us through **Send feedback**
+(Settings) or **Report an error** (on excerpt pages). When you tap Send, the app
+stores:
+
+- your message (up to 2000 characters — please don't put personal details in it),
+- where in the app you sent it from (for example "excerpt notes — common
+  pitfalls"),
+- the excerpt it is about, if any,
+- the app's version number,
+- a scrambled install code — a one-way hash of the random install number — so we
+  can tell that two messages came from the same install. It is **not** your name,
+  email, Apple ID or device identifier, and we cannot turn it back into any of
+  those.
+
+Messages are kept by our database provider, **Supabase** (hosted in the United
+States), in a table only our server can read. We keep each message until we have
+handled it and delete it **within 12 months** at the latest. Feedback is read by
+people; it is **never sent to any AI service**.
+
+If the server is not reachable the message waits on your device and is sent
+later. Deleting the app deletes unsent messages.
+
 ## Videos and music from other services
 
 - **YouTube.** Excerpt pages can play videos in YouTube's own embedded player.
@@ -64,8 +88,11 @@ Auditioner is intended for people aged 13 and over.
 
 - You can use the app without reading notes from scans; then nothing leaves
   your device except when you play a video or music.
-- You can delete everything by deleting the app.
-- Questions or requests about your data: **[contact email to be added]**.
+- You can delete everything on the device by deleting the app.
+- Questions or requests about your data — including asking us to delete feedback
+  you sent — go through **Send feedback** in Settings or **Report an error** on an
+  excerpt page. Mention the date you sent the message so we can find it; we don't
+  know who sent what otherwise. There is no public contact email.
 
 ## Changes
 

@@ -68,6 +68,15 @@ class Settings:
     include_drafts: bool = False
     # Where per-request scratch directories are created (None = system temp dir).
     work_dir: Path | None = None
+    # Feedback storage (POST /v1/feedback → Supabase table "feedback", app/feedback.py).
+    # Off (503 to the app) while either value is empty. The key is a secret: Cloud Run
+    # gets it from Secret Manager (backend/deploy.sh), never from the repo.
+    supabase_url: str = ""
+    supabase_service_role_key: str = ""
+    # Salt for hashing device ids before they are stored; empty → fallback derived from
+    # SUPABASE_URL (see app/feedback.py and README).
+    feedback_hash_salt: str = ""
+    daily_feedback_limit: int = 20
 
     @classmethod
     def from_env(cls, env: Mapping[str, str] | None = None) -> "Settings":
@@ -86,4 +95,8 @@ class Settings:
             catalog_dir=Path(catalog) if catalog else default_catalog_dir(),
             include_drafts=_bool(env, "INCLUDE_DRAFTS"),
             work_dir=Path(work) if work else None,
+            supabase_url=env.get("SUPABASE_URL", "").strip().rstrip("/"),
+            supabase_service_role_key=env.get("SUPABASE_SERVICE_ROLE_KEY", "").strip(),
+            feedback_hash_salt=env.get("FEEDBACK_HASH_SALT", "").strip(),
+            daily_feedback_limit=_int(env, "DAILY_FEEDBACK_LIMIT", 20),
         )

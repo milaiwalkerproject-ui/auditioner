@@ -10,6 +10,8 @@ struct AuditionerApp: App {
     var body: some Scene {
         WindowGroup {
             RootView()
+                // Resends queued "Report an error" / "Send feedback" messages on launch and when the app comes back.
+                .flushesFeedbackQueue()
                 .environmentObject(catalog)
                 .environmentObject(router)
                 .environmentObject(settings)
