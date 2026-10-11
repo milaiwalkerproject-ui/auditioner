@@ -9,9 +9,11 @@ enum BeatUnit: String, Codable, CaseIterable, Identifiable {
 
     var id: String { rawValue }
 
+    /// Short label for the picker and the "♩ = 80" line. The half-note glyph (U+1D15E) is not in the
+    /// iOS system fonts, so the half note is spelled out.
     var symbol: String {
         switch self {
-        case .half: return "𝅗𝅥"
+        case .half: return String(localized: "Half")
         case .quarter: return "♩"
         case .dottedQuarter: return "♩."
         case .eighth: return "♪"
@@ -76,7 +78,8 @@ struct MetronomeSettings: Codable, Equatable {
         let bpm = try container.decodeIfPresent(Double.self, forKey: .bpm) ?? 80
         let beats = try container.decodeIfPresent(Int.self, forKey: .beatsPerBar) ?? 4
         let unit = try container.decodeIfPresent(BeatUnit.self, forKey: .beatUnit) ?? .quarter
-        let sub = try container.decodeIfPresent(Subdivision.self, forKey: .subdivision) ?? .none
+        // Spelled out: `?? .none` would be read as `Optional.none` and leave this an optional.
+        let sub: Subdivision = try container.decodeIfPresent(Subdivision.self, forKey: .subdivision) ?? Subdivision.none
         let accent = try container.decodeIfPresent(Bool.self, forKey: .accentFirstBeat) ?? true
         let sound = try container.decodeIfPresent(ClickSound.self, forKey: .sound) ?? .woodblock
         self.init(bpm: bpm, beatsPerBar: beats, beatUnit: unit, subdivision: sub, accentFirstBeat: accent, sound: sound)

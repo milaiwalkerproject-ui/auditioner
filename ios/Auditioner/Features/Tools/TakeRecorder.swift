@@ -102,7 +102,7 @@ final class TakeRecorder: NSObject, ObservableObject, AVAudioRecorderDelegate {
     func cancel() {
         guard let active = recorder else { return }
         active.stop()
-        active.deleteRecording()
+        _ = active.deleteRecording()
         stopMetering()
         recorder = nil
         isRecording = false

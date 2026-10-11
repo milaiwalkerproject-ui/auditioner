@@ -96,7 +96,7 @@ final class ToolsTests: XCTestCase {
         let partial = try XCTUnwrap(MetronomeSettings.decoded(from: Data("{\"bpm\": 96}".utf8)))
         XCTAssertEqual(partial.bpm, 96)
         XCTAssertEqual(partial.beatsPerBar, 4)
-        XCTAssertEqual(partial.subdivision, .none)
+        XCTAssertEqual(partial.subdivision, Subdivision.none)
         XCTAssertNil(MetronomeSettings.decoded(from: Data()))
         // Out-of-range values are clamped on the way in.
         XCTAssertEqual(MetronomeSettings(bpm: 1000, beatsPerBar: 99).bpm, 300)

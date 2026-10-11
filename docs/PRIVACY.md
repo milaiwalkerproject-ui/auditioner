@@ -1,6 +1,6 @@
 # Auditioner — Privacy policy
 
-*Version 0.1 · 10 October 2026 · applies to the Auditioner app for iPhone and iPad
+*Version 0.2 · 11 October 2026 · applies to the Auditioner app for iPhone and iPad
 (test version 0.1.0).*
 
 Auditioner helps orchestral musicians prepare for auditions. We designed it to
@@ -14,6 +14,10 @@ These never leave your iPhone or iPad unless you share them yourself:
 - the parts you import or scan into **My parts** (PDFs and images) and your
   Apple Pencil markings on them;
 - the reference audio and notation the app makes for you;
+- your own practice recordings (record & compare takes and mock auditions) — the
+  microphone is used only while you record, and the files are never uploaded;
+- the pictures of the parts you scanned, kept so you can correct the notes next to
+  the original;
 - the start/end marks you set on recordings;
 - your settings (instrument, position, region, tuning).
 

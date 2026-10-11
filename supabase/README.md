@@ -11,6 +11,7 @@ twice is harmless (`create table if not exists`, …).
 | File | What it creates |
 |---|---|
 | `20261011000000_feedback.sql` | `public.feedback` — in-app "Report an error" / "Send feedback" messages (server-only, no RLS policies) |
+| `20261011010000_auditions.sql` | Open-auditions feed: `orchestras`, `audition_sources`, `vacancies`, `vacancy_items`, `crawl_runs`, the `open_auditions` / `excerpt_frequency` / `excerpt_open_now` views and the `excerpt_recommendations` function (written by the crawler, read by the app — published rows only; see `docs/FEED.md`) |
 
 ## Applying a migration (Milai, plain words)
 

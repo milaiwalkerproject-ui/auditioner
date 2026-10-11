@@ -102,12 +102,13 @@ final class AudioSessionCoordinator: ObservableObject {
         case .undetermined:
             break
         }
-        AVAudioApplication.requestRecordPermission { [weak self] granted in
+        // The label is spelled out so the completion-handler overload is picked, not the async one.
+        AVAudioApplication.requestRecordPermission(completionHandler: { [weak self] (granted: Bool) in
             DispatchQueue.main.async {
                 self?.micPermission = granted ? .granted : .denied
                 completion(granted)
             }
-        }
+        })
     }
 
     static func readMicPermission() -> MicPermissionState {

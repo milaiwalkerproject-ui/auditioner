@@ -68,7 +68,7 @@ struct RecordCompareBar: View {
                 .buttonStyle(.borderedProminent)
                 .tint(Theme.garnet)
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(session.phase == .countingIn ? "Count-in…" : "Recording")
+                    phaseLabel
                         .font(.footnote.weight(.semibold))
                         .foregroundStyle(session.phase == .countingIn ? Theme.inkSoft : Theme.garnet)
                     LevelMeterBar(level: session.inputLevel)
@@ -77,6 +77,16 @@ struct RecordCompareBar: View {
                     .foregroundStyle(Theme.inkSoft)
             }
         }
+    }
+}
+
+extension RecordCompareBar {
+    /// "Count-in…" / "Recording" as localizable literals.
+    fileprivate var phaseLabel: Text {
+        if session.phase == .countingIn {
+            return Text("Count-in…")
+        }
+        return Text("Recording")
     }
 }
 

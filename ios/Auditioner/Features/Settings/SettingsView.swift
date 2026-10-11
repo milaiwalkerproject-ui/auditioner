@@ -245,7 +245,7 @@ struct SettingsView: View {
         } header: {
             Text("About")
         } footer: {
-            Text("Questions, ideas or something wrong? Send feedback reaches us directly — there's no public email. Messages go through the Auditioner server; without one they wait on this device.")
+            Text("Questions, ideas or something wrong? Use Send feedback — it reaches us directly; there's no public email. Messages go through the Auditioner server and wait on this device until it can be reached.")
         }
     }
 

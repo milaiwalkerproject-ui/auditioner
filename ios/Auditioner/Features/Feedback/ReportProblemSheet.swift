@@ -98,7 +98,7 @@ struct ReportProblemSheet: View {
         } header: {
             Text(FeedbackLogic.prompt(for: context))
         } footer: {
-            Text("Don't include personal details. We see your message, the excerpt and the app version — nothing else.")
+            Text("Don't include personal details. We see your message, where in the app you sent it from, the excerpt, the app version and a scrambled install code — never your name, email or device.")
         }
     }
 
