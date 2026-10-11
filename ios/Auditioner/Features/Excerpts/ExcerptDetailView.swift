@@ -15,6 +15,8 @@ struct ExcerptDetailView: View {
     @State private var columnRecording: Recording? = nil
     @State private var safariItem: SafariLinkItem? = nil
     @State private var showReferenceMissing: Bool = false
+    /// "Add to my audition" (Auditions feature).
+    @State private var showAddToAudition: Bool = false
 
     private var isWide: Bool {
         horizontalSizeClass == .regular
@@ -31,12 +33,24 @@ struct ExcerptDetailView: View {
         .background(Theme.paper.ignoresSafeArea())
         .navigationTitle(excerpt.workHeading)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    showAddToAudition = true
+                } label: {
+                    Label("Add to my audition", systemImage: "calendar.badge.plus")
+                }
+            }
+        }
         .sheet(item: $safariItem) { item in
             ExcerptSafariView(url: item.url)
                 .ignoresSafeArea()
         }
         .sheet(item: $sheetRecording) { recording in
             recordingSheet(recording)
+        }
+        .sheet(isPresented: $showAddToAudition) {
+            AddToAuditionSheet(excerpt: excerpt)
         }
         .alert("Reference not available", isPresented: $showReferenceMissing) {
             Button("OK", role: .cancel) {}

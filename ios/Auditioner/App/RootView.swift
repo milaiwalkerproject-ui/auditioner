@@ -40,6 +40,9 @@ struct RootView: View {
             ExcerptBrowserView()
                 .tabItem { Label("Excerpts", systemImage: "music.note.list") }
                 .tag(AppTab.excerpts)
+            AuditionsHomeView()
+                .tabItem { Label("Auditions", systemImage: "calendar") }
+                .tag(AppTab.auditions)
             LibraryView()
                 .tabItem { Label("My parts", systemImage: "doc.richtext") }
                 .tag(AppTab.library)
