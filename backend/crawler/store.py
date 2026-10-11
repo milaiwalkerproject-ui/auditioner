@@ -88,6 +88,8 @@ class Writer(Protocol):
 
     def write_vacancy(self, record: VacancyRecord) -> str: ...
 
+    def touch_source(self, source_url: str) -> None: ...
+
     def finish(self, summary: dict[str, Any]) -> None: ...
 
 
@@ -114,6 +116,7 @@ class DryRunWriter:
             except ValueError:
                 log.warning("state.json unreadable — starting fresh")
         self.written: list[Path] = []
+        self.touched: list[str] = []
 
     def get_source(self, url: str) -> SourceRecord | None:
         data = self._state.get(url)
@@ -141,6 +144,11 @@ class DryRunWriter:
         with self._lock:
             self.written.append(path)
         return record.natural_key
+
+    def touch_source(self, source_url: str) -> None:
+        """A dry run keeps no vacancy table; it only remembers which sources were seen unchanged."""
+        with self._lock:
+            self.touched.append(source_url)
 
     def finish(self, summary: dict[str, Any]) -> None:
         stamp = self._now().replace(":", "-")
@@ -317,6 +325,12 @@ class SupabaseWriter:
         if items:
             self._request("POST", "/vacancy_items", json_body=items, prefer="return=minimal")
         return vacancy_id
+
+    def touch_source(self, source_url: str) -> None:
+        """The page or document is still there and unchanged: every vacancy read from it is
+        still listed tonight. Only `last_seen_at` moves; review status and items stay as they are."""
+        self._request("PATCH", "/vacancies", params={"source_url": f"eq.{source_url}"},
+                      json_body={"last_seen_at": self._now()}, prefer="return=minimal")
 
     def finish(self, summary: dict[str, Any]) -> None:
         self._request("POST", "/crawl_runs", json_body=[{"summary": summary, "finished_at": self._now()}], prefer="return=minimal")

@@ -191,7 +191,10 @@ registry → fetch page (conditional GET) → change detection → linked docume
 8. **Writer** (`store.py`): Supabase REST (PostgREST) with the service-role key —
    upserts keyed by a natural key (orchestra, source, position, instrument, chair);
    unchanged snapshot → only `last_seen_at`; changed → items replaced, vacancy back to
-   `in_review`. Dry run → JSON files.
+   `in_review`. A page or document that answers unchanged (304, or the same text)
+   moves `last_seen_at` on for every vacancy read from it (`touch_source`), so a
+   notice still on the site stays in the feed and "Last checked" shows the night it
+   was last seen. Dry run → JSON files.
 
 **Batch API**: `ExtractionClient.submit_extraction_batch` / `collect_batch` build the
 same requests for Anthropic's Message Batches (50 % price, results within hours).
@@ -285,10 +288,9 @@ What this means for you as the reviewer:
 - a vacancy drops out of the feed the day after its deadline, but its list keeps
   counting for "What orchestras ask";
 - a vacancy **without a deadline** stays in the feed for 60 days after `last_seen_at`.
-  Today the crawler moves `last_seen_at` only when it re-extracts a page or document
-  that changed, so a long-running notice without a deadline on an unchanged page
-  drops out after 60 days (and "Last checked" in the app shows that older date) —
-  give it a deadline in the table editor if the source states one;
+  The crawler moves `last_seen_at` on every night the page or document it came from
+  is still there unchanged, so it drops out 60 days after it was last seen on the
+  orchestra's site (or after its page changed and the new version no longer lists it);
 - for "What orchestras ask", a region's lists for one chair are counted only once at
   least one item on one of them is matched to a catalogue excerpt; until then that
   region shows as having no lists for that chair (a gap in the database views, noted

@@ -58,7 +58,9 @@ class FakeSupabase:
             return httpx.Response(201, json=[merged])
         if path.endswith("/vacancies") and request.method == "PATCH":
             for row in self.vacancies.values():
-                if f"eq.{row['id']}" == params["id"]:
+                if "id" in params and f"eq.{row['id']}" == params["id"]:
+                    row.update(body)
+                if "source_url" in params and f"eq.{row['source_url']}" == params["source_url"]:
                     row.update(body)
             return httpx.Response(204)
         if path.endswith("/vacancy_items") and request.method == "DELETE":
@@ -119,6 +121,35 @@ def test_unchanged_snapshot_only_touches_last_seen(supabase):
     assert methods == [("GET", "vacancies"), ("PATCH", "vacancies")]
     assert len(fake.items) == before
     assert fake.vacancies[record().natural_key]["last_seen_at"] == "2026-10-10T00:00:00+00:00"
+
+
+def test_touch_source_moves_last_seen_only(supabase):
+    writer, fake = supabase
+    writer.write_vacancy(record())
+    other = record(source_url="https://www.example-phil.org/files/other.pdf", position="Principal Cello")
+    writer.write_vacancy(other)
+    row = fake.vacancies[record().natural_key]
+    row["review_status"] = "published"
+    row["last_seen_at"] = "2026-08-01T00:00:00+00:00"
+    fake.vacancies[other.natural_key]["last_seen_at"] = "2026-08-01T00:00:00+00:00"
+    items_before = list(fake.items)
+
+    writer.touch_source(record().source_url)
+
+    patch = fake.requests[-1]
+    assert patch.method == "PATCH" and patch.url.path.endswith("/vacancies")
+    assert dict(patch.url.params) == {"source_url": f"eq.{record().source_url}"}
+    assert json.loads(patch.content) == {"last_seen_at": "2026-10-10T00:00:00+00:00"}
+    assert row["last_seen_at"] == "2026-10-10T00:00:00+00:00"
+    assert row["review_status"] == "published"  # a still-listed audition is not sent back to review
+    assert fake.vacancies[other.natural_key]["last_seen_at"] == "2026-08-01T00:00:00+00:00"
+    assert fake.items == items_before
+
+
+def test_dry_run_touch_is_remembered(tmp_path):
+    writer = DryRunWriter(tmp_path)
+    writer.touch_source("https://www.example-phil.org/auditions")
+    assert writer.touched == ["https://www.example-phil.org/auditions"]
 
 
 def test_changed_snapshot_replaces_items_and_reopens_review(supabase):

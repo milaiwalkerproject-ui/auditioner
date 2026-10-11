@@ -101,7 +101,7 @@ list order. A vacancy id appears at most once in an answer.
 | `auditionDates` | the verified dates, `YYYY-MM-DD`, sorted, duplicates removed; anything that is not a real calendar date is dropped, never guessed |
 | `listCompleteness` | `full` · `partial_public` · `works_only` · `revealed_on_invitation` · `unknown` |
 | `sourceURL` | the orchestra's own page or document (always http/https; uploaded lists never reach the feed) |
-| `lastCheckedAt` | `YYYY-MM-DD` of `last_seen_at`: the last time the crawler read this vacancy from the source |
+| `lastCheckedAt` | `YYYY-MM-DD` of `last_seen_at`: the last night the crawler found this vacancy's source still there (unchanged, or re-read) |
 | `items` | published items only: `rawText` (the source line, verbatim), `category` (`solo` · `excerpt` · `sight_reading` · `chamber` · `other`), `round` (`""` when the list doesn't say), `excerptId` (null when not matched to the catalogue) |
 
 **`/v1/recommendations`** — the app's position is mapped to the database's coarse

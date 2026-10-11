@@ -163,6 +163,33 @@ def test_second_run_is_conditional_and_calls_no_model(web, clock, registry, cata
     assert len(fake.calls) == calls_before
     assert "nothing changed" in " ".join(orchestra.notes)
     assert writer.get_source(PDF).status == "unchanged"
+    # Both answered 304, so what was read from them is still listed tonight.
+    assert PAGE in writer.touched and PDF in writer.touched
+    assert orchestra.sources_unchanged == 2 and orchestra.to_dict()["sourcesUnchanged"] == 2
+
+
+def test_changed_source_is_not_marked_still_listed(web, clock, registry, catalogue, tmp_path):
+    serve(web)
+    pipeline, writer, fake = build(web, clock, registry, catalogue, tmp_path)
+    pipeline.run(orchestra_id="example-phil")
+    assert writer.touched == []  # first visit: everything is new
+    web.pdf(PDF, make_pdf(PDF_LINES[:4]), etag='"pdf-v2"')
+    clock.advance(3600)
+    pipeline.run(orchestra_id="example-phil")
+    assert PDF not in writer.touched  # the changed list is re-extracted instead
+
+
+def test_unchanged_content_without_validators_is_still_listed(web, clock, registry, catalogue, tmp_path):
+    web.text(f"{HOST}/robots.txt", "User-agent: *\nDisallow: /private/\n")
+    web.html(PAGE, PAGE_HTML)  # no ETag / Last-Modified: the server always answers 200
+    web.pdf(PDF, make_pdf(PDF_LINES))
+    web.pdf(f"{HOST}/files/season-brochure.pdf", make_pdf(["Season"]))
+    pipeline, writer, fake = build(web, clock, registry, catalogue, tmp_path)
+    pipeline.run(orchestra_id="example-phil")
+    clock.advance(3600)
+    report = pipeline.run(orchestra_id="example-phil")
+    assert not report.orchestras[0].page_changed
+    assert PAGE in writer.touched and PDF in writer.touched
 
 
 def test_changed_document_is_re_extracted_and_replaces_the_snapshot(web, clock, registry, catalogue, tmp_path):

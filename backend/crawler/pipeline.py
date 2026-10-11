@@ -54,6 +54,7 @@ class OrchestraReport:
     pages_checked: int = 0
     documents_checked: int = 0
     documents_changed: int = 0
+    sources_unchanged: int = 0
     extracted: int = 0
     vacancies_written: int = 0
     items_total: int = 0
@@ -75,6 +76,7 @@ class OrchestraReport:
             "pagesChecked": self.pages_checked,
             "documentsChecked": self.documents_checked,
             "documentsChanged": self.documents_changed,
+            "sourcesUnchanged": self.sources_unchanged,
             "extracted": self.extracted,
             "vacanciesWritten": self.vacancies_written,
             "itemsTotal": self.items_total,
@@ -207,6 +209,7 @@ class Pipeline:
         previous = self.writer.get_source(url)
         if result.unchanged:
             self.fetcher.record(result, orchestra_id=orchestra.id, kind="page")
+            self._still_listed(report, url, result.final_url)
             links = [Link(**entry) for entry in (previous.extra.get("links") or [])] if previous else []
             return result, "", links, [], False
         if not result.ok:
@@ -226,6 +229,8 @@ class Pipeline:
         kept = links[: self.settings.max_documents_per_orchestra + self.settings.max_subpages_per_orchestra]
         record.extra["links"] = [{**link.__dict__, "text": redact_text(link.text)[0]} for link in kept]
         self.writer.put_source(record)
+        if not changed:
+            self._still_listed(report, url, result.final_url)
         return result, text, links, posting_lines, changed
 
     def _fetch_document(self, link: Link, orchestra: Orchestra, page_url: str, report: OrchestraReport) -> _Source | None:
@@ -234,6 +239,7 @@ class Pipeline:
         previous = self.writer.get_source(link.url)
         if result.unchanged:
             self.fetcher.record(result, orchestra_id=orchestra.id, kind="document")
+            self._still_listed(report, link.url, result.final_url)
             return None
         if not result.ok:
             self.fetcher.record(result, orchestra_id=orchestra.id, kind="document", note=result.error)
@@ -252,12 +258,27 @@ class Pipeline:
             changed = True
         self.fetcher.record(result, orchestra_id=orchestra.id, kind="document", content_hash=raw_hash, text_hash=text_hash,
                             note="; ".join(text.notes) or None)
+        if not changed:
+            self._still_listed(report, link.url, result.final_url)
         if text.skipped:
             return None
         if changed:
             report.documents_changed += 1
         return _Source(url=result.final_url, kind=text.kind, text=text, raw=result.body, changed=changed,
                        strong=link.strong or any(h in link.url.lower() for h in STRONG_DOCUMENT_HINTS), link_text=link.text)
+
+    def _still_listed(self, report: OrchestraReport, *urls: str) -> None:
+        """The source answered and is unchanged since the last visit, so whatever we read
+        from it is still on the orchestra's site tonight: move `last_seen_at` on, or an
+        audition with no deadline would drop out of the feed 60 days after it was first read
+        and "last checked" in the app would show an old date. A changed source is not
+        touched here; its vacancies are rewritten (or left to expire) by extraction."""
+        report.sources_unchanged += 1
+        for url in dict.fromkeys(u for u in urls if u):
+            try:
+                self.writer.touch_source(url)
+            except Exception as exc:  # a missed touch must not stop the orchestra
+                report.errors.append(f"could not mark {url} as still listed: {exc}")
 
     def _process(self, orchestra: Orchestra, report: OrchestraReport) -> None:
         start_url = orchestra.start_url or ""
