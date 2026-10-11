@@ -11,6 +11,8 @@ import Foundation
 //   POST/DELETE/GET /v1/trends  → see APIClient+Trends.swift (opt-in "Popular with other players", PLAN D6)
 //   GET  /healthz      → {"status":"ok"}
 // Every request carries X-Device-Id (random per install) and X-App-Version.
+// Only the OMR upload and the account endpoints carry the signed-in session (Authorization: Bearer):
+// feedback, trends, the feed and recommendations are sent without it (docs/PRIVACY.md).
 
 struct OMRResponse: Decodable {
     var musicxml: String
@@ -87,11 +89,18 @@ final class APIClient {
     let baseURL: URL?
     let deviceId: String
     let session: URLSession
+    /// Reads the signed-in session token (nil when signed out). Called only for requests that ask for
+    /// it (`request(path:method:authorized:)`), never for the rest. Injected so tests never touch the keychain.
+    private let sessionToken: () -> String?
 
-    init(baseURL: URL?, deviceId: String, session: URLSession = .shared) {
+    init(baseURL: URL?,
+         deviceId: String,
+         session: URLSession = .shared,
+         sessionToken: @escaping () -> String? = KeychainStore.currentSessionToken) {
         self.baseURL = baseURL
         self.deviceId = deviceId
         self.session = session
+        self.sessionToken = sessionToken
     }
 
     static func fromSettings(_ settings: AppSettings = .shared) -> APIClient {
@@ -103,17 +112,28 @@ final class APIClient {
     }
 
     // Internal (not private) so feature files can add endpoints in their own `extension APIClient`.
+    /// A plain request: X-Device-Id and X-App-Version only, never the account session and never a
+    /// keychain read. Feedback, trends, the feed and recommendations use this (docs/PRIVACY.md: the
+    /// session is used for nothing but counting scans per account).
     func request(path: String, method: String) throws -> URLRequest {
         guard let baseURL else { throw APIError.notConfigured }
         var req = URLRequest(url: baseURL.appendingPathComponent(path))
         req.httpMethod = method
         req.setValue(deviceId, forHTTPHeaderField: "X-Device-Id")
         req.setValue(appVersion, forHTTPHeaderField: "X-App-Version")
-        // Signed in (PLAN B2): the server counts scans per account instead of per device. See APIClient+Account.swift.
-        if let sessionToken: String = KeychainStore.currentSessionToken() {
-            req.setValue("Bearer " + sessionToken, forHTTPHeaderField: "Authorization")
-        }
         req.timeoutInterval = 120
+        return req
+    }
+
+    /// The same request with the signed-in session as `Authorization: Bearer …` when `authorized` is
+    /// true and the player is signed in (PLAN B2: the server counts scans per account instead of per
+    /// device). Only the OMR upload asks for this; the account endpoints set the header from the
+    /// token they are given (APIClient+Account.swift).
+    func request(path: String, method: String, authorized: Bool) throws -> URLRequest {
+        var req: URLRequest = try request(path: path, method: method)
+        if authorized, let token: String = sessionToken(), !token.isEmpty {
+            req.setValue("Bearer " + token, forHTTPHeaderField: "Authorization")
+        }
         return req
     }
 
@@ -134,7 +154,9 @@ final class APIClient {
     }
 
     func recognize(imageJPEG: Data, instrument: Instrument, transposition: Int, meter: String?, hints: [String]) async throws -> OMRResponse {
-        var req = try request(path: "v1/omr", method: "POST")
+        // Besides the account endpoints, the one request that carries the session: signed-in players
+        // get their own daily scan limit (the server counts per account instead of per device).
+        var req: URLRequest = try request(path: "v1/omr", method: "POST", authorized: true)
         let boundary = "auditioner-\(UUID().uuidString)"
         req.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         var body = Data()

@@ -99,6 +99,20 @@ enum MockAuditionLogic {
         guard let r = rating else { return nil }
         return min(5, max(1, r))
     }
+
+    /// Which catalogue excerpts a finished run counts as practised (PLAN D6), under each excerpt's
+    /// **own** instrument — a run can mix instruments, and the player's instrument in Settings says
+    /// nothing about what was played. `instrumentOf` looks an id up in the catalogue; an id it doesn't
+    /// know is skipped, as are typed items and scans without an excerpt id. Ids are sorted, no repeats.
+    static func practisedExcerpts(_ items: [MockAuditionItem],
+                                  instrumentOf: (String) -> Instrument?) -> [Instrument: [String]] {
+        var byInstrument: [Instrument: Set<String>] = [:]
+        for item in items {
+            guard let excerptId: String = item.excerptId, let instrument: Instrument = instrumentOf(excerptId) else { continue }
+            byInstrument[instrument, default: []].insert(excerptId)
+        }
+        return byInstrument.mapValues { (ids: Set<String>) -> [String] in ids.sorted() }
+    }
 }
 
 /// Deterministic generator (SplitMix64) for tests and previews.

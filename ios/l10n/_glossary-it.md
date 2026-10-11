@@ -22,7 +22,7 @@ Condividi, Accedi con Apple, File (Files app), Foto (Photos app).
 | utility | utility | no Italian equivalent; kept |
 | concertmaster | spalla | |
 | high / low (horn) | acuto / grave | |
-| (excerpt) list | lista | "lists" → liste; "official list" → lista ufficiale. The two `lists.phrase.*` keys have no format arguments, so they are plain complements — "per il tuo strumento" / "per il tuo ruolo" — and the noun "lista/liste" sits in the surrounding sentences ("In 7 delle 9 liste per il tuo ruolo che abbiamo raccolto") |
+| (excerpt) list | lista | "lists" → liste; "official list" → lista ufficiale. The two `lists.phrase.*` keys have no format arguments, so they are plain complements — "per questo strumento" / "per il tuo ruolo" — and the noun "lista/liste" sits in the surrounding sentences ("In 7 delle 9 liste per il tuo ruolo che abbiamo raccolto", "In 3 delle 4 liste per questo strumento che abbiamo raccolto, tutti i ruoli"). "questo strumento", not "il tuo strumento": “this instrument”, not “your instrument”, because the excerpt page builds its query from the excerpt's instrument (`ExcerptFrequencySection`), which need not be the player's own; the chair always comes from the player's Settings, so `lists.phrase.chair` keeps “your chair”. |
 | repertoire | repertorio | |
 | catalogue | catalogo | |
 | match (to catalogue) | corrispondenza / abbinare | "Match to catalogue" → Abbina al catalogo; "Link"/"Unlink" → Collega/Scollega |

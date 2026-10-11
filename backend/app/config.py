@@ -81,6 +81,11 @@ class Settings:
     # A secret, env only (Secret Manager on Cloud Run). Empty → trends off (503). Set it
     # once: a new value orphans every stored row.
     trends_salt: str = field(default="", repr=False)
+    # Per-network (client IP) sliding-hour limits on the two POSTs anyone can call with a
+    # made-up device id: sharing practice trends and signing in with Apple. A brake on a
+    # flood, not a security boundary — App Attest (PLAN B3) is the real protection.
+    hourly_trends_post_limit: int = 20
+    hourly_sign_in_limit: int = 30
     # Sign in with Apple accounts (/v1/account…, app/accounts.py). Off (503) until the
     # four Apple/account values and Supabase are all set. The .p8 key and ACCOUNT_SECRET
     # are secrets: env only (Secret Manager on Cloud Run), never logged or shown.
@@ -113,6 +118,8 @@ class Settings:
             feedback_hash_salt=env.get("FEEDBACK_HASH_SALT", "").strip(),
             daily_feedback_limit=_int(env, "DAILY_FEEDBACK_LIMIT", 20),
             trends_salt=env.get("TRENDS_SALT", "").strip(),
+            hourly_trends_post_limit=_int(env, "HOURLY_TRENDS_POST_LIMIT", 20),
+            hourly_sign_in_limit=_int(env, "HOURLY_SIGN_IN_LIMIT", 30),
             apple_team_id=env.get("APPLE_TEAM_ID", "").strip(),
             apple_key_id=env.get("APPLE_KEY_ID", "").strip(),
             apple_private_key=env.get("APPLE_PRIVATE_KEY", "").strip(),

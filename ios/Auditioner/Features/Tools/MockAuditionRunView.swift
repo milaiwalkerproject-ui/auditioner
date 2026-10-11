@@ -151,6 +151,7 @@ struct MockAuditionRunView: View {
     let config: MockAuditionConfig
 
     @StateObject private var model: MockAuditionRunModel
+    @EnvironmentObject private var catalog: CatalogStore
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     @State private var savedRun: MockAuditionRun? = nil
@@ -269,7 +270,14 @@ struct MockAuditionRunView: View {
 
     private func finish() {
         let result = model.finish()
-        TrendsTracker.shared.notePractised(excerptIds: result.items.compactMap { $0.excerptId }, instrument: AppSettings.shared.instrument) // D6, only while sharing is on
+        // D6, only while sharing is on: each excerpt counts under its own instrument, looked up in the
+        // catalogue — not under the instrument in Settings. Ids the catalogue doesn't know are skipped.
+        let practised: [Instrument: [String]] = MockAuditionLogic.practisedExcerpts(result.items) { (excerptId: String) -> Instrument? in
+            catalog.excerpt(id: excerptId)?.instrument
+        }
+        for instrument in practised.keys.sorted(by: { $0.rawValue < $1.rawValue }) {
+            TrendsTracker.shared.notePractised(excerptIds: practised[instrument] ?? [], instrument: instrument)
+        }
         let run = MockAuditionRun(title: MockAuditionLogic.runTitle(date: Date()),
                                   itemsData: MockAuditionLogic.encode(result.items))
         run.recordingFileName = result.recordingFileName

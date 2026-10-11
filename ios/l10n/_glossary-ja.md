@@ -23,7 +23,7 @@ Japanese has one plural category, so every value is a plain string.
 | chair / position | ポジション | Which chair? = ポジションは？; Include all chairs = すべてのポジションを含める; ", all chairs" = 、全ポジション |
 | principal / assistant principal | 首席 / 副首席 | |
 | section (player) | セクション | |
-| lists phrase (`lists.phrase.allChairs` / `lists.phrase.chair`) | この楽器のリスト / このポジションのリスト | the key text carries no `%@`, so `merge_translations.py` rejects a value with placeholders; these fixed labels pass and the evidence lines are built as 「label：収集した9件中7件に掲載、全ポジション（2022–2026）」. If the checker is taught to compare against the Swift `defaultValue`, prefer `%@の%@` / `%@%@の%@` (チェロのリスト, セクションチェロのリスト) |
+| lists phrase (`lists.phrase.allChairs` / `lists.phrase.chair`) | この楽器のリスト / このポジションのリスト | the key text carries no `%@`, so `merge_translations.py` rejects a value with placeholders; these fixed labels pass and the evidence lines are built as 「label：収集した9件中7件に掲載、全ポジション（2022–2026）」. この楽器 (“this instrument”), never あなたの楽器: the excerpt page builds its query from the excerpt's instrument (`ExcerptFrequencySection`), which need not be the player's own. If the checker is taught to compare against the Swift `defaultValue`, prefer `%@の%@` / `%@%@の%@` (チェロのリスト, セクションチェロのリスト) |
 | second (chair) | 2番 | |
 | utility | ユーティリティ | |
 | high / low (horn) | 上吹き / 下吹き | |

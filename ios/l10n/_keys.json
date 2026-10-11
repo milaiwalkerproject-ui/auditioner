@@ -2062,12 +2062,6 @@
    "ExcerptNotesSection.swift"
   ]
  },
- "Machine-translated from English — may contain errors. Use Show original to compare.": {
-  "comment": "",
-  "files": [
-   "ExcerptNotesSection.swift"
-  ]
- },
  "Make reference audio": {
   "comment": "",
   "files": [
@@ -3813,6 +3807,12 @@
    "ExcerptRecordingsSection.swift"
   ]
  },
+ "Some notes aren't available in your region.": {
+  "comment": "",
+  "files": [
+   "ExcerptNotesSection.swift"
+  ]
+ },
  "Something went wrong": {
   "comment": "",
   "files": [
@@ -4875,6 +4875,12 @@
    "DroneView.swift"
   ]
  },
+ "We couldn't read your sign-in on this device, so the account wasn't deleted. Sign in again, then delete it.": {
+  "comment": "",
+  "files": [
+   "AccountStore.swift"
+  ]
+ },
  "We haven't collected any %@ yet.": {
   "comment": "",
   "files": [
@@ -5150,6 +5156,12 @@
   "comment": "",
   "files": [
    "PrivacyView.swift"
+  ]
+ },
+ "Your sign-in has expired, so the account wasn't deleted. Sign in again, then delete it.": {
+  "comment": "",
+  "files": [
+   "AccountStore.swift"
   ]
  },
  "Your verdict": {

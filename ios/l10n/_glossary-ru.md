@@ -80,7 +80,7 @@ Plural keys carry the four CLDR forms one / few / many / other (1 список �
 | Hz | Гц | |
 
 Keys `lists.phrase.chair` and `lists.phrase.allChairs` are translated without the instrument
-and chair words ("списков для вашей позиции", "списков для вашего инструмента") because
+and chair words ("списков для вашей позиции", "списков для этого инструмента") because
 `_keys.json` records them without format arguments and `merge_translations.py` rejects any
 `%@` in them. They are in the genitive plural so that every sentence they are glued into reads
 correctly: "В 7 из 9 собранных нами списков для вашей позиции (2022–2026)", "Нет ни в одном
@@ -88,3 +88,4 @@ correctly: "В 7 из 9 собранных нами списков для ваш
 позиции из региона «…»", "У нас пока нет списков для вашей позиции." The wording that keeps the
 words, for when the script accepts positional arguments: `lists.phrase.chair` →
 `%3$@ (%2$@, %1$@)`, `lists.phrase.allChairs` → `%2$@ (%1$@)`.
+`lists.phrase.allChairs` says "этого инструмента" — “this instrument”, not “your instrument”, because the excerpt page builds its query from the excerpt's instrument (`ExcerptFrequencySection`), which need not be the player's own; the chair always comes from the player's Settings, so `lists.phrase.chair` keeps “your chair”.

@@ -22189,70 +22189,6 @@
         }
       }
     },
-    "Machine-translated from English — may contain errors. Use Show original to compare." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Maschinell aus dem Englischen übersetzt – kann Fehler enthalten. Vergleiche mit „Original anzeigen“."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Traducción automática del inglés — puede contener errores. Usa Mostrar original para comparar."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Traduction automatique depuis l'anglais — peut contenir des erreurs. Utilisez « Afficher l'original » pour comparer."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Traduzione automatica dall'inglese — può contenere errori. Usa Mostra originale per confrontare."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "英語からの機械翻訳 — 誤りを含む可能性があります。「原文を表示」で比較できます。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "영어에서 기계 번역한 글이에요 — 오류가 있을 수 있어요. 원문 보기로 비교해 보세요."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Traduzido do inglês por máquina — pode conter erros. Use Mostrar original para comparar."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Машинный перевод с английского — возможны ошибки. Нажмите «Показать оригинал», чтобы сравнить."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "由英文机器翻译——可能有错误。可使用“显示原文”进行对比。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "由英文機器翻譯：可能有錯。請用「顯示原文」比較。"
-          }
-        }
-      }
-    },
     "Make reference audio" : {
       "localizations" : {
         "de" : {
@@ -40265,6 +40201,7 @@
         }
       }
     },
+    "Some notes aren't available in your region." : {},
     "Something went wrong" : {
       "localizations" : {
         "de" : {
@@ -51445,6 +51382,7 @@
         }
       }
     },
+    "We couldn't read your sign-in on this device, so the account wasn't deleted. Sign in again, then delete it." : {},
     "We haven't collected any %@ yet." : {
       "localizations" : {
         "de" : {
@@ -54461,6 +54399,7 @@
         }
       }
     },
+    "Your sign-in has expired, so the account wasn't deleted. Sign in again, then delete it." : {},
     "Your verdict" : {
       "localizations" : {
         "de" : {
@@ -54871,25 +54810,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "für dein Instrument"
+            "value" : "für dieses Instrument"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "listas de tu instrumento"
+            "value" : "listas de este instrumento"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "pour votre instrument"
+            "value" : "pour cet instrument"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "per il tuo strumento"
+            "value" : "per questo strumento"
           }
         },
         "ja" : {
@@ -54907,25 +54846,25 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "do seu instrumento"
+            "value" : "deste instrumento"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "списков для вашего инструмента"
+            "value" : "списков для этого инструмента"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "你所选乐器的曲目单"
+            "value" : "该乐器的曲目单"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "符合你樂器的清單"
+            "value" : "符合此樂器的清單"
           }
         }
       }

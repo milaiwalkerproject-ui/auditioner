@@ -73,8 +73,9 @@ Eliminar, Compartir, Archivos, Fotos, Iniciar sesión con Apple. Sentence case t
 | note (a notice banner, not a pitch) | aviso | "Ocultar este aviso" |
 
 Keys `lists.phrase.chair` and `lists.phrase.allChairs` are translated without the instrument
-and chair words ("listas para tu posición", "listas de tu instrumento") because `_keys.json`
+and chair words ("listas para tu posición", "listas de este instrumento") because `_keys.json`
 records them without format arguments and `merge_translations.py` rejects any `%@` in them.
+`lists.phrase.allChairs` says "este instrumento" — “this instrument”, not “your instrument”, because the excerpt page builds its query from the excerpt's instrument (`ExcerptFrequencySection`), which need not be the player's own; the chair always comes from the player's Settings, so `lists.phrase.chair` keeps “your chair”.
 The wording that keeps the words, for when the script accepts positional arguments:
 `lists.phrase.chair` → `%3$@ de %2$@ %1$@` (e.g. "listas de violonchelo tutti"),
 `lists.phrase.allChairs` → `%2$@ de %1$@` (e.g. "listas de violonchelo").

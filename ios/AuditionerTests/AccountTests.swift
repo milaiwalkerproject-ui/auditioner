@@ -305,20 +305,61 @@ final class AccountStoreTests: XCTestCase {
         XCTAssertTrue(h.api.signOutTokens.isEmpty)
     }
 
-    func testDeleteAccountOnExpiredSessionSignsOutLocally() async {
+    func testDeleteAccountOnExpiredSessionSignsOutLocallyButSaysTheAccountStillExists() async {
         let h = AccountHarness(session: AccountHarness.session) { api, _ in
             api.deleteError = APIError.server(status: 401, message: "You're signed out. Sign in again.")
         }
         do {
             try await h.store.deleteAccount()
-            XCTFail("expected a signed-out error")
+            XCTFail("expected an error: the server did not delete anything")
         } catch let error as AccountError {
-            XCTAssertEqual(error, .signedOut(message: "You're signed out. Sign in again."))
+            // Not the server's plain "signed out": the player must learn the account is still there.
+            XCTAssertEqual(error, .sessionExpiredBeforeDelete)
+            XCTAssertEqual(AccountStore.plainWords(for: error),
+                           "Your sign-in has expired, so the account wasn't deleted. Sign in again, then delete it.")
         } catch {
             XCTFail("unexpected error \(error)")
         }
+        XCTAssertEqual(h.api.deleteTokens, ["tok-1"])
         XCTAssertEqual(h.store.state, .signedOut)
         XCTAssertNil(h.storage.session)
+        XCTAssertFalse(h.store.isBusy)
+    }
+
+    func testDeleteAccountWithUnreadableSessionIsNotReportedAsDeleted() async {
+        // The screen says signed in, but the keychain gives nothing back (item gone or unreadable).
+        let h = AccountHarness(session: AccountHarness.session)
+        XCTAssertEqual(h.store.state, AccountHarness.signedIn)
+        h.storage.session = nil
+        do {
+            try await h.store.deleteAccount()
+            XCTFail("expected an error: nothing was sent to the server, so nothing was deleted")
+        } catch let error as AccountError {
+            XCTAssertEqual(error, .sessionUnreadableBeforeDelete)
+            XCTAssertEqual(AccountStore.plainWords(for: error),
+                           "We couldn't read your sign-in on this device, so the account wasn't deleted. Sign in again, then delete it.")
+        } catch {
+            XCTFail("unexpected error \(error)")
+        }
+        // The server was never asked, and the device is now honestly signed out so the player can sign in again.
+        XCTAssertTrue(h.api.deleteTokens.isEmpty)
+        XCTAssertEqual(h.store.state, .signedOut)
+        XCTAssertNil(h.storage.session)
+        XCTAssertFalse(h.store.isBusy)
+    }
+
+    func testDeleteAccountWhileSignedOutIsNotReportedAsDeleted() async {
+        let h = AccountHarness()
+        do {
+            try await h.store.deleteAccount()
+            XCTFail("expected an error: there is no session to delete with")
+        } catch let error as AccountError {
+            XCTAssertEqual(error, .sessionUnreadableBeforeDelete)
+        } catch {
+            XCTFail("unexpected error \(error)")
+        }
+        XCTAssertTrue(h.api.deleteTokens.isEmpty)
+        XCTAssertEqual(h.store.state, .signedOut)
     }
 
     func testRevokedAppleCredentialSignsOut() async {
@@ -391,6 +432,180 @@ final class AccountStoreTests: XCTestCase {
     func testStateFromSession() {
         XCTAssertEqual(AccountStore.state(from: nil), .signedOut)
         XCTAssertEqual(AccountStore.state(from: AccountHarness.session), AccountHarness.signedIn)
+    }
+}
+
+// MARK: - Which requests carry the account session (docs/PRIVACY.md)
+
+/// Answers every request from one canned JSON body and remembers the requests, so tests can read the
+/// headers the app really sends without a network. Plugged into a `URLSession` per test.
+final class RecordingURLProtocol: URLProtocol {
+    private static let lock: NSLock = NSLock()
+    private static var requests: [URLRequest] = []
+    private static var answer: Data = Data("{}".utf8)
+
+    /// Forgets earlier requests and sets the body every request is answered with (200, JSON).
+    static func reset(answer json: String) {
+        lock.lock()
+        defer { lock.unlock() }
+        requests = []
+        answer = Data(json.utf8)
+    }
+
+    static var recorded: [URLRequest] {
+        lock.lock()
+        defer { lock.unlock() }
+        return requests
+    }
+
+    private static func record(_ request: URLRequest) -> Data {
+        lock.lock()
+        defer { lock.unlock() }
+        requests.append(request)
+        return answer
+    }
+
+    override class func canInit(with request: URLRequest) -> Bool { true }
+    override class func canonicalRequest(for request: URLRequest) -> URLRequest { request }
+
+    override func startLoading() {
+        let data: Data = RecordingURLProtocol.record(request)
+        guard let url: URL = request.url, let client: URLProtocolClient = self.client else { return }
+        guard let response: HTTPURLResponse = HTTPURLResponse(url: url, statusCode: 200, httpVersion: "HTTP/1.1",
+                                                              headerFields: ["Content-Type": "application/json"]) else { return }
+        client.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+        client.urlProtocol(self, didLoad: data)
+        client.urlProtocolDidFinishLoading(self)
+    }
+
+    override func stopLoading() {}
+}
+
+final class APIClientSessionHeaderTests: XCTestCase {
+
+    /// One body that satisfies every decoder these tests run into (unknown keys are ignored).
+    private let everyAnswer: String = """
+    {"musicxml":"<score-partwise/>","warnings":[],"engine":"test",
+     "auditions":[],"recommendations":[],"candidates":[],
+     "enough":false,"fromWeek":"2026-W34","toWeek":"2026-W41","trends":[],
+     "accountId":"acc-1","sessionToken":"tok-2","dailyScanLimit":60,"createdAt":"2026-10-11"}
+    """
+
+    private var tokenReads: Int = 0
+
+    override func setUp() {
+        super.setUp()
+        tokenReads = 0
+        RecordingURLProtocol.reset(answer: everyAnswer)
+    }
+
+    /// A client that talks to `RecordingURLProtocol` and, when `signedIn`, has the session "tok-1".
+    private func makeClient(signedIn: Bool) -> APIClient {
+        let config: URLSessionConfiguration = URLSessionConfiguration.ephemeral
+        config.protocolClasses = [RecordingURLProtocol.self]
+        let session: URLSession = URLSession(configuration: config)
+        let token: String? = signedIn ? "tok-1" : nil
+        return APIClient(baseURL: URL(string: "https://auditioner.test"),
+                         deviceId: "device-1",
+                         session: session,
+                         sessionToken: { [weak self] in
+                             self?.tokenReads += 1
+                             return token
+                         })
+    }
+
+    private func authorizationHeaders() -> [String?] {
+        RecordingURLProtocol.recorded.map { $0.value(forHTTPHeaderField: "Authorization") }
+    }
+
+    private func paths() -> [String] {
+        RecordingURLProtocol.recorded.map { $0.url?.path ?? "" }
+    }
+
+    // MARK: Request builders
+
+    func testPlainRequestNeverTouchesTheSession() throws {
+        let client: APIClient = makeClient(signedIn: true)
+        let req: URLRequest = try client.request(path: "v1/feedback", method: "POST")
+        XCTAssertNil(req.value(forHTTPHeaderField: "Authorization"))
+        XCTAssertEqual(req.value(forHTTPHeaderField: "X-Device-Id"), "device-1")
+        XCTAssertNotNil(req.value(forHTTPHeaderField: "X-App-Version"))
+        XCTAssertEqual(tokenReads, 0, "a plain request must not read the keychain")
+    }
+
+    func testAuthorizedRequestCarriesTheSessionOnlyWhenSignedIn() throws {
+        let signedIn: URLRequest = try makeClient(signedIn: true).request(path: "v1/omr", method: "POST", authorized: true)
+        XCTAssertEqual(signedIn.value(forHTTPHeaderField: "Authorization"), "Bearer tok-1")
+        let notAsked: URLRequest = try makeClient(signedIn: true).request(path: "v1/omr", method: "POST", authorized: false)
+        XCTAssertNil(notAsked.value(forHTTPHeaderField: "Authorization"))
+        let signedOut: URLRequest = try makeClient(signedIn: false).request(path: "v1/omr", method: "POST", authorized: true)
+        XCTAssertNil(signedOut.value(forHTTPHeaderField: "Authorization"))
+    }
+
+    // MARK: What each endpoint really sends
+
+    func testOMRUploadCarriesTheSessionWhenSignedIn() async throws {
+        let client: APIClient = makeClient(signedIn: true)
+        _ = try await client.recognize(imageJPEG: Data([0xFF, 0xD8, 0xFF]), instrument: .cello, transposition: 0, meter: nil, hints: [])
+        XCTAssertEqual(paths(), ["/v1/omr"])
+        XCTAssertEqual(authorizationHeaders(), ["Bearer tok-1"])
+    }
+
+    func testOMRUploadCarriesNoSessionWhenSignedOut() async throws {
+        let client: APIClient = makeClient(signedIn: false)
+        _ = try await client.recognize(imageJPEG: Data([0xFF, 0xD8, 0xFF]), instrument: .cello, transposition: 0, meter: nil, hints: [])
+        XCTAssertEqual(paths(), ["/v1/omr"])
+        XCTAssertEqual(authorizationHeaders(), [nil])
+    }
+
+    func testFeedbackCarriesNoSessionEvenWhenSignedIn() async throws {
+        let client: APIClient = makeClient(signedIn: true)
+        try await client.sendFeedback(context: "settings", excerptId: nil, message: "The tempo row is wrong.")
+        XCTAssertEqual(paths(), ["/v1/feedback"])
+        XCTAssertEqual(authorizationHeaders(), [nil])
+        XCTAssertEqual(RecordingURLProtocol.recorded.first?.value(forHTTPHeaderField: "X-Device-Id"), "device-1")
+        XCTAssertEqual(tokenReads, 0)
+    }
+
+    func testTrendsCarryNoSessionEvenWhenSignedIn() async throws {
+        let client: APIClient = makeClient(signedIn: true)
+        try await client.shareTrends(instrument: .cello, week: "2026-W41", excerptIds: ["cello-example-1"])
+        try await client.forgetTrends()
+        _ = try await client.trends(instrument: .cello)
+        XCTAssertEqual(paths(), ["/v1/trends", "/v1/trends", "/v1/trends"])
+        XCTAssertEqual(authorizationHeaders(), [nil, nil, nil])
+        XCTAssertEqual(tokenReads, 0)
+    }
+
+    func testFeedRecommendationsAndIdentifyCarryNoSessionEvenWhenSignedIn() async throws {
+        let client: APIClient = makeClient(signedIn: true)
+        _ = try await client.auditions(instrument: .cello, region: nil)
+        _ = try await client.recommendations(instrument: .cello, position: .section, region: nil)
+        _ = try await client.identify(ocrText: "Allegro", instrument: .cello)
+        XCTAssertEqual(paths(), ["/v1/auditions", "/v1/recommendations", "/v1/identify"])
+        XCTAssertEqual(authorizationHeaders(), [nil, nil, nil])
+        XCTAssertEqual(tokenReads, 0)
+    }
+
+    func testAccountEndpointsCarryTheTokenTheyAreGiven() async throws {
+        // The store passes the stored token explicitly; the client's own keychain read is not consulted.
+        let client: APIClient = makeClient(signedIn: true)
+        _ = try await client.account(sessionToken: "tok-9")
+        try await client.signOut(sessionToken: "tok-9")
+        try await client.deleteAccount(sessionToken: "tok-9")
+        XCTAssertEqual(paths(), ["/v1/account", "/v1/account/signout", "/v1/account"])
+        XCTAssertEqual(RecordingURLProtocol.recorded.map { $0.httpMethod }, ["GET", "POST", "DELETE"])
+        XCTAssertEqual(authorizationHeaders(), ["Bearer tok-9", "Bearer tok-9", "Bearer tok-9"])
+        XCTAssertEqual(tokenReads, 0)
+    }
+
+    func testSignInExchangeCarriesNoSession() async throws {
+        // A stale token from an earlier sign-in must not ride along on a fresh one.
+        let client: APIClient = makeClient(signedIn: true)
+        _ = try await client.signInWithApple(identityToken: "id-token", authorizationCode: "code", nonce: "raw-nonce")
+        XCTAssertEqual(paths(), ["/v1/account/apple"])
+        XCTAssertEqual(authorizationHeaders(), [nil])
+        XCTAssertEqual(tokenReads, 0)
     }
 }
 

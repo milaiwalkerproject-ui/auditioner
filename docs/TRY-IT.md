@@ -244,12 +244,24 @@ of the error list and send it to me.
   note appears in English whatever language the app runs in. From that day
   on, with the app in one of those languages (on the device: **Settings → scroll
   down to Auditioner → Language**, then reopen the excerpt page), each approved
-  note shows the translation with a small "Machine-translated" tag, the line
-  "Machine-translated from English — may contain errors", and a "Show
-  original" link under it; "Show translation" brings the translation back. The
-  "AI-generated — may contain errors" line stays on every AI note, translated or
-  not. Draft notes (reviewer mode) are never translated. Work titles, composer
-  names and score markings stay as they are.
+  note shows the translation with a small "Machine-translated" tag, a "Show
+  original" link under it ("Show translation" brings the translation back), and
+  the usual "AI-generated — may contain errors, check against your part" line
+  with thumbs up/down and "Report an error" — a machine translation is AI text,
+  so that line appears under a translated **curated** note too, and goes away
+  when you switch that note to its English original. An AI note keeps the line
+  either way. Draft notes (reviewer mode) are never translated. Work titles,
+  composer names and score markings stay as they are.
+- **Hong Kong and Macau: AI notes hidden (plan row A6).** On an App Store
+  account from Hong Kong or Macau the excerpt pages leave out every AI-written
+  note and every machine translation; notes a person wrote (the ones with the
+  "Curated" tag) still show, in English, and the Notes box says once "Some notes
+  aren't available in your region." The App Store country decides; the
+  simulator has no App Store, so there the device's region decides instead. To
+  see it on the Mac: in the simulator, **Settings (the iOS one) → General →
+  Language & Region → Region → Hong Kong**, then open the app again and an
+  excerpt page with AI notes. Set the region back afterwards. On a real device
+  the storefront is read once when the app starts.
 - **Privacy page.** **Settings → About → Privacy** has new blocks for signing in
   with Apple and for "Popular with other players"; the full text is
   `docs/PRIVACY.md` (version 0.3). It is a promise to users — please read both

@@ -79,14 +79,15 @@ com a Apple, Sair. Sentence case throughout.
 Keys `lists.phrase.chair` and `lists.phrase.allChairs` are translated without the instrument
 and chair words because `_keys.json` records them without format arguments and
 `merge_translations.py` rejects any `%@` in them. The phrase is only the qualifier — "da sua
-posição" / "do seu instrumento" — and the sentences around it carry "lista"/"listas", so the
+posição" / "deste instrumento" — and the sentences around it carry "lista"/"listas", so the
 singular case reads naturally: "Em 7 das 9 listas da sua posição que coletamos (2022–2026)",
-"Na única lista da sua posição que coletamos (2025)", "Em 3 das 4 listas do seu instrumento que
+"Na única lista da sua posição que coletamos (2025)", "Em 3 das 4 listas deste instrumento que
 coletamos, todas as posições (2024–2026)", "Ainda não coletamos listas da sua posição.".
 The wording that keeps the words, for when the script accepts positional arguments:
 `lists.phrase.chair` → `%3$@ de %2$@ %1$@` (e.g. "listas de violoncelo tutti"),
 `lists.phrase.allChairs` → `%2$@ de %1$@` (e.g. "listas de violoncelo") — the sentences would
 then drop their own "listas".
+`lists.phrase.allChairs` says "deste instrumento" — “this instrument”, not “your instrument”, because the excerpt page builds its query from the excerpt's instrument (`ExcerptFrequencySection`), which need not be the player's own; the chair always comes from the player's Settings, so `lists.phrase.chair` keeps “your chair”.
 
 Other choices worth knowing: "Other" → "Outros" (one key for the region list and the line-kind
 list, so neither "Outro" nor "Outra" fits both); the mock-audition review screen is "Revisão"

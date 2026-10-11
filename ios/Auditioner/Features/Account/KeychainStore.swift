@@ -42,7 +42,8 @@ struct KeychainStore: AccountSessionStorage {
     }
 
     /// The session token to send as `Authorization: Bearer …`, or nil when signed out.
-    /// Safe from any thread; `APIClient` calls it before every request.
+    /// Safe from any thread; `APIClient` calls it only for the OMR upload (the one request where the
+    /// server counts scans per account), never for feedback, trends, the feed or recommendations.
     static func currentSessionToken() -> String? {
         standard.readSession()?.sessionToken
     }

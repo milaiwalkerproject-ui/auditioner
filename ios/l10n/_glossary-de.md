@@ -90,11 +90,12 @@ Sentence case throughout. Typography: „…“ quotes, en dash (–) with space
 Keys `lists.phrase.chair` and `lists.phrase.allChairs` are recorded in `_keys.json` without
 format arguments, and `merge_translations.py` rejects any `%@` in them, so the instrument and
 chair words cannot be carried. The German phrases are therefore "für deine Position" /
-"für dein Instrument" **without the noun**, and the noun "Liste(n)" is written into each sentence
+"für dieses Instrument" **without the noun**, and the noun "Liste(n)" is written into each sentence
 that uses the phrase ("Auf %lld von %lld gesammelten Listen %@%@%@", "Wir haben noch keine Listen %@
 gesammelt."). The wording that keeps the words, for when the script accepts positional arguments
 (noun still omitted, since the sentences carry it): `lists.phrase.chair` → `für %1$@ (%2$@)`
 (e.g. "Listen für Tutti (Cello)"), `lists.phrase.allChairs` → `für %1$@` (e.g. "Listen für Cello").
+`lists.phrase.allChairs` says "dieses Instrument" — “this instrument”, not “your instrument”, because the excerpt page builds its query from the excerpt's instrument (`ExcerptFrequencySection`), which need not be the player's own; the chair always comes from the player's Settings, so `lists.phrase.chair` keeps “your chair”.
 
 Known limitation: `LocalRecommendationEngine.instrumentWords` and three views lowercase the
 instrument name before inserting it ("The %@ catalogue…", "No open %@ auditions…", "Popular with %@

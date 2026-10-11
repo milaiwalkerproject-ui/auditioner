@@ -14,6 +14,8 @@ struct AuditionerApp: App {
                 .flushesFeedbackQueue()
                 // Signed in with Apple? Ask Apple once per launch whether that still stands (PLAN B2).
                 .task { await AccountStore.shared.refreshCredentialState() }
+                // Hong Kong / Macau storefront (PLAN A6): read once, then AI notes stay hidden for the run.
+                .task { await AINotesAvailability.shared.load() }
                 // Opt-in "Popular with other players" (PLAN D6): uploads this week's practised excerpts, at most once per 12 h.
                 .syncsPracticeTrends()
                 .environmentObject(catalog)

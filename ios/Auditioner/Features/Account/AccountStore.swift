@@ -21,6 +21,11 @@ enum AccountError: LocalizedError, Equatable {
     case couldNotSaveSession
     /// The server no longer knows this session (401); the app has signed out locally.
     case signedOut(message: String)
+    /// Delete account: the app says signed in but the keychain gave no session back, so nothing was
+    /// sent to the server and nothing was deleted. The app signs out locally.
+    case sessionUnreadableBeforeDelete
+    /// Delete account: the server answered 401, so the account is still there. The app signs out locally.
+    case sessionExpiredBeforeDelete
 
     var errorDescription: String? {
         switch self {
@@ -30,6 +35,10 @@ enum AccountError: LocalizedError, Equatable {
             return String(localized: "Couldn't keep your sign-in on this device. Try again.")
         case .signedOut(let message):
             return message.isEmpty ? String(localized: "You're signed out. Sign in again.") : message
+        case .sessionUnreadableBeforeDelete:
+            return String(localized: "We couldn't read your sign-in on this device, so the account wasn't deleted. Sign in again, then delete it.")
+        case .sessionExpiredBeforeDelete:
+            return String(localized: "Your sign-in has expired, so the account wasn't deleted. Sign in again, then delete it.")
         }
     }
 }
@@ -130,12 +139,16 @@ final class AccountStore: ObservableObject {
     }
 
     /// Deletes the account on the server (which revokes Apple's token) and then clears this device.
-    /// Throws when the server didn't confirm; nothing changes locally then, except when the server
-    /// says the session is already gone (401), which signs the player out here too.
+    /// Returns only when the server confirmed (204): Settings may say "Your account is deleted" on
+    /// nothing less. Throws otherwise; nothing changes locally then, except in the two cases where the
+    /// session is unusable, which sign the player out here (with an error that says the account is
+    /// still there): no session in the keychain (nothing was sent) and a 401 from the server.
     func deleteAccount() async throws {
         guard let session = storage.readSession() else {
+            // The screen may say signed in, but there is no session to send. Nothing was deleted;
+            // tell the player so, and bring the state in line with the keychain so they can sign in again.
             clearLocalSession()
-            return
+            throw AccountError.sessionUnreadableBeforeDelete
         }
         isBusy = true
         defer { isBusy = false }
@@ -143,9 +156,10 @@ final class AccountStore: ObservableObject {
         do {
             try await api.deleteAccount(sessionToken: session.sessionToken)
         } catch let error as APIError {
-            if case .server(let status, let message) = error, status == 401 {
+            if case .server(let status, _) = error, status == 401 {
+                // The session is dead but the account is not: say so, don't just say "signed out".
                 clearLocalSession()
-                throw AccountError.signedOut(message: message)
+                throw AccountError.sessionExpiredBeforeDelete
             }
             throw error
         }

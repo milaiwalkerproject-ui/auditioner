@@ -5,7 +5,9 @@ import Combine
 // source of truth; `content/sync_to_app.py` ships, per language, only translations whose English
 // is unchanged, as Resources/Translations/notes-<code>.json. Work titles, composer names and score
 // markings are never in these files. Nothing here invents a fact: a translation is shown or the
-// English is, and either way the AI label on an AI note stays.
+// English is. A translation is AI prose (CLAUDE.md), so whenever one is displayed the note carries the
+// "AI-generated — may contain errors, check against your part" label, also for a curated note; and
+// where AI notes are hidden (PLAN A6, Hong Kong / Macau) no translation is offered at all.
 
 /// The date gate: translated notes are offered only from 12 November 2026 (the I2 date). The gate is
 /// one fixed moment worldwide — 12:00 UTC on 12 November 2026, when 12 November has begun in every
@@ -148,5 +150,12 @@ enum NoteTranslationDisplay {
     /// The "Machine-translated" pill belongs next to translated text only.
     static func showsMachineTranslatedTag(translation: String?, showsOriginal: Bool) -> Bool {
         translation != nil && !showsOriginal
+    }
+
+    /// The AI footer ("AI-generated — may contain errors, check against your part", thumbs, "Report
+    /// an error") goes under every AI note, and under any note while its machine translation is the
+    /// text on screen — a translation is AI prose even when the English was written by a person.
+    static func showsAIFooter(origin: ContentOrigin, translation: String?, showsOriginal: Bool) -> Bool {
+        origin == .ai || showsMachineTranslatedTag(translation: translation, showsOriginal: showsOriginal)
     }
 }

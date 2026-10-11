@@ -6,6 +6,7 @@ EC P-256 key standing in for the .p8); no key material is committed."""
 
 from __future__ import annotations
 
+import asyncio
 import hashlib
 import hmac
 import json
@@ -33,12 +34,16 @@ from app.accounts import (
     MSG_DELETE_APPLE_DOWN,
     MSG_SIGNED_OUT,
     AccountService,
+    AppleClient,
+    AppleTokenInvalid,
+    AppleUnavailable,
     bearer_token,
     load_apple_key,
     refresh_token_cipher,
 )
 from app.config import Settings
-from app.main import create_app
+from app.limits import MSG_TOO_MANY_REQUESTS, ConcurrencyGuard
+from app.main import MIN_RUN_SECONDS, create_app
 from conftest import DEVICE, post_omr
 
 TEAM_ID = "TEAM123456"
@@ -310,19 +315,22 @@ class World:
         self.clock = Clock()
         self.settings = settings
         self.app = create_app(settings)
+        self.use_transport(self.route)
+        self.client = TestClient(self.app)
 
-        def route(request: httpx.Request) -> httpx.Response:
-            if request.url.host == "appleid.apple.com":
-                return self.apple.handle(request)
-            if request.url.host == SUPABASE_HOST:
-                return self.supabase.handle(request)
-            return httpx.Response(404)
+    def route(self, request: httpx.Request) -> httpx.Response:
+        if request.url.host == "appleid.apple.com":
+            return self.apple.handle(request)
+        if request.url.host == SUPABASE_HOST:
+            return self.supabase.handle(request)
+        return httpx.Response(404)
 
+    def use_transport(self, handler: Callable[[httpx.Request], Any]) -> None:
+        """Rebuild the account service on another (possibly async) transport handler."""
         self.service = AccountService.from_settings(
-            settings, transport=httpx.MockTransport(route), monotonic=self.clock
+            self.settings, transport=httpx.MockTransport(handler), monotonic=self.clock
         )
         self.app.state.accounts = self.service
-        self.client = TestClient(self.app)
 
     def sign_in(self, **token_args: Any) -> httpx.Response:
         sub = token_args.get("sub", APPLE_SUB)
@@ -538,9 +546,10 @@ def test_stale_apple_keys_are_used_when_apple_is_down(world: World) -> None:
     assert world.sign_in().status_code == 200
 
 
-def test_key_fetches_are_bounded_while_apple_is_down_with_no_keys(world: World) -> None:
+def test_key_fetches_are_bounded_while_apple_is_down_with_no_keys(world_factory: Callable[..., World]) -> None:
     """A flood of sign-ins on a cold instance while Apple's keys are unreachable asks
     Apple once a minute, not once per request (each attempt waits out a timeout)."""
+    world = world_factory(hourly_sign_in_limit=100)  # the per-network limit has its own test
     world.apple.down.add("keys")
     for _ in range(10):
         response = world.sign_in()
@@ -559,7 +568,8 @@ def test_key_fetches_are_bounded_while_apple_is_down_with_no_keys(world: World) 
     assert world.apple.calls["keys"] == 3
 
 
-def test_key_fetches_are_bounded_while_apple_is_down_with_stale_keys(world: World) -> None:
+def test_key_fetches_are_bounded_while_apple_is_down_with_stale_keys(world_factory: Callable[..., World]) -> None:
+    world = world_factory(hourly_sign_in_limit=100)
     assert world.sign_in().status_code == 200
     world.clock.now += 24 * 3600 + 1
     world.apple.down.add("keys")
@@ -570,6 +580,163 @@ def test_key_fetches_are_bounded_while_apple_is_down_with_stale_keys(world: Worl
     # An unknown key id during the outage doesn't add fetches either.
     assert world.sign_in(kid="kid-z").status_code == 400
     assert world.apple.calls["keys"] == 2
+
+
+class GatedApple:
+    """Apple's /auth/keys that answers only once `gate` is set — so two sign-ins can be
+    caught with one fetch in flight. `down` makes the answer a connection error."""
+
+    def __init__(self) -> None:
+        self.gate = asyncio.Event()
+        self.down = False
+        self.published: list[str] = ["kid-a"]
+        self.calls = 0
+
+    async def __call__(self, request: httpx.Request) -> httpx.Response:
+        assert request.url.path == "/auth/keys"
+        self.calls += 1
+        await self.gate.wait()
+        if self.down:
+            raise httpx.ConnectError("Apple is down (test)")
+        return httpx.Response(200, json={"keys": [jwk_for(kid) for kid in self.published]})
+
+
+def apple_client(handler: Callable[..., Any], clock: Clock) -> AppleClient:
+    return AppleClient(
+        team_id=TEAM_ID, key_id=KEY_ID, private_key=ec_key(), bundle_id=BUNDLE_ID,
+        transport=httpx.MockTransport(handler), monotonic=clock,
+    )
+
+
+def test_concurrent_sign_ins_share_one_key_fetch() -> None:
+    """A sign-in that arrives while Apple's keys are being fetched waits for that fetch
+    instead of being told it failed: same fetch, both succeed, Apple asked once."""
+    apple = GatedApple()
+    clock = Clock()
+    client = apple_client(apple, clock)
+    token = FakeApple().identity_token()
+
+    async def scenario() -> None:
+        first = asyncio.create_task(client.verify_identity_token(token, RAW_NONCE))
+        second = asyncio.create_task(client.verify_identity_token(token, RAW_NONCE))
+        await asyncio.sleep(0.02)  # the first is waiting on Apple, the second on the first
+        assert apple.calls == 1
+        assert not first.done() and not second.done()
+        apple.gate.set()
+        assert await asyncio.gather(first, second) == [APPLE_SUB, APPLE_SUB]
+        assert apple.calls == 1
+
+    asyncio.run(scenario())
+
+
+def test_concurrent_sign_ins_share_one_failed_fetch_and_its_back_off() -> None:
+    """Both are told Apple is unreachable from the one failed fetch; the minute's back-off
+    starts when that fetch fails, and the retry after it works."""
+    apple = GatedApple()
+    apple.down = True
+    clock = Clock()
+    client = apple_client(apple, clock)
+    token = FakeApple().identity_token()
+
+    async def scenario() -> None:
+        first = asyncio.create_task(client.verify_identity_token(token, RAW_NONCE))
+        second = asyncio.create_task(client.verify_identity_token(token, RAW_NONCE))
+        await asyncio.sleep(0.02)
+        assert apple.calls == 1
+        apple.gate.set()
+        outcomes = await asyncio.gather(first, second, return_exceptions=True)
+        assert all(isinstance(o, AppleUnavailable) for o in outcomes), outcomes
+        assert apple.calls == 1
+        # Inside the minute nothing asks Apple again; after it, one try succeeds.
+        with pytest.raises(AppleUnavailable):
+            await client.verify_identity_token(token, RAW_NONCE)
+        assert apple.calls == 1
+        apple.down = False
+        clock.now += 61
+        assert await client.verify_identity_token(token, RAW_NONCE) == APPLE_SUB
+        assert apple.calls == 2
+
+    asyncio.run(scenario())
+
+
+def test_concurrent_sign_ins_during_key_rotation_share_one_fetch() -> None:
+    """Fresh keys, but two tokens with a key id Apple has just rotated to: one fetch,
+    and the second sign-in gets the new key rather than 'unknown key id'."""
+    apple = GatedApple()
+    apple.gate.set()
+    clock = Clock()
+    client = apple_client(apple, clock)
+    fake = FakeApple()
+
+    async def scenario() -> None:
+        assert await client.verify_identity_token(fake.identity_token(), RAW_NONCE) == APPLE_SUB
+        assert apple.calls == 1
+        apple.published = ["kid-b"]
+        apple.gate.clear()
+        clock.now += 120
+        rotated = fake.identity_token(kid="kid-b")
+        first = asyncio.create_task(client.verify_identity_token(rotated, RAW_NONCE))
+        second = asyncio.create_task(client.verify_identity_token(rotated, RAW_NONCE))
+        await asyncio.sleep(0.02)
+        assert apple.calls == 2
+        apple.gate.set()
+        assert await asyncio.gather(first, second) == [APPLE_SUB, APPLE_SUB]
+        assert apple.calls == 2
+        # And a key id nobody has, right after that fetch, is refused without another one.
+        with pytest.raises(AppleTokenInvalid):
+            await client.verify_identity_token(fake.identity_token(kid="kid-z"), RAW_NONCE)
+        assert apple.calls == 2
+
+    asyncio.run(scenario())
+
+
+# ---------------------------------------------------------------------- sign-ins per network
+
+
+def forwarded(address: str) -> dict[str, str]:
+    return {"X-Forwarded-For": address}
+
+
+def test_sign_ins_are_limited_per_network(world_factory: Callable[..., World], caplog: pytest.LogCaptureFixture) -> None:
+    caplog.set_level(logging.DEBUG)
+    world = world_factory(hourly_sign_in_limit=2)
+
+    assert world.sign_in().status_code == 200
+    assert world.sign_in().status_code == 200
+    third = world.sign_in()
+    assert third.status_code == 429
+    assert third.json() == {"detail": MSG_TOO_MANY_REQUESTS}
+    assert world.apple.calls["token"] == 2  # the third never reached Apple
+    assert len(world.supabase.sessions) == 2
+
+    # Another network (the last X-Forwarded-For entry is the one Google's front end adds).
+    body = {
+        "identityToken": world.apple.identity_token(),
+        "authorizationCode": world.apple.issue_code(),
+        "nonce": RAW_NONCE,
+    }
+    assert world.client.post("/v1/account/apple", json=body, headers=forwarded("10.1.2.3, 203.0.113.7")).status_code == 200
+    # Addresses are counter keys only: none of them in any log line.
+    logged = caplog.text + "\n".join(r.getMessage() for r in caplog.records)
+    assert "203.0.113.7" not in logged and "testclient" not in logged
+
+
+def test_bad_sign_in_attempts_count_against_the_network(world_factory: Callable[..., World]) -> None:
+    world = world_factory(hourly_sign_in_limit=2)
+    assert world.sign_in(nonce="wrong").status_code == 400
+    assert world.sign_in(nonce="wrong").status_code == 400
+    response = world.sign_in()
+    assert response.status_code == 429
+    assert response.json() == {"detail": MSG_TOO_MANY_REQUESTS}
+    assert world.supabase.accounts == {}
+
+
+def test_unconfigured_accounts_do_not_count_against_the_network(world_factory: Callable[..., World]) -> None:
+    world = world_factory(account_secret="", hourly_sign_in_limit=1)
+    for _ in range(3):
+        response = world.sign_in()
+        assert response.status_code == 503
+        assert response.json() == {"detail": MSG_ACCOUNTS_OFF}
 
 
 # ---------------------------------------------------------------------- code exchange
@@ -694,12 +861,15 @@ def test_settings_from_env() -> None:
         "APPLE_PRIVATE_KEY": ec_pem(),
         "ACCOUNT_SECRET": ACCOUNT_SECRET,
         "SIGNED_IN_DAILY_SCAN_LIMIT": "75",
+        "HOURLY_SIGN_IN_LIMIT": "4",
     }
     settings = Settings.from_env(env)
     assert settings.apple_team_id == "TEAM123456"
     assert settings.apple_bundle_id == "com.milaiwalker.auditioner"
     assert settings.signed_in_daily_scan_limit == 75
+    assert settings.hourly_sign_in_limit == 4
     assert Settings.from_env({}).signed_in_daily_scan_limit == 60
+    assert Settings.from_env({}).hourly_sign_in_limit == 30
     # Secrets never show up when settings are printed.
     shown = repr(settings)
     assert ACCOUNT_SECRET not in shown and "PRIVATE KEY" not in shown
@@ -917,6 +1087,11 @@ def test_secrets_never_reach_logs_or_responses(world: World, caplog: pytest.LogC
 # ---------------------------------------------------------------------- the scan limit
 
 
+def device_used(world: World, device_id: str = DEVICE["X-Device-Id"]) -> int:
+    """Scans the device counter holds for `device_id` (read against a cap nothing reaches)."""
+    return 10_000 - world.app.state.limiter.remaining(device_id, limit=10_000)
+
+
 def test_signed_in_scans_use_the_account_limit(world_factory: Callable[..., World]) -> None:
     world = world_factory(daily_scan_limit=1, signed_in_daily_scan_limit=2)
     signed_in = world.sign_in().json()
@@ -929,10 +1104,122 @@ def test_signed_in_scans_use_the_account_limit(world_factory: Callable[..., Worl
     assert third.status_code == 429
     assert world.app.state.account_limiter.remaining("account:" + signed_in["accountId"]) == 0
 
-    # The device's own allowance was never touched.
-    assert world.app.state.limiter.remaining(DEVICE["X-Device-Id"]) == 1
-    assert post_omr(world.client).status_code == 200
+    # Every scan also counted against the device, which is now over its signed-out
+    # allowance (1): signing out does not give it a fresh one.
+    assert device_used(world) == 2
+    assert world.app.state.limiter.remaining(DEVICE["X-Device-Id"]) == 0
     assert post_omr(world.client).status_code == 429
+    # Another device of the same player has its own allowance.
+    assert post_omr(world.client, headers={"X-Device-Id": "second-device"}).status_code == 200
+
+
+def test_limits_do_not_stack_across_sign_ins_on_one_device(world_factory: Callable[..., World]) -> None:
+    """Apple ID A, then signed out, then Apple ID B on one device never adds up to more
+    than the signed-in limit for that device."""
+    world = world_factory(daily_scan_limit=1, signed_in_daily_scan_limit=2)
+    account_a = world.sign_in(sub=APPLE_SUB).json()
+    headers_a = {**DEVICE, **bearer(account_a["sessionToken"])}
+    assert post_omr(world.client, headers=headers_a).status_code == 200
+    assert post_omr(world.client, headers=headers_a).status_code == 200
+    assert post_omr(world.client, headers=headers_a).status_code == 429
+
+    # Signed out on the same device: nothing left either.
+    assert post_omr(world.client).status_code == 429
+
+    # Apple ID B on the same device: a fresh account, but the device has had its two.
+    account_b = world.sign_in(sub=OTHER_SUB).json()
+    assert account_b["accountId"] != account_a["accountId"]
+    headers_b = {**DEVICE, **bearer(account_b["sessionToken"])}
+    refused = post_omr(world.client, headers=headers_b)
+    assert refused.status_code == 429
+    assert refused.json() == {"detail": "Daily scan limit reached. Try again tomorrow."}
+    # A refused scan is charged to nothing: B's account allowance is untouched.
+    assert world.app.state.account_limiter.remaining("account:" + account_b["accountId"]) == 2
+    assert device_used(world) == 2
+
+    # Apple ID B on another device is fine, and counts against that device.
+    other = {"X-Device-Id": "another-device", **bearer(account_b["sessionToken"])}
+    assert post_omr(world.client, headers=other).status_code == 200
+    assert device_used(world, "another-device") == 1
+    assert world.app.state.account_limiter.remaining("account:" + account_b["accountId"]) == 1
+
+
+def test_signing_in_lifts_the_device_cap_to_the_signed_in_limit(world_factory: Callable[..., World]) -> None:
+    """One shared device counter: scans made signed out are part of the signed-in
+    allowance, and the account's own allowance is a second, separate cap."""
+    world = world_factory(daily_scan_limit=1, signed_in_daily_scan_limit=3)
+    assert post_omr(world.client).status_code == 200  # signed out: 1 of 1
+    assert post_omr(world.client).status_code == 429
+
+    signed_in = world.sign_in().json()
+    headers = {**DEVICE, **bearer(signed_in["sessionToken"])}
+    assert post_omr(world.client, headers=headers).status_code == 200  # device 2 of 3, account 1 of 3
+    assert post_omr(world.client, headers=headers).status_code == 200  # device 3 of 3, account 2 of 3
+    assert post_omr(world.client, headers=headers).status_code == 429  # the device is full first
+    assert world.app.state.account_limiter.remaining("account:" + signed_in["accountId"]) == 1
+    assert device_used(world) == 3
+
+
+def test_a_busy_server_refunds_the_device_and_the_account(world_factory: Callable[..., World]) -> None:
+    world = world_factory(daily_scan_limit=1, signed_in_daily_scan_limit=2)
+    signed_in = world.sign_in().json()
+    world.app.state.guard = ConcurrencyGuard(max_running=0, max_waiting=0)  # nothing may run
+
+    response = post_omr(world.client, headers={**DEVICE, **bearer(signed_in["sessionToken"])})
+    assert response.status_code == 503
+    assert device_used(world) == 0
+    assert world.app.state.account_limiter.remaining("account:" + signed_in["accountId"]) == 2
+    assert post_omr(world.client).status_code == 503
+    assert device_used(world) == 0
+
+
+# ---------------------------------------------------------------------- a slow account store
+
+
+def slow_sessions(world: World, seconds: float) -> Callable[[httpx.Request], Any]:
+    """The world's transport, with every read of account_sessions taking `seconds`."""
+
+    async def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.host == SUPABASE_HOST and request.method == "GET" and request.url.path.endswith("account_sessions"):
+            await asyncio.sleep(seconds)
+        return world.route(request)
+
+    return handler
+
+
+def test_slow_session_lookup_falls_back_to_the_device_limit(world_factory: Callable[..., World]) -> None:
+    """The look-up is bounded as a whole: past its time the scan goes ahead on the device
+    limit, and the account is not charged."""
+    world = world_factory(daily_scan_limit=1, signed_in_daily_scan_limit=5)
+    token = world.session()
+    world.use_transport(slow_sessions(world, 0.5))
+    world.service.scan_lookup_seconds = 0.05
+    account_id = next(iter(world.supabase.accounts))
+
+    response = post_omr(world.client, headers={**DEVICE, **bearer(token)})
+    assert response.status_code == 200, response.text
+    assert world.app.state.limiter.remaining(DEVICE["X-Device-Id"]) == 0
+    assert world.app.state.account_limiter.remaining("account:" + account_id) == 5
+    # Nothing was cached for the token, so a quick store afterwards is signed in again.
+    world.use_transport(world.route)
+    assert post_omr(world.client, headers={**DEVICE, **bearer(token)}).status_code == 200
+    assert world.app.state.account_limiter.remaining("account:" + account_id) == 4
+
+
+def test_session_lookup_time_is_part_of_the_scan_budget(world_factory: Callable[..., World], monkeypatch: pytest.MonkeyPatch) -> None:
+    """With the look-up taking 0.3 s and only 0.1 s of budget to spare over the minimum
+    run, the scan is refused as busy (and not charged) rather than started late."""
+    monkeypatch.setattr("app.main.REQUEST_BUDGET_SECONDS", MIN_RUN_SECONDS + 0.1)
+    world = world_factory(daily_scan_limit=1, signed_in_daily_scan_limit=5)
+    token = world.session()
+    account_id = next(iter(world.supabase.accounts))
+    world.use_transport(slow_sessions(world, 0.3))
+
+    response = post_omr(world.client, headers={**DEVICE, **bearer(token)})
+    assert response.status_code == 503, response.text
+    assert response.headers.get("retry-after") == "60"
+    assert device_used(world) == 0
+    assert world.app.state.account_limiter.remaining("account:" + account_id) == 5
 
 
 @pytest.mark.parametrize(
@@ -983,7 +1270,10 @@ def test_scan_look_ups_are_cached_for_five_minutes(world_factory: Callable[..., 
     assert post_omr(world.client, headers=headers).status_code == 200
     assert world.supabase.count("GET", "account_sessions") == looked_up + 2
 
-    # Signing out on this instance forgets the cached answer at once.
+    # Signing out on this instance forgets the cached answer at once: the next scan is
+    # looked up (and refused), the device having had three — were the stale answer
+    # still used, the account's allowance of 10 would let it through.
     assert world.client.post("/v1/account/signout", headers=bearer(token)).status_code == 204
-    assert post_omr(world.client, headers=headers).status_code == 200  # device allowance: 1
+    after_sign_out = world.supabase.count("GET", "account_sessions")  # signing out read the session too
     assert post_omr(world.client, headers=headers).status_code == 429
+    assert world.supabase.count("GET", "account_sessions") == after_sign_out + 1

@@ -7,8 +7,9 @@ import Foundation
 //   DELETE /v1/account          Bearer → 204 (Apple token revoked, account and sessions deleted)
 // Errors are {"detail": "<plain words>"}: 400 Apple couldn't confirm the sign-in, 401 signed out,
 // 502 Apple or the account store didn't answer, 503 accounts aren't set up on the server.
-// Every request still carries X-Device-Id and X-App-Version; `request(path:method:)` adds the
-// Bearer token from the keychain on its own, these methods set it explicitly from their argument.
+// Every request still carries X-Device-Id and X-App-Version. `request(path:method:)` never reads the
+// keychain; these methods set the Bearer header explicitly from their argument (`AccountStore` passes
+// the stored token), and the sign-in exchange carries no session at all.
 
 /// Answer to a successful Sign in with Apple exchange.
 struct AppleSignInResponse: Decodable, Equatable {
@@ -39,10 +40,16 @@ extension APIClient: AccountAPI {
         var nonce: String
     }
 
+    /// A plain request with this session token as `Authorization: Bearer …`.
+    private func request(path: String, method: String, sessionToken: String) throws -> URLRequest {
+        var req: URLRequest = try request(path: path, method: method)
+        req.setValue("Bearer " + sessionToken, forHTTPHeaderField: "Authorization")
+        return req
+    }
+
     func signInWithApple(identityToken: String, authorizationCode: String, nonce: String) async throws -> AppleSignInResponse {
+        // A plain request: a stale token from an earlier sign-in must not ride along on a fresh one.
         var req: URLRequest = try request(path: "v1/account/apple", method: "POST")
-        // A stale token from an earlier sign-in must not ride along on a fresh one.
-        req.setValue(nil, forHTTPHeaderField: "Authorization")
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
         req.httpBody = try JSONEncoder().encode(AppleSignInBody(identityToken: identityToken,
                                                                  authorizationCode: authorizationCode,
@@ -56,8 +63,7 @@ extension APIClient: AccountAPI {
     }
 
     func account(sessionToken: String) async throws -> AccountInfo {
-        var req: URLRequest = try request(path: "v1/account", method: "GET")
-        req.setValue("Bearer " + sessionToken, forHTTPHeaderField: "Authorization")
+        let req: URLRequest = try request(path: "v1/account", method: "GET", sessionToken: sessionToken)
         let data: Data = try await send(req)
         do {
             return try JSONDecoder().decode(AccountInfo.self, from: data)
@@ -67,14 +73,12 @@ extension APIClient: AccountAPI {
     }
 
     func signOut(sessionToken: String) async throws {
-        var req: URLRequest = try request(path: "v1/account/signout", method: "POST")
-        req.setValue("Bearer " + sessionToken, forHTTPHeaderField: "Authorization")
+        let req: URLRequest = try request(path: "v1/account/signout", method: "POST", sessionToken: sessionToken)
         _ = try await send(req)
     }
 
     func deleteAccount(sessionToken: String) async throws {
-        var req: URLRequest = try request(path: "v1/account", method: "DELETE")
-        req.setValue("Bearer " + sessionToken, forHTTPHeaderField: "Authorization")
+        let req: URLRequest = try request(path: "v1/account", method: "DELETE", sessionToken: sessionToken)
         _ = try await send(req)
     }
 }

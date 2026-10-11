@@ -25,6 +25,9 @@ struct AuditionsHomeView: View {
     @State private var isCreating: Bool = false
     /// What the "New audition" form starts with: empty from the + button, filled in from a link (PLAN U1).
     @State private var createPrefill: AuditionPrefill = AuditionPrefill()
+    /// Changes every time the form is presented, so the form in the sheet starts again from
+    /// `createPrefill` (its fields are read once, when the form is made).
+    @State private var createFormId: UUID = UUID()
     @State private var safariItem: SafariLinkItem? = nil
 
     var body: some View {
@@ -41,6 +44,7 @@ struct AuditionsHomeView: View {
                 ToolbarItem(placement: .primaryAction) {
                     Button {
                         createPrefill = AuditionPrefill()
+                        createFormId = UUID()
                         isCreating = true
                     } label: {
                         Label("New audition", systemImage: "plus")
@@ -63,14 +67,16 @@ struct AuditionsHomeView: View {
         .onChange(of: router.auditionPrefill) { _, _ in
             consumeLinkPrefill()
         }
-        .sheet(isPresented: $isCreating) {
+        .sheet(isPresented: $isCreating, onDismiss: consumeLinkPrefill) {
             NavigationStack {
                 AuditionFormView(mode: .create, prefill: createPrefill) { created in
                     path.append(AuditionsRoute.audition(created.id))
                 }
             }
+            .id(createFormId)
+            .onAppear(perform: formDidShowPrefill)
         }
-        .sheet(item: $safariItem) { item in
+        .sheet(item: $safariItem, onDismiss: consumeLinkPrefill) { item in
             ExcerptSafariView(url: item.url)
                 .ignoresSafeArea()
         }
@@ -81,13 +87,30 @@ struct AuditionsHomeView: View {
         settings.instrumentRaw + "|" + settings.region + "|" + settings.serverURL
     }
 
-    /// Opens the "New audition" form filled in from an `auditioner://audition/new` link, then clears the request.
-    /// Nothing is saved until the player taps Add.
+    /// Opens the "New audition" form filled in from an `auditioner://audition/new` link (PLAN U1). The
+    /// request stays in the router until a form has actually shown it (`formDidShowPrefill`), so it is
+    /// not lost when a sheet is already up: that sheet is closed first, and its `onDismiss` comes back
+    /// here to present a fresh form. Nothing is saved until the player taps Add.
     private func consumeLinkPrefill() {
-        guard let prefill = router.auditionPrefill else { return }
-        router.auditionPrefill = nil
-        createPrefill = prefill
-        isCreating = true
+        switch AuditionLinkPresentation.step(pending: router.auditionPrefill,
+                                             sheetIsUp: isCreating || safariItem != nil) {
+        case .nothing:
+            return
+        case .dismissSheetFirst:
+            isCreating = false
+            safariItem = nil
+        case .present(let prefill):
+            createPrefill = prefill
+            createFormId = UUID()
+            isCreating = true
+        }
+    }
+
+    /// The form in the sheet is on screen: the link's request has been shown and can be cleared.
+    private func formDidShowPrefill() {
+        if AuditionLinkPresentation.clearsPending(router.auditionPrefill, shownPrefill: createPrefill) {
+            router.auditionPrefill = nil
+        }
     }
 
     // MARK: My auditions
@@ -236,5 +259,32 @@ struct AuditionsHomeView: View {
         case .archived:
             ArchivedAuditionsView()
         }
+    }
+}
+
+// MARK: - Link prefill (pure)
+
+/// How the Auditions tab answers an `auditioner://audition/new` request (PLAN U1) given what is on
+/// screen. Pure, so it can be unit-tested; `AuditionsHomeView.consumeLinkPrefill` acts on the step.
+enum AuditionLinkPresentation {
+    enum Step: Equatable {
+        /// No request pending.
+        case nothing
+        /// A sheet is up (a form or the in-app browser): close it; its `onDismiss` asks again.
+        case dismissSheetFirst
+        /// Present a fresh form with this prefill.
+        case present(AuditionPrefill)
+    }
+
+    static func step(pending: AuditionPrefill?, sheetIsUp: Bool) -> Step {
+        guard let prefill: AuditionPrefill = pending else { return .nothing }
+        return sheetIsUp ? .dismissSheetFirst : .present(prefill)
+    }
+
+    /// The router's request is cleared only once a form showing exactly it is on screen — not
+    /// when a form opened from the + button (or an earlier link) happens to appear.
+    static func clearsPending(_ pending: AuditionPrefill?, shownPrefill: AuditionPrefill) -> Bool {
+        guard let prefill: AuditionPrefill = pending else { return false }
+        return prefill == shownPrefill
     }
 }

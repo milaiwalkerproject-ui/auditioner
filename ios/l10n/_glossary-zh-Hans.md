@@ -15,7 +15,7 @@ Arabic numerals (`第 %lld 页`, `A = 440 Hz`), none when the argument is itself
 | excerpt | 片段 | orchestral excerpts = 乐队片段 |
 | excerpt page | 片段页面 | |
 | part (sheet music) | 分谱 | My parts = 我的分谱 |
-| list (audition repertoire list) | 曲目单 | measure word 份; "list"/"lists" both 曲目单; lists.phrase.allChairs = 你所选乐器的曲目单, lists.phrase.chair = 你所选席位的曲目单 (no placeholders: the checker compares these keys against the key name) |
+| list (audition repertoire list) | 曲目单 | measure word 份; "list"/"lists" both 曲目单; lists.phrase.allChairs = 该乐器的曲目单, lists.phrase.chair = 你所选席位的曲目单 (no placeholders: the checker compares these keys against the key name; 该乐器 = “this instrument”, not “your instrument”, because the excerpt page builds its query from the excerpt's instrument (`ExcerptFrequencySection`), which need not be the player's own; the chair always comes from the player's Settings, so `lists.phrase.chair` keeps “your chair”.) |
 | official list | 官方曲目单 | for a deadline (not repertoire) the unverified text says 官方公告 |
 | repertoire | 曲目 | |
 | catalogue (the app's excerpt catalogue) | 曲库 | match to catalogue = 匹配曲库; link = 关联 |

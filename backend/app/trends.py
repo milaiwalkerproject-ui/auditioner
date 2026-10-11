@@ -18,12 +18,18 @@ with the service-role key (RLS on, no policies). Rules the code keeps:
 - one row per contributor + instrument + week, replaced on every post; a post with no
   known excerpt left removes that week's row; rows older than 26 weeks are deleted
   (at most once an hour per instance, on any /v1/trends request);
+- POST is limited per network address (HOURLY_TRENDS_POST_LIMIT, default 20 per
+  sliding hour, 429): device ids are minted by the app, so this is what stands between
+  one client and an endless supply of "contributors" until App Attest (PLAN B3). The
+  address is a counter key in memory and is never logged;
 - GET counts distinct contributors over the 8 most recent ISO weeks (current one
   included). Below 20 contributors nothing is shown. Otherwise each excerpt gets a
   tier from the share of contributors who listed it — very-popular ≥ 40 %, popular
   ≥ 15 %, nothing below — and the answer carries **no counts and no shares**; within
   a tier excerpts are in id order, so not even the ranking leaks. Answers are kept
-  in memory for an hour.
+  in memory for an hour. Should the read run past the safety stop on paging
+  (MAX_PAGED_ROWS), the answer is "not enough" with no excerpts, not a partial count
+  and not an error.
 
 Hiding the section for under-18s and keeping it apart from "What orchestras ask"
 are the app's job (PLAN D6).
@@ -49,7 +55,7 @@ from pydantic import BaseModel, Field
 
 from .catalog import Catalog
 from .feed import BadFeedParam, feed_instrument
-from .limits import clean_device_id
+from .limits import MSG_TOO_MANY_REQUESTS, DailyLimiter, clean_device_id, request_network
 
 log = logging.getLogger("auditioner.trends")
 
@@ -114,6 +120,10 @@ class BadTrendsParam(ValueError):
 
 class TrendsUpstreamError(Exception):
     """Supabase gave no usable answer: unreachable, refused, or an unexpected body (502)."""
+
+
+class _TooManyRows(Exception):
+    """A read ran past MAX_PAGED_ROWS: the safety stop, answered as "not enough" (200)."""
 
 
 # ---------------------------------------------------------------------- ISO weeks
@@ -292,6 +302,7 @@ class TrendsService:
         clock: Callable[[], float] = time.monotonic,
         now: Callable[[], datetime] = _utc_now,
         page_rows: int = PAGE_ROWS,
+        max_paged_rows: int = MAX_PAGED_ROWS,
     ) -> None:
         self.url = (url or "").strip().rstrip("/")
         self._key = (service_key or "").strip()
@@ -303,6 +314,7 @@ class TrendsService:
         self._clock = clock
         self._now = now
         self.page_rows = max(1, int(page_rows))
+        self.max_paged_rows = max(1, int(max_paged_rows))
         self._cache: OrderedDict[tuple[str, str], tuple[float, dict[str, Any]]] = OrderedDict()
         self._last_prune: float | None = None
 
@@ -400,9 +412,8 @@ class TrendsService:
             rows.extend(page)
             if len(page) < self.page_rows:
                 return rows
-            if len(rows) >= MAX_PAGED_ROWS:
-                log.warning("trends: over %d rows; refusing a partial answer", MAX_PAGED_ROWS)
-                raise TrendsUpstreamError("read: too many rows")
+            if len(rows) >= self.max_paged_rows:
+                raise _TooManyRows()
 
     async def _prune_if_due(self, client: httpx.AsyncClient) -> None:
         """Delete rows older than 26 weeks, at most once per `prune_every_seconds`.
@@ -432,7 +443,7 @@ class TrendsService:
                     "contributor_hash": contributor,
                     "instrument": instrument,
                     "week": week,
-                    "excerpt_ids": sorted(set(excerpt_ids)),
+                    "excerpt_ids": list(excerpt_ids),  # keep_known already trimmed, deduplicated and sorted them
                     "updated_at": self._utc_moment().isoformat(),
                 }
                 await self._send(
@@ -475,17 +486,30 @@ class TrendsService:
         cached = self._cached(key)
         if cached is not None:
             return cached
+        rows: list[dict[str, Any]] | None
         async with self._client() as client:
-            rows = await self._rows(client, {
-                "select": "contributor_hash,excerpt_ids",
-                "instrument": f"eq.{instrument}",
-                "week": f"in.({','.join(weeks)})",
-                "order": "contributor_hash.asc,week.asc",
-            })
+            try:
+                rows = await self._rows(client, {
+                    "select": "contributor_hash,excerpt_ids",
+                    "instrument": f"eq.{instrument}",
+                    "week": f"in.({','.join(weeks)})",
+                    "order": "contributor_hash.asc,week.asc",
+                })
+            except _TooManyRows:
+                # The safety stop, never reached by real data: a partial read would give
+                # a wrong tier, so the answer is "not enough" instead (and it is kept an
+                # hour like any answer, so the pages aren't read again on every GET).
+                # Nothing about the rows is logged — no hashes, no excerpt ids.
+                log.warning("trends instrument=%s weeks=%s..%s: over %d rows; answering 'not enough'",
+                            instrument, weeks[0], weeks[-1], self.max_paged_rows)
+                rows = None
             await self._prune_if_due(client)
-        answer, contributors = summarise(rows, known=known, from_week=weeks[0], to_week=weeks[-1])
-        log.info("trends instrument=%s weeks=%s..%s contributors=%d enough=%s excerpts=%d",
-                 instrument, weeks[0], weeks[-1], contributors, answer["enough"], len(answer["trends"]))
+        if rows is None:
+            answer: dict[str, Any] = {"enough": False, "fromWeek": weeks[0], "toWeek": weeks[-1], "trends": []}
+        else:
+            answer, contributors = summarise(rows, known=known, from_week=weeks[0], to_week=weeks[-1])
+            log.info("trends instrument=%s weeks=%s..%s contributors=%d enough=%s excerpts=%d",
+                     instrument, weeks[0], weeks[-1], contributors, answer["enough"], len(answer["trends"]))
         self._remember(key, answer)
         return answer
 
@@ -529,6 +553,12 @@ async def share_trends(body: TrendsShare, request: Request) -> Response:
         raise HTTPException(400, MSG_TOO_MANY)
     if not service.configured:
         raise HTTPException(503, MSG_TRENDS_OFF)
+    # Per network address, counted once the post is otherwise good and about to be
+    # stored (a bad request or an unconfigured server costs nothing). Not refunded when
+    # Supabase fails: the limit is there to bound what one place can make us do.
+    network_limiter = getattr(request.app.state, "trends_network_limiter", None)
+    if isinstance(network_limiter, DailyLimiter) and not network_limiter.allow(request_network(request)):
+        raise HTTPException(429, MSG_TOO_MANY_REQUESTS)
     catalog: Catalog = request.app.state.catalog
     excerpt_ids = keep_known(body.excerptIds, known_excerpt_ids(catalog, instrument))
     try:

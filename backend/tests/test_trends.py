@@ -18,6 +18,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from app.config import Settings
+from app.limits import HOUR_SECONDS, MSG_TOO_MANY_REQUESTS, DailyLimiter
 from app.main import create_app
 from app.trends import (
     MIN_CONTRIBUTORS,
@@ -762,6 +763,96 @@ def test_reads_are_paged(make_client, table, clock, wall):
     pages = table.requests_with("GET")
     assert [r.url.params["offset"] for r in pages] == ["0", "7", "14", "21"]
     assert all(r.url.params["order"] == "contributor_hash.asc,week.asc" for r in pages)
+
+
+def test_running_past_the_paging_stop_is_not_enough_rather_than_an_error(make_client, table, clock, wall, caplog):
+    """The safety stop on paging (never reached by real data) answers 'not enough' with
+    no excerpts — not a 502, and not a tier from a partial count — and logs no ids."""
+    caplog.set_level(logging.DEBUG)
+    client = make_client()
+    client.app.state.trends = TrendsService(
+        SUPABASE_URL, SERVICE_KEY, SALT, transport=httpx.MockTransport(table), clock=clock, now=wall,
+        page_rows=5, max_paged_rows=10,
+    )
+    seed_contributors(table, 23, lambda n: [CELLO_IDS[0]])
+
+    response = client.get("/v1/trends?instrument=cello")
+    assert response.status_code == 200
+    assert response.json() == {"enough": False, "fromWeek": "2026-W34", "toWeek": THIS_WEEK, "trends": []}
+    assert [r.url.params["offset"] for r in table.requests_with("GET")] == ["0", "5"]  # stopped at 10 rows
+    warnings = [r.getMessage() for r in caplog.records if r.levelno == logging.WARNING and r.name == "auditioner.trends"]
+    assert len(warnings) == 1 and "over 10 rows" in warnings[0]
+    for line in (r.getMessage() for r in caplog.records):
+        assert CELLO_IDS[0] not in line
+        assert not any(hash_of(n) in line for n in range(23))
+    # Kept like any answer, so the pages are not read again on every request.
+    assert client.get("/v1/trends?instrument=cello").json()["enough"] is False
+    assert len(table.requests_with("GET")) == 2
+
+
+# ------------------------------------------------------------------ posts per network
+
+
+def forwarded(address: str) -> dict[str, str]:
+    return {**DEVICE_HEADERS, "X-Forwarded-For": address}
+
+
+def test_posts_are_limited_per_network(make_client, table, clock, caplog):
+    """Device ids are the app's to make up, so one network address gets a bounded number
+    of posts an hour: 429 beyond it, nothing stored, and the address never logged."""
+    caplog.set_level(logging.DEBUG)
+    client = make_client(hourly_trends_post_limit=3)
+    limiter = client.app.state.trends_network_limiter
+    assert limiter.limit == 3 and limiter.window == HOUR_SECONDS
+    client.app.state.trends_network_limiter = DailyLimiter(3, window_seconds=HOUR_SECONDS, clock=clock)
+
+    for n in range(3):  # three "contributors" from one place
+        assert share(client, [CELLO_IDS[n]], headers={"X-Device-Id": f"minted-{n}"}).status_code == 204
+    fourth = share(client, [CELLO_IDS[3]], headers={"X-Device-Id": "minted-3"})
+    assert fourth.status_code == 429
+    assert fourth.json() == {"detail": MSG_TOO_MANY_REQUESTS}
+    assert len(table.rows) == 3
+    assert len(table.requests_with("POST")) == 3
+
+    # Another address (the last entry of X-Forwarded-For, which Google's front end appends)
+    # has its own allowance; entries a client puts in front of it change nothing.
+    assert share(client, [CELLO_IDS[0]], headers=forwarded("203.0.113.7")).status_code == 204
+    assert share(client, [CELLO_IDS[0]], headers=forwarded("10.1.2.3, 203.0.113.7")).status_code == 204
+    assert share(client, [CELLO_IDS[0]], headers=forwarded(" 10.9.9.9 ,203.0.113.7")).status_code == 204
+    assert share(client, [CELLO_IDS[0]], headers=forwarded("198.51.100.4, 203.0.113.7")).status_code == 429
+    assert share(client, [CELLO_IDS[0]], headers=forwarded("203.0.113.8")).status_code == 204
+    # A sliding hour.
+    clock.now += HOUR_SECONDS + 1
+    assert share(client, [CELLO_IDS[0]], headers={"X-Device-Id": "minted-3"}).status_code == 204
+
+    for record in caplog.records:
+        line = record.getMessage()
+        assert "203.0.113" not in line and "testclient" not in line
+
+
+def test_bad_posts_do_not_count_against_the_network(make_client, table):
+    client = make_client(hourly_trends_post_limit=1)
+    for week in ("2026-W39", "nope", ""):
+        assert share(client, [CELLO_IDS[0]], week=week).status_code == 400
+    assert share(client, [CELLO_IDS[0]], instrument="kazoo").status_code == 400
+    assert share(client, CELLO_IDS[:51]).status_code == 400
+    assert share(client, [CELLO_IDS[0]], headers={}).status_code == 400
+    assert share(client, [CELLO_IDS[0]]).status_code == 204
+    assert share(client, [CELLO_IDS[1]]).status_code == 429
+
+
+def test_unconfigured_posts_do_not_count_against_the_network(settings_factory, catalog_dir):
+    app = create_app(settings_factory(catalog_dir=catalog_dir, hourly_trends_post_limit=1))
+    client = TestClient(app)
+    for _ in range(3):
+        assert share(client, [CELLO_IDS[0]]).status_code == 503
+
+
+def test_network_limit_comes_from_the_environment():
+    assert Settings.from_env({}).hourly_trends_post_limit == 20
+    assert Settings.from_env({"HOURLY_TRENDS_POST_LIMIT": " 5 "}).hourly_trends_post_limit == 5
+    with pytest.raises(ValueError):
+        Settings.from_env({"HOURLY_TRENDS_POST_LIMIT": "lots"})
 
 
 # ------------------------------------------------------------------ cache and errors

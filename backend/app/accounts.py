@@ -33,6 +33,7 @@ What is stored, and what never is:
 
 from __future__ import annotations
 
+import asyncio
 import base64
 import hashlib
 import hmac
@@ -240,7 +241,11 @@ class AppleClient:
         self._monotonic = monotonic
         self._keys: dict[str, jwt.PyJWK] = {}
         self._keys_fetched_at: float | None = None    # last successful fetch
-        self._keys_attempted_at: float | None = None  # last attempt, successful or not
+        self._keys_attempted_at: float | None = None  # last *finished* attempt, successful or not
+        # Single-flight: one fetch of Apple's keys at a time; sign-ins that arrive while
+        # it runs wait for it and share its outcome (see _key_for). asyncio.Lock binds to
+        # the event loop only when it is actually contended, so creating it here is fine.
+        self._fetch_lock = asyncio.Lock()
 
     def __repr__(self) -> str:  # never show the key
         return f"AppleClient(team={self.team_id!r}, key_id={self.key_id!r}, bundle={self.bundle_id!r})"
@@ -250,15 +255,29 @@ class AppleClient:
 
     # ---- Apple's public keys
 
+    def _keys_fresh(self) -> bool:
+        fetched_at = self._keys_fetched_at
+        return fetched_at is not None and self._monotonic() - fetched_at < JWKS_CACHE_SECONDS
+
     def _may_fetch_keys(self) -> bool:
-        """At most one fetch per JWKS_MIN_REFRESH_SECONDS, counting failed attempts too:
-        a flood of sign-ins while Apple is unreachable (or carrying unknown key ids)
-        must not turn into a flood of requests to Apple, each waiting out a timeout."""
+        """At most one fetch per JWKS_MIN_REFRESH_SECONDS after the last *finished* one,
+        failed attempts included: a flood of sign-ins while Apple is unreachable (or
+        carrying unknown key ids) must not turn into a flood of requests to Apple, each
+        waiting out a timeout. A fetch still in progress does not count — callers wait
+        for it instead (_key_for)."""
         attempted_at = self._keys_attempted_at
         return attempted_at is None or self._monotonic() - attempted_at >= JWKS_MIN_REFRESH_SECONDS
 
     async def _fetch_keys(self) -> None:
-        self._keys_attempted_at = self._monotonic()
+        """One request to Apple for its signing keys. Called with _fetch_lock held."""
+        try:
+            await self._fetch_keys_unstamped()
+        finally:
+            # Stamped when the attempt is over, not when it starts: a sign-in waiting on
+            # this fetch must not find "asked a moment ago" and be refused for it.
+            self._keys_attempted_at = self._monotonic()
+
+    async def _fetch_keys_unstamped(self) -> None:
         try:
             async with self._http() as client:
                 response = await client.get(APPLE_KEYS_URL, headers={"Accept": "application/json"})
@@ -292,24 +311,33 @@ class AppleClient:
         self._keys_fetched_at = self._monotonic()
 
     async def _key_for(self, kid: str) -> jwt.PyJWK:
-        fetched_at = self._keys_fetched_at
-        if fetched_at is None or self._monotonic() - fetched_at >= JWKS_CACHE_SECONDS:
-            if self._may_fetch_keys():
-                try:
-                    await self._fetch_keys()
-                except AppleUnavailable:
-                    if not self._keys:
-                        raise
-                    # Apple's keys change rarely: yesterday's set is better than no sign-in.
-                    log.warning("using Apple keys from the last successful fetch")
-            elif not self._keys:
-                # The last attempt (under a minute ago) failed and there is nothing to
-                # fall back on: answer 502 without asking Apple again just yet.
-                raise AppleUnavailable("keys unreachable (recent attempt failed)")
-        key = self._keys.get(kid)
-        if key is None and self._may_fetch_keys():
-            await self._fetch_keys()  # Apple has rotated its keys since we last looked
+        key = self._keys.get(kid) if self._keys_fresh() else None
+        if key is not None:
+            return key  # the usual case: fresh keys, known key id, no waiting
+        # The slow path runs one caller at a time. A sign-in that arrives while another
+        # one is fetching Apple's keys waits here, then re-reads the state that fetch
+        # left behind: fresh keys (so its key id is found, or really unknown), or a
+        # failure stamped a moment ago (so it backs off like the first caller did)
+        # — instead of being told the keys could not be had (502) or that its key id is
+        # unknown (400) while the answer was on its way.
+        async with self._fetch_lock:
+            if not self._keys_fresh():
+                if self._may_fetch_keys():
+                    try:
+                        await self._fetch_keys()
+                    except AppleUnavailable:
+                        if not self._keys:
+                            raise
+                        # Apple's keys change rarely: yesterday's set is better than no sign-in.
+                        log.warning("using Apple keys from the last successful fetch")
+                elif not self._keys:
+                    # The last attempt (under a minute ago) failed and there is nothing to
+                    # fall back on: answer 502 without asking Apple again just yet.
+                    raise AppleUnavailable("keys unreachable (recent attempt failed)")
             key = self._keys.get(kid)
+            if key is None and self._may_fetch_keys():
+                await self._fetch_keys()  # Apple has rotated its keys since we last looked
+                key = self._keys.get(kid)
         if key is None:
             log.info("Apple identity token refused: unknown key id")
             raise AppleTokenInvalid("unknown key id")
@@ -654,6 +682,7 @@ class AccountService:
         clock: Callable[[], datetime] = _utc_now,
         monotonic: Callable[[], float] = time.monotonic,
         scan_cache_seconds: float = SCAN_CACHE_SECONDS,
+        scan_lookup_seconds: float = SCAN_LOOKUP_TIMEOUT_SECONDS,
     ) -> None:
         self.apple = apple
         self.store = store
@@ -670,6 +699,10 @@ class AccountService:
         self._clock = clock
         self._monotonic = monotonic
         self.scan_cache_seconds = float(scan_cache_seconds)
+        # The whole session look-up for a scan — find the session, and the once-a-day
+        # touch when due — must finish in this long altogether (asyncio.wait_for), not
+        # per request to Supabase. Over it, the scan counts against the device.
+        self.scan_lookup_seconds = float(scan_lookup_seconds)
         self._scan_cache: OrderedDict[str, tuple[float, str | None]] = OrderedDict()
 
     @classmethod
@@ -847,7 +880,12 @@ class AccountService:
         """The account id for a scan's Bearer token, or None (no token, unknown or
         expired token, accounts off, database slow or down). Never raises: a bad token
         only means the scan counts against the device limit instead. Answers are kept
-        for five minutes per token on this instance."""
+        for five minutes per token on this instance.
+
+        The look-up is bounded as a whole by `scan_lookup_seconds` (3 s): httpx's own
+        timeout is per phase of each request, and finding the session can take up to
+        three requests (find, plus the daily touch of session and account), so without
+        this a slow database could eat most of the scan's 115 s budget."""
         try:
             if not self.configured or not session_token or not SESSION_TOKEN_PATTERN.match(session_token):
                 return None
@@ -862,7 +900,10 @@ class AccountService:
                 del self._scan_cache[session_hash]
             try:
                 account_id: str | None
-                account_id, _ = await self._authenticate(session_token, timeout=SCAN_LOOKUP_TIMEOUT_SECONDS)
+                account_id, _ = await asyncio.wait_for(
+                    self._authenticate(session_token, timeout=SCAN_LOOKUP_TIMEOUT_SECONDS),
+                    timeout=self.scan_lookup_seconds,
+                )
             except SignedOut:
                 account_id = None
             self._scan_cache[session_hash] = (self._monotonic() + self.scan_cache_seconds, account_id)
@@ -870,7 +911,7 @@ class AccountService:
             while len(self._scan_cache) > SCAN_CACHE_MAX_ENTRIES:
                 self._scan_cache.popitem(last=False)
             return account_id
-        except Exception as exc:  # store down, timeout, anything: fall back to the device limit
+        except Exception as exc:  # store down, over the time bound, anything: the device limit instead
             log.warning("account look-up for a scan failed (%s); using the device limit", type(exc).__name__)
             return None
 

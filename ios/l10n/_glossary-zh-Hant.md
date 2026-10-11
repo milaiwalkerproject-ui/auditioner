@@ -74,15 +74,17 @@ IMSLP, AirTurn, Apple Pencil, Supabase, homr, PDF, MusicXML, A = 440/442.
 
 ## Word-order keys (evidence lines)
 
-- `lists.phrase.allChairs` → 「符合你樂器的清單」 and `lists.phrase.chair` → 「符合你職位的清單」.
+- `lists.phrase.allChairs` → 「符合此樂器的清單」 and `lists.phrase.chair` → 「符合你職位的清單」.
   The two keys are recorded without their format arguments (`collect_strings.py` keeps only the
   key, not the `defaultValue` "%@ %@"), so `merge_translations.py` rejects any translation that
-  carries `%@`. Like es/fr/ko/pt-BR/zh-Hans, the phrase therefore names "your instrument / your
-  chair" instead of the instrument word itself; the query is always the player's own profile, so
-  this stays true. If the tooling later records the real format strings, switch to
+  carries `%@`. Like es/fr/ko/pt-BR/zh-Hans, the phrase therefore names "this instrument / your
+  chair" instead of the instrument word itself. 此樂器, not 你樂器: the excerpt page builds its query
+  from the excerpt's instrument (`ExcerptFrequencySection`), which need not be the player's own; the
+  chair always comes from the player's Settings, so 你職位 stays. If the tooling later records the
+  real format strings, switch to
   `%1$@%2$@` (大提琴清單) and `%2$@%1$@%3$@` (大提琴聲部團員清單).
 - `, all chairs` → `，含所有職位`; years suffix ` (%@)` → `（%@）`, so an evidence line reads
   「我們收集到的 9 份符合你職位的清單中，有 7 份列出此片段（2022–2026）」 or, with all chairs,
-  「我們收集到的 4 份符合你樂器的清單中，有 3 份列出此片段，含所有職位（2024–2026）」.
+  「我們收集到的 4 份符合此樂器的清單中，有 3 份列出此片段，含所有職位（2024–2026）」.
 - "How often it's asked" → 被列入清單的頻率; "Most asked for your chair" → 你的職位最常被列入的片段;
   "Where we saw it" → 出現在哪些清單; "Tap tempo" → 點按設定速度; "Open Settings" → 打開「設定」.

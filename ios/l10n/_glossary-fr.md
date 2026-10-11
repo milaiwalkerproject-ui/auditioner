@@ -81,7 +81,7 @@ Sentence case throughout. Typography: a non-breaking space (U+00A0) before `: ; 
 
 Keys `lists.phrase.chair` and `lists.phrase.allChairs` are recorded in `_keys.json` without
 format arguments, and `merge_translations.py` rejects any `%@` in them, so the instrument and
-chair words cannot be carried. The French phrases are therefore "pour votre poste" / "pour votre
+chair words cannot be carried. The French phrases are therefore "pour votre poste" / "pour cet
 instrument" **without the noun**, and the noun "liste(s)" is written into each sentence that uses
 the phrase, where the count is known ("Figure sur %lld des %lld listes %@ que nous avons
 collectées…", "Nous n'avons encore collecté aucune liste %@."). The region caveat reorders its
@@ -90,3 +90,4 @@ listes %2$@ jusqu'ici, …". The wording that keeps the words,
 for when the script accepts positional arguments (noun still omitted, since the sentences carry it):
 `lists.phrase.chair` → `de %2$@ %1$@` (e.g. "listes de violoncelle tutti"),
 `lists.phrase.allChairs` → `de %1$@` (e.g. "listes de violoncelle").
+`lists.phrase.allChairs` says "cet instrument" — “this instrument”, not “your instrument”, because the excerpt page builds its query from the excerpt's instrument (`ExcerptFrequencySection`), which need not be the player's own; the chair always comes from the player's Settings, so `lists.phrase.chair` keeps “your chair”.

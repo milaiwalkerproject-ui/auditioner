@@ -21,10 +21,10 @@ the two in step.
 | `GET /v1/instruments` | — | `{"instruments": ["violin", …]}` (handy for checks) |
 | `GET /v1/auditions?instrument=cello&region=uk` | `instrument` (catalogue id, required), `region` (optional; absent = every region) | `{"auditions": [FeedVacancy]}` — open, published auditions only (see below) |
 | `GET /v1/recommendations?instrument=cello&position=section&region=uk` | `instrument`, `position` (the app's position id), `region` (optional; absent = every region) | `{"recommendations": [Recommendation]}` — most asked first, from published lists only (see below) |
-| `POST /v1/trends` | JSON `{"instrument": "cello", "week": "2026-W41", "excerptIds": ["…"]}` — this or last ISO week (UTC), at most 50 ids. Header `X-Device-Id` required. | `204` — community trends, opt-in (see "Community trends" below) |
+| `POST /v1/trends` | JSON `{"instrument": "cello", "week": "2026-W41", "excerptIds": ["…"]}` — this or last ISO week (UTC), at most 50 ids. Header `X-Device-Id` required. At most `HOURLY_TRENDS_POST_LIMIT` (20) an hour per network address. | `204` — community trends, opt-in (see "Community trends" below) |
 | `DELETE /v1/trends` | header `X-Device-Id` | `204` — everything this device shared is deleted |
 | `GET /v1/trends?instrument=cello` | `instrument` (catalogue id) | `{"enough": true, "fromWeek": "2026-W34", "toWeek": "2026-W41", "trends": [{"excerptId": "…", "tier": "very-popular"}]}` — tiers only, never counts |
-| `POST /v1/account/apple` | JSON `{"identityToken": "…", "authorizationCode": "…", "nonce": "<raw nonce>"}` from Sign in with Apple | `{"accountId": "<uuid>", "sessionToken": "…", "dailyScanLimit": 60}` (see "Accounts" below) |
+| `POST /v1/account/apple` | JSON `{"identityToken": "…", "authorizationCode": "…", "nonce": "<raw nonce>"}` from Sign in with Apple. At most `HOURLY_SIGN_IN_LIMIT` (30) attempts an hour per network address. | `{"accountId": "<uuid>", "sessionToken": "…", "dailyScanLimit": 60}` (see "Accounts" below) |
 | `GET /v1/account` | header `Authorization: Bearer <sessionToken>` | `{"accountId": "…", "dailyScanLimit": 60, "createdAt": "YYYY-MM-DD"}` |
 | `POST /v1/account/signout` | Bearer | `204` — this session only |
 | `DELETE /v1/account` | Bearer | `204` — Apple token revoked, then the account and all its sessions deleted |
@@ -39,7 +39,7 @@ in the body — the app decodes it as a flat `[String: String]` dictionary:
 | 413 | upload over 15 MB (refused by Content-Length before reading, or cut off while a chunked body streams in) |
 | 415 | the file isn't a JPEG/PNG (or another picture Pillow can read) |
 | 422 | a field is missing or has the wrong type (for `/v1/feedback`: `context` outside `[a-z0-9:-]{1,64}`, over-long fields) |
-| 429 | daily scan limit reached for this device (`/v1/omr`), or daily feedback limit (`/v1/feedback`, `DAILY_FEEDBACK_LIMIT`) |
+| 429 | daily scan limit reached for this device or account (`/v1/omr`, see "Scan limit"), or daily feedback limit (`/v1/feedback`, `DAILY_FEEDBACK_LIMIT`); for `POST /v1/trends` and `POST /v1/account/apple` too many requests from one network address in an hour — `"Too many requests from this network. Try again later."` (see "Rate limits") |
 | 500 | homr failed or produced nothing readable (or any unexpected server error) |
 | 502 | `/v1/feedback`: Supabase did not take the row (unreachable, refused, table missing) — not charged. `/v1/auditions`, `/v1/recommendations`: `"The auditions feed didn't answer. Try again in a few minutes."` — Supabase unreachable, refused (e.g. the auditions migration isn't applied) or sent something unexpected |
 | 503 | the instance is busy: the short queue is full, or the scan could not start within `OMR_QUEUE_WAIT_SECONDS` — `Retry-After: 60`, not charged. For `/v1/feedback`: `"Feedback isn't set up on the server yet."` while `SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY` are not set (the app keeps the report queued). For `/v1/auditions` and `/v1/recommendations`: `"The auditions feed isn't set up on the server yet."`, same condition (parameters are checked first, so a bad one is still a 400) |
@@ -185,7 +185,10 @@ them). `deploy.sh` creates it once and refuses to replace it.
 the 22 ids, 400), `week` (`YYYY-Www` with ASCII digits and a capital W; a real ISO week —
 `2025-W53` is not one; and only **this week or last week, reckoned in UTC** — 400 in
 plain words otherwise), at most **50** `excerptIds` (more → 400, nothing stored), then
-503 while not set up. Excerpt ids the **server catalogue** does not list for that
+503 while not set up, then the per-network limit (`HOURLY_TRENDS_POST_LIMIT`, default
+20 posts per sliding hour from one network address → 429 `"Too many requests from this
+network. Try again later."`; a bad request or an unconfigured server costs nothing, a
+post that Supabase then refuses is not given back). Excerpt ids the **server catalogue** does not list for that
 instrument are dropped silently: `Catalog.excerpts` — the `content/catalog/<instrument>.json`
 file baked into the image, `published` only (drafts too when `INCLUDE_DRAFTS=1`); an
 instrument without a catalogue file keeps nothing. Repeats and blanks are dropped,
@@ -198,7 +201,11 @@ stored). 204, no body.
 week (the app calls it when the player turns sharing off). 204.
 
 **`GET /v1/trends?instrument=`** — no device id needed. Reads the 8 most recent ISO
-weeks, the current one included (`fromWeek`…`toWeek`), paged at 1,000 rows. A
+weeks, the current one included (`fromWeek`…`toWeek`), paged at 1,000 rows with a
+safety stop at 500,000 rows (never reached by real data): past it the answer is
+`{"enough": false, …, "trends": []}` — not a tier from a partial count and not an
+error — kept an hour like any answer, and one warning is logged (the instrument and
+the weeks, no ids). A
 contributor counts once however many weeks they shared; an excerpt counts once per
 contributor who listed it. `enough` is true from **20 distinct contributors**; below
 that `trends` is `[]`. Otherwise each excerpt still in the catalogue gets a tier from
@@ -223,10 +230,14 @@ practise isn't set up on the server yet."` while `SUPABASE_URL`,
 so a bad one is still a 400).
 
 **Known limits.** Device ids are minted by the app, so someone determined could post
-as many "contributors" as they like and push an excerpt up a tier; the 20-contributor
-floor and the coarse tiers limit what that achieves, and App Attest (PLAN B3) is the
-real fix. Counting is per Supabase project, not per Cloud Run instance; only the cache
-and the retention timer are per instance.
+as "contributors" they made up and push an excerpt up a tier. What stands in the way
+today: the 20-contributor floor, the coarse tiers, and the per-network limit on posts
+(20 an hour per address, per instance, in memory — see "Rate limits"), which turns a
+flood into a trickle but does not stop a patient attacker or one with many addresses.
+**Full protection needs App Attest (PLAN B3), which is not built yet**: the app will
+then prove it is the genuine Auditioner build on a real device before the server
+counts its posts. Counting is per Supabase project, not per Cloud Run instance; only
+the cache, the retention timer and the per-network counters are per instance.
 
 ### Accounts (`/v1/account…`, Sign in with Apple)
 
@@ -239,14 +250,21 @@ yet."`) until `APPLE_TEAM_ID`, `APPLE_KEY_ID`, `APPLE_PRIVATE_KEY`, `ACCOUNT_SEC
 P-256 `.p8` and `ACCOUNT_SECRET` is at least 32 characters (the server logs which
 names are missing, never values). Tables: `supabase/migrations/20261012000000_accounts.sql`.
 
-**Signing in** (`POST /v1/account/apple`):
+**Signing in** (`POST /v1/account/apple`). First the attempt is counted against the
+caller's network address (`HOURLY_SIGN_IN_LIMIT`, default 30 per sliding hour per
+instance, good token or bad; over it → 429 `"Too many requests from this network. Try
+again later."` and Apple is not asked; an unconfigured server, 503, counts nothing).
+Then:
 
 1. The identity token is checked: RS256 against Apple's keys
-   (`https://appleid.apple.com/auth/keys`, kept 24 h and asked for at most once a
-   minute per instance — whether because a token names a key id we haven't seen or
-   because the last fetch failed, so a flood of sign-ins while Apple is unreachable is
-   not a flood of requests to Apple; if Apple can't be reached the last good set is
-   used, and with no good set yet sign-in answers 502 until the next try), issuer
+   (`https://appleid.apple.com/auth/keys`, kept 24 h and fetched **one request at a
+   time**: a sign-in that arrives while a fetch is in progress waits for it and shares
+   its outcome rather than being told the keys could not be had or that its key id is
+   unknown; after a fetch has *finished* — well or badly — Apple is not asked again for
+   a minute, whether because a token names a key id we haven't seen or because the
+   fetch failed, so a flood of sign-ins while Apple is unreachable is not a flood of
+   requests to Apple; if Apple can't be reached the last good set is used, and with no
+   good set yet sign-in answers 502 until the next try), issuer
    `https://appleid.apple.com`, audience
    `APPLE_BUNDLE_ID`, not expired (60 s leeway for clocks), and its `nonce` claim must
    be the sha256 hex of the raw `nonce` in the request (the app sends Apple the hash
@@ -293,15 +311,25 @@ gives every returning player a fresh, empty account (their old one is orphaned) 
 makes the stored refresh tokens unreadable, so deleting an old account can no longer
 revoke Apple's token.
 
-**Scan limit.** A `/v1/omr` request with a valid Bearer session counts against a
-per-account allowance (`SIGNED_IN_DAILY_SCAN_LIMIT`, default 60, a separate in-memory
-`DailyLimiter` keyed by account id) instead of the device's `DAILY_SCAN_LIMIT`. The
-session look-up has a 3-second budget and its answer (also "no such session") is
-kept 5 minutes per token per instance; signing out or deleting on the same instance
-forgets it at once (another instance may keep counting the old token as signed in for
-up to 5 minutes — only the limit is affected). A missing, malformed, unknown or
-expired token, accounts being off or Supabase being down **never fail a scan**: it
-simply counts against the device limit.
+**Scan limit.** Every `/v1/omr` request counts against the device (`X-Device-Id`,
+one in-memory counter per device): signed out, up to `DAILY_SCAN_LIMIT` (30) in a
+sliding 24 h; with a valid Bearer session, up to `SIGNED_IN_DAILY_SCAN_LIMIT` (60) on
+the device **and** up to `SIGNED_IN_DAILY_SCAN_LIMIT` on the account (a second counter,
+keyed by account id). Because the device counter is shared, signing out and in again,
+or in with a second Apple ID, never adds up: 60 is the most one device scans in a day,
+however it is signed in (before this, 30 signed out + 60 per Apple ID stacked). A
+refused scan is charged to nothing; a scan the server could not start (503 busy) is
+given back to device and account alike. Signing in never lowers the device's cap (it
+is the larger of the two limits). The session look-up — finding the session plus the
+once-a-day touch — is **bounded as a whole to 3 seconds** (`asyncio.wait_for`, not
+httpx's per-phase timeout), and the scan's 115 s budget clock starts before it, so a
+slow database costs the scan at most those 3 s and then it simply counts against the
+device. The look-up's answer (also "no such session") is kept 5 minutes per token per
+instance; signing out or deleting on the same instance forgets it at once (another
+instance may keep counting the old token as signed in for up to 5 minutes — only the
+limit is affected). A missing, malformed, unknown or expired token, accounts being off
+or Supabase being down or slow **never fail a scan**: it simply counts against the
+device limit.
 
 ### What `/v1/omr` does with the picture
 
@@ -358,17 +386,37 @@ main branch, which has moved on:
 
 ### Rate limits
 
-In-memory, per instance, per `X-Device-Id`: a sliding 24-hour window of
-`DAILY_SCAN_LIMIT` scans (default 30), plus one OMR job at a time with a queue of
-`OMR_QUEUE_LIMIT` (default 4) — beyond that, or when the queue does not move within
-`OMR_QUEUE_WAIT_SECONDS`, the server answers 503. A 503 does not count against the
-device's daily limit. This stops a runaway client; it is not a security boundary
-(anyone can mint device ids, and the counters reset with the instance). **M5
-(PLAN.md B3): App Attest replaces/augments it** — the app proves it is the genuine
-build on a real device. The header-based limiter stays as the fallback. Signed-in
-players (a valid Bearer session) already get their own per-account allowance,
-`SIGNED_IN_DAILY_SCAN_LIMIT` (default 60) — see "Accounts" above; it is in memory per
-instance too.
+All in memory, per Cloud Run instance (`app/limits.py`); the counters reset when the
+instance restarts and are not shared between instances.
+
+- **Scans, per `X-Device-Id`**: a sliding 24-hour window of `DAILY_SCAN_LIMIT` (default
+  30) signed out, `SIGNED_IN_DAILY_SCAN_LIMIT` (default 60) with a valid session — the
+  same counter, read against two caps — plus the per-account counter for signed-in
+  scans (see "Scan limit" under "Accounts"). One OMR job runs at a time with a queue of
+  `OMR_QUEUE_LIMIT` (default 4) — beyond that, or when the queue does not move within
+  `OMR_QUEUE_WAIT_SECONDS`, the server answers 503, which is not charged.
+- **Feedback, per `X-Device-Id`**: `DAILY_FEEDBACK_LIMIT` (default 20) a day.
+- **Per network address, a sliding hour**: `POST /v1/trends` at most
+  `HOURLY_TRENDS_POST_LIMIT` (default 20) and `POST /v1/account/apple` at most
+  `HOURLY_SIGN_IN_LIMIT` (default 30, so a masterclass signing in together on one
+  Wi-Fi isn't stopped); over it, 429 `"Too many requests from this network. Try again
+  later."`. The address is the **last entry of `X-Forwarded-For`** when it is an IP
+  address — Google's front end appends the address it saw, so entries a client sends
+  itself land to the left and are ignored — else the connection's own peer; IPv6
+  addresses count by their /64. It is a counter key in memory and is
+  **never logged**. These two endpoints are the ones anyone can call with a made-up
+  device id — to mint "contributors" for the trends, or to make us call Apple — so the
+  device id alone bounds nothing there. A school or an orchestra behind one address
+  shares one allowance; the app treats a 429 on trends like any failed post (the set
+  stays on the device and goes out with the next upload, at least 12 hours later) and
+  shows the sentence above on the sign-in screen.
+
+None of this is a security boundary: anyone can mint device ids, `X-Forwarded-For`
+only says where a request appears to come from, and the counters reset with the
+instance. **Full protection needs App Attest (PLAN.md B3), not built yet** — the app
+proves it is the genuine Auditioner build on a real device before the server counts
+anything it sends. The header-based limiters stay as the fallback (attestation-free
+path, TestFlight builds).
 
 ## Environment variables
 
@@ -395,8 +443,10 @@ instance too.
 | `APPLE_PRIVATE_KEY` | unset | **a secret**: the text of the Sign in with Apple `.p8` key (EC P-256). On Cloud Run it comes from Secret Manager (secret `auditioner-apple-signin-key`) |
 | `APPLE_BUNDLE_ID` | `com.milaiwalker.auditioner` | the app's bundle id: the identity token's audience and the `client_id` sent to Apple |
 | `ACCOUNT_SECRET` | unset | **a secret**, at least 32 characters: key for `HMAC-SHA256` of Apple's user id and (through HKDF-SHA256) for encrypting Apple refresh tokens. On Cloud Run it comes from Secret Manager (secret `auditioner-account-secret`). Never change it once set |
-| `SIGNED_IN_DAILY_SCAN_LIMIT` | `60` | scans per signed-in account per sliding 24 h (instead of `DAILY_SCAN_LIMIT`) |
+| `SIGNED_IN_DAILY_SCAN_LIMIT` | `60` | scans per signed-in account per sliding 24 h, and the device's cap while signed in (the device counter is shared with signed-out scans, so limits never stack) |
+| `HOURLY_SIGN_IN_LIMIT` | `30` | `POST /v1/account/apple` attempts per network address per sliding hour (429 beyond it) |
 | `TRENDS_SALT` | unset | **a secret**: key for `HMAC-SHA256(TRENDS_SALT, X-Device-Id)` in `trend_contributions`; with Supabase it turns `/v1/trends` on (503 without it). On Cloud Run it comes from Secret Manager (`deploy.sh`, secret `auditioner-trends-salt`, created once with a random value). Never change it once set |
+| `HOURLY_TRENDS_POST_LIMIT` | `20` | `POST /v1/trends` requests per network address per sliding hour (429 beyond it) |
 
 The only secret so far is the Supabase service-role key, and it lives in Google
 Secret Manager (`deploy.sh` stores it from the `SUPABASE_SERVICE_ROLE_KEY` variable
@@ -455,19 +505,26 @@ exist there. `tests/test_trends.py` drives `/v1/trends` against a fake
 the year boundary, UTC), the 19/20-contributor threshold, the 40 %/15 % tier
 boundaries, no numbers anywhere in the answer, unknown and draft excerpts dropped,
 the 50-id cap, replace-on-repost, delete-everything, 26-week retention (hourly, never
-failing a request), the one-hour cache, 400/422/502/503, and that neither the raw
-device id, the contributor hash nor the salt reaches Supabase or a log line.
+failing a request), the one-hour cache, the paging safety stop answering "not enough"
+rather than 502, the per-network hourly limit on posts (last `X-Forwarded-For` entry,
+bad posts not counted, the address never logged), 400/422/429/502/503, and that
+neither the raw device id, the contributor hash nor the salt reaches Supabase or a
+log line.
 `tests/test_accounts.py` drives `/v1/account…` and the signed-in scan limit against a
 fake Apple and a fake Supabase on one `httpx.MockTransport`, with an RSA key (Apple's
 signing key) and an EC P-256 key (the `.p8`) generated at test time — no key material
 in the repo: the happy path (hashed id, encrypted refresh token, hashed session, a
 valid ES256 client secret), wrong audience/issuer, expired, nonce mismatch, HS256,
-key rotation and the 24-hour key cache, 503 for each missing setting, code-exchange
-failures (502, nothing stored), GET/sign-out/delete, delete with Apple down (502,
-account kept), the 365-day expiry, signed-in vs device limits on `/v1/omr` with
-valid, bad and unknown tokens and with Supabase down, the 5-minute look-up cache, and
-that no token, code, nonce, refresh token, Apple id or secret reaches a log line or a
-response.
+key rotation and the 24-hour key cache, one key fetch at a time (two sign-ins during
+one fetch, during a failed fetch and during key rotation share it), the per-network
+hourly limit on sign-ins, 503 for each missing setting, code-exchange failures (502,
+nothing stored), GET/sign-out/delete, delete with Apple down (502, account kept), the
+365-day expiry, the shared device counter on `/v1/omr` (Apple ID A, signed out, Apple
+ID B on one device never stack; a busy server refunds device and account), valid, bad
+and unknown tokens, Supabase down and Supabase slow (the bounded look-up, and its time
+counting against the scan's budget), the 5-minute look-up cache, and that no token,
+code, nonce, refresh token, Apple id, secret or network address reaches a log line or
+a response.
 `.github/workflows/backend.yml` runs the suite on every push that
 touches `backend/**` or `content/**`.
 

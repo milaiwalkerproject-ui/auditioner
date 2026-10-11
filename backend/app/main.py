@@ -36,7 +36,7 @@ from starlette.datastructures import Headers
 from starlette.types import ASGIApp, Message, Receive, Scope, Send
 
 from . import __version__
-from .accounts_api import install_accounts, scan_limiter
+from .accounts_api import install_accounts, scan_allowance
 from .catalog import Catalog
 from .config import Settings
 from .feed import (
@@ -53,7 +53,7 @@ from .feed import (
 from .feedback import FeedbackStore, FeedbackStoreError
 from .imaging import ImageTooLarge, NotAnImage, probe
 from .instruments import INSTRUMENT_IDS, lookup
-from .limits import Busy, ConcurrencyGuard, DailyLimiter, clean_device_id
+from .limits import HOUR_SECONDS, Busy, ConcurrencyGuard, DailyLimiter, clean_device_id
 from .omr import EngineError, EngineTimeout, recognise
 from .postprocess import MalformedMusicXML, parse_meter, postprocess
 from .trends import TrendsService
@@ -193,6 +193,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.state.feed = FeedService(settings.supabase_url, settings.supabase_service_role_key)
     # Community trends (POST/DELETE/GET /v1/trends): opt-in, hashed contributors, tiers only.
     app.state.trends = TrendsService(settings.supabase_url, settings.supabase_service_role_key, settings.trends_salt)
+    # POST /v1/trends per network address per sliding hour (keys are never logged).
+    app.state.trends_network_limiter = DailyLimiter(settings.hourly_trends_post_limit, window_seconds=HOUR_SECONDS)
     app.include_router(trends_router)
     # Optional Sign in with Apple accounts (/v1/account…) and the signed-in scan limiter.
     install_accounts(app, settings)
@@ -270,13 +272,18 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         except ImageTooLarge:
             raise HTTPException(400, MSG_TOO_MANY_PIXELS) from None
 
-        # Signed in (valid Bearer session) → per-account limit; otherwise per device.
-        limiter, limit_key = await scan_limiter(request, device_id)
-        if not limiter.allow(limit_key):
+        # The app gives up REQUEST_BUDGET_SECONDS after sending, so the clock starts here:
+        # the session look-up below (bounded to a few seconds itself) is part of the budget.
+        started = time.monotonic()
+        # Every scan counts against the device; a valid Bearer session also counts
+        # against the account and lifts the device's cap to the signed-in limit
+        # (app/accounts_api.py). A bad or unknown token, or a slow or down account
+        # store, just means the device limit — never a failed scan.
+        allowance = await scan_allowance(request, device_id)
+        if not allowance.allow():
             raise HTTPException(429, MSG_LIMIT)
 
         guard: ConcurrencyGuard = app.state.guard
-        started = time.monotonic()
         try:
             async with guard.slot(max_wait=settings.omr_queue_wait_seconds):
                 left = REQUEST_BUDGET_SECONDS - (time.monotonic() - started)
@@ -284,7 +291,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                     raise Busy()
                 raw_xml = await recognise(data, settings, timeout=left)
         except Busy:
-            limiter.refund(limit_key)
+            allowance.refund()  # device and account alike: no work was done
             raise HTTPException(503, MSG_BUSY, headers={"Retry-After": "60"}) from None
         except NotAnImage:
             raise HTTPException(415, MSG_NOT_IMAGE) from None

@@ -1,8 +1,17 @@
 import asyncio
+from types import SimpleNamespace
 
 import pytest
 
-from app.limits import Busy, ConcurrencyGuard, DailyLimiter, clean_device_id
+from app.limits import (
+    UNKNOWN_NETWORK,
+    Busy,
+    ConcurrencyGuard,
+    DailyLimiter,
+    clean_device_id,
+    client_ip,
+    request_network,
+)
 
 
 class FakeClock:
@@ -45,6 +54,29 @@ def test_refund():
 def test_zero_limit_blocks_everything():
     limiter = DailyLimiter(limit=0)
     assert not limiter.allow("a")
+
+
+def test_one_counter_read_against_different_caps():
+    """A device's scans are one count, checked against 30 signed out and 60 signed in."""
+    limiter = DailyLimiter(limit=1)
+    assert limiter.allow("a")
+    assert not limiter.allow("a")                 # the limiter's own cap
+    assert limiter.allow("a", limit=3)            # a higher cap for the same key
+    assert limiter.allow("a", limit=3)
+    assert not limiter.allow("a", limit=3)
+    assert limiter.remaining("a") == 0
+    assert limiter.remaining("a", limit=3) == 0
+    assert limiter.remaining("a", limit=5) == 2
+    assert not limiter.allow("a", limit=0)
+    assert not limiter.allow("a", limit=-4)       # never below zero
+
+
+def test_hour_window():
+    clock = FakeClock()
+    limiter = DailyLimiter(limit=2, window_seconds=3600, clock=clock)
+    assert limiter.allow("net") and limiter.allow("net") and not limiter.allow("net")
+    clock.now += 3601
+    assert limiter.allow("net")
 
 
 def test_sweep_drops_idle_devices():
@@ -117,6 +149,37 @@ def test_guard_releases_slot_on_error():
 )
 def test_clean_device_id(raw, expected):
     assert clean_device_id(raw) == expected
+
+
+@pytest.mark.parametrize(
+    "forwarded_for,peer,expected",
+    [
+        ("203.0.113.7", "10.0.0.1", "203.0.113.7"),                     # Google's front end: the caller it saw
+        ("198.51.100.1, 203.0.113.7", "10.0.0.3", "203.0.113.7"),        # a client-sent entry is ignored…
+        ("1.1.1.1, 2.2.2.2,  203.0.113.7 ", "10.0.0.3", "203.0.113.7"),  # …however many it sends
+        ("  10.0.0.1 ,203.0.113.7", "10.0.0.3", "203.0.113.7"),
+        ("2001:db8:1234:5678:abcd::1", "10.0.0.1", "2001:db8:1234:5678::/64"),  # IPv6 by its /64
+        ("2001:db8:1234:5678:ffff::2", "10.0.0.1", "2001:db8:1234:5678::/64"),
+        ("::ffff:203.0.113.7", "10.0.0.1", "203.0.113.7"),                # IPv4 carried as IPv6 is that IPv4 address…
+        ("::ffff:198.51.100.9", "10.0.0.1", "198.51.100.9"),              # …not one shared ::/64 bucket
+        ("not-an-address", "10.0.0.1", "10.0.0.1"),                       # garbage → the connection's peer
+        ("203.0.113.7:8080", "10.0.0.1", "10.0.0.1"),
+        ("", "10.0.0.1", "10.0.0.1"),
+        (None, "10.0.0.1", "10.0.0.1"),
+        (None, "testclient", "testclient"),
+        (None, None, UNKNOWN_NETWORK),
+        ("", "  ", UNKNOWN_NETWORK),
+    ],
+)
+def test_client_ip(forwarded_for, peer, expected):
+    assert client_ip(forwarded_for, peer) == expected
+
+
+def test_request_network_reads_the_request():
+    request = SimpleNamespace(headers={"x-forwarded-for": "10.0.0.1, 203.0.113.7"}, client=SimpleNamespace(host="10.0.0.9"))
+    assert request_network(request) == "203.0.113.7"
+    assert request_network(SimpleNamespace(headers={}, client=SimpleNamespace(host="10.0.0.9"))) == "10.0.0.9"
+    assert request_network(SimpleNamespace(headers={}, client=None)) == UNKNOWN_NETWORK
 
 
 def test_slot_max_wait_gives_up_with_busy():

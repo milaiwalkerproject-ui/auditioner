@@ -295,6 +295,21 @@ final class NoteTranslationsTests: XCTestCase {
         XCTAssertFalse(NoteTranslationDisplay.showsMachineTranslatedTag(translation: nil, showsOriginal: false))
     }
 
+    /// A machine translation is AI prose (CLAUDE.md): the "AI-generated — may contain errors, check
+    /// against your part" footer stands under every translated note, curated ones included, and goes
+    /// away with "Show original" unless the note itself is AI-written.
+    func testAIFooterUnderEveryAINoteAndEveryTranslationOnScreen() {
+        XCTAssertTrue(NoteTranslationDisplay.showsAIFooter(origin: .ai, translation: nil, showsOriginal: false))
+        XCTAssertTrue(NoteTranslationDisplay.showsAIFooter(origin: .ai, translation: "Español.", showsOriginal: false))
+        XCTAssertTrue(NoteTranslationDisplay.showsAIFooter(origin: .ai, translation: "Español.", showsOriginal: true),
+                      "an AI note keeps its label when the English is shown")
+        XCTAssertTrue(NoteTranslationDisplay.showsAIFooter(origin: .curated, translation: "Español.", showsOriginal: false),
+                      "a translated curated note is labelled while the translation is on screen")
+        XCTAssertFalse(NoteTranslationDisplay.showsAIFooter(origin: .curated, translation: "Español.", showsOriginal: true),
+                       "the English of a curated note is a person's text: no AI label")
+        XCTAssertFalse(NoteTranslationDisplay.showsAIFooter(origin: .curated, translation: nil, showsOriginal: false))
+    }
+
     // MARK: - Approved-only rule on the page
 
     func testApprovedNotesCarryTheirTranslationInPageOrder() throws {
