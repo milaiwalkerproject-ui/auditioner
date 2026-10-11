@@ -27,7 +27,7 @@ struct ExcerptRecordingsSection: View {
             .pickerStyle(.segmented)
 
             if shown.isEmpty {
-                Text(kind == .orchestra ? "No orchestra recordings listed yet." : "No solo recordings listed yet.")
+                Text(kind == .orchestra ? String(localized: "No orchestra recordings listed yet.") : String(localized: "No solo recordings listed yet."))
                     .font(.subheadline)
                     .foregroundStyle(Theme.inkSoft)
             } else {

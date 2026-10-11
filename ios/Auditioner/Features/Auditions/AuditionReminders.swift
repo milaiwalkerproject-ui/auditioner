@@ -57,7 +57,7 @@ enum AuditionReminderSchedule {
         var result: [AuditionReminder] = []
         let who: String = position.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
             ? orchestra
-            : "\(orchestra) (\(position))"
+            : String(localized: "\(orchestra) (\(position))")
         if let deadline = deadline {
             for days in dayOffsets {
                 guard let fire = fireDate(before: deadline, daysBefore: days, calendar: calendar), fire > now else { continue }

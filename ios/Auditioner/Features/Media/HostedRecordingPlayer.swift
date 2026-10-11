@@ -144,7 +144,7 @@ struct HostedRecordingPlayer: View {
                     controller.play()
                 }
             } label: {
-                Label(controller.isPlaying ? "Pause" : "Play", systemImage: controller.isPlaying ? "pause.fill" : "play.fill")
+                Label(controller.isPlaying ? String(localized: "Pause") : String(localized: "Play"), systemImage: controller.isPlaying ? "pause.fill" : "play.fill")
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)

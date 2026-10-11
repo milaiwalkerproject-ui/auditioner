@@ -1,6 +1,18 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Image of a part" : {
+      "comment" : "Document type name (CFBundleTypeName) shown in the iOS Open in / Share sheets for a photo or image of a part.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Image of a part"
+          }
+        }
+      }
+    },
     "NSAppleMusicUsageDescription" : {
       "comment" : "Permission prompt (Apple Music). Keep the exact meaning: the app only plays recordings from the start of an excerpt when the player has a subscription.",
       "extractionState" : "manual",
@@ -33,6 +45,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Auditioner records your practice so you can compare it with the reference."
+          }
+        }
+      }
+    },
+    "PDF part" : {
+      "comment" : "Document type name (CFBundleTypeName) shown in the iOS Open in / Share sheets for a PDF part.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PDF part"
           }
         }
       }

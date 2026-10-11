@@ -95,7 +95,7 @@ struct AuditionMockSetupSheet: View {
                 Text("Time to prepare between excerpts")
                 Picker(selection: $prepSeconds) {
                     ForEach(MockAuditionLogic.prepChoices, id: \.self) { seconds in
-                        Text(seconds == 0 ? String(localized: "None") : "\(seconds) s").tag(seconds)
+                        Text(seconds == 0 ? String(localized: "None") : String(localized: "\(seconds) s")).tag(seconds)
                     }
                 } label: {
                     Text("Time to prepare")

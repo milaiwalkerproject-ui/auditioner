@@ -292,16 +292,21 @@ enum LocalRecommendationEngine {
         let noun: String = count == 1 ? String(localized: "list") : String(localized: "lists")
         let words: String = instrumentWords(instrument)
         if includeAllChairs || position == .any {
-            return "\(words) \(noun)"
+            return String(localized: "lists.phrase.allChairs", defaultValue: "\(words) \(noun)",
+                          comment: "Instrument followed by 'list'/'lists', e.g. 'cello lists'. Reorder the words as your language needs.")
         }
-        return "\(position.displayName.lowercased()) \(words) \(noun)"
+        return String(localized: "lists.phrase.chair", defaultValue: "\(position.displayName.lowercased()) \(words) \(noun)",
+                      comment: "Chair, instrument, then 'list'/'lists', e.g. 'section cello lists'. Reorder the words as your language needs.")
     }
 
     /// " (2022–2026)", " (2025)" or "".
     static func yearsSuffix(_ years: ClosedRange<Int>?) -> String {
         guard let years = years else { return "" }
-        if years.lowerBound == years.upperBound { return " (\(years.lowerBound))" }
-        return " (\(years.lowerBound)\u{2013}\(years.upperBound))"
+        // Years are labels, not quantities: as Ints they would be shown as "2,026".
+        let first: String = String(years.lowerBound)
+        let last: String = String(years.upperBound)
+        if years.lowerBound == years.upperBound { return String(localized: " (\(first))") }
+        return String(localized: " (\(first)\u{2013}\(last))")
     }
 
     /// The plain-words line under a count. Only the numbers vary; nothing is inferred.

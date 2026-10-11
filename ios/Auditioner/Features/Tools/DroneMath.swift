@@ -92,6 +92,6 @@ enum DroneMath {
 
     /// "220.0 Hz" style text.
     static func frequencyText(_ hz: Double) -> String {
-        String(format: "%.1f Hz", hz)
+        String(localized: "\(String(format: "%.1f", hz)) Hz")
     }
 }

@@ -69,7 +69,7 @@ struct CountdownLine: View {
                 Text(AuditionDates.dayText(date))
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(Theme.ink)
-                Text("· " + AuditionCountdown.phrase(days: days))
+                Text("· \(AuditionCountdown.phrase(days: days))")
                     .font(.subheadline)
                     .foregroundStyle(AuditionCountdown.isPast(days: days) ? Theme.garnet : Theme.inkSoft)
             }
@@ -170,7 +170,7 @@ struct AuditionSummaryRow: View {
     private var dateLine: String {
         guard let target = countdownTarget else { return String(localized: "No date yet") }
         let phrase: String = AuditionCountdown.phrase(to: target.date, now: now, calendar: Calendar.current)
-        return "\(target.label) \(phrase) · \(AuditionDates.dayText(target.date))"
+        return String(localized: "\(target.label) \(phrase) · \(AuditionDates.dayText(target.date))")
     }
 
     private var dateIsPast: Bool {

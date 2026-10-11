@@ -156,7 +156,7 @@ struct AppleMusicRecordingPlayer: View {
                         Task { await model.play(startSeconds: verifiedStart) }
                     }
                 } label: {
-                    Label(model.isPlaying ? "Pause" : "Play", systemImage: model.isPlaying ? "pause.fill" : "play.fill")
+                    Label(model.isPlaying ? String(localized: "Pause") : String(localized: "Play"), systemImage: model.isPlaying ? "pause.fill" : "play.fill")
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)

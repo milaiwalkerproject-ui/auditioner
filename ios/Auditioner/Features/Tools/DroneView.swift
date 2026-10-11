@@ -66,8 +66,10 @@ struct DroneNoteCard: View {
     }
 
     private var frequencyLine: String {
-        let parts = engine.soundingFrequencies.map { DroneMath.frequencyText($0) }
-        return parts.joined(separator: " + ") + " · A = \(Int(a4.rounded())) Hz"
+        let parts: [String] = engine.soundingFrequencies.map { DroneMath.frequencyText($0) }
+        // The tuning is a label, not a quantity, so it is interpolated as text (never "1,000").
+        let tuning: String = String(Int(a4.rounded()))
+        return String(localized: "\(parts.joined(separator: " + ")) · A = \(tuning) Hz")
     }
 
     var body: some View {

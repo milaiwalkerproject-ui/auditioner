@@ -252,7 +252,7 @@ struct AuditionItemGroup<Item>: Identifiable {
     /// "Preliminary round · Orchestral excerpts", or just the category when the list has no rounds.
     func title(showRound: Bool) -> String {
         if showRound {
-            return AuditionRounds.displayName(round) + " · " + category.displayName
+            return String(localized: "\(AuditionRounds.displayName(round)) · \(category.displayName)")
         }
         return category.displayName
     }

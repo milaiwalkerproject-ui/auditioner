@@ -199,9 +199,10 @@ enum MetronomeMath {
     /// "Allegro range (120–168)" style hint.
     static func tempoMarkingHint(bpm: Double) -> String {
         for item in markingRanges where item.range.contains(bpm) {
-            let lo = Int(item.range.lowerBound)
-            let hi = Int(item.range.upperBound)
-            return "\(item.name) · \(lo)–\(hi)"
+            // Tempo bounds are labels, not quantities, so they are interpolated as text.
+            let lo: String = String(Int(item.range.lowerBound))
+            let hi: String = String(Int(item.range.upperBound))
+            return String(localized: "\(item.name) · \(lo)–\(hi)")
         }
         return ""
     }

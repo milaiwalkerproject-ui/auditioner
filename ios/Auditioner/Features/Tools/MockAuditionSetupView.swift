@@ -153,7 +153,7 @@ struct MockAuditionSetupView: View {
     }
 
     static func prepLabel(_ seconds: Int) -> String {
-        seconds == 0 ? String(localized: "None") : "\(seconds) s"
+        seconds == 0 ? String(localized: "None") : String(localized: "\(seconds) s")
     }
 }
 

@@ -41,6 +41,7 @@ orchestra and its auditions; Auditioner helps them *win the seat*.
 | A5 | Ages **13+** in the terms for now; lower later after a COPPA check. Everything works signed out. |
 | A6 | Storefronts: **exclude mainland China, Russia, Belarus** (Claude unsupported, YouTube blocked, China ICP filing). **Hong Kong & Macau included with AI notes hidden.** |
 | A7 | Languages (all in v1): English, Spanish, Simplified Chinese, Traditional Chinese, Italian, Russian, Japanese, Korean, German, French, Portuguese (BR). UI AI-translated and marked "beta translation" until a native speaker checks it; excerpt content translated by Claude on first open, cached, labelled "machine-translated"; **score markings stay in the original language** (tap for a translation). |
+| A7b | (2026-10-11) The app's language follows the device's language setting (iOS picks it; Settings → Auditioner → Language can override it). Scans and parts are never translated or changed. Excerpt notes follow the device language too: their machine translations are prepared now, checked by code that every number, bar and marking survived unchanged, and are shown **from 12 Nov 2026** (the I2 date), labelled "Machine-translated"; until then notes appear in English. Work titles and score markings stay in the original language. |
 
 ### Platform & build
 | # | Decision |
@@ -200,7 +201,7 @@ reminders, mock audition from the list); "Most asked for your chair" in the exce
 browser, counted on the device from the catalogue's lists or from the server
 (`/v1/auditions`, `/v1/recommendations`). Next: M5.
 
-**Status (2026-10-12):** M5 built, not yet merged. Sign in with Apple (B2): optional,
+**Status (2026-10-11, later):** M5 built, not yet merged. Sign in with Apple (B2): optional,
 Skip always possible, server checks Apple's token itself and stores only a keyed hash
 of Apple's id, an encrypted refresh token (used only to revoke on deletion), dates
 and session hashes — no name, no email; in-app Delete account revokes at Apple and

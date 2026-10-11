@@ -1,6 +1,6 @@
 # Auditioner — Privacy policy
 
-*Version 0.3 · 12 October 2026 · applies to the Auditioner app for iPhone and iPad
+*Version 0.3 · 11 October 2026 · applies to the Auditioner app for iPhone and iPad
 (test version 0.1.0). Changed in this version: the sections "If you sign in with
 Apple" and "Popular with other players".*
 

@@ -105,7 +105,7 @@ enum ExcerptFormat {
     /// Movement line for the header, e.g. "Mvt. II · Andante con moto".
     static func movementLine(_ movement: Movement?) -> String? {
         guard let movement = movement else { return nil }
-        let number: String? = movement.number.map { "Mvt. \(Excerpt.roman($0))" }
+        let number: String? = movement.number.map { String(localized: "Mvt. \(Excerpt.roman($0))") }
         let title: String? = movement.title.flatMap { $0.isEmpty ? nil : $0 }
         let parts: [String] = [number, title].compactMap { $0 }
         return parts.isEmpty ? nil : parts.joined(separator: " · ")
@@ -116,7 +116,7 @@ enum ExcerptFormat {
         let year: String? = variant.year.map { String($0) }
         let who: [String] = [variant.orchestra, year].compactMap { $0 }.filter { !$0.isEmpty }
         if who.isEmpty { return variant.location.text }
-        return who.joined(separator: " ") + ": " + variant.location.text
+        return String(localized: "\(who.joined(separator: " ")): \(variant.location.text)")
     }
 }
 

@@ -306,7 +306,7 @@ struct Excerpt: Codable, Hashable, Identifiable {
     /// Movement + title, e.g. "Mvt. II · Opening".
     var subtitle: String {
         if let m = movement?.number {
-            return "Mvt. \(Excerpt.roman(m)) · \(title)"
+            return String(localized: "Mvt. \(Excerpt.roman(m)) · \(title)")
         }
         return title
     }
