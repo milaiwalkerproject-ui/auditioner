@@ -211,7 +211,11 @@ final class NoteTranslationsTests: XCTestCase {
         XCTAssertTrue(translations.hasTranslations)
         XCTAssertFalse(translations.isGateOpen)
         XCTAssertNil(translations.translation(excerptId: "cello-test-one", field: "history"))
-        let at: Date = try date(2026, 11, 12, 0, 0, 0, in: berlin)
+        // Local midnight on 12 November is still closed: the gate is one moment worldwide (12:00 UTC).
+        let berlinMidnight: Date = try date(2026, 11, 12, 0, 0, 0, in: berlin)
+        let stillClosed: NoteTranslations = try fixtureTranslations(now: berlinMidnight)
+        XCTAssertNil(stillClosed.translation(excerptId: "cello-test-one", field: "history"))
+        let at: Date = try date(2026, 11, 12, 13, 0, 0, in: berlin)   // 12:00 UTC
         let open: NoteTranslations = try fixtureTranslations(now: at)
         XCTAssertEqual(open.translation(excerptId: "cello-test-one", field: "history"), "Historia de prueba.")
     }
