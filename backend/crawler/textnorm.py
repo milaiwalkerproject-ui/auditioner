@@ -10,7 +10,7 @@ from __future__ import annotations
 import difflib
 import re
 import unicodedata
-from typing import Iterable
+from collections.abc import Iterable
 
 _SPECIAL = str.maketrans(
     {
@@ -143,6 +143,19 @@ def parse_bar_range(text: str) -> tuple[int, int] | None:
             if start <= end and end < 10000:
                 return start, end
     return None
+
+
+def parse_all_bar_ranges(text: str) -> list[tuple[int, int]]:
+    """Every 'a–b' bar range in a text, e.g. 'mm. 1-10, 49-59, 98-106' → three ranges."""
+    if not text:
+        return []
+    cleaned = text.translate(_SPECIAL)
+    found: list[tuple[int, int]] = []
+    for match in _RANGE_PATTERNS[0].finditer(cleaned):
+        start, end = int(match.group("start")), int(match.group("end"))
+        if start <= end and end < 10000 and (start, end) not in found:
+            found.append((start, end))
+    return found
 
 
 def parse_single_bar(text: str) -> int | None:

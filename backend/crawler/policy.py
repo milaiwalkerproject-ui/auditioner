@@ -11,8 +11,8 @@
 
 from __future__ import annotations
 
+from collections.abc import Iterable
 from dataclasses import dataclass
-from typing import Iterable
 from urllib.parse import urlsplit
 
 # Hosts (and all their subdomains) the bot never reads — aggregators, job boards,
@@ -30,6 +30,12 @@ REFUSED_HOSTS: frozenset[str] = frozenset(
         "americanorchestras.org",
         "musicchairs.com",
         "berufsorchester.de",
+        "symphony.org",
+        "theviolinchannel.com",
+        "cellobello.org",
+        "harpcolumn.com",
+        "indeed.com",
+        "glassdoor.com",
         # Social networks / video
         "facebook.com",
         "fb.com",

@@ -19,9 +19,9 @@ import shutil
 import subprocess
 import tempfile
 import zipfile
+from collections.abc import Callable, Iterable
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Callable, Iterable
 from xml.etree import ElementTree
 
 from pypdf import PdfReader

@@ -131,3 +131,11 @@ HK Phil, Singapore SO, Sapporo SO, Tokyo Metropolitan SO; 8 UK, 6 German/Austria
 
 The crawler should treat an entry **without** `auditionsUrl` as "not crawlable yet";
 it may read `homepageUrl` only to help a human find the page, never to infer one.
+
+## Verification log
+
+- **2026-10-11** — 25 random `auditionsUrl` entries re-checked with a web search limited to
+  each orchestra's own domain. 18 confirmed as written; 2 normalised to the exact form the
+  search returned (Atlanta, Metropolitan Opera); 5 replaced by the audition page that did
+  turn up on the same domain, because the stored address did not (Kansas City, CSUN Youth
+  Orchestras, Calgary, San Francisco Ballet, Chicago). Nothing removed; no aggregator hosts.

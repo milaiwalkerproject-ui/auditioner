@@ -1,0 +1,102 @@
+{
+  "version": "test-fixture",
+  "generatedAt": "2026-10-10",
+  "instrument": "cello",
+  "licenseNotes": [
+    "TEST FIXTURE ONLY. Bar numbers and sources here are fictional (example.org) and exist to exercise the mapping code. They are not audition facts."
+  ],
+  "excerpts": [
+    {
+      "id": "cello-fixture-sym-5-mvt2",
+      "instrument": "cello",
+      "part": "Cello",
+      "positions": ["section", "principal"],
+      "composer": "Ludwig van Beethoven",
+      "work": "Symphony No. 5 in C minor",
+      "catalogueNumber": "Op. 67",
+      "movement": { "number": 2, "title": "Andante con moto" },
+      "title": "Fixture: movement II opening",
+      "location": {
+        "status": "verified",
+        "value": { "text": "II: mm. 1–106", "start": { "bar": 1 }, "end": { "bar": 106 } },
+        "source": "https://example.org/fixture-list.pdf",
+        "asOf": "2026-10-10"
+      },
+      "variants": [
+        {
+          "location": { "text": "II: mm. 1-10, 49-59, 98-106" },
+          "orchestra": "Fixture Orchestra",
+          "year": 2025,
+          "position": "section",
+          "source": "https://example.org/fixture-variant.pdf",
+          "asOf": "2026-10-10"
+        }
+      ],
+      "sources": ["https://example.org/fixture-list.pdf"],
+      "listingStatus": "published"
+    },
+    {
+      "id": "cello-fixture-sym-5-mvt3",
+      "instrument": "cello",
+      "part": "Cello",
+      "positions": ["section"],
+      "composer": "Ludwig van Beethoven",
+      "work": "Symphony No. 5 in C minor",
+      "catalogueNumber": "Op. 67",
+      "movement": { "number": 3, "title": "Scherzo" },
+      "title": "Fixture: movement III",
+      "location": {
+        "status": "verified",
+        "value": { "text": "III: mm. 140–218", "start": { "bar": 140 }, "end": { "bar": 218 } },
+        "source": "https://example.org/fixture-list.pdf",
+        "asOf": "2026-10-10"
+      },
+      "sources": ["https://example.org/fixture-list.pdf"],
+      "listingStatus": "published"
+    },
+    {
+      "id": "cello-fixture-dvorak-sym-8-mvt1",
+      "instrument": "cello",
+      "part": "Cello",
+      "positions": ["section"],
+      "composer": "Antonín Dvořák",
+      "work": "Symphony No. 8 in G major",
+      "catalogueNumber": "Op. 88",
+      "movement": { "number": 1, "title": "Allegro con brio" },
+      "title": "Fixture: movement I opening",
+      "location": {
+        "status": "unverified",
+        "source": "https://example.org/fixture-list.pdf"
+      },
+      "variants": [
+        {
+          "location": { "text": "I: mm. 1–18" },
+          "orchestra": "Fixture Orchestra",
+          "year": 2024,
+          "source": "https://example.org/fixture-variant.pdf",
+          "asOf": "2026-10-10"
+        }
+      ],
+      "sources": ["https://example.org/fixture-list.pdf"],
+      "listingStatus": "published"
+    },
+    {
+      "id": "cello-fixture-strauss-don-juan",
+      "instrument": "cello",
+      "part": "Cello",
+      "positions": ["section"],
+      "composer": "Richard Strauss",
+      "work": "Don Juan",
+      "catalogueNumber": "Op. 20",
+      "title": "Fixture: opening",
+      "location": {
+        "status": "verified",
+        "value": { "text": "mm. 1–62", "start": { "bar": 1 }, "end": { "bar": 62 } },
+        "source": "https://example.org/fixture-list.pdf",
+        "asOf": "2026-10-10"
+      },
+      "sources": ["https://example.org/fixture-list.pdf"],
+      "listingStatus": "draft"
+    }
+  ]
+}

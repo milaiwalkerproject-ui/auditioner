@@ -1,0 +1,30 @@
+{
+  "version": "test",
+  "generatedAt": "2026-10-10",
+  "orchestras": [
+    {
+      "id": "example-phil",
+      "name": "Example Philharmonic (test fixture)",
+      "country": "US",
+      "region": "north-america",
+      "city": "Exampleville",
+      "type": "professional",
+      "auditionsUrl": "https://www.example-phil.org/auditions",
+      "homepageUrl": "https://www.example-phil.org/",
+      "notes": "Test fixture, not a real orchestra.",
+      "source": "https://www.example-phil.org/",
+      "asOf": "2026-10-10"
+    },
+    {
+      "id": "example-youth",
+      "name": "Example Youth Orchestra (test fixture)",
+      "country": "DE",
+      "region": "europe-german",
+      "type": "youth",
+      "homepageUrl": "https://jugend.example.de/",
+      "source": "https://jugend.example.de/",
+      "asOf": "2026-10-10",
+      "tutti": { "orgId": "example-youth-tutti" }
+    }
+  ]
+}

@@ -7,9 +7,9 @@ environment — on Cloud Run they arrive from Secret Manager. Nothing here logs 
 from __future__ import annotations
 
 import os
+from collections.abc import Mapping
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Mapping
 
 from . import USER_AGENT
 
@@ -55,6 +55,9 @@ class Settings:
     max_retry_after_sleep_seconds: float = 120.0
     max_subpages_per_orchestra: int = 8
     max_documents_per_orchestra: int = 12
+    # Most time spent on one site per night. A long robots.txt Crawl-delay is honoured in
+    # full; what gives is the number of requests (pipeline._request_budget).
+    per_host_time_budget_seconds: float = 1200.0
     concurrency: int = 1
 
     # Extraction
@@ -80,7 +83,7 @@ class Settings:
         return bool(self.supabase_url and self.supabase_service_role_key)
 
     @classmethod
-    def from_env(cls, env: Mapping[str, str] | None = None) -> "Settings":
+    def from_env(cls, env: Mapping[str, str] | None = None) -> Settings:
         env = os.environ if env is None else env
         registry = env.get("CRAWLER_REGISTRY") or str(cls.registry_path)
         catalog = env.get("CATALOG_DIR") or str(cls.catalog_dir)
@@ -99,6 +102,7 @@ class Settings:
             ),
             max_subpages_per_orchestra=_as_int(env.get("CRAWLER_MAX_SUBPAGES"), 8),
             max_documents_per_orchestra=_as_int(env.get("CRAWLER_MAX_DOCUMENTS"), 12),
+            per_host_time_budget_seconds=_as_float(env.get("CRAWLER_HOST_TIME_BUDGET_SECONDS"), 1200.0, minimum=0.0),
             concurrency=_as_int(env.get("CRAWLER_CONCURRENCY"), 1, minimum=1),
             extraction_model=env.get("CRAWLER_EXTRACTION_MODEL") or DEFAULT_EXTRACTION_MODEL,
             triage_model=env.get("CRAWLER_TRIAGE_MODEL") or DEFAULT_TRIAGE_MODEL,

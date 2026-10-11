@@ -8,9 +8,10 @@ from __future__ import annotations
 
 import json
 import re
+from collections.abc import Iterable
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any
 from urllib.parse import urlsplit
 
 REGIONS = frozenset({"north-america", "europe-german", "europe-other", "uk", "asia-pacific", "other"})
@@ -78,7 +79,8 @@ class Orchestra:
 @dataclass
 class Registry:
     orchestras: list[Orchestra] = field(default_factory=list)
-    problems: list[str] = field(default_factory=list)
+    problems: list[str] = field(default_factory=list)  # entries that could not be used
+    notes: list[str] = field(default_factory=list)  # usable entries worth a remark (no address yet)
     generated_at: str | None = None
     version: str | None = None
 
@@ -212,7 +214,7 @@ def parse_registry(data: Any, *, strict: bool = False) -> Registry:
             continue
         seen.add(orchestra.id)
         if orchestra.start_url is None:
-            registry.problems.append(f"entry '{orchestra.id}': no auditionsUrl or homepageUrl — nothing to read")
+            registry.notes.append(f"entry '{orchestra.id}': no auditionsUrl or homepageUrl yet — nothing to read")
         registry.orchestras.append(orchestra)
     if strict and registry.problems:
         raise RegistryError("; ".join(registry.problems))

@@ -9,8 +9,8 @@ this run — a conservative reading, by design.
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Callable
 from urllib import robotparser
 from urllib.parse import urlsplit, urlunsplit
 

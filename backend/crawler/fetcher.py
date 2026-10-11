@@ -16,16 +16,16 @@ from __future__ import annotations
 import logging
 import threading
 import time
+from collections.abc import Callable
 from dataclasses import dataclass, field
-from email.utils import parsedate_to_datetime
 from datetime import datetime, timezone
-from typing import Callable
+from email.utils import parsedate_to_datetime
 from urllib.parse import urljoin, urlsplit
 
 import httpx
 
 from . import USER_AGENT
-from .policy import Decision, HostPolicy
+from .policy import Decision, HostPolicy, normalise_host
 from .robots import RobotsCache
 from .state import SourceRecord, SourceStateStore
 
@@ -117,7 +117,7 @@ class PoliteFetcher:
     def close(self) -> None:
         self._client.close()
 
-    def __enter__(self) -> "PoliteFetcher":
+    def __enter__(self) -> PoliteFetcher:
         return self
 
     def __exit__(self, *exc: object) -> None:
@@ -125,8 +125,8 @@ class PoliteFetcher:
 
     @staticmethod
     def _host_key(url: str) -> str:
-        parts = urlsplit(url)
-        return (parts.hostname or "").lower()
+        # www.example.org and example.org are one server for our purposes: one gap.
+        return normalise_host(urlsplit(url).hostname)
 
     def _host(self, url: str) -> HostState:
         key = self._host_key(url)
@@ -179,6 +179,10 @@ class PoliteFetcher:
                             return hop.status_code, text
                     return status, ""
                 text = self._read_limited(response, ROBOTS_MAX_BYTES).decode("utf-8", "replace")
+        except _TooLarge as exc:
+            # An absurdly large robots.txt: use what we read (rules are at the top).
+            self._strip_cookies()
+            return 200, exc.partial.decode("utf-8", "replace")
         except httpx.HTTPError as exc:
             log.warning("robots.txt unreachable for %s: %s", robots_url, exc.__class__.__name__)
             self._strip_cookies()
@@ -240,7 +244,7 @@ class PoliteFetcher:
             return FetchResult(url=url, final_url=url, error="robots.txt disallows this address", skipped=True)
         delay = self.robots.crawl_delay(url)
         if delay is not None and delay > host.gap:
-            host.gap = min(float(delay), 300.0)
+            host.gap = float(delay)  # honoured in full; the pipeline reads fewer pages instead
 
         headers: dict[str, str] = {}
         previous = self.state.get_source(url) if conditional else None

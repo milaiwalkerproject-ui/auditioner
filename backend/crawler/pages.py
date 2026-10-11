@@ -10,8 +10,9 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+from collections.abc import Iterable
 from dataclasses import dataclass, field
-from typing import Any, Iterable
+from typing import Any
 from urllib.parse import urljoin, urlsplit, urlunsplit
 
 from bs4 import BeautifulSoup, Tag
@@ -255,7 +256,7 @@ def parse_job_postings(html: str | bytes) -> list[JobPosting]:
                     organisation=_text(node.get("hiringOrganization")),
                     url=_text(node.get("url")),
                     employment_type=_text(node.get("employmentType")),
-                    description="\n".join(l.strip() for l in description.splitlines() if l.strip()),
+                    description="\n".join(part.strip() for part in description.splitlines() if part.strip()),
                     raw=node,
                 )
             )

@@ -9,10 +9,10 @@
       "region": "north-america",
       "city": "Calgary",
       "type": "professional",
-      "auditionsUrl": "https://calgaryphil.com/careers/auditions",
+      "auditionsUrl": "https://calgaryphil.com/about/orchestra-auditions/",
       "homepageUrl": "https://calgaryphil.com",
-      "notes": "Auditions page seen on calgaryphil.com (HTML; also /about/orchestra-auditions/; job postings as PDFs).",
-      "source": "https://calgaryphil.com/careers/auditions",
+      "notes": "'Orchestra Auditions' page seen on calgaryphil.com (HTML list of upcoming auditions; audition packages and excerpts as PDFs). /careers/auditions could not be confirmed in the 2026-10-11 spot check and was replaced.",
+      "source": "https://calgaryphil.com/about/orchestra-auditions/",
       "asOf": "2026-10-11",
       "groups": [
         "canada-majors"
@@ -130,10 +130,10 @@
       "region": "north-america",
       "city": "Atlanta",
       "type": "professional",
-      "auditionsUrl": "https://aso.org/Orchestra-Auditions",
+      "auditionsUrl": "https://www.aso.org/orchestra-auditions",
       "homepageUrl": "https://aso.org",
-      "notes": "'Current Audition(s)' page seen on aso.org (HTML; also reachable as /About/Orchestra-Auditions and /jobs-auditions).",
-      "source": "https://aso.org/Orchestra-Auditions",
+      "notes": "'Orchestra Auditions' page seen on aso.org (HTML; also /about-the-aso/about/jobs-auditions). Address normalised to the form seen in search results, 2026-10-11.",
+      "source": "https://www.aso.org/orchestra-auditions",
       "asOf": "2026-10-11",
       "groups": [
         "icsom"
@@ -247,10 +247,10 @@
       "region": "north-america",
       "city": "Chicago",
       "type": "professional",
-      "auditionsUrl": "https://cso.org/about/auditions/",
+      "auditionsUrl": "https://cso.org/about/employment/",
       "homepageUrl": "https://cso.org",
-      "notes": "Auditions page seen on cso.org (HTML list of openings; fellowship and chorus auditions on separate pages).",
-      "source": "https://cso.org/about/auditions/",
+      "notes": "Employment page seen on cso.org with the 'How to Audition for the CSO' section (HTML; the how-to page sits under /about/performers/cso-musicians/how-to-audition-for-the-cso/, repertoire lists as PDF/DOC under /media/). /about/auditions/ could not be confirmed in the 2026-10-11 spot check and was replaced.",
+      "source": "https://cso.org/about/employment/",
       "asOf": "2026-10-11",
       "groups": [
         "icsom"
@@ -385,10 +385,10 @@
       "region": "north-america",
       "city": "Northridge",
       "type": "youth",
-      "auditionsUrl": "https://www.csun.edu/csun-youth-orchestras/application-audition",
+      "auditionsUrl": "https://www.csun.edu/csun-youth-orchestras/apply-orchestras-0",
       "homepageUrl": "https://www.csun.edu/csun-youth-orchestras",
-      "notes": "From Tutti's verified data (Tutti applyUrl). Tutti metro: Greater Los Angeles.",
-      "source": "https://github.com/milaiwalkerproject-ui/tutti/blob/main/data.json",
+      "notes": "'Apply to the Orchestras' page seen on csun.edu (HTML; video auditions, requirements as PDFs under /sites/default/files/). Tutti's applyUrl (/application-audition) could not be confirmed in the 2026-10-11 spot check and was replaced. Tutti metro: Greater Los Angeles.",
+      "source": "https://www.csun.edu/csun-youth-orchestras/apply-orchestras-0",
       "asOf": "2026-10-11",
       "tutti": {
         "orgId": "csun-yo"
@@ -635,10 +635,10 @@
       "region": "north-america",
       "city": "Kansas City",
       "type": "professional",
-      "auditionsUrl": "https://www.kcsymphony.org/StaticCtl/OrchestraAuditionsAct",
+      "auditionsUrl": "https://www.kcsymphony.org/about-us/employment/orchestra-auditions/",
       "homepageUrl": "https://www.kcsymphony.org",
-      "notes": "Orchestra auditions page seen on kcsymphony.org (HTML; separate /substitute-auditions page).",
-      "source": "https://www.kcsymphony.org/StaticCtl/OrchestraAuditionsAct",
+      "notes": "'Orchestra Auditions' page seen on kcsymphony.org (HTML; one sub-page per audition, e.g. /principal-bass-audition/; separate /substitute-auditions/ page). The older /StaticCtl/OrchestraAuditionsAct address could not be confirmed in the 2026-10-11 spot check and was replaced.",
+      "source": "https://www.kcsymphony.org/about-us/employment/orchestra-auditions/",
       "asOf": "2026-10-11",
       "groups": [
         "icsom"
@@ -812,10 +812,10 @@
       "region": "north-america",
       "city": "New York",
       "type": "professional",
-      "auditionsUrl": "https://metopera.org/about/auditions/orchestra",
+      "auditionsUrl": "https://www.metopera.org/about/auditions/orchestra/",
       "homepageUrl": "https://metopera.org",
-      "notes": "Orchestra auditions page seen on metopera.org (HTML).",
-      "source": "https://metopera.org/about/auditions/orchestra",
+      "notes": "Orchestra auditions page seen on metopera.org (HTML). Address normalised to the form seen in search results, 2026-10-11.",
+      "source": "https://www.metopera.org/about/auditions/orchestra/",
       "asOf": "2026-10-11",
       "groups": [
         "icsom"
@@ -1278,10 +1278,10 @@
       "region": "north-america",
       "city": "San Francisco",
       "type": "professional",
-      "auditionsUrl": "https://www.sfballet.org/discover/employment-auditions/",
+      "auditionsUrl": "https://www.sfballet.org/careers-auditions/",
       "homepageUrl": "https://www.sfballet.org",
-      "notes": "'Employment & Auditions' page seen on sfballet.org; has an 'Orchestra Auditions' section (HTML). Early rounds sometimes run jointly with SF Opera.",
-      "source": "https://www.sfballet.org/discover/employment-auditions/",
+      "notes": "'Careers & Auditions' page seen on sfballet.org, with the orchestra vacancies (HTML; audition packets as PDFs under /app/uploads/). /discover/employment-auditions/ could not be confirmed in the 2026-10-11 spot check and was replaced. Early rounds sometimes run jointly with SF Opera.",
+      "source": "https://www.sfballet.org/careers-auditions/",
       "asOf": "2026-10-11",
       "groups": [
         "icsom"

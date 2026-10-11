@@ -1,0 +1,20 @@
+# Cloud Build recipe used by backend/crawler/deploy_job.sh. Builds
+# backend/crawler/Dockerfile.crawler with the REPO ROOT as context (the image needs
+# content/catalog and content/registry) and pushes it to Artifact Registry. Run it
+# yourself with:
+#   gcloud builds submit . --config backend/crawler/cloudbuild.yaml \
+#       --substitutions _IMAGE=us-central1-docker.pkg.dev/PROJECT/auditioner/auditioner-crawler:TAG \
+#       --ignore-file backend/crawler/.gcloudignore
+steps:
+  - name: gcr.io/cloud-builders/docker
+    # BuildKit reads backend/crawler/Dockerfile.crawler.dockerignore (the classic builder ignores it).
+    env: ["DOCKER_BUILDKIT=1"]
+    args: ["build", "-f", "backend/crawler/Dockerfile.crawler", "-t", "${_IMAGE}", "."]
+images:
+  - "${_IMAGE}"
+substitutions:
+  _IMAGE: "us-central1-docker.pkg.dev/${PROJECT_ID}/auditioner/auditioner-crawler:latest"
+options:
+  logging: CLOUD_LOGGING_ONLY
+  dynamicSubstitutions: true
+timeout: 900s

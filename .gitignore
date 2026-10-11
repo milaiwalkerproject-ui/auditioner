@@ -12,6 +12,9 @@ __pycache__/
 .venv/
 .pytest_cache/
 
+# Crawler dry-run output (local JSON, never committed)
+backend/crawler/out/
+
 # Secrets — never commit
 .env
 *.env

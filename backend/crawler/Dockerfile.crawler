@@ -1,0 +1,41 @@
+# Auditioner audition-feed crawler image (a Cloud Run Job, not a web service).
+# Build from the REPO ROOT (it needs content/catalog and content/registry):
+#     docker build -f backend/crawler/Dockerfile.crawler -t auditioner-crawler .
+# backend/crawler/deploy_job.sh does this on Cloud Build and deploys the job.
+
+FROM python:3.12-slim
+
+ENV PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# LibreOffice is deliberately NOT installed: it would add ~400 MB for the rare
+# legacy .doc list. Such documents are skipped with a note in the run report
+# (crawler/documents.py). Add `apt-get install libreoffice-writer-nogui` here if
+# that ever matters.
+
+WORKDIR /srv
+
+COPY backend/crawler/requirements.txt /srv/requirements.txt
+RUN pip install -r /srv/requirements.txt
+
+COPY backend/crawler /srv/crawler
+COPY content/catalog /srv/content/catalog
+COPY content/registry /srv/content/registry
+
+RUN rm -rf /srv/crawler/tests /srv/crawler/out \
+    && groupadd --system app \
+    && useradd --system --gid app --create-home --home-dir /home/app app \
+    && chown -R app:app /srv
+USER app
+
+# Secrets (ANTHROPIC_API_KEY, SUPABASE_SERVICE_ROLE_KEY) and SUPABASE_URL arrive
+# from the job's environment (Secret Manager) — nothing is baked into the image.
+ENV HOME=/home/app \
+    CRAWLER_REGISTRY=/srv/content/registry/orchestras.json \
+    CATALOG_DIR=/srv/content/catalog \
+    CRAWLER_OUT_DIR=/tmp/crawler-out \
+    CRAWLER_CONCURRENCY=3
+
+ENTRYPOINT ["python", "-m", "crawler"]
+CMD ["run"]

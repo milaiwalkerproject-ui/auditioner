@@ -30,3 +30,9 @@ jobs:
           cache-dependency-path: backend/requirements-dev.txt
       - run: pip install -r backend/requirements-dev.txt
       - run: pytest -q backend/tests
+      # The audition-feed crawler (backend/crawler) has its own dependencies and tests;
+      # they need no network and no model (fake transport + fake Anthropic client).
+      - run: pip install -r backend/crawler/requirements-dev.txt
+      - run: pytest -q backend/crawler/tests
+      - run: python -m crawler --version
+        working-directory: backend

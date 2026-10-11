@@ -1,0 +1,20 @@
+# Docker build context ignore list for backend/crawler/Dockerfile.crawler (BuildKit
+# reads <Dockerfile>.dockerignore next to the Dockerfile). Only backend/crawler,
+# content/catalog and content/registry are copied into the image.
+.git
+.github
+docs
+ios
+supabase
+backend/app
+backend/tests
+backend/.venv
+backend/crawler/tests
+backend/crawler/out
+content/musicxml
+content/review
+content/importers
+**/__pycache__
+**/*.pyc
+**/.pytest_cache
+**/.DS_Store
