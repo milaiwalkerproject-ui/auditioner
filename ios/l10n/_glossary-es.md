@@ -63,8 +63,14 @@ Eliminar, Compartir, Archivos, Fotos, Iniciar sesión con Apple. Sentence case t
 | Add / Remove / Delete | Añadir / Quitar / Eliminar | |
 | Horn | Trompa | Latin America often says "corno (francés)" |
 | Timpani | Timbales | |
-| Behind the screen | Tras el biombo | |
+| Behind the screen | Detrás del biombo | |
 | video | vídeo | Spain spelling; Latin America writes "video" |
+| Public domain / Protected (copyright row) | Dominio público en … / Con derechos de autor en … | |
+| Faster by N / Slower by N (tempo buttons) | N más rápido / N más lento | also "5 más rápido" / "5 más lento" |
+| Overall (mock audition rating) | General | |
+| Practise next (section) | Qué practicar ahora | |
+| Something went wrong | Algo salió mal | simple past reads neutral in Spain and Latin America; "¿Cómo te fue?", "¿Ves un error?" likewise |
+| note (a notice banner, not a pitch) | aviso | "Ocultar este aviso" |
 
 Keys `lists.phrase.chair` and `lists.phrase.allChairs` are translated without the instrument
 and chair words ("listas para tu posición", "listas de tu instrumento") because `_keys.json`
